@@ -1,25 +1,24 @@
-document.getElementById("changeBtn").addEventListener("click", function(){
-    let newPw = document.getElementById("newPw").value;
-    let newPwCheck = document.getElementById("newPwCheck").value;
+document.getElementById("pwFind").addEventListener("click", function(){
+    let name = document.getElementById("findName").value;
+    let id = document.getElementById("findId").value;
 
-    if(newPw === "" || newPwCheck === ""){
-        alert("새 비밀번호를 입력해주세요.");
+    if(name === "" || id === ""){
+        alert("모든 항목을 입력해주세요.");
         return;
     }
 
-    if(newPw !== newPwCheck){
-        alert("비밀번호가 일치하지 않습니다.");
-        return;
-    }
+    let savedName = localStorage.getItem("userName");
+    let savedId = localStorage.getItem("userId");
 
-    localStorage.setItem("userPw", newPw);
-    alert("비밀번호가 변경되었습니다.");
-    window.location.href = "./login.html";
+    if(name === savedName && id === savedId){
+        window.location.href = "./changePw.html";
+    } else {
+        alert("일치하는 회원 정보가 없습니다.");
+    }
 });
 
-//키보드 엔터키
 document.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
-        document.getElementById("changeBtn").click();
+        document.getElementById("pwFind").click();
     }
 });

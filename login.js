@@ -29,3 +29,8 @@ document.addEventListener("keydown", function(e){
         document.getElementById("enter").click();
     }
 });
+
+//비밀번호 찾기 페이지로 이동
+document.getElementById("findBtn").addEventListener("click", function(){
+    window.location.href = "./find.html";
+})
