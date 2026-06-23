@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NODE의 스튜디오 모니터 제품을 만나보세요.">
+    <title>스튜디오 제품 | NODE</title>
+    <link rel="stylesheet" href="./product.css">
+    <script src="./product.js" defer></script>
+</head>
+<body data-product-category="studio">
+    <header class="site-header">
+        <!-- 상단 메뉴: 팀에서 파일명이 바뀌면 href 주소를 수정하세요. -->
+        <nav class="main-nav" aria-label="주요 메뉴">
+            <a class="logo" href="#" aria-label="NODE 홈">NODE</a>
+            <ul class="nav-links">
+                <li class="has-submenu">
+                    <a href="./product.html">Product</a>
+                    <ul class="sub-menu">
+                        <li><a href="./product.html">ALL</a></li>
+                        <li><a href="./product-studio.html" aria-current="page">STUDIO</a></li>
+                        <li><a href="./product-live.html">LIVE</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="./accessory.html">Accessory</a>
+                    <ul class="sub-menu">
+                        <li><a href="./accessory.html">ALL</a></li>
+                        <li><a href="./accessory-cable.html">CABLE</a></li>
+                        <li><a href="./accessory-stand.html">STAND</a></li>
+                    </ul>
+                </li>
+                <li><a href="#store">Store</a></li>
+            </ul>
+            <div class="user-nav">
+                <a href="#login">Login</a>
+                <span aria-hidden="true">/</span>
+                <a href="#signup">Sign up</a>
+            </div>
+        </nav>
+        <p class="sub-banner">지금 회원가입하고 첫 구매 혜택을 받아보세요.</p>
+    </header>
+
+    <main>
+        <!-- 스튜디오 배너 문구입니다. 배경 사진은 product.css에서 수정합니다. -->
+        <section class="hero-product" aria-labelledby="hero-title">
+            <div>
+                <p class="eyebrow">Precision for every detail</p>
+                <h1 id="hero-title">STUDIO</h1>
+            </div>
+        </section>
+
+        <section class="product-container" id="products" aria-labelledby="product-title">
+            <div class="section-heading">
+                <p class="eyebrow">Explore studio monitors</p>
+                <h2 id="product-title">STUDIO</h2>
+                <p id="product-count" class="product-count" aria-live="polite"></p>
+            </div>
+
+            <!-- 필터 초기화 버튼과 가격 정렬 -->
+            <div class="filter-toolbar">
+                <div class="filter-actions">
+                    <button class="reset-filter" id="reset-filter" type="button">필터 초기화</button>
+                    <label class="sort-control">
+                        <span>정렬</span>
+                        <select id="sort-select">
+                            <option value="featured">추천순</option>
+                            <option value="low">낮은 가격순</option>
+                            <option value="high">높은 가격순</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 스튜디오 상품에 사용하는 상세 필터 -->
+            <div class="filter-area" id="product-filters">
+                <section class="filter-section" aria-labelledby="studio-filter-title">
+                    <h3 id="studio-filter-title">스튜디오</h3>
+                    <div class="filter-row">
+                        <strong>작업 공간</strong>
+                        <div class="filter-options">
+                            <label><input type="checkbox" data-domain="studio" data-filter="space" value="near-field"> 니어필드(데스크탑)</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="space" value="mid-field"> 미드필드(스탠드)</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="space" value="far-field"> 파필드</label>
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <strong>구성 방식</strong>
+                        <div class="filter-options">
+                            <label><input type="checkbox" data-domain="studio" data-filter="type" value="2-way"> 2-Way</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="type" value="3-way"> 3-Way</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="type" value="coaxial"> 동축형(Coaxial)</label>
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <strong>사운드 성향</strong>
+                        <div class="filter-options">
+                            <label><input type="checkbox" data-domain="studio" data-filter="sound" value="flat"> 플랫/정확함</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="sound" value="bass-heavy"> 저역 강조형</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="sound" value="all-rounder"> 올라운드</label>
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <strong>가격대</strong>
+                        <div class="filter-options">
+                            <label><input type="checkbox" data-domain="studio" data-filter="price_range" value="under-50"> 50만원 이하</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="price_range" value="50-100"> 50~100만원</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="price_range" value="100-300"> 100~300만원</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="price_range" value="300-500"> 300~500만원</label>
+                            <label><input type="checkbox" data-domain="studio" data-filter="price_range" value="over-500"> 500만원 이상</label>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="product-grid" id="product-grid" aria-live="polite"></div>
+            <nav class="pagination" id="pagination" aria-label="상품 페이지"></nav>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="store">
+        <div class="footer-content">
+            <div>
+                <a class="footer-logo" href="#">NODE</a>
+                <p>좋은 소리가 머무는 공간을 만듭니다.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="./product-studio.html">Studio</a></li>
+                <li><a href="./product-live.html">Live</a></li>
+                <li><a href="./accessory.html">Accessory</a></li>
+                <li><a href="#lifestyle">Life style</a></li>
+                <li><a href="#store">Store</a></li>
+            </ul>
+        </div>
+        <p class="copyright">&copy; 2026 NODE. All rights reserved.</p>
+    </footer>
+</body>
+</html>
