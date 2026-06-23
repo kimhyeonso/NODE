@@ -1,629 +1,341 @@
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Thin.ttf");
-  font-weight: 100;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Light.ttf");
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Regular.ttf");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Medium.ttf");
+@font-face{
+  font-family: "Nanum_Myeongjo" ;
+  src: url("../font/Nanum_Myeongjo/NanumMyeongjo-Regular.ttf");
   font-weight: 500;
 }
 
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Bold.ttf");
+@font-face{
+  font-family: "Nanum_Myeongjo" ;
+  src: url("../font/Nanum_Myeongjo/NanumMyeongjo-Bold.ttf");
   font-weight: 700;
 }
 
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Black.ttf");
+@font-face{
+  font-family: "Nanum_Myeongjo" ;
+  src: url("../font/Nanum_Myeongjo/NanumMyeongjo-ExtraBold.ttf");
   font-weight: 900;
 }
 
-html {
-  font-size: 16px;
+@font-face{
+  font-family: "noto sans" ;
+  src: url("../font/noto snas/NotoSans-Regular.ttf");
+  font-weight: 500;
 }
 
-html > body {
-	font-family: "roboto-regular";
-	text-underline-position: under;
-  color: #222;
-}
-
-/* -------헤더 시작------- */
-
-/* 메인 메뉴 */
-
-.top-bar {
-  width: 100%;
-}
-
-.top-menu-bar {
-  width: 100%;
-  height: 5rem;
-  background-color: #111;
-  border-bottom: 1px solid #777;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
-
-.top-menu-contents {
-  width: min(90%, 1900px);
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-bottom: 1.2rem;
-}
-
-.main-logo {
-  width: 250px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.main-logo img {
-  width: auto;
-  height: 3rem;
-  object-fit: contain;
-}
-
-.main {
-  flex: 0 0 auto;
-}
-
-.gnb {
-  display: flex;
-  align-items: center;
-}
-
-.gnb > li {
-  padding: 0 1.75rem;
-}
-
-.gnb > li > a {
-  position: relative;
-  font-weight: 400;
-  transition: font-weight .2s ease;
-  color: #fff;
-}
-
-.gnb > li:hover > a {
-  font-weight: 700;
-}
-
-.gnb > li > a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-
-  width: 0;
-  height: 2px;
-
-  background: #fff;
-  transition: width .3s ease;
-}
-
-.gnb > li:hover > a::after {
-  width: 100%;
-}
-
-.menu-icon {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.menu-icon a {
-  font-size: clamp(0.8125rem, 0.8vw, 0.75rem);
-  color: rgba(255,255,255,.8);
-}
-
-.menu-icon li:nth-child(2) {
-  width: 1px;
-  height: 14px;
-  background: #999;
-}
-
-/* 서브 메뉴 */
-.snb {
-  position: absolute;
-  top: 5rem;
-  left: 0;
-  padding: 30px 0;
-  width: 100%;
-
-  background-color: #333;
-  display: none;
-}
-
-.snb-inner {
-  width: 100%;
-  height: 100%;
-  padding: 0 160px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-
-.snb-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-
-.snb-menu a {
-  font-size: 0.8rem;
-  color: #fff;
-  font-weight: 400;
-}
-
-.snb-menu a:hover {
+@font-face{
+  font-family: "noto sans" ;
+  src: url("../font/noto snas/NotoSans-Medium.ttf");
   font-weight: 600;
 }
 
-.snb-banner {
-  display: flex;
-  gap: 18px;
+/* 탑바 메뉴 변경사항 */
+.top-menu-bar {
+  background-color: transparent;
+  transition: none;
 }
 
-.banner-item {
+.gnb > li > a {
+  color: #fff;
+}
+
+.gnb > li > a::after {
+  background-color: #fff;
+}
+
+.menu-icon a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.menu-icon li:nth-child(2) {
+  background-color: #999;
+}
+
+.hamburger-btn img {
+  filter: none;
+}
+
+
+/*********** 첫번째 섹션 구현 ***********/
+.movie-section{
+  width: 100%;
+  height: 100vh;
   position: relative;
-  display: block;
+}
 
-  width: 272px;
-  height: 145px;
-  border-radius: 10px;
-
-  background: #ddd;
+.movie-section .img{
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
-.banner-item img {
+.movie-section .img img{
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.banner-item::after {
+.movie-section .scroll {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  color: gold;
+  /* 색 그라데이션 수정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-section p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  margin-bottom: 20px;
+}
+
+.movie-section .line{
+  width: 1px;
+  height: 80px;
+  background-color: gold;
+  /* 색 그라데이션 수정 */
+}
+
+/*********** 두번째 섹션 구현 ***********/
+.brand-logo-section{
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  position: relative;
+}
+
+.brand-logo-section img{
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.brand-story-section{
+  width: 100%;
+  height: 100vh;
+  background-color: #070707;
+  position: relative;
+}
+
+.brand-story-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.brand-story-container .logo{
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  padding-left: 70px;
+}
+
+.brand-story-container .text{
+  text-align: center;
+}
+
+.brand-story-container .title {
+  font-family: "noto sans";
+  font-weight: 500;
+  font-size: clamp(2rem , 2.5vw, 3.125rem);
+  color: #fff;
+}
+
+.brand-story-container .title span{
+  font-family: "Nanum_Myeongjo" ;
+  font-weight: 700;
+  color: #FFCD4A;
+}
+
+.brand-story-container p{
+  margin-top: 30px;
+  color: rgba(255, 255, 255, .7);
+  font-size: clamp(0.9rem , 2.5vw, 1rem);
+}
+
+.brand-story-txt.mobile {
+  display: none;
+}
+
+.brand-story-txt.pc {
+  white-space: nowrap;
+}
+
+.brand-story-section-02{
+  width: 100%;
+  height: 100vh;
+  background-color: #070707;
+  position: relative;
+}
+
+.brand-story-section-02 img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/*********** 세번째 섹션 구현 ***********/
+
+/*********** 네번째 섹션 구현 ***********/
+.menu-section{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #070707;
+  padding: clamp(70px, 9vh, 120px) 0;
+  color: #fff;
+}
+
+.menu-container{
+  margin: 0 auto;
+  width: min(90%, 1900px);
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2vw, 40px);
+}
+
+.menu-section .title-box{
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(20px, 2vw, 40px);
+}
+
+.menu-section .image-box{
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(20px, 2vw, 40px);
+}
+
+.menu-section .title-box > .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: clamp(5px, 1.5vw, 24px);
+}
+
+.menu-section .title-txt {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem , 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.menu-section .title-box > .title p {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.menu-section .title-box > .prouct,
+.menu-section .image-box > .accessory,
+.menu-section .image-box > .lifestyle {
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.menu-section .title-box > .prouct::after,
+.menu-section .image-box > .accessory::after,
+.menu-section .image-box > .lifestyle::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,.25);
+  z-index: 1;
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 60%, transparent 100%);
   pointer-events: none;
 }
 
-.banner-item span {
+.menu-section .title-box > .prouct img,
+.menu-section .image-box > .accessory img,
+.menu-section .image-box > .lifestyle img {
   position: absolute;
-  left: 50%;
-  bottom: 10px;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.menu-section .title-box > .prouct:hover img,
+.menu-section .image-box > .accessory:hover img,
+.menu-section .image-box > .lifestyle:hover img {
+  transform: scale(1.04);
+}
+
+.menu-section .menu-card-txt {
+  position: absolute;
+  top: clamp(18px, 2vw, 32px);
+  left: clamp(18px, 2vw, 32px);
   z-index: 2;
-
-  transform: translateX(-50%);
-
-  padding: 5px 15px;
-  border-radius: 20px;
-
-  background: #fff;
-  color: #111;
-
-  font-size: 12px;
 }
 
-/* 사이드 메뉴 */
-.hamburger-btn {
-  display: none;
-  width: 30px;
-  height: 30px;
+.menu-section .prouct-title,
+.menu-section .accessory-title,
+.menu-section .lifeStyle-title {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.2;
 }
 
-.hamburger-btn img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.menu-section .menu-card-txt .sub-title {
+  margin-top: 6px;
+  font-family: "Nanum_Myeongjo";
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
 }
 
-.dim{
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0,0,0,.3);
-  z-index: 150;
+.menu-section .menu-card-txt p {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
-
-.dim.active {
-  display: block;
-}
-
-/* 사이드 박스 */
-
-.side-menu-box {
-	position: fixed;
-	top: 0;
-	right: -50%;
-	width: 50%;
-  height: 100vh;
-	background-color: #222;
-  color: #fff;
-  z-index: 300;
-  transform: all .3s;
-  overflow-y: auto;
-}
-
-.side-menu-box.active {
-  right: 0;
-}
-
-.side-menu-box .side-top-bar {
-	padding: 0 20px;
-	display: flex;
-  align-items: center;
-  justify-content: space-between;
-	height: 67px;
-	}
-
-.side-menu-box .side-top-logo {
-  width: 50px;
-  height: 50px;
-}
-
-.side-menu-box .side-top-logo img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.exit-btn {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-
-.exit-btn img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 사이드 메인 메뉴 */
-
-.side-gnb {
-	width: 100%;
-	overflow-y: auto;
-	white-space: nowrap;
-}
-
-.side-gnb .side-main-gnb{
-  display: block;
-  padding: 0 20px;
-  width: 100%;	
-}
-
-.side-gnb .side-main-gnb > li{
-  margin-top: 24px;
-}
-
-.side-gnb .side-main-gnb > li > a{
-  display: flex;
-  align-items: center;
-  height: 32px;
-  font-size: 1.2rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.side-gnb .side-main-gnb > li > a:not(:only-child)::after{
-  display: block;
-  margin-left: auto;
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url(https://supra-korea.com/SkinImg/img/icon_plus.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.side-gnb .side-main-gnb > li.active > a:not(:only-child)::after{
-  background-image: url(https://www.supra-korea.com/SkinImg/img/icon_minus.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-
-/* 사이드 서브 메뉴 */
-
-.side-sub-menu {
-  display: none;
-  margin-top: 16px;
-  padding: 0 40px;
-  width: 100%;
-}
-
-.side-sub-menu > li{
-    padding: 8px 0;
-}
-
-.side-sub-menu > li.active > a:not(:only-child)::after{
-  background-image: url(https://www.supra-korea.com/SkinImg/img/icon_minus.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-}
-
-.side-sub-menu__img > li {
-  position: relative;
-  width: 100%;
-  height: 150px;
-  padding: 10px 0;
-}
-
-.side-sub-menu > li img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 6px;
-
-}
-
-.side-sub-menu > li > a{
-  display: flex;
-  font-size: 0.9rem;
-  font-weight: 400;
-}
-
-.side-sub-menu > li > a:not(:only-child)::after {
-  display: block;
-  margin-left: auto;
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url(https://supra-korea.com/SkinImg/img/icon_plus.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-}
-
-/* 사이드 스팟 */
-
-.side-spot {
-	padding: 0 20px;
-	padding-top: 300px;	
-}
-
-.side-spot-menu li{
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 10px 0;
-}
-
-.side-spot-menu li a{
-  display: flex;
-  align-items: center;
-}
-
-.side-spot-menu li img{
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  margin-right: 12px;
-}
-
-/* 사이드 로그인/회원가입 */
-
-.side-util {
-  position: static;
-  margin-top: 80px;
-  padding: 0 0 30px;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.side-util ul{
-  display: flex;
-  justify-content: center;
-}
-.side-util ul > li{
-  font-size: 0.85rem;
-  font-weight: 300;
-  padding: 0 10px;
-}
-
-/* -------헤더 끝------- */
-
-
-
-/* -------푸터------- */
-
-.footer {
-  background: #11101a;
-  color: #fff;
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 60px;
-  margin: 0 auto;
-}
-
-.footer-info h2 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 18px;
-}
-
-.footer-info p {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: rgba(255,255,255,.8);
-}
-
-.footer-sns {
-  display: flex;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.footer-sns li {
-  width: 35px;
-  height: 35px;
-}
-
-.footer-sns img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.footer-menu {
-  margin-right: 0;
-}
-
-.footer-menu li {
-  margin-bottom: 10px;
-}
-
-.footer-menu a {
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-right: 50px;
-}
-
-.footer-menu a::before {
-  content: "›";
-  margin-right: 8px;
-}
-
-.footer-menu a:hover {
-  color: #fff;
-  font-size: 1rem;
-}
-
-.footer-bottom {
-  height: 75px;
-  background: #181923;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 55px;
-}
-
-.footer-logo {
-  width: 50px;
-  height: 50px;
-}
-
-.footer-logo img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.footer-bottom p {
-  font-size: 13px;
-  color: rgba(255,255,255,.85);
-}
-
-/* ------- 푸터 끝 ------- */
-
-/* ------- 모바일 반응형 ------- */
 
 @media (max-width: 768px) {
-  .main-logo {
-    width: 150px;
-  }
-
-  .main-logo img {
-    height: 32px;
-  }
-
-  .main,
-  .menu-icon {
+  .brand-story-txt.pc {
     display: none;
   }
 
-  .hamburger-btn {
+  .brand-story-txt.mobile {
     display: block;
   }
 
-  .side-menu-box {
-    width: 85%;
-    right: -85%;
+  .menu-section {
+    padding: 70px 0;
   }
 
-  .footer {
-    width: 100%;
+  .menu-container {
+    min-height: auto;
+    gap: 18px;
   }
 
-  .footer-top {
-    height: auto;
-    display: block;
-    padding: 40px 44px;
-  }
-
-  .footer-info h2 {
-    font-size: 1rem;
-    margin-bottom: 18px;
-  }
-
-  .footer-info p {
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-
-  .footer-sns {
-    gap: 32px;
-    margin-top: 22px;
-  }
-
-  .footer-menu {
-    display: none;
-  }
-
-  .footer-bottom {
-    height: 75px;
-    padding: 0 44px;
+  .menu-section .title-box,
+  .menu-section .image-box {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  .footer-logo {
-    display: none;
+  .menu-section .title-box > .title {
+    min-height: 180px;
+    justify-content: center;
+    padding: 0;
   }
 
-  .footer-bottom p {
-    font-size: 0.75rem;
-    white-space: nowrap;
+  .menu-section .title-box > .prouct,
+  .menu-section .image-box > .accessory,
+  .menu-section .image-box > .lifestyle {
+    min-height: 240px;
   }
 }

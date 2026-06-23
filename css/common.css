@@ -42,6 +42,7 @@ html > body {
 	font-family: "roboto-regular";
 	text-underline-position: under;
   color: #222;
+  overflow-x: hidden;
 }
 
 /* -------헤더 시작------- */
