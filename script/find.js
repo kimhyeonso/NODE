@@ -1,9 +1,10 @@
 document.getElementById("pwFind").addEventListener("click", function(){
     let name = document.getElementById("findName").value;
     let id = document.getElementById("findId").value;
+    let errorMsg = document.getElementById("errorMsg");
 
     if(name === "" || id === ""){
-        alert("모든 항목을 입력해주세요.");
+        errorMsg.textContent = "모든 항목을 입력해주세요.";
         return;
     }
 
@@ -13,10 +14,11 @@ document.getElementById("pwFind").addEventListener("click", function(){
     if(name === savedName && id === savedId){
         window.location.href = "./changePw.html";
     } else {
-        alert("일치하는 회원 정보가 없습니다.");
+        errorMsg.textContent = "일치하는 회원 정보가 없습니다.";
     }
 });
 
+//키보드 엔터치기
 document.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
         document.getElementById("pwFind").click();

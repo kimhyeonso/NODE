@@ -2,7 +2,8 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
+    background-image: url('../image/login/login_bgi.png');
     opacity: 0.9;
     display: flex;
     justify-content: space-evenly;
@@ -18,41 +19,109 @@
     flex-direction: column;
     border-radius: 2rem 0.2rem 2rem 0.2rem;
     background-color: white;
-    width: 27%;
-    height:70%;
+    /* width: 27%; */
+    /* height:70%; */
+    width: clamp(280px, 40%, 600px);
+    padding: 3rem 0;
 }
 
 .signupBox > h2{
-    margin-top: -2rem;
+    /* margin-top: -2rem; */
+    /* margin-bottom: 2.5rem;
+    color: #111; */
+     font-size: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: 2rem;
     margin-bottom: 2.5rem;
     color: #111;
 }
 
 .inBox{
     display: flex;
-    width: 80%;
+    /* width: 80%; */
+    width: clamp(200px, 80%, 500px);
+    flex-wrap: wrap; 
     /* background-color: pink; */
     justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.inBox > label{
+    /* width: 140px; */
+    width: clamp(80px, 10vw, 140px);
+    white-space: nowrap;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    left: clamp(80px, 10vw, 140px); 
 }
 
 .inBox> input{
-    padding: 0.5rem;
+    flex: 1;
+    padding: 0.5rem 0;
     border: none;
     border-bottom: 0.01rem solid #333;
     margin: 1rem;
+    outline: none;
 }
 
+.errorMsg{
+    width: 100%;        /* 에러메시지 아래 줄로 */
+    /* margin-left: 140px; 라벨 너비만큼 들여쓰기 */
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    margin-left: clamp(80px, 10vw, 140px);
+}
 
 .signupBox> button{
     font-size: 1.1rem;
-    background-color: #333;
-    color: white;
-    padding: 1rem 5.5rem;
+    background-color: white;
+    border: 0.01rem solid #333;
+    color: #333;
+    font-weight: bold;
+    /* padding: 1rem 5.5rem; */
     border-radius: 0.5rem;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
+    padding: 1rem clamp(2rem, 4vw, 5.5rem);
 }
 .signupBox>button:hover{
     transform: scale(1.02);
 }
 
+
+/*  모바일 반응형 시작 */
+@media(max-width: 768px){
+    .wrap{
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .imgBox{
+        width: 20%;
+    }
+
+    .signupBox{
+        width: 55%;
+        height: auto;
+        padding: 2rem 0;
+        min-width: 280px;
+    }
+
+    .inBox{
+        width: 85%;
+    }
+
+    .inBox > label{
+        width: 100px;
+    }
+
+    .errorMsg{
+        margin-left: 100px;
+        margin-left: 0;
+    }
+
+    .signupBox > button{
+        padding: 1rem 4rem;
+    }
+}
