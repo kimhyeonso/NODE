@@ -1,0 +1,256 @@
+* { box-sizing: border-box; }
+
+/* ==================== 공통 배경 / 전체 콘텐츠 너비 ==================== */
+body {
+  color: #202124;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 220, 120, .32), transparent 26rem),
+    #f4f5f8;
+}
+
+button, select { font: inherit; }
+
+.payment-page {
+  width: min(1100px, calc(100% - 40px));
+  margin: 5rem auto 0;
+  padding: 48px 0 72px;
+}
+
+/* ==================== 페이지 제목 영역 ==================== */
+.page-heading,
+.section-heading,
+.method-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.page-heading { margin-bottom: 32px; }
+
+.eyebrow {
+  margin-bottom: 7px;
+  color: #8b8e99;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+
+.page-heading h1 {
+  margin-bottom: 10px;
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: -.045em;
+}
+
+.page-heading > div > p:last-child {
+  color: #858891;
+  font-size: 14px;
+}
+
+.back-link,
+.section-heading > span {
+  color: #80838d;
+  font-size: 12px;
+}
+
+.back-link {
+  padding-bottom: 4px;
+  border-bottom: 1px solid #aeb0b8;
+}
+
+/* ==================== 카드 목록 + 오른쪽 안내 영역 ==================== */
+.payment-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, .85fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.payment-main,
+.add-payment-panel,
+.security-panel {
+  border: 1px solid rgba(24, 25, 35, .07);
+  border-radius: 22px;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 12px 34px rgba(32,35,48,.065);
+}
+
+.payment-main { padding: 28px; }
+
+.section-heading {
+  padding-bottom: 22px;
+  border-bottom: 1px solid #ececf1;
+}
+
+.section-heading h2,
+.add-payment-panel h2,
+.security-panel h2 { font-size: 19px; }
+
+.payment-card-list { display: grid; }
+
+.payment-method {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 25px;
+  padding: 26px 0;
+}
+
+.payment-method + .payment-method { border-top: 1px solid #ececf1; }
+
+/* [수정 포인트] 카드 크기와 공통 모양 */
+.card-visual {
+  display: flex;
+  height: 150px;
+  padding: 20px;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 18px;
+  box-shadow: 0 13px 24px rgba(28,30,42,.18);
+}
+
+/* [수정 포인트] 카드 종류별 배경색 */
+.card-dark {
+  color: #fff;
+  background: radial-gradient(circle at 90% 10%, rgba(255,255,255,.18), transparent 34%), linear-gradient(145deg,#1e2029,#45495b);
+}
+
+.card-blue {
+  color: #fff;
+  background: radial-gradient(circle at 15% 10%, rgba(255,255,255,.18), transparent 35%), linear-gradient(145deg,#b27a00,#4f3700);
+}
+
+.card-light {
+  color: #25262c;
+  background: linear-gradient(145deg,#f7f7f9,#cdd0d8);
+}
+
+/* 카드 안쪽 칩, 번호, 이름 */
+.card-top,
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-top strong { font-size: 13px; font-style: italic; }
+
+.card-chip {
+  width: 31px;
+  height: 23px;
+  border-radius: 6px;
+  background: linear-gradient(135deg,#d6bd73,#fff0b4);
+}
+
+.card-visual > p { font-size: 14px; letter-spacing: .09em; }
+.card-bottom { opacity: .68; font-size: 9px; letter-spacing: .08em; }
+
+.method-info { align-items: flex-end; }
+.method-info h3 { margin: 9px 0 6px; font-size: 17px; }
+.method-info p { color: #92949d; font-size: 12px; }
+
+.primary-badge {
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 20px;
+  color: #795000;
+  background: #fff1bf;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ==================== 수정 / 삭제 / 기본 설정 버튼 ==================== */
+.method-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.method-actions button {
+  padding: 7px 9px;
+  border: 1px solid #e3e4e9;
+  border-radius: 8px;
+  color: #777a84;
+  background: #fff;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.method-actions .danger { color: #c15e68; }
+
+/* ==================== 새 카드 등록 / 보안 안내 ==================== */
+.payment-side { display: grid; gap: 20px; }
+
+.add-payment-panel,
+.security-panel { padding: 27px; }
+
+.add-payment-panel { text-align: center; }
+
+.add-icon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 18px;
+  place-items: center;
+  border-radius: 17px;
+  color: #795000;
+  background: #fff1bf;
+  font-size: 27px;
+  font-weight: 300;
+}
+
+.add-payment-panel p {
+  margin: 10px 0 22px;
+  color: #92949d;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.primary-button {
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 11px;
+  color: #fff;
+  background: #20222c;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.security-panel ul { display: grid; gap: 16px; margin-top: 22px; }
+
+.security-panel li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  color: #777a84;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.security-panel li span {
+  color: #8a5a00;
+  font-weight: 700;
+}
+
+/* ==================== 반응형: 태블릿 / 모바일 ==================== */
+@media (max-width: 900px) {
+  .payment-layout { grid-template-columns: 1fr; }
+  .payment-side { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 700px) {
+  .payment-page { width: min(100% - 32px, 1100px); padding-top: 24px; }
+  .page-heading { align-items: flex-start; flex-direction: column; }
+  .payment-method { grid-template-columns: 1fr; }
+  .card-visual { max-width: 330px; width: 100%; }
+  .method-info { align-items: flex-start; flex-direction: column; }
+  .method-actions { justify-content: flex-start; }
+  .payment-side { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .payment-main,
+  .add-payment-panel,
+  .security-panel { padding: 20px; }
+}

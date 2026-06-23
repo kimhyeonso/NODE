@@ -11,7 +11,7 @@
     <script src="./script/common.js"></script>
     <script src="./script/product.js" defer></script>
 </head>
-<body>
+<body data-product-category="studio">
   <!--------- 헤더 --------->
   <div class="top-bar">
     <header class="top-menu-bar">
@@ -166,7 +166,7 @@
     </header>
   </div>
 
-    <!--------- 여기 메인 시작 여기서만 수정 요망--------->
+    <!--------- 여기 메인 시작 여기서만 수정 요망 (사진 원본은 imge/hero) --------->
   <main>
     <!-- 스튜디오 배너 문구입니다. 배경 사진은 product.css에서 수정합니다. -->
     <section class="hero-product" aria-labelledby="hero-title">
@@ -240,8 +240,32 @@
 
         </div>
 
-        <div class="product-grid" id="product-grid" aria-live="polite"></div>
-        <nav class="pagination" id="pagination" aria-label="상품 페이지"></nav>
+        <div class="product-grid" id="product-grid" aria-live="polite">
+            <article class="product-card" data-price="390000" data-values="near-field 2-way flat under-50">
+                <div class="image-box"><img src="./image/Studio/studio_11.jpg" alt="Home Studio Entry Monitor"><button class="cart-button" type="button">＋</button></div>
+                <div class="brand">NODE STUDIO</div><h3 class="product-name">Home Studio Entry Monitor</h3>
+                <div class="price-row"><span class="sale-price">390,000원</span><span class="original-price">470,000원</span></div>
+                <label class="compare-check"><input type="checkbox"> 비교</label>
+            </article>
+            <article class="product-card" data-price="790000" data-values="near-field 2-way all-rounder 50-100">
+                <div class="image-box"><img src="./image/Studio/studio_8.jpg" alt="Best Value Nearfield Monitor"><button class="cart-button" type="button">＋</button></div>
+                <div class="brand">NODE STUDIO</div><h3 class="product-name">Best Value Nearfield Monitor</h3>
+                <div class="price-row"><span class="sale-price">790,000원</span><span class="original-price">950,000원</span></div>
+                <label class="compare-check"><input type="checkbox"> 비교</label>
+            </article>
+            <article class="product-card" data-price="1890000" data-values="near-field coaxial flat 100-300">
+                <div class="image-box"><img src="./image/Studio/studio_4.jpg" alt="Professional Coaxial Monitor"><button class="cart-button" type="button">＋</button></div>
+                <div class="brand">NODE STUDIO</div><h3 class="product-name">Professional Coaxial Monitor</h3>
+                <div class="price-row"><span class="sale-price">1,890,000원</span><span class="original-price">2,270,000원</span></div>
+                <label class="compare-check"><input type="checkbox"> 비교</label>
+            </article>
+            <article class="product-card" data-price="3890000" data-values="mid-field 3-way flat 300-500">
+                <div class="image-box"><img src="./image/Studio/studio_6.jpg" alt="3-Way Studio Monitor"><button class="cart-button" type="button">＋</button></div>
+                <div class="brand">NODE STUDIO</div><h3 class="product-name">3-Way Studio Monitor</h3>
+                <div class="price-row"><span class="sale-price">3,890,000원</span><span class="original-price">4,670,000원</span></div>
+                <label class="compare-check"><input type="checkbox"> 비교</label>
+            </article>
+        </div>
     </section>
 </main>
 
