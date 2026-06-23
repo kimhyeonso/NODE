@@ -1,0 +1,248 @@
+/* reset.css */
+
+ 
+
+/* =========================
+
+1. 기본 Reset
+
+========================= */
+
+* {
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+}
+
+ 
+
+html { /*웹 문서 전체*/
+
+font-size: 16px;
+
+-webkit-text-size-adjust: 100%; /*크로스 브라우징 기법: 옛날 익스플로러에서 못 알아듣는 용어들을 알아들을 수 있게 해주는 거*/
+
+scroll-behavior: smooth; /*부드러운 스크롤로 넘어갈 수 있게 해주는 역할*/
+
+}
+
+ 
+
+body {
+
+font-family: Arial, "Noto Sans KR", sans-serif;
+
+line-height: 1.5;
+
+color: #222;
+
+background: #fff;
+
+}
+
+ 
+
+/* =========================
+
+2. 태그 기본값 정리
+
+========================= */
+
+ul,
+
+ol {
+
+list-style: none; /*none: 존재하지 않습니다*/
+
+}
+
+ 
+
+a { 
+color: inherit; /*글꼴색이 정해져있지 않을 때, 부모의 글꼴색을 가져간다는 뜻*/
+
+text-decoration: none; 
+
+}
+
+ 
+
+img,
+
+video {
+
+max-width: 100%;
+
+display: block;
+
+}
+
+ 
+
+button,
+
+input,
+
+textarea,
+
+select {
+
+font: inherit;
+
+}
+
+ 
+
+button {
+
+border: 0;
+
+background: none;
+
+cursor: pointer;
+
+}
+
+ 
+
+/* =========================
+
+3. 접근성용 숨김 클래스
+
+========================= */
+
+.blind {
+
+position: absolute;
+
+width: 1px;
+
+height: 1px;
+
+overflow: hidden;
+
+clip: rect(0, 0, 0, 0);
+
+}
+
+ 
+
+/* =========================
+
+4. 반응형 기본 컨테이너
+
+========================= */
+
+.container {
+
+width: min(100% - 32px, 1200px);
+
+margin: 0 auto;
+
+}
+
+ 
+
+/* =========================
+
+5. 자주 쓰는 반응형 이미지 박스
+
+========================= */
+
+.img-box {
+
+overflow: hidden;
+
+}
+
+ 
+
+.img-box img {
+
+width: 100%;
+
+height: 100%;
+
+object-fit: cover;
+
+}
+
+ 
+
+/* =========================
+
+6. 벤더 프리픽스 예시
+
+========================= */
+
+.transition {
+
+-webkit-transition: all 0.3s ease;
+
+transition: all 0.3s ease;
+
+}
+
+ 
+
+.transform-scale:hover {
+
+-webkit-transform: scale(1.05);
+
+transform: scale(1.05);
+
+}
+
+ 
+
+/* =========================
+
+7. 반응형 기준
+
+========================= */
+
+@media (max-width: 1024px) {
+
+html {
+
+font-size: 15px;
+
+}
+
+}
+
+ 
+
+@media (max-width: 768px) {
+
+html {
+
+font-size: 14px;
+
+}
+
+ 
+
+.container {
+
+width: min(100% - 24px, 1200px);
+
+}
+
+}
+
+ 
+
+@media (max-width: 480px) {
+
+.container {
+
+width: min(100% - 20px, 1200px);
+
+}
+
+}
