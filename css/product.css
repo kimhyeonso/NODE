@@ -1,0 +1,696 @@
+/* 전체 페이지에서 공통으로 사용하는 기본 스타일 */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: #151515;
+    background: #fff;
+    font-family: Arial, "Noto Sans KR", sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+.main-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: 1280px;
+    min-height: 72px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.logo,
+.footer-logo {
+    width: fit-content;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+}
+
+.nav-links,
+.footer-links {
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.has-submenu {
+    /* Product 메뉴 아래의 ALL / STUDIO / LIVE 서브메뉴 위치 기준 */
+    position: relative;
+}
+
+/* Product 서브메뉴 디자인입니다. 메뉴 크기나 색상은 여기서 수정하세요. */
+.sub-menu {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    z-index: 30;
+    display: grid;
+    min-width: 150px;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    visibility: hidden;
+    list-style: none;
+    background: #fff;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    transform: translate(-50%, -6px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+
+.sub-menu::before {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 16px;
+    content: "";
+}
+
+.sub-menu a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+}
+
+.sub-menu a:hover,
+.sub-menu a[aria-current="page"] {
+    opacity: 1;
+    background: #f7f7f5;
+}
+
+.has-submenu:hover .sub-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.nav-links a,
+.user-nav a,
+.footer-links a {
+    transition: opacity 180ms ease;
+}
+
+.nav-links a:hover,
+.user-nav a:hover,
+.footer-links a:hover {
+    opacity: 0.55;
+}
+
+.user-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.sub-banner {
+    margin: 0;
+    padding: 10px 16px;
+    background: #f7d9df;
+    text-align: center;
+    font-size: 13px;
+}
+
+.hero-product {
+    display: grid;
+    min-height: 430px;
+    padding: 40px 24px;
+    place-items: center;
+    color: #fff;
+    background-color: #080808;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+/* 각 상품 페이지의 히어로 배경 이미지입니다. url 안의 경로만 바꾸면 됩니다. */
+body[data-product-category="all"] .hero-product {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.64)),
+        url("https://images.pexels.com/photos/6587321/pexels-photo-6587321.jpeg");
+    background-position: center 62%;
+}
+
+body[data-product-category="studio"] .hero-product {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.66)),
+        url("./image/Studio/studio_13.jpg");
+    background-position: center;
+}
+
+body[data-product-category="live"] .hero-product {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
+        url("./image/hero/live-banner.png");
+    background-position: center 10%;
+}
+
+.hero-product h1,
+.section-heading h2 {
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.1em;
+}
+
+.hero-product h1 {
+    font-size: 90px;
+}
+
+.eyebrow {
+    margin: 0 0 16px;
+    color: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.hero-product .eyebrow {
+    color: #aaa;
+}
+
+/* 상품 목록 전체 너비와 위아래 여백 */
+.product-container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 88px 32px 110px;
+}
+
+.section-heading {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.section-heading .eyebrow {
+    color: #717171;
+}
+
+.section-heading h2 {
+    font-size: 48px;
+}
+
+.product-count {
+    min-height: 24px;
+    margin: 12px 0 0;
+    color: #717171;
+    font-size: 14px;
+}
+
+/* 필터 초기화 버튼과 가격 정렬 영역 */
+.filter-toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+}
+
+.filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.reset-filter {
+    min-height: 40px;
+    padding: 7px 16px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    color: #151515;
+    background: #fff;
+    cursor: pointer;
+}
+
+.reset-filter:hover {
+    color: #fff;
+    background: #151515;
+}
+
+/* 상세 필터 박스 */
+.filter-area {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 42px;
+}
+
+.filter-section {
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.filter-section h3 {
+    margin: 0;
+    padding: 17px 20px;
+    color: #fff;
+    background: #151515;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+}
+
+.filter-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 16px 20px;
+    border-top: 1px solid #e7e7e7;
+}
+
+.filter-row strong {
+    font-size: 14px;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+}
+
+.filter-options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #444;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filter-options input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #151515;
+}
+
+.sort-control {
+    display: grid;
+    gap: 7px;
+    color: #717171;
+    font-size: 12px;
+}
+
+.sort-control select {
+    min-width: 136px;
+    min-height: 40px;
+    padding: 0 34px 0 12px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    color: #151515;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* 상품 카드 그리드: PC에서 한 줄에 4개 표시 */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px 24px;
+}
+
+.product-card {
+    min-width: 0;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    margin: 60px 0;
+    color: #717171;
+    text-align: center;
+}
+
+/* 상품 이미지 크기, 비율, 그림자 */
+.image-box {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    background: #ededeb;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.image-box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+}
+
+.product-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.product-card:hover .image-box img {
+    transform: scale(1.045);
+}
+
+.product-card:hover .image-box {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 상품 이미지 왼쪽 위 장바구니 버튼 */
+.cart-button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    place-items: center;
+    color: #222;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 180ms ease, color 180ms ease;
+}
+
+.cart-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+}
+
+.cart-button:hover {
+    transform: scale(1.08);
+}
+
+.cart-button.active {
+    color: #fff;
+    background: #151515;
+}
+
+/* 상품 이미지 오른쪽 아래 비교 체크박스 */
+.compare-check {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: #222;
+    background: rgba(255, 255, 255, 0.92);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.compare-check input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #151515;
+}
+
+/* 상품 2개 선택 시 나타나는 비교 안내창 */
+.compare-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    padding: 20px;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.compare-popup-box {
+    width: min(360px, 100%);
+    padding: 26px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
+
+.compare-popup-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.compare-popup-actions button,
+.compare-popup-actions a {
+    padding: 9px 15px;
+    border: 1px solid #151515;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.compare-cancel {
+    color: #151515;
+    background: #fff;
+}
+
+.compare-go {
+    color: #fff;
+    background: #151515;
+}
+
+.brand {
+    margin-bottom: 6px;
+    color: #717171;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.product-name {
+    overflow: hidden;
+    margin: 0 0 10px;
+    color: #151515;
+    font-size: 15px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.colors {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.color-swatch {
+    width: 11px;
+    height: 11px;
+    border: 1px solid #cfcfcf;
+    border-radius: 50%;
+}
+
+.price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.sale-price {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.original-price {
+    color: #999;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.discount-rate {
+    color: #ef5b45;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 56px;
+}
+
+.page-button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #e7e7e7;
+    border-radius: 50%;
+    place-items: center;
+    color: #555;
+    background: #fff;
+    cursor: pointer;
+}
+
+.page-button:hover,
+.page-button.active {
+    border-color: #151515;
+    color: #fff;
+    background: #151515;
+}
+
+.site-footer {
+    padding: 56px 5% 28px;
+    color: #fff;
+    background: #17171f;
+}
+
+.footer-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footer-content p,
+.copyright {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.copyright {
+    margin: 48px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+:focus-visible {
+    outline: 3px solid #6ba4ff;
+    outline-offset: 3px;
+}
+
+/* 태블릿 화면: 상품을 한 줄에 3개 표시 */
+@media (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 모바일 화면: 메뉴, 필터, 상품 카드 크기를 여기서 수정하세요. */
+@media (max-width: 768px) {
+    .main-nav {
+        grid-template-columns: auto 1fr;
+        min-height: 64px;
+        padding: 0 18px;
+    }
+
+    .nav-links {
+        justify-content: flex-end;
+        gap: 18px;
+        font-size: 14px;
+    }
+
+    .sub-menu {
+        left: auto;
+        right: 0;
+        transform: translateY(-6px);
+    }
+
+    .has-submenu:hover .sub-menu {
+        transform: translateY(0);
+    }
+
+    .user-nav {
+        display: none;
+    }
+
+    .hero-product {
+        min-height: 270px;
+    }
+
+    .hero-product h1 {
+        font-size: 52px;
+    }
+
+    .section-heading h2 {
+        font-size: 36px;
+    }
+
+    .product-container {
+        padding: 56px 16px 72px;
+    }
+
+    .filter-toolbar {
+        justify-content: stretch;
+    }
+
+    .filter-actions {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .sort-control select {
+        width: 100%;
+    }
+
+    .filter-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 14px 16px;
+    }
+
+    .filter-options {
+        gap: 10px 18px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 14px;
+    }
+
+    .image-box {
+        border-radius: 12px;
+    }
+
+    .price-row {
+        gap: 4px;
+        font-size: 13px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 380px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
