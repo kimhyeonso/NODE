@@ -1,1 +1,0 @@
-common.html , common.css안의 top-bar에서 메인 메뉴바가 기존 -> background-color가 투명색, color가 #222222색이고 스크롤 내렸을시 현재 background-color,color가 나타나게 해줘
