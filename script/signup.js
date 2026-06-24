@@ -5,29 +5,53 @@ document.getElementById("signupCheck").addEventListener("click", function(){
     let passWord = document.getElementById("passWord").value;
     let passWordCheck = document.getElementById("passWordCheck").value;
 
-    // 빈칸 체크
-    if(name === "" || id === "" || passWord === "" || passWordCheck === ""){
-        alert("모든 항목을 입력해주세요.");
-        return;
+    // 정규식
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let phoneRegex = /^01[0-9]{9}$/;
+
+    // 에러 메시지 초기화
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("idError").textContent = "";
+    document.getElementById("pwError").textContent = "";
+    document.getElementById("pwCheckError").textContent = "";
+
+    let isValid = true;
+
+    if(name === ""){
+        document.getElementById("nameError").textContent = "이름을 입력해주세요.";
+        isValid = false;
+    }
+    if(id === ""){
+        document.getElementById("idError").textContent = "전화번호 혹은 이메일을 입력해주세요.";
+        isValid = false;
+    } else if(!emailRegex.test(id) && !phoneRegex.test(id)){
+        document.getElementById("idError").textContent = "올바른 이메일 또는 전화번호를 입력해주세요.";
+        isValid = false;
+    }
+    if(passWord === ""){
+        document.getElementById("pwError").textContent = "비밀번호를 입력해주세요.";
+        isValid = false;
+    }
+    if(passWordCheck === ""){
+        document.getElementById("pwCheckError").textContent = "비밀번호 확인을 입력해주세요.";
+        isValid = false;
+    }
+    if(passWord !== "" && passWordCheck !== "" && passWord !== passWordCheck){
+        document.getElementById("pwCheckError").textContent = "비밀번호가 일치하지 않습니다.";
+        isValid = false;
     }
 
-    // 비밀번호 일치 체크
-    if(passWord !== passWordCheck){
-        alert("비밀번호가 일치하지 않습니다.");
-        return;
-    }
+    if(!isValid) return;
 
-    // 로컬스토리지에 저장
     localStorage.setItem("userId", id);
     localStorage.setItem("userPw", passWord);
     localStorage.setItem("userName", name);
 
-    alert("회원가입이 완료되었습니다.");
+    //회원가입되면 바로 로그인 창으로 이동
     window.location.href = "./login.html";
-
 });
 
-//키보드 엔터
+// 키보드 엔터 적용
 document.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
         document.getElementById("signupCheck").click();
