@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <!--
-  ============================================================
-  PRODUCT DETAIL HTML · 팀원 수정 가이드
-  ============================================================
-  1. 상품명·가격·대표 이미지: script/product-detail.js의 products 수정
-  2. 제품 사양: script/product-detail.js의 productSpecifications 수정
+  
+  1. 상품명·가격·대표 이미지: js/catalog/products.json의 products 수정
+  2. 제품 사양: js/catalog/products.json의 specifications 수정
   3. 공통 상세정보 문구: 이 파일의 #detail 영역 수정
   4. 리뷰 내용: 이 파일의 #review 영역 수정
   5. 배송·반품 내용: 이 파일의 #shipping 영역 수정
@@ -13,6 +11,7 @@
 
   주의: class, id, data-tab 이름은 JS와 연결되어 있으므로
   기능 수정이 아니라면 이름을 변경하지 마세요.
+
 -->
 <head>
     <meta charset="UTF-8">
@@ -194,7 +193,7 @@
       <div class="gallery">
         <!--
           상품 상단 원본 사진 위치
-          script/product-detail.js의 각 상품 images 배열에서 수정합니다.
+          js/catalog/products.json의 각 상품 images 배열에서 수정합니다.
           예: images: ["./image/Studio/studio_11.jpg", "./image/Studio/studio_12.jpg"]
         -->
         <div class="thumbnails">
@@ -294,7 +293,7 @@
         <!--
           포트폴리오 시안용 임시 상세정보입니다.
           실제 판매 페이지로 사용할 때는 제조사 공식 성능 및 제원으로 교체해 주세요.
-          아래 이미지들은 product-detail.js에서 현재 상품 images/detailImages를 반복 적용합니다.
+         아래 이미지들은 js/catalog/products.json의 sharedDetailImages를 반복 적용합니다.
         -->
         <section class="detail-performance">
           <div class="detail-section-heading">

@@ -47,39 +47,85 @@ for (let i = 0; i < accessoryCards.length; i++) {
   accessoryName.appendChild(nameLink);
 }
 
-// 체크된 필터 값을 배열에 담기
-function getSelectedValues() {
-  let selectedValues = [];
+// 체크된 필터를 그룹별로 담기
+// 같은 필터 그룹 안에서는 OR, 같은 액세서리 영역의 다른 그룹끼리는 AND로 검사합니다.
+// ALL 페이지에서 CABLE과 STAND 영역을 함께 선택하면 두 영역의 결과를 모두 보여줍니다.
+function getSelectedFilters() {
+  let selectedFilters = {};
 
   for (let i = 0; i < filterInputs.length; i++) {
     if (filterInputs[i].checked === true) {
-      selectedValues.push(filterInputs[i].value);
+      const filterDomain = filterInputs[i].dataset.domain;
+      const filterGroup = filterInputs[i].dataset.filter;
+
+      if (!selectedFilters[filterDomain]) {
+        selectedFilters[filterDomain] = {};
+      }
+
+      if (!selectedFilters[filterDomain][filterGroup]) {
+        selectedFilters[filterDomain][filterGroup] = [];
+      }
+
+      selectedFilters[filterDomain][filterGroup].push(filterInputs[i].value);
     }
   }
 
-  return selectedValues;
+  return selectedFilters;
 }
 
 // 카드가 선택한 필터에 맞는지 확인
-function checkAccessoryCard(card, selectedValues) {
-  let cardValues = card.getAttribute("data-values");
+function checkAccessoryCard(card, selectedFilters) {
+  const cardValues = card.getAttribute("data-values").split(/\s+/);
+  const filterDomains = Object.keys(selectedFilters);
 
-  for (let i = 0; i < selectedValues.length; i++) {
-    if (cardValues.indexOf(selectedValues[i]) === -1) {
-      return false;
+  if (filterDomains.length === 0) {
+    return true;
+  }
+
+  for (let i = 0; i < filterDomains.length; i++) {
+    const filterDomain = filterDomains[i];
+    const domainFilters = selectedFilters[filterDomain];
+    const filterGroups = Object.keys(domainFilters);
+    const hasDomainTokens = cardValues.includes("cable") || cardValues.includes("stand");
+
+    if (hasDomainTokens && !cardValues.includes(filterDomain)) {
+      continue;
+    }
+
+    let matchesDomain = true;
+
+    for (let j = 0; j < filterGroups.length; j++) {
+      const groupValues = domainFilters[filterGroups[j]];
+      let matchesGroup = false;
+
+      for (let k = 0; k < groupValues.length; k++) {
+        if (cardValues.includes(groupValues[k])) {
+          matchesGroup = true;
+          break;
+        }
+      }
+
+      if (!matchesGroup) {
+        matchesDomain = false;
+        break;
+      }
+    }
+
+    if (matchesDomain) {
+      return true;
     }
   }
 
-  return true;
+  return false;
 }
 
 // 선택한 필터에 맞는 카드만 보여주기
 function filterAccessories() {
-  let selectedValues = getSelectedValues();
+  let selectedFilters = getSelectedFilters();
   let visibleCount = 0;
 
   for (let i = 0; i < accessoryCards.length; i++) {
-    if (checkAccessoryCard(accessoryCards[i], selectedValues) === true) {
+    if (checkAccessoryCard(accessoryCards[i], selectedFilters) === true) {
       accessoryCards[i].style.display = "grid";
       visibleCount++;
     } else {
