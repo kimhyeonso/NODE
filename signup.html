@@ -11,7 +11,7 @@
 <body>
     <div class="wrap">
         <div class="imgBox">
-            <img src="./노드 로고_수정-02.png" alt="">
+            <img src="./image/common/node_logo.png" alt="logo">
         </div>
         <div class="signupBox">
             <h2>회원 가입</h2>
@@ -19,23 +19,27 @@
             <div class="inBox">
                 <label for="name">이름</label>
                 <input id="name" type="text" placeholder="">
+                <p class="errorMsg" id="nameError"></p>
             </div>
             <div class="inBox">
-                <label for="id">전화번호 혹은 이메일</label>
+                <label for="id">전화번호<br>혹은 이메일</label>
                 <input id="id" type="text" placeholder="">
+                <p class="errorMsg" id="idError"></p>
             </div>
             <div class="inBox">
                 <label for="passWord">비밀번호</label>
                 <input id="passWord" type="password" placeholder="비밀번호">
+                <p class="errorMsg" id="pwError"></p>
             </div>
-             <div class="inBox">
+            <div class="inBox">
                 <label for="passWordCheck">비밀번호 확인</label>
                 <input id="passWordCheck" type="password" placeholder="비밀번호">
+                <p class="errorMsg" id="pwCheckError"></p>
             </div>
             <button id="signupCheck">회원 가입</button>
         </div>
     </div>
 
-    <script src="./signup.js"></script>
+    <script src="./script/signup.js"></script>
 </body>
 </html>
