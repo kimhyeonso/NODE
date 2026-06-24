@@ -1,8 +1,6 @@
 /*
   ACCESSORY 페이지 JS
 
-  액세서리 카드는 HTML에 직접 작성되어 있습니다.
-  이 파일은 아래 기능만 담당합니다.
   1. 체크박스 필터
   2. 가격 정렬
   3. 필터 초기화
@@ -17,18 +15,36 @@ const sortSelect = document.getElementById("sort-select");
 const resetButton = document.getElementById("reset-filter");
 const accessoryCount = document.getElementById("accessory-count");
 
-// 액세서리 이미지를 누르면 상세페이지로 이동합니다.
-// 상세페이지가 완성되면 아래의 "#"만 실제 파일 주소로 바꾸면 됩니다.
-const accessoryImages = document.querySelectorAll(".image-box img");
+// 상품명으로 고유 ID를 만들어 공통 상세페이지에 연결합니다.
+function createProductId(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
 
-for (let i = 0; i < accessoryImages.length; i++) {
+for (let i = 0; i < accessoryCards.length; i++) {
+  const card = accessoryCards[i];
+  const accessoryImage = card.querySelector(".image-box img");
+  const accessoryName = card.querySelector(".accessory-name");
+  const productId = createProductId(accessoryName.textContent);
+  const detailUrl = "./product-detail.html?id=" + encodeURIComponent(productId);
+
+  card.dataset.productId = productId;
+
   let imageLink = document.createElement("a");
   imageLink.className = "product-link";
-  imageLink.href = "#";
-  imageLink.setAttribute("aria-label", "상품 상세페이지 보기");
+  imageLink.href = detailUrl;
+  imageLink.setAttribute("aria-label", accessoryName.textContent + " 상세페이지 보기");
 
-  accessoryImages[i].parentElement.insertBefore(imageLink, accessoryImages[i]);
-  imageLink.appendChild(accessoryImages[i]);
+  accessoryImage.parentElement.insertBefore(imageLink, accessoryImage);
+  imageLink.appendChild(accessoryImage);
+
+  let nameLink = document.createElement("a");
+  nameLink.href = detailUrl;
+  nameLink.textContent = accessoryName.textContent;
+  accessoryName.textContent = "";
+  accessoryName.appendChild(nameLink);
 }
 
 // 체크된 필터 값을 배열에 담기

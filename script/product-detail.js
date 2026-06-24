@@ -1,0 +1,523 @@
+/*
+  1. products
+     상품명, 브랜드, 가격, 상단 이미지, 짧은 설명을 수정합니다.
+
+  2. productSpecifications
+     상품별 비교용 제품 사양을 수정합니다.
+     상품 ID는 products의 ID와 반드시 동일해야 합니다.
+
+  3. sharedDetailImages
+     모든 상품이 공통으로 사용하는 상세정보 이미지를 수정합니다.
+
+  4. 하단 기능 코드
+     썸네일, 수량, 탭, 추천 상품 기능입니다.
+     데이터나 문구만 수정할 때는 기능 코드를 변경하지 마세요.
+
+  상품 URL 예시:
+  product-detail.html?id=home-studio-entry-monitor
+*/
+
+// ==================== 상품 기본 데이터 시작 ====================
+const products = {
+  "home-studio-entry-monitor": {
+    name: "Home Studio Entry Monitor",
+    brand: "NODE STUDIO",
+    price: 390000,
+    images: ["./image/Studio/studio_11.jpg", "./image/Studio/studio_12.jpg"],
+    description: "작은 작업실에서도 균형 잡힌 소리를 들려주는 입문용 니어필드 모니터입니다.",
+    headline: "작은 공간에서 만나는<br>정확한 첫 번째 사운드",
+    detail: "선명한 중역과 단단한 저역을 바탕으로 홈 스튜디오의 녹음과 편집 작업을 안정적으로 지원합니다."
+  },
+  "best-value-nearfield-monitor": {
+    name: "Best Value Nearfield Monitor",
+    brand: "NODE STUDIO",
+    price: 790000,
+    images: ["./image/Studio/studio_8.jpg", "./image/Studio/studio_7.jpg"],
+    description: "음악 제작과 감상을 고르게 만족시키는 올라운드 니어필드 모니터입니다.",
+    headline: "합리적인 선택 안에 담은<br>완성도 높은 밸런스",
+    detail: "장시간 작업에도 편안한 음색과 넓은 스테레오 이미지를 제공해 다양한 장르에 자연스럽게 대응합니다."
+  },
+  "professional-coaxial-monitor": {
+    name: "Professional Coaxial Monitor",
+    brand: "NODE STUDIO",
+    price: 1890000,
+    images: ["./image/Studio/studio_4.jpg", "./image/Studio/studio_5.jpg"],
+    description: "정밀한 위치 표현과 일관된 음상을 제공하는 프로페셔널 동축 모니터입니다.",
+    headline: "한 점에서 완성되는<br>정교한 사운드 이미지",
+    detail: "동축 드라이버 설계로 청취 위치에 따른 편차를 줄이고 믹스의 작은 변화까지 명확하게 전달합니다."
+  },
+  "3-way-studio-monitor": {
+    name: "3-Way Studio Monitor",
+    brand: "NODE STUDIO",
+    price: 3890000,
+    images: ["./image/Studio/studio_6.jpg", "./image/Studio/studio_13.jpg"],
+    description: "넓은 주파수 대역과 높은 해상력을 갖춘 3웨이 스튜디오 모니터입니다.",
+    headline: "세 개의 길로 나누어<br>더 깊고 정확하게",
+    detail: "각 대역을 전담하는 드라이버가 대형 세션과 정밀한 마스터링 작업에 필요한 여유와 해상도를 제공합니다."
+  },
+  "battery-busking-amp-set": {
+    name: "Battery Busking Amp Set",
+    brand: "NODE LIVE",
+    price: 620000,
+    images: ["./image/stage/stage_1.jpg", "./image/stage/stage_2.jpg"],
+    description: "전원 연결이 어려운 장소에서도 간편하게 사용할 수 있는 휴대용 버스킹 앰프 세트입니다.",
+    headline: "무대가 없는 곳에서도<br>공연은 시작됩니다",
+    detail: "배터리 구동과 간편한 이동성을 바탕으로 거리 공연, 소규모 행사와 야외 활동에 안정적인 사운드를 제공합니다."
+  },
+  "compact-pa-speaker": {
+    name: "Compact PA Speaker",
+    brand: "NODE LIVE",
+    price: 790000,
+    images: ["./image/stage/stage_2.jpg", "./image/stage/stage_3.jpg"],
+    description: "이동성과 출력의 균형을 갖춘 소형 액티브 PA 스피커입니다.",
+    headline: "가볍게 이동하고<br>선명하게 전달하다",
+    detail: "컴팩트한 크기 안에 충분한 출력과 직관적인 연결 기능을 담아 소규모 공연과 프레젠테이션에 적합합니다."
+  },
+  "12-inch-live-main-speaker": {
+    name: "12-Inch Live Main Speaker",
+    brand: "NODE LIVE",
+    price: 1180000,
+    images: ["./image/stage/stage_3.jpg", "./image/stage/stage_5.jpg"],
+    description: "중형 공연장을 위한 풍부한 출력과 명료도를 갖춘 12인치 메인 스피커입니다.",
+    headline: "무대의 에너지를<br>객석 끝까지 선명하게",
+    detail: "보컬의 명료함과 악기의 타격감을 고르게 살려 라이브 공연의 에너지를 안정적으로 전달합니다."
+  },
+  "festival-main-speaker": {
+    name: "Festival Main Speaker",
+    brand: "NODE LIVE",
+    price: 3290000,
+    images: ["./image/stage/stage_11.jpg", "./image/stage/stage_13.jpg"],
+    description: "대형 무대와 야외 페스티벌을 위한 고출력 패시브 메인 스피커입니다.",
+    headline: "넓은 공간을 압도하는<br>대형 무대의 사운드",
+    detail: "높은 음압과 넓은 커버리지를 바탕으로 대규모 관객에게 균일하고 역동적인 공연 사운드를 전달합니다."
+  },
+  "balanced-xlr-cable-1m": {
+    name: "Balanced XLR Cable 1M",
+    brand: "NODE CABLE",
+    price: 39000,
+    images: ["./image/cable/cable_1.jpg", "./image/cable/cable_4.jpg"],
+    description: "마이크와 오디오 장비를 안정적으로 연결하는 1미터 밸런스 XLR 케이블입니다.",
+    headline: "짧은 연결에서도<br>신호는 더 깨끗하게",
+    detail: "촘촘한 차폐와 견고한 커넥터로 스튜디오와 무대에서 노이즈를 줄이고 안정적인 신호를 전달합니다."
+  },
+  "premium-xlr-cable-3m": {
+    name: "Premium XLR Cable 3M",
+    brand: "NODE CABLE",
+    price: 59000,
+    images: ["./image/cable/cable_2.jpg", "./image/cable/cable_6.jpg"],
+    description: "여유 있는 설치와 안정적인 신호 전송을 위한 3미터 프리미엄 XLR 케이블입니다.",
+    headline: "더 긴 거리에서도<br>흔들림 없는 연결",
+    detail: "유연한 피복과 강화된 단자 구조를 적용해 반복되는 설치와 이동 환경에서도 뛰어난 내구성을 제공합니다."
+  },
+  "studio-trs-cable-3m": {
+    name: "Studio TRS Cable 3M",
+    brand: "NODE CABLE",
+    price: 32000,
+    images: ["./image/cable/cable_3.jpg", "./image/cable/cable_8.jpg"],
+    description: "오디오 인터페이스와 모니터 연결에 적합한 3미터 TRS 케이블입니다.",
+    headline: "스튜디오의 신호를<br>정확하게 이어주다",
+    detail: "밸런스 연결을 지원해 외부 노이즈를 억제하고 녹음 및 모니터링 환경의 깨끗한 신호 흐름을 유지합니다."
+  },
+  "speaker-cable-5m": {
+    name: "Speaker Cable 5M",
+    brand: "NODE CABLE",
+    price: 65000,
+    images: ["./image/cable/cable_5.jpg", "./image/cable/cable_9.png"],
+    description: "앰프와 패시브 스피커를 연결하는 고내구성 5미터 스피커 케이블입니다.",
+    headline: "강한 출력도 안정적으로<br>무대 끝까지 연결",
+    detail: "충분한 도체 굵기와 견고한 외피로 높은 출력 환경에서도 손실을 줄이고 안정적인 전력 전송을 지원합니다."
+  },
+  "desktop-monitor-stand": {
+    name: "Desktop Monitor Stand",
+    brand: "NODE STAND",
+    price: 89000,
+    images: ["./image/stands/stand_1.jpg", "./image/stands/stand_2.webp"],
+    description: "데스크 위 모니터 스피커의 높이와 각도를 안정적으로 맞춰주는 스탠드입니다.",
+    headline: "귀에 맞는 높이로<br>사운드를 더 정확하게",
+    detail: "스피커의 청취 축을 자연스럽게 맞추고 책상 진동을 줄여 더 또렷하고 안정적인 모니터링 환경을 만듭니다."
+  },
+  "isolation-speaker-stand": {
+    name: "Isolation Speaker Stand",
+    brand: "NODE STAND",
+    price: 129000,
+    images: ["./image/stands/isolation-speaker-stand-new.png"],
+    description: "불필요한 진동 전달을 줄여주는 데스크톱 아이솔레이션 스피커 스탠드입니다.",
+    headline: "진동은 덜어내고<br>소리의 윤곽은 선명하게",
+    detail: "흡진 구조가 책상으로 전달되는 공진을 줄여 저역의 번짐을 완화하고 스피커 본연의 밸런스를 살립니다."
+  },
+  "adjustable-studio-stand": {
+    name: "Adjustable Studio Stand",
+    brand: "NODE STAND",
+    price: 159000,
+    images: ["./image/stands/stand_3.jpg", "./image/stands/stand_6.jpg"],
+    description: "다양한 작업 환경에 맞춰 높이를 조절할 수 있는 플로어형 스튜디오 스탠드입니다.",
+    headline: "공간과 자세에 맞춰<br>정확한 위치를 만들다",
+    detail: "높이 조절 구조와 안정적인 베이스로 스튜디오 모니터를 청취 환경에 맞는 위치에 안전하게 배치합니다."
+  },
+  "minimal-floor-stand": {
+    name: "Minimal Floor Stand",
+    brand: "NODE STAND",
+    price: 179000,
+    images: ["./image/stands/minimal-floor-stand-new.png"],
+    description: "공간에 자연스럽게 어울리는 미니멀 디자인의 플로어 스피커 스탠드입니다.",
+    headline: "공간은 가볍게<br>사운드는 안정적으로",
+    detail: "절제된 형태와 단단한 지지 구조가 거실과 작업실 어디에서나 스피커를 안정적으로 받쳐줍니다."
+  }
+};
+// ==================== 상품 기본 데이터 끝 ====================
+
+// 비교페이지에서도 사용할 수 있는 상품별 제원 데이터입니다.
+// ==================== 상품별 비교 제원 시작 ====================
+const productSpecifications = {
+  "home-studio-entry-monitor": [
+    ["제품 유형", "2-Way Near-field Active Monitor"],
+    ["주파수 응답", "48 Hz – 20 kHz"],
+    ["최대 출력", "102 dB SPL"],
+    ["앰프 출력", "60 W"],
+    ["드라이버", "5.25인치 우퍼 / 1인치 트위터"],
+    ["입력 방식", "XLR / TRS"],
+    ["크기", "178 × 260 × 215 mm"],
+    ["무게", "4.1 kg"]
+  ],
+  "best-value-nearfield-monitor": [
+    ["제품 유형", "2-Way Near-field Active Monitor"],
+    ["주파수 응답", "42 Hz – 22 kHz"],
+    ["최대 출력", "108 dB SPL"],
+    ["앰프 출력", "100 W"],
+    ["드라이버", "6.5인치 우퍼 / 1인치 트위터"],
+    ["입력 방식", "XLR / TRS / RCA"],
+    ["크기", "215 × 332 × 285 mm"],
+    ["무게", "6.8 kg"]
+  ],
+  "professional-coaxial-monitor": [
+    ["제품 유형", "2-Way Coaxial Active Monitor"],
+    ["주파수 응답", "38 Hz – 25 kHz"],
+    ["최대 출력", "114 dB SPL"],
+    ["앰프 출력", "250 W"],
+    ["드라이버", "8인치 동축 드라이버"],
+    ["입력 방식", "XLR / AES3"],
+    ["크기", "286 × 420 × 330 mm"],
+    ["무게", "12.4 kg"]
+  ],
+  "3-way-studio-monitor": [
+    ["제품 유형", "3-Way Mid-field Active Monitor"],
+    ["주파수 응답", "28 Hz – 30 kHz"],
+    ["최대 출력", "120 dB SPL"],
+    ["앰프 출력", "500 W"],
+    ["드라이버", "10인치 / 4인치 / 1인치"],
+    ["입력 방식", "XLR / AES3 / Network"],
+    ["크기", "360 × 580 × 430 mm"],
+    ["무게", "27.5 kg"]
+  ],
+  "battery-busking-amp-set": [
+    ["제품 유형", "Battery Portable PA System"],
+    ["주파수 응답", "55 Hz – 18 kHz"],
+    ["최대 출력", "110 dB SPL"],
+    ["정격 출력", "120 W"],
+    ["배터리 사용", "최대 10시간"],
+    ["입력 방식", "Mic × 2 / Line / Bluetooth"],
+    ["크기", "310 × 460 × 280 mm"],
+    ["무게", "9.2 kg"]
+  ],
+  "compact-pa-speaker": [
+    ["제품 유형", "10-Inch Active PA Speaker"],
+    ["주파수 응답", "50 Hz – 20 kHz"],
+    ["최대 출력", "124 dB SPL"],
+    ["정격 출력", "700 W"],
+    ["드라이버", "10인치 우퍼 / 1.4인치 HF"],
+    ["커버리지", "90° × 60°"],
+    ["크기", "320 × 520 × 300 mm"],
+    ["무게", "11.6 kg"]
+  ],
+  "12-inch-live-main-speaker": [
+    ["제품 유형", "12-Inch Active Main Speaker"],
+    ["주파수 응답", "45 Hz – 20 kHz"],
+    ["최대 출력", "130 dB SPL"],
+    ["정격 출력", "1,200 W"],
+    ["드라이버", "12인치 우퍼 / 1.75인치 HF"],
+    ["커버리지", "90° × 50°"],
+    ["크기", "365 × 610 × 355 mm"],
+    ["무게", "17.8 kg"]
+  ],
+  "festival-main-speaker": [
+    ["제품 유형", "Dual 15-Inch Passive Speaker"],
+    ["주파수 응답", "35 Hz – 18 kHz"],
+    ["최대 출력", "138 dB SPL"],
+    ["허용 입력", "2,400 W"],
+    ["드라이버", "15인치 우퍼 × 2 / 3인치 HF"],
+    ["임피던스", "4 Ω"],
+    ["크기", "520 × 1,180 × 620 mm"],
+    ["무게", "58.5 kg"]
+  ],
+  "balanced-xlr-cable-1m": [
+    ["제품 유형", "Balanced XLR Microphone Cable"],
+    ["길이", "1 m"],
+    ["커넥터", "XLR Female–Male"],
+    ["도체", "OFC Copper 24 AWG"],
+    ["차폐 방식", "Braided Copper 95%"],
+    ["외경", "6.0 mm"],
+    ["피복", "Flexible PVC"],
+    ["보증 기간", "2년"]
+  ],
+  "premium-xlr-cable-3m": [
+    ["제품 유형", "Premium Balanced XLR Cable"],
+    ["길이", "3 m"],
+    ["커넥터", "Gold-Plated XLR"],
+    ["도체", "OFC Copper 22 AWG"],
+    ["차폐 방식", "Dual Spiral Shield 98%"],
+    ["외경", "6.8 mm"],
+    ["피복", "Soft-Touch TPE"],
+    ["보증 기간", "3년"]
+  ],
+  "studio-trs-cable-3m": [
+    ["제품 유형", "Balanced TRS Studio Cable"],
+    ["길이", "3 m"],
+    ["커넥터", "6.35 mm TRS–TRS"],
+    ["도체", "OFC Copper 24 AWG"],
+    ["차폐 방식", "Spiral Copper 90%"],
+    ["정전 용량", "85 pF/m"],
+    ["피복", "Low-Noise PVC"],
+    ["보증 기간", "2년"]
+  ],
+  "speaker-cable-5m": [
+    ["제품 유형", "High-Current Speaker Cable"],
+    ["길이", "5 m"],
+    ["커넥터", "6.35 mm TS–TS"],
+    ["도체", "OFC Copper 14 AWG"],
+    ["도체 단면적", "2.08 mm² × 2"],
+    ["최대 허용 전력", "1,500 W"],
+    ["피복", "Heavy-Duty Rubber"],
+    ["보증 기간", "3년"]
+  ],
+  "desktop-monitor-stand": [
+    ["제품 유형", "Angled Desktop Monitor Stand"],
+    ["높이", "145 mm"],
+    ["상판 크기", "220 × 250 mm"],
+    ["조절 각도", "0° / 5° / 10°"],
+    ["최대 하중", "15 kg"],
+    ["소재", "Powder-Coated Steel"],
+    ["제품 무게", "2.3 kg / pair"],
+    ["구성", "스탠드 2개"]
+  ],
+  "isolation-speaker-stand": [
+    ["제품 유형", "Isolation Speaker Stand"],
+    ["높이", "105 mm"],
+    ["상판 크기", "200 × 240 mm"],
+    ["조절 각도", "-5° / 0° / 5°"],
+    ["최대 하중", "12 kg"],
+    ["진동 감소", "최대 18 dB"],
+    ["제품 무게", "1.8 kg / pair"],
+    ["구성", "스탠드 2개"]
+  ],
+  "adjustable-studio-stand": [
+    ["제품 유형", "Adjustable Floor Studio Stand"],
+    ["높이 조절", "720–1,180 mm"],
+    ["상판 크기", "230 × 230 mm"],
+    ["조절 단계", "7단계"],
+    ["최대 하중", "30 kg"],
+    ["소재", "Steel / Aluminum"],
+    ["제품 무게", "9.4 kg / pair"],
+    ["구성", "스탠드 2개"]
+  ],
+  "minimal-floor-stand": [
+    ["제품 유형", "Minimal Fixed Floor Stand"],
+    ["전체 높이", "820 mm"],
+    ["상판 크기", "210 × 240 mm"],
+    ["기둥 구조", "Dual-Pillar"],
+    ["최대 하중", "22 kg"],
+    ["케이블 정리", "Internal Cable Management"],
+    ["제품 무게", "11.2 kg / pair"],
+    ["구성", "스탠드 2개"]
+  ]
+};
+// ==================== 상품별 비교 제원 끝 ====================
+
+// 비교페이지 담당 팀원이 사용할 수 있는 전역 데이터입니다.
+window.productSpecifications = productSpecifications;
+
+// ==================== 현재 URL의 상품 선택 ====================
+const params = new URLSearchParams(window.location.search);
+const requestedId = params.get("id");
+const fallbackId = "home-studio-entry-monitor";
+const product = products[requestedId] || products[fallbackId];
+
+const productTitle = document.querySelector(".product-info h1");
+const productPrice = document.querySelector(".product-info .price");
+const productDescription = document.querySelector(".product-info .description");
+const productCategory = document.querySelector(".product-info");
+const mainImage = document.querySelector(".main-image");
+const thumbnails = document.querySelectorAll(".thumb");
+const detailHero = document.querySelector(".detail-hero");
+const detailImagePrimary = document.querySelector(".detail-image-primary");
+const detailImageSecondary = document.querySelector(".detail-image-secondary");
+const detailRepeatImages = document.querySelectorAll(".detail-repeat-image");
+const similarCards = document.querySelectorAll(".similar-products .card");
+const quantityMinus = document.querySelector(".quantity-minus");
+const quantityPlus = document.querySelector(".quantity-plus");
+const quantityValue = document.querySelector(".quantity-value");
+const tabButtons = document.querySelectorAll(".product-tabs button");
+const tabPanels = document.querySelectorAll(".tab-panel");
+const specificationList = document.querySelector(".specification-list");
+
+function formatPrice(price) {
+  return price.toLocaleString("ko-KR") + "원";
+}
+
+function setMainImage(image, index) {
+  mainImage.style.backgroundImage = 'url("' + image + '")';
+  mainImage.setAttribute("aria-label", product.name + " 상품 이미지 " + (index + 1));
+
+  for (let i = 0; i < thumbnails.length; i++) {
+    thumbnails[i].classList.toggle("is-active", i === index);
+  }
+}
+
+document.title = product.name + " | NODE";
+productTitle.textContent = product.name;
+productPrice.textContent = formatPrice(product.price);
+productDescription.textContent = product.description;
+productCategory.setAttribute("data-brand", product.brand);
+detailHero.style.backgroundImage =
+  'linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.18)), url("' +
+  "./image/product-detail/shared/node-detail-hero.png" +
+  '")';
+
+/*
+  모든 상품의 상세정보 영역은 아래 공통 이미지 4장을 사용합니다.
+  이미지를 교체할 때 파일명은 유지하고
+  image/product-detail/shared 폴더의 원본만 바꾸면 됩니다.
+*/
+// ==================== 모든 상품 공통 상세 이미지 ====================
+// 파일 교체 위치: image/product-detail/shared/
+const sharedDetailImages = [
+  "./image/product-detail/shared/node-detail-hero.png",
+  "./image/product-detail/shared/node-detail-texture.png",
+  "./image/product-detail/shared/node-detail-lifestyle.png",
+  "./image/product-detail/shared/node-detail-engineering.png"
+];
+
+detailImagePrimary.src = sharedDetailImages[2];
+detailImagePrimary.alt = "NODE 오디오 라이프스타일 상세 이미지";
+detailImageSecondary.src = sharedDetailImages[1];
+detailImageSecondary.alt = "NODE 오디오 소재 상세 이미지";
+
+for (let i = 0; i < detailRepeatImages.length; i++) {
+  const repeatedImage = sharedDetailImages[i % sharedDetailImages.length];
+  detailRepeatImages[i].src = repeatedImage;
+  detailRepeatImages[i].alt = "NODE 공통 상세 이미지 " + (i + 1);
+}
+
+const currentSpecifications =
+  productSpecifications[requestedId] || productSpecifications[fallbackId];
+
+specificationList.textContent = "";
+
+for (let i = 0; i < currentSpecifications.length; i++) {
+  const specificationRow = document.createElement("div");
+  const specificationName = document.createElement("dt");
+  const specificationValue = document.createElement("dd");
+
+  specificationName.textContent = currentSpecifications[i][0];
+  specificationValue.textContent = currentSpecifications[i][1];
+  specificationRow.appendChild(specificationName);
+  specificationRow.appendChild(specificationValue);
+  specificationList.appendChild(specificationRow);
+}
+
+for (let i = 0; i < thumbnails.length; i++) {
+  const image = product.images[i] || product.images[0];
+  thumbnails[i].style.backgroundImage = 'url("' + image + '")';
+  thumbnails[i].setAttribute("aria-label", product.name + " 상품 이미지 " + (i + 1));
+  thumbnails[i].addEventListener("click", function () {
+    setMainImage(image, i);
+  });
+}
+
+setMainImage(product.images[0], 0);
+
+// ==================== 수량 선택 기능 ====================
+let quantity = 1;
+
+function updateQuantity() {
+  quantityValue.textContent = quantity;
+  quantityMinus.disabled = quantity === 1;
+}
+
+quantityMinus.addEventListener("click", function () {
+  if (quantity > 1) {
+    quantity--;
+    updateQuantity();
+  }
+});
+
+quantityPlus.addEventListener("click", function () {
+  quantity++;
+  updateQuantity();
+});
+
+updateQuantity();
+
+// ==================== 상세정보·리뷰·배송 탭 기능 ====================
+for (let i = 0; i < tabButtons.length; i++) {
+  tabButtons[i].addEventListener("click", function () {
+    const selectedTab = this.dataset.tab;
+
+    for (let j = 0; j < tabButtons.length; j++) {
+      const isSelected = tabButtons[j] === this;
+      tabButtons[j].classList.toggle("is-active", isSelected);
+      tabButtons[j].setAttribute("aria-selected", String(isSelected));
+    }
+
+    for (let j = 0; j < tabPanels.length; j++) {
+      const isSelected = tabPanels[j].id === selectedTab;
+      tabPanels[j].hidden = !isSelected;
+      tabPanels[j].classList.toggle("is-active", isSelected);
+    }
+  });
+}
+
+// ==================== 추천 상품 자동 연결 ====================
+const currentId = products[requestedId] ? requestedId : fallbackId;
+let similarEntries = Object.entries(products).filter(function (entry) {
+  return entry[0] !== currentId && entry[1].brand === product.brand;
+});
+
+if (similarEntries.length < similarCards.length) {
+  const otherEntries = Object.entries(products).filter(function (entry) {
+    return entry[0] !== currentId && entry[1].brand !== product.brand;
+  });
+  similarEntries = similarEntries.concat(otherEntries);
+}
+
+for (let i = 0; i < similarCards.length; i++) {
+  const similarId = similarEntries[i][0];
+  const similarProduct = similarEntries[i][1];
+  const similarUrl = "./product-detail.html?id=" + encodeURIComponent(similarId);
+  const similarImageBox = similarCards[i].querySelector(".similar-image-box");
+  const similarImageLink = similarCards[i].querySelector(".similar-product-link");
+  const similarNameLink = similarCards[i].querySelector(".similar-name a");
+  const similarCartButton = similarCards[i].querySelector(".similar-cart-button");
+
+  similarImageBox.style.backgroundImage = 'url("' + similarProduct.images[0] + '")';
+  similarImageLink.href = similarUrl;
+  similarImageLink.setAttribute("aria-label", similarProduct.name + " 상세페이지 보기");
+  similarNameLink.href = similarUrl;
+  similarNameLink.textContent = similarProduct.name;
+  similarCards[i].querySelector(".similar-brand").textContent = similarProduct.brand;
+  similarCards[i].querySelector(".similar-price").textContent = formatPrice(similarProduct.price);
+
+  similarCartButton.innerHTML =
+    '<svg aria-hidden="true" viewBox="0 0 24 24">' +
+    '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
+    '<circle cx="9" cy="20" r="1"></circle>' +
+    '<circle cx="17" cy="20" r="1"></circle>' +
+    "</svg>";
+
+  similarCartButton.addEventListener("click", function () {
+    this.classList.toggle("is-active");
+  });
+}
+
+if (!products[requestedId]) {
+  history.replaceState(null, "", "./product-detail.html?id=" + fallbackId);
+}

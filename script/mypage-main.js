@@ -1,85 +1,69 @@
-/*
-  [이 파일의 역할]
-  1. 회원가입할 때 저장한 이름을 가져옵니다.
-  2. 결제수단 페이지에서 저장한 카드 정보를 가져옵니다.
-  3. 가져온 값을 마이페이지 메인 화면에 표시합니다.
+/* [마이페이지 메인 JS]
+  1. localStorage에서 저장된 데이터를 가져와 화면에 그립니다.
+  2. 카드 정보를 활용해 요약 정보를 업데이트합니다.
 */
 
-// ==================== 회원 정보 ====================
-// [수정 포인트] 회원가입 JS에서 사용하는 localStorage 이름과 같아야 합니다.
-// localStorage는 브라우저를 닫아도 간단한 값을 기억하는 저장 공간입니다.
+// ==================== 1. 사용자 정보 표시 ====================
 const savedUserName = localStorage.getItem("userName");
-const userName = document.querySelector(".user-info-card h2");
-const userAvatar = document.querySelector(".user-avatar");
+const userNameElement = document.querySelector(".user-info-card h2");
+const userAvatarElement = document.querySelector(".user-avatar");
 
-if (savedUserName && userName && userAvatar) {
-  userName.innerHTML = savedUserName + " <span>님</span>";
-  userAvatar.textContent = savedUserName.charAt(0);
+if (savedUserName) {
+  // 이름이 있을 경우 화면에 반영
+  userNameElement.innerHTML = `${savedUserName} <span>님</span>`; // 템플릿 리터럴 사용
+  userAvatarElement.textContent = savedUserName.charAt(0);
 }
 
-// ==================== 결제 수단 정보 ====================
-// 결제수단 페이지에서 저장한 카드 정보 가져오기
+// ==================== 2. 결제 수단 정보 표시 ====================
 const savedCards = localStorage.getItem("mypageCards");
-let cards = [];
+// 데이터가 없으면 빈 배열로 초기화 (에러 방지)
+const cards = savedCards ? JSON.parse(savedCards) : [];
 
-if (savedCards) {
-  // localStorage에는 글자만 저장할 수 있습니다.
-  // JSON.parse는 저장된 글자를 다시 배열과 객체로 되돌립니다.
-  cards = JSON.parse(savedCards);
-}
-
-// [수정 포인트] 요약 카드 순서가 바뀌면 summaryCards[2] 숫자도 변경
+// 요약 카드 개수 업데이트 함수
 function updateCardCount() {
   const summaryCards = document.querySelectorAll(".summary-grid .card");
+  // 3번째 카드(인덱스 2)의 숫자를 수정
   const paymentCount = summaryCards[2].querySelector("strong");
-  let count = cards.length;
-
-  if (count === 0) {
-    count = 3;
-  }
-
-  paymentCount.innerHTML = count + "<small>개</small>";
+  
+  // 데이터가 있으면 카드 배열 길이를, 없으면 기본값 3으로 설정
+  const count = cards.length > 0 ? cards.length : 3;
+  paymentCount.innerHTML = `${count}<small>개</small>`;
 }
 
-// 기본 결제수단 카드 변경
+// 기본 카드 정보 업데이트 함수
 function updatePrimaryCard() {
-  if (cards.length === 0) {
-    return;
-  }
+  if (cards.length === 0) return; // 카드가 없으면 함수 종료
 
-  let primaryCard = cards[0];
-
-  for (let i = 0; i < cards.length; i++) {
-    if (cards[i].primary === true) {
-      primaryCard = cards[i];
-    }
-  }
+  // 배열에서 primary가 true인 카드를 찾음 (없으면 첫 번째 카드)
+  const primaryCard = cards.find(card => card.primary === true) || cards[0];
 
   const creditCard = document.querySelector(".credit-card");
-
+  
+  // 카드 정보 입력
   creditCard.querySelector("span").textContent = primaryCard.brand;
-  creditCard.querySelector("strong").textContent = "••••  ••••  ••••  " + primaryCard.lastNumber;
+  creditCard.querySelector("strong").textContent = `•••• •••• •••• ${primaryCard.lastNumber}`;
   creditCard.querySelector("div small:last-child").textContent = primaryCard.expiry;
 }
 
-// ==================== 최근 결제 내역 클릭 ====================
-// [수정 포인트] alert 대신 상세 페이지 이동으로 바꿀 수 있습니다.
+// ==================== 3. 최근 결제 내역 클릭 이벤트 ====================
 function addTransactionEvents() {
   const transactionItems = document.querySelectorAll(".transaction-list li");
 
-  for (let i = 0; i < transactionItems.length; i++) {
-    transactionItems[i].addEventListener("click", function () {
-      const productName = this.querySelector("div:nth-child(2) strong").textContent;
-      const paymentInfo = this.querySelector("div:nth-child(2) span").textContent;
-      // li의 마지막 자식 strong이 결제 금액입니다.
-      const price = this.lastElementChild.textContent;
+  // for문 대신 배열의 forEach 사용
+  transactionItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      // 이벤트 발생 시 클릭된 요소 내부에서 정보 추출
+      const productName = item.querySelector("div:nth-child(2) strong").textContent;
+      const paymentInfo = item.querySelector("div:nth-child(2) span").textContent;
+      const price = item.lastElementChild.textContent;
 
-      alert(productName + "\n" + paymentInfo + "\n결제 금액: " + price);
+      alert(`${productName}\n${paymentInfo}\n결제 금액: ${price}`);
     });
-  }
+  });
 }
 
-// ==================== 최초 실행 ====================
+// ==================== 4. 초기 실행 ====================
+// 함수들을 호출하여 화면을 구성
 updateCardCount();
 updatePrimaryCard();
 addTransactionEvents();

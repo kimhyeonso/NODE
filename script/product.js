@@ -17,18 +17,27 @@ const sortSelect = document.getElementById("sort-select");
 const resetButton = document.getElementById("reset-filter");
 const productCount = document.getElementById("product-count");
 
-// 상품 이미지를 누르면 상세페이지로 이동합니다.
-// 상세페이지가 완성되면 아래의 "#"만 실제 파일 주소로 바꾸면 됩니다.
-const productImages = document.querySelectorAll(".image-box img");
+// HTML 카드에 적힌 상품 ID로 상세페이지 주소를 만듭니다.
+for (let i = 0; i < productCards.length; i++) {
+  const card = productCards[i];
+  const productImage = card.querySelector(".image-box img");
+  const productName = card.querySelector(".product-name");
+  const productId = card.getAttribute("data-product-id");
+  const detailUrl = "./product-detail.html?id=" + encodeURIComponent(productId);
 
-for (let i = 0; i < productImages.length; i++) {
   let imageLink = document.createElement("a");
   imageLink.className = "product-link";
-  imageLink.href = "#";
-  imageLink.setAttribute("aria-label", "상품 상세페이지 보기");
+  imageLink.href = detailUrl;
+  imageLink.setAttribute("aria-label", productName.textContent + " 상세페이지 보기");
 
-  productImages[i].parentElement.insertBefore(imageLink, productImages[i]);
-  imageLink.appendChild(productImages[i]);
+  productImage.parentElement.insertBefore(imageLink, productImage);
+  imageLink.appendChild(productImage);
+
+  let nameLink = document.createElement("a");
+  nameLink.href = detailUrl;
+  nameLink.textContent = productName.textContent;
+  productName.textContent = "";
+  productName.appendChild(nameLink);
 }
 
 // 체크된 필터 값을 배열에 담기
