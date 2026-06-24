@@ -6,7 +6,7 @@
     <title>common</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/reset.css">
-    <!-- 여기에 섹션 작업 링크 추가해주세요 -->
+    <link rel="stylesheet" href="./css/shoppingCart.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./script/common.js"></script>
     <!-- 여기에 섹션 작업 스크립트 추가해주세요 -->
@@ -174,10 +174,92 @@
     </header>
   </div>
 
+
+
+
+
   <!--------- 여기에 섹션 태그 삭제후 섹션 구현 넣어주세요--------->
-  <section style="margin-top: 5rem; width: 100%; height: 800px; background-color: antiquewhite;">
-    
-  </section>
+  <!-- <section style="margin-top: 5rem; width: 100%; height: 800px; background-color: antiquewhite;">
+    <h1>CART</h1>
+
+  </section> -->
+   <main class="cart-main">
+ 
+    <!-- 페이지 타이틀 -->
+    <section class="cart-hero">
+      <h1>SHOPPING CART</h1>
+    </section>
+ 
+    <!-- 상품 목록 테이블 -->
+    <section class="cart-section">
+      <div class="cart-wrap">
+ 
+        <!-- 테이블 헤더 -->
+        <div class="cart-table-head">
+          <span class="col-product">Product</span>
+          <span class="col-price">Price</span>
+          <span class="col-qty">Quantity</span>
+          <span class="col-total">Total</span>
+          <span class="col-delete"></span>
+        </div>
+ 
+        <!-- 상품 목록 (JS가 채워 넣습니다) -->
+        <ul class="cart-list" id="cart-list">
+          <!-- 장바구니가 비었을 때 -->
+          <li class="cart-empty" id="cart-empty">
+            <p>장바구니에 담긴 상품이 없습니다.</p>
+            <a href="./product-main.html" class="btn-go-product">상품 보러 가기</a>
+          </li>
+        </ul>
+ 
+      </div>
+    </section>
+ 
+    <!-- 하단: YOU MAY NEED + SUBTOTAL -->
+    <section class="cart-bottom">
+      <div class="cart-wrap">
+ 
+        <!-- 좌: 추천 상품 -->
+        <div class="cart-recommend">
+          <h2 class="recommend-title">YOU MAY NEED</h2>
+          <!-- JS가 채워 넣습니다 -->
+          <ul class="recommend-list" id="recommend-list"></ul>
+        </div>
+ 
+        <!-- 우: 주문 요약 -->
+        <aside class="cart-summary" id="cart-summary">
+          <h2 class="summary-title">ORDER SUMMARY</h2>
+ 
+          <dl class="summary-list">
+            <div class="summary-row">
+              <dt>총 금액</dt>
+              <dd id="summary-original">0원</dd>
+            </div>
+            <div class="summary-row">
+              <dt>할인</dt>
+              <dd id="summary-discount" class="summary-discount">-0원</dd>
+            </div>
+            <div class="summary-row">
+              <dt>총 배송비</dt>
+              <dd id="summary-shipping">0원</dd>
+            </div>
+            <div class="summary-row summary-total">
+              <dt>TOTAL</dt>
+              <dd id="summary-total">0원</dd>
+            </div>
+          </dl>
+ 
+          <button class="btn-checkout" type="button" id="btn-checkout">구매하기</button>
+        </aside>
+ 
+      </div>
+    </section>
+ 
+  </main>
+
+
+
+
 
   <!--------- 푸터 --------->
   <footer class="footer">
@@ -209,7 +291,7 @@
 
     <div class="footer-bottom">
       <h1 class="footer-logo"><img src="image/common/node_logo.png" alt="footer logo"></h1>
-      <p>© 2026 본 사이트는 학생용 포트폴리오입니다</p>
+      <p>© 2026 본 사이트는 학생용 포트폴리오입니다.</p>
     </div>
   </footer>
 </body>

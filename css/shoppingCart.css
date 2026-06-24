@@ -1,0 +1,391 @@
+/* ---------- 공통 래퍼 ---------- */
+.cart-wrap {
+  max-width: 68.75rem;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ---------- 히어로 ---------- */
+.cart-hero {
+  padding: 5rem 2.5rem 2.5rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.cart-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #111111;
+  margin: 7rem 0;
+}
+
+/* ---------- 상품 테이블 ---------- */
+.cart-section {
+  background-color: #ffffff;
+  padding: 0 0 3.75rem;
+}
+
+/* 테이블 헤더 */
+.cart-table-head {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1.2fr 1fr 2.5rem;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  border-top: 0.125rem solid #111111;
+  border-bottom: 0.0625rem solid #ddd;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  color: #111111;
+  text-align: center;
+}
+
+.cart-table-head .col-product {
+  text-align: left;
+}
+
+/* 상품 목록 */
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 상품 한 행 */
+.cart-item {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1.2fr 1fr 2.5rem;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 0.0625rem solid #eee;
+  text-align: center;
+}
+
+/* 상품 정보 */
+.cart-item-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
+}
+
+.cart-item-img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  background-color: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.cart-item-text .item-brand {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.cart-item-text .item-name {
+  font-size: 0.85rem;
+  color: #111111;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* 단가 */
+.cart-item-price {
+  font-size: 0.9rem;
+  color: #111111;
+}
+
+/* 수량 조절 */
+.cart-qty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border: 0.0625rem solid #ddd;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.cart-qty button {
+  background: none;
+  border: none;
+  color: #111111;
+  width: 1.875rem;
+  height: 1.875rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cart-qty button:hover {
+  background: #ffcd4a;
+}
+
+.cart-qty-num {
+  width: 2.125rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #111111;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  line-height: 1.875rem;
+  user-select: none;
+}
+
+/* 합계 */
+.cart-item-total {
+  font-size: 0.9rem;
+  color: #111111;
+  font-weight: 500;
+}
+
+/* 삭제 버튼 */
+.cart-delete {
+  background: none;
+  border: none;
+  color: #bbb;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.25rem;
+}
+
+.cart-delete:hover {
+  color: #111111;
+}
+
+/* 빈 장바구니 */
+.cart-empty {
+  padding: 5rem 0;
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.cart-empty p {
+  margin-bottom: 1.25rem;
+}
+
+.btn-go-product {
+  display: inline-block;
+  padding: 0.625rem 28px;
+  border: 1px solid #111111;
+  color: #111111;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-go-product:hover {
+  background: #111111;
+  color: #ffffff;
+}
+
+/* ---------- 하단 (YOU MAY NEED + SUBTOTAL) ---------- */
+.cart-bottom {
+  background-color: #f7f7f7;
+  padding: 3.75rem 0 5rem;
+}
+
+.cart-bottom .cart-wrap {
+  display: flex;
+  gap: 3.75rem;
+  align-items: flex-start;
+}
+
+/* ---------- YOU MAY NEED ---------- */
+.cart-recommend {
+  flex: 1;
+  min-width: 0;
+}
+
+.recommend-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #111111;
+  margin-bottom: 24px;
+}
+
+.recommend-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.recommend-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.recommend-item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  background-color: #e8e8e8;
+  flex-shrink: 0;
+}
+
+.recommend-item-info {
+  flex: 1;
+}
+
+.recommend-item-name {
+  font-size: 0.85rem;
+  color: #111111;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.recommend-item-price {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.recommend-item-go {
+  font-size: 0.75rem;
+  color: #111111;
+  text-decoration: underline;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.recommend-item-go:hover {
+  color: #ffcd4a;
+}
+
+/* ---------- SUBTOTAL ---------- */
+.cart-summary {
+  width: 300px;
+  flex-shrink: 0;
+  background-color: #eeeeee;
+  padding: 32px 28px;
+}
+
+.summary-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #111111;
+  margin-bottom: 24px;
+}
+
+.summary-list {
+  margin-bottom: 28px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.summary-row dt {
+  color: #555;
+}
+
+.summary-row dd {
+  color: #111111;
+  font-weight: 500;
+}
+
+.summary-discount {
+  color: #585858 !important;
+}
+
+.summary-total {
+  border-bottom: none;
+  padding-top: 16px;
+  margin-top: 4px;
+}
+
+.summary-total dt {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.summary-total dd {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #000000 !important;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 14px;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #111111;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-checkout:hover {
+  background: #ffcd4a;
+  border-color: #ffcd4a;
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 768px) {
+  .cart-wrap {
+    padding: 0 20px;
+  }
+ 
+  .cart-hero {
+    padding: 60px 20px 30px;
+  }
+ 
+  /* 테이블 헤더 숨김 */
+  .cart-table-head {
+    display: none;
+  }
+ 
+  /* 상품 행 1열로 */
+  .cart-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 20px 0;
+    text-align: left;
+  }
+ 
+  .cart-item-price::before { content: "단가  "; color: #888; font-size: 0.7rem; }
+  .cart-item-total::before { content: "합계  "; color: #888; font-size: 0.7rem; }
+ 
+  .cart-qty {
+    margin: 0;
+  }
+ 
+  /* 하단 영역: 세로로 쌓기 + YOU MAY NEED 숨김 */
+  .cart-bottom .cart-wrap {
+    flex-direction: column;
+    gap: 0;
+  }
+ 
+  .cart-recommend {
+    display: none;
+  }
+ 
+  .cart-summary {
+    width: 100%;
+  }
+}

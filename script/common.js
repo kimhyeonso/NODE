@@ -75,4 +75,19 @@ function SideMenu__show() {
 
 SideMenu__show();
 
+
+// 로그인 상태 체크
+const userName = localStorage.getItem("userName");
+
+if (userName) {
+  $(".before-login").hide();
+  $(".after-login").show();
+  $("#header-username").text(userName);
+
+  $(".side-before-login").hide();
+  $(".side-after-login").show();
+  $("#side-username").text(userName);
+}
+
+
 })
