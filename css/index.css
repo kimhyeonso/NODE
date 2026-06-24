@@ -28,6 +28,13 @@
   font-weight: 600;
 }
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #070707;
+}
+
 /* 탑바 메뉴 변경사항 */
 .top-menu-bar {
   background-color: transparent;
@@ -182,6 +189,103 @@
 }
 
 /*********** 세번째 섹션 구현 ***********/
+.sound-section {
+  width: 100%;
+  height: auto;
+  padding: clamp(65px, 8vw, 110px) 0 clamp(80px, 10vw, 140px);
+  overflow: hidden;
+  background-color: #070707;
+  color: #fff;
+  text-align: center;
+}
+
+.sound-heading h2 {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem, 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sound-heading p {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+}
+
+.sound-flow {
+  position: relative;
+  width: min(70vw, 760px);
+  margin: clamp(45px, 6vw, 80px) auto 0;
+}
+
+.sound-flow::before,
+.sound-flow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  width: 1px;
+  height: clamp(30px, 4vw, 60px);
+  background: linear-gradient(to bottom, transparent, rgba(255, 220, 145, 0.75));
+  transform: translateX(-50%);
+}
+
+.sound-flow::before {
+  top: calc(clamp(30px, 4vw, 60px) * -1);
+}
+
+.sound-flow::after {
+  bottom: calc(clamp(30px, 4vw, 60px) * -1);
+  background: linear-gradient(to bottom, rgba(255, 220, 145, 0.75), transparent);
+}
+
+.sound-flow > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.86;
+}
+
+.sound-label {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  width: 90%;
+  color: #fff;
+  text-shadow: 0 2px 16px #000, 0 0 30px #000;
+  transform: translateX(-50%);
+}
+
+.sound-label h3 {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(1.35rem, 2.2vw, 2.2rem);
+  font-weight: 400;
+}
+
+.sound-label p {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(0.72rem, 0.9vw, 0.95rem);
+}
+
+.sound-origin {
+  top: 8%;
+}
+
+.sound-node {
+  top: 43%;
+}
+
+.sound-destination {
+  bottom: 5%;
+}
+
+.sound-closing {
+  margin-top: clamp(75px, 9vw, 125px);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  line-height: 1.55;
+}
 
 /*********** 네번째 섹션 구현 ***********/
 .menu-section{
@@ -233,7 +337,6 @@
   margin-top: 18px;
   color: rgba(255, 255, 255, 0.78);
   font-size: clamp(0.9rem, 1.15vw, 1.2rem);
-  line-height: 1.55;
 }
 
 .menu-section .title-box > .prouct,
@@ -302,13 +405,287 @@
   font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
+/*********** 다섯번째 검색 섹션 구현 ***********/
+.seach-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  padding: 100px 0;
+  overflow: hidden;
+  background-color: #070707;
+}
+
+.search-inner {
+  width: min(92%, 1640px);
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.55fr) minmax(720px, 2.45fr);
+  align-items: end;
+  gap: clamp(45px, 6vw, 110px);
+}
+
+.search-copy {
+  position: relative;
+  z-index: 4;
+  align-self: start;
+  padding-top: 2px;
+  color: #fff;
+}
+
+.search-kicker {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem , 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.search-copy p:nth-child(2) {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+}
+
+.search-showcase {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  display: flex;
+  gap: 24px;
+  padding: 40px 0 18px;
+  cursor: grab;
+}
+
+.search-showcase:active {
+  cursor: grabbing;
+}
+
+.search-circle {
+  position: absolute;
+  top: 0px;
+  left: -120px;
+  z-index: -1;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: #b79232;
+  opacity: .3;
+}
+
+.search-card {
+  position: relative;
+  flex: 0 0 calc((100% - 24px) / 2);
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.28);
+  width: 100%;
+  overflow-x: hidden;
+  transform: translateY(-100px);
+}
+
+.search-image {
+  height: 300px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.search-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search-card-copy {
+  padding: 18px;
+}
+
+.search-card-copy h3 {
+  color: #111;
+  font-family: "noto sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.search-card-copy p {
+  margin-top: 7px;
+  color: #555;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.search-card-copy a {
+  display: inline-block;
+  margin-top: 16px;
+  color: #111;
+  font-size: 0.72rem;
+}
+
+/*********** 여섯번째 아티스트 섹션 구현 ***********/
+.artist-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  background-color: #070707;
+  color: #fff;
+}
+
+.artist-heading {
+  position: absolute;
+  top: clamp(70px, 10vh, 110px);
+  left: 6%;
+  z-index: 3;
+}
+
+.artist-heading h2 {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem, 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.artist-heading p {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.artist-gallery {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(100px, 13vh, 150px);
+  width: max-content;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(30px, 3vw, 56px);
+  transform: translateX(-50%);
+}
+
+.artist-item {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(190px, 20vw, 310px);
+  text-align: center;
+}
+
+.artist-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #171717;
+}
+
+.artist-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.artist-item h3 {
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(0.9rem, 1.2vw, 1.25rem);
+  font-weight: 400;
+}
+
+.artist-item-featured {
+  width: clamp(290px, 30vw, 440px);
+  margin: 0 clamp(4px, 1vw, 18px);
+}
+
+.artist-item-featured .artist-photo {
+  border: 1px dashed rgba(255, 255, 255, 0.7);
+  padding: 12px;
+  background-color: transparent;
+}
+
+.artist-item-featured .artist-photo img {
+  border-radius: 50%;
+  filter: brightness(0.9);
+}
+
+.artist-speaker {
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  z-index: 2;
+  width: 43%;
+  height: 48%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+  transform: translateX(-50%);
+}
+
+.artist-point {
+  position: absolute;
+  top: 12%;
+  right: 7%;
+  z-index: 3;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: #c9a24b;
+}
+
+.artist-item-featured h3 {
+  visibility: hidden;
+}
+
+
+
+
 @media (max-width: 768px) {
+  .brand-story-container {
+    width: 100%;
+  }
+
+  .brand-story-container .logo {
+    width: min(80vw, 360px);
+    padding-left: 0;
+  }
+
   .brand-story-txt.pc {
     display: none;
   }
 
   .brand-story-txt.mobile {
     display: block;
+  }
+
+  .sound-section {
+    padding: 60px 0 80px;
+  }
+
+  .sound-flow {
+    width: min(92vw, 620px);
+    margin-top: 45px;
+  }
+
+  .sound-origin {
+    top: 7%;
+  }
+
+  .sound-node {
+    top: 42%;
+  }
+
+  .sound-destination {
+    bottom: 4%;
+  }
+
+  .sound-closing {
+    margin-top: 75px;
   }
 
   .menu-section {
@@ -337,5 +714,75 @@
   .menu-section .image-box > .accessory,
   .menu-section .image-box > .lifestyle {
     min-height: 240px;
+  }
+
+  .seach-section {
+    min-height: auto;
+    padding: 70px 0 30px;
+    overflow: hidden;
+    background: #0c0c0c;
+  }
+
+  .search-inner {
+    width: min(88%, 640px);
+    height: auto;
+    min-height: auto;
+    display: block;
+  }
+
+  .search-guide {
+    margin-top: 22px;
+  }
+
+  .search-showcase {
+    display: flex;
+    gap: 15px;
+    padding: 150px 0 14px;
+  }
+
+  .search-circle {
+    top: 10px;
+    left: -50px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .search-image {
+    height: 210px;
+  }
+
+  .search-card {
+  transform: translateY(40px);
+  }
+
+  .search-card-copy {
+    padding: 15px;
+  }
+
+  .artist-section {
+    min-height: 600px;
+  }
+
+  .artist-heading {
+    top: 65px;
+    left: 6%;
+  }
+
+  .artist-gallery {
+    bottom: 85px;
+    gap: 22px;
+  }
+
+  .artist-item {
+    width: 175px;
+  }
+
+  .artist-item-featured {
+    width: 265px;
+    margin: 0;
+  }
+
+  .artist-speaker {
+    width: 46%;
   }
 }
