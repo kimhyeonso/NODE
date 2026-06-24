@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>accessory</title>
+    <title>mypage</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/accessory.css">
+    <link rel="stylesheet" href="./css/mypage-main.css">
+    <!-- 여기에 섹션 작업 링크 추가해주세요 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./script/common.js"></script>
-    <script src="./script/accessory.js" defer></script>
+    <!-- 마이페이지 메인 기능: 회원명, 카드 수, 기본 카드, 결제내역 클릭 -->
+    <script src="./script/mypage-main.js" defer></script>
 </head>
 <body>
   <!--------- 헤더 --------->
@@ -166,101 +168,132 @@
     </header>
   </div>
 
-  <!--------- 여기 메인 시작 여기서만 수정 요망--------->
-  <main>
-  <!-- 액세서리 배너 문구입니다. 배경 사진은 accessory.css에서 수정합니다. -->
-  <section class="hero-accessory" aria-labelledby="hero-title">
-      <div class="hero-copy">
-          <p class="eyebrow">Complete your sound</p>
-          <h1 id="hero-title">ACCESSORY</h1>
-          <p class="hero-description">작은 차이가 더 선명한 사운드를 만듭니다.</p>
-      </div>
-  </section>
+<!-- ==================== 마이페이지 메인 콘텐츠 시작 ==================== -->
+ 
+<main class="mypage-container">
+        <!-- [수정 포인트] 회원 이름, 이메일, 주문/쿠폰/포인트 숫자 -->
+        <section class="user-info-card">
+            <div class="user-profile">
+                <div class="user-avatar" aria-hidden="true">김</div>
+                <div>
+                    <p class="eyebrow">MY ACCOUNT</p>
+                    <h2>김현수 <span>님</span></h2>
+                    <p class="user-email">hyunsoo@email.com</p>
+                </div>
+            </div>
+            <div class="stats-box">
+                <div><strong>12</strong><span>주문</span></div>
+                <div><strong>3</strong><span>쿠폰</span></div>
+                <div><strong>2,400</strong><span>포인트</span></div>
+            </div>
+        </section>
 
-  <section class="accessory-container" id="accessories" aria-labelledby="accessory-title">
-      <div class="section-heading">
-          <p class="eyebrow">Designed for every detail</p>
-          <h2 id="accessory-title">ALL</h2>
-          <p id="accessory-count" class="accessory-count" aria-live="polite"></p>
-      </div>
+        <!-- [수정 포인트] 결제 요약 카드의 제목, 금액, 설명 -->
+        <section class="summary-grid">
+            <article class="card">
+                <span class="card-label">이번 달 결제액</span>
+                <strong>500,000<small>원</small></strong>
+                <span class="card-change is-up">지난달보다 12% 증가</span>
+            </article>
+            <article class="card">
+                <span class="card-label">총 환불액</span>
+                <strong>50,000<small>원</small></strong>
+                <span class="card-change">최근 30일 기준</span>
+            </article>
+            <article class="card">
+                <span class="card-label">등록 결제수단</span>
+                <strong>5<small>개</small></strong>
+                <span class="card-change">기본 카드 설정 완료</span>
+            </article>
+            <article class="card">
+                <span class="card-label">누적 결제액</span>
+                <strong>2,850,000<small>원</small></strong>
+                <span class="card-change">총 12건의 주문</span>
+            </article>
+        </section>
 
-      <!-- 필터 초기화 버튼과 가격 정렬 -->
-      <div class="toolbar">
-          <div class="filter-actions">
-              <button class="reset-filter" id="reset-filter" type="button">필터 초기화</button>
-              <label class="sort-control">
-                  <span>정렬</span>
-                  <select id="sort-select">
-                      <option value="featured">추천순</option>
-                      <option value="low">낮은 가격순</option>
-                      <option value="high">높은 가격순</option>
-                  </select>
-              </label>
-          </div>
-      </div>
+        <!-- [수정 포인트] 막대 높이는 --value, 도넛 비율은 CSS conic-gradient와 함께 수정 -->
+        <section class="chart-section">
+            <article class="monthly-graph panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">SPENDING</p>
+                        <h3>월별 구매액</h3>
+                    </div>
+                    <span>최근 6개월</span>
+                </div>
+                <div class="bar-chart" aria-label="최근 6개월 구매액 그래프">
+                    <div class="bar-item"><span class="bar" style="--value: 32%"></span><small>1월</small></div>
+                    <div class="bar-item"><span class="bar" style="--value: 48%"></span><small>2월</small></div>
+                    <div class="bar-item"><span class="bar" style="--value: 40%"></span><small>3월</small></div>
+                    <div class="bar-item"><span class="bar" style="--value: 68%"></span><small>4월</small></div>
+                    <div class="bar-item"><span class="bar" style="--value: 54%"></span><small>5월</small></div>
+                    <div class="bar-item is-current"><span class="bar" style="--value: 86%"></span><small>6월</small></div>
+                </div>
+            </article>
+            <article class="category-chart panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">CATEGORY</p>
+                        <h3>카테고리별 비중</h3>
+                    </div>
+                </div>
+                <div class="donut-wrap">
+                    <div class="donut-chart"><strong>68<small>%</small></strong></div>
+                    <ul class="chart-legend">
+                        <li><span class="legend-dot studio"></span>Studio <strong>68%</strong></li>
+                        <li><span class="legend-dot live"></span>Live <strong>22%</strong></li>
+                        <li><span class="legend-dot accessory"></span>Accessory <strong>10%</strong></li>
+                    </ul>
+                </div>
+            </article>
+        </section>
 
-      <!-- 전체 액세서리 페이지에서는 케이블과 스탠드 필터를 모두 보여줍니다. -->
-      <div class="filter-area" id="accessory-filters">
-          <section class="filter-section" data-filter-section="cable" aria-labelledby="cable-filter-title">
-              <h3 id="cable-filter-title">케이블</h3>
-              <div class="filter-row">
-                  <strong>단자 타입</strong>
-                  <div class="filter-options">
-                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="xlr"> XLR</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="trs"> TRS</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="ts"> TS</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="rca"> RCA/3.5mm</label>
-                  </div>
-              </div>
-              <div class="filter-row">
-                  <strong>용도</strong>
-                  <div class="filter-options">
-                      <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="microphone"> 마이크</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="instrument"> 악기</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="speaker"> 스피커/앰프</label>
-                  </div>
-              </div>
-              <div class="filter-row">
-                  <strong>길이</strong>
-                  <div class="filter-options">
-                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="1m"> 1m</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="3m"> 3m</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="5m"> 5m</label>
-                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="10m"> 10m</label>
-                  </div>
-              </div>
-          </section>
-
-          <section class="filter-section" data-filter-section="stand" aria-labelledby="stand-filter-title">
-              <h3 id="stand-filter-title">스탠드</h3>
-              <div class="filter-row">
-                  <strong>설치 위치</strong>
-                  <div class="filter-options">
-                      <label><input type="checkbox" data-domain="stand" data-filter="location" value="desktop"> 데스크탑(책상 위)</label>
-                      <label><input type="checkbox" data-domain="stand" data-filter="location" value="floor"> 플로어(바닥형)</label>
-                  </div>
-              </div>
-              <div class="filter-row">
-                  <strong>적재 하중</strong>
-                  <div class="filter-options">
-                      <label><input type="checkbox" data-domain="stand" data-filter="load" value="small"> 소형(니어필드)</label>
-                      <label><input type="checkbox" data-domain="stand" data-filter="load" value="large"> 중대형(미드필드 이상)</label>
-                  </div>
-              </div>
-              <div class="filter-row">
-                  <strong>기능</strong>
-                  <div class="filter-options">
-                      <label><input type="checkbox" data-domain="stand" data-filter="feature" value="angle"> 각도 조절 가능</label>
-                      <label><input type="checkbox" data-domain="stand" data-filter="feature" value="isolation"> 진동 차단(패드 포함)</label>
-                  </div>
-              </div>
-          </section>
-      </div>
-
-      <div class="accessory-grid" id="accessory-grid" aria-live="polite"></div>
-      <nav class="pagination" id="pagination" aria-label="액세서리 페이지"></nav>
-  </section>
-</main>
+        <!-- [수정 포인트] 기본 카드 정보와 최근 결제 상품 3개 -->
+        <section class="payment-section">
+            <article class="payment-card panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">PAYMENT</p>
+                        <h3>주 결제 수단</h3>
+                    </div>
+                    <a href="./mypage-payment.html">관리</a>
+                </div>
+                <div class="credit-card">
+                    <span>VISA</span>
+                    <strong>••••  ••••  ••••  2486</strong>
+                    <div><small>KIM HYUNSOO</small><small>08/29</small></div>
+                </div>
+            </article>
+            <article class="recent-transactions panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">HISTORY</p>
+                        <h3>최근 결제 내역</h3>
+                    </div>
+                    <a href="./mypage-history.html">전체보기</a>
+                </div>
+                <ul class="transaction-list">
+                    <li>
+                        <div class="transaction-icon">S</div>
+                        <div><strong>Studio Monitor S8</strong><span>2026. 06. 18 · 카드</span></div>
+                        <strong>₩320,000</strong>
+                    </li>
+                    <li>
+                        <div class="transaction-icon">C</div>
+                        <div><strong>Balanced XLR Cable</strong><span>2026. 06. 12 · 카드</span></div>
+                        <strong>₩59,000</strong>
+                    </li>
+                    <li>
+                        <div class="transaction-icon">A</div>
+                        <div><strong>Monitor Stand Pair</strong><span>2026. 06. 03 · 카드</span></div>
+                        <strong>₩121,000</strong>
+                    </li>
+                </ul>
+            </article>
+        </section>
+    </main>
+<!-- ==================== 마이페이지 메인 콘텐츠 끝 ==================== -->
 
   <!--------- 푸터 --------->
   <footer class="footer">

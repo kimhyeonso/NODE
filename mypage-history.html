@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>accessory-cable</title>
+    <title>최근 결제 내역 | NODE</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/accessory.css">
+    <link rel="stylesheet" href="./css/mypage-history.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./script/common.js"></script>
-    <!-- defer: HTML 화면을 먼저 만든 뒤 액세서리 JS를 실행 -->
-    <script src="./script/accessory.js" defer></script>
+    <!-- 결제내역 기능: 기간/상태 조회, 페이지 이동, 상세보기 -->
+    <script src="./script/mypage-history.js" defer></script>
 </head>
-<body data-accessory-category="cable">
+<body>
   <!--------- 헤더 --------->
   <div class="top-bar">
     <header class="top-menu-bar">
@@ -167,90 +167,161 @@
     </header>
   </div>
 
-  <!--------- 여기 메인 시작 여기서만 수정 요망--------->
-  <main>
-    <!-- 케이블 배너 문구입니다. 배경 사진은 accessory.css에서 수정합니다. (사진 원본은 imge/hero) -->
-    <section class="hero-accessory" aria-labelledby="hero-title">
-        <div class="hero-copy">
-            <p class="eyebrow">Connect every detail</p>
-            <h1 id="hero-title">CABLE</h1>
-            <p class="hero-description">신호의 시작부터 끝까지 선명하게 연결합니다.</p>
-        </div>
+  <!-- ==================== 최근 결제 내역 콘텐츠 시작 ==================== -->
+   
+  <main class="history-page">
+    <!-- [수정 포인트] 페이지 제목과 안내 문구 -->
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">MY ACCOUNT</p>
+        <h1>최근 결제 내역</h1>
+        <p>주문별 결제 상태와 상세 내역을 확인할 수 있습니다.</p>
+      </div>
+      <a class="back-link" href="./mypage-main.html">마이페이지로 돌아가기</a>
+    </div>
+
+    <!-- [수정 포인트] 총 결제액, 완료 건수, 환불 건수 -->
+    <section class="history-summary">
+      <article>
+        <span>총 결제액</span>
+        <strong>2,850,000<small>원</small></strong>
+        <p>최근 12개월 기준</p>
+      </article>
+      <article>
+        <span>결제 완료</span>
+        <strong>12<small>건</small></strong>
+        <p>정상 처리된 주문</p>
+      </article>
+      <article>
+        <span>취소·환불</span>
+        <strong>1<small>건</small></strong>
+        <p>총 50,000원</p>
+      </article>
     </section>
 
-    <section class="accessory-container" id="accessories" aria-labelledby="accessory-title">
-        <div class="section-heading">
-            <p class="eyebrow">Built for clean signal</p>
-            <h2 id="accessory-title">CABLE</h2>
-            <p id="accessory-count" class="accessory-count" aria-live="polite"></p>
+    <section class="history-panel">
+      <div class="history-toolbar">
+        <div>
+          <p class="eyebrow">PAYMENT HISTORY</p>
+          <h2>결제 내역</h2>
         </div>
+        <!-- [수정 포인트] 필터 문구를 바꾸면 JS의 비교 문구도 함께 수정 -->
+        <div class="history-filters">
+          <label>
+            <span>기간</span>
+            <select>
+              <option>최근 6개월</option>
+              <option>최근 1년</option>
+              <option>전체 기간</option>
+            </select>
+          </label>
+          <label>
+            <span>상태</span>
+            <select>
+              <option>전체 상태</option>
+              <option>결제 완료</option>
+              <option>배송 중</option>
+              <option>취소·환불</option>
+            </select>
+          </label>
+          <button type="button">조회</button>
+        </div>
+      </div>
 
-        <!-- 필터 초기화 버튼과 가격 정렬 -->
-        <div class="toolbar">
-            <div class="filter-actions">
-                <button class="reset-filter" id="reset-filter" type="button">필터 초기화</button>
-                <label class="sort-control"><span>정렬</span>
-                    <select id="sort-select">
-                        <option value="featured">추천순</option>
-                        <option value="low">낮은 가격순</option>
-                        <option value="high">높은 가격순</option>
-                    </select>
-                </label>
-            </div>
-        </div>
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>주문 정보</th>
+              <th>결제일</th>
+              <th>결제 수단</th>
+              <th>결제 금액</th>
+              <th>상태</th>
+              <th><span class="sr-only">상세 보기</span></th>
+            </tr>
+          </thead>
+          <!-- [수정 포인트] 결제내역 추가/삭제는 tr 한 묶음 단위로 수정 -->
+          <tbody>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">S</span>
+                  <div><strong>Studio Monitor S8</strong><small>NODE-260618-0124</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 18</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>320,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">C</span>
+                  <div><strong>Balanced XLR Cable</strong><small>NODE-260612-0088</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 12</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>59,000원</strong></td>
+              <td><span class="status shipping">배송 중</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">A</span>
+                  <div><strong>Monitor Stand Pair</strong><small>NODE-260603-0051</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 03</td>
+              <td>현대카드 · 7312</td>
+              <td><strong>121,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">P</span>
+                  <div><strong>Premium Speaker Cable</strong><small>NODE-260521-0392</small></div>
+                </div>
+              </td>
+              <td>2026. 05. 21</td>
+              <td>국민카드 · 9041</td>
+              <td><strong>50,000원</strong></td>
+              <td><span class="status refund">환불 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">L</span>
+                  <div><strong>Live Speaker L12</strong><small>NODE-260409-0217</small></div>
+                </div>
+              </td>
+              <td>2026. 04. 09</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>790,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- 케이블 상품에 사용하는 상세 필터 -->
-        <div class="filter-area" id="accessory-filters">
-            <section class="filter-section" aria-labelledby="cable-filter-title">
-                <h3 id="cable-filter-title">케이블</h3>
-                <div class="filter-row"><strong>단자 타입</strong><div class="filter-options">
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="xlr"> XLR</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="trs"> TRS</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="ts"> TS</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="rca"> RCA/3.5mm</label>
-                </div></div>
-                <div class="filter-row"><strong>용도</strong><div class="filter-options">
-                    <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="microphone"> 마이크</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="instrument"> 악기</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="speaker"> 스피커/앰프</label>
-                </div></div>
-                <div class="filter-row"><strong>길이</strong><div class="filter-options">
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="1m"> 1m</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="3m"> 3m</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="5m"> 5m</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="10m"> 10m</label>
-                </div></div>
-            </section>
-        </div>
-
-        <div class="accessory-grid" id="accessory-grid" aria-live="polite">
-            <article class="accessory-card" data-price="39000" data-values="xlr microphone 1m">
-                <div class="image-box"><img src="./image/cable/cable_1.jpg" alt="Balanced XLR Cable 1M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Balanced XLR Cable 1M</h3>
-                <div class="price-row"><span class="sale-price">39,000원</span><span class="original-price">49,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-            <article class="accessory-card" data-price="59000" data-values="xlr microphone 3m">
-                <div class="image-box"><img src="./image/cable/cable_2.jpg" alt="Premium XLR Cable 3M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Premium XLR Cable 3M</h3>
-                <div class="price-row"><span class="sale-price">59,000원</span><span class="original-price">69,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-            <article class="accessory-card" data-price="32000" data-values="trs instrument 3m">
-                <div class="image-box"><img src="./image/cable/cable_3.jpg" alt="Studio TRS Cable 3M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Studio TRS Cable 3M</h3>
-                <div class="price-row"><span class="sale-price">32,000원</span><span class="original-price">39,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-            <article class="accessory-card" data-price="65000" data-values="ts speaker 5m">
-                <div class="image-box"><img src="./image/cable/cable_5.jpg" alt="Speaker Cable 5M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Speaker Cable 5M</h3>
-                <div class="price-row"><span class="sale-price">65,000원</span><span class="original-price">79,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-        </div>
+      <!-- 페이지당 표시 개수는 mypage-history.js의 ITEMS_PER_PAGE에서 수정 -->
+      <nav class="pagination" aria-label="결제 내역 페이지">
+        <button type="button" disabled>이전</button>
+        <button type="button" class="active">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button">다음</button>
+      </nav>
     </section>
   </main>
+  <!-- ==================== 최근 결제 내역 콘텐츠 끝 ==================== -->
 
   <!--------- 푸터 --------->
   <footer class="footer">

@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>accessory-cable</title>
+    <title>결제 수단 관리 | NODE</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/accessory.css">
+    <link rel="stylesheet" href="./css/mypage-payment.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./script/common.js"></script>
-    <!-- defer: HTML 화면을 먼저 만든 뒤 액세서리 JS를 실행 -->
-    <script src="./script/accessory.js" defer></script>
+    <!-- 결제수단 기능: 카드 추가, 수정, 삭제, 기본 카드 설정 -->
+    <script src="./script/mypage-payment.js" defer></script>
 </head>
-<body data-accessory-category="cable">
+<body>
   <!--------- 헤더 --------->
   <div class="top-bar">
     <header class="top-menu-bar">
@@ -167,90 +167,130 @@
     </header>
   </div>
 
-  <!--------- 여기 메인 시작 여기서만 수정 요망--------->
-  <main>
-    <!-- 케이블 배너 문구입니다. 배경 사진은 accessory.css에서 수정합니다. (사진 원본은 imge/hero) -->
-    <section class="hero-accessory" aria-labelledby="hero-title">
-        <div class="hero-copy">
-            <p class="eyebrow">Connect every detail</p>
-            <h1 id="hero-title">CABLE</h1>
-            <p class="hero-description">신호의 시작부터 끝까지 선명하게 연결합니다.</p>
-        </div>
-    </section>
+  <!-- ==================== 결제 수단 관리 콘텐츠 시작 ==================== -->
+   
+  <main class="payment-page">
+    <!-- [수정 포인트] 페이지 제목과 안내 문구 -->
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">MY ACCOUNT</p>
+        <h1>결제 수단 관리</h1>
+        <p>자주 사용하는 결제 수단을 등록하고 안전하게 관리하세요.</p>
+      </div>
+      <a class="back-link" href="./mypage-main.html">마이페이지로 돌아가기</a>
+    </div>
 
-    <section class="accessory-container" id="accessories" aria-labelledby="accessory-title">
+    <section class="payment-layout">
+      <div class="payment-main">
         <div class="section-heading">
-            <p class="eyebrow">Built for clean signal</p>
-            <h2 id="accessory-title">CABLE</h2>
-            <p id="accessory-count" class="accessory-count" aria-live="polite"></p>
+          <div>
+            <p class="eyebrow">PAYMENT METHODS</p>
+            <h2>등록된 카드</h2>
+          </div>
+          <span>총 3개</span>
         </div>
 
-        <!-- 필터 초기화 버튼과 가격 정렬 -->
-        <div class="toolbar">
-            <div class="filter-actions">
-                <button class="reset-filter" id="reset-filter" type="button">필터 초기화</button>
-                <label class="sort-control"><span>정렬</span>
-                    <select id="sort-select">
-                        <option value="featured">추천순</option>
-                        <option value="low">낮은 가격순</option>
-                        <option value="high">높은 가격순</option>
-                    </select>
-                </label>
+        <!-- 카드 목록은 JS의 defaultCards 데이터로 다시 그려집니다. -->
+        <div class="payment-card-list">
+          <article class="payment-method is-primary">
+            <div class="card-visual card-dark">
+              <div class="card-top">
+                <span class="card-chip" aria-hidden="true"></span>
+                <strong>VISA</strong>
+              </div>
+              <p>••••&nbsp;&nbsp;••••&nbsp;&nbsp;••••&nbsp;&nbsp;2486</p>
+              <div class="card-bottom">
+                <span>KIM HYUNSOO</span>
+                <span>08/29</span>
+              </div>
             </div>
-        </div>
+            <div class="method-info">
+              <div>
+                <span class="primary-badge">기본 결제 수단</span>
+                <h3>신한카드</h3>
+                <p>개인 · VISA · 2486</p>
+              </div>
+              <div class="method-actions">
+                <button type="button">수정</button>
+                <button type="button" class="danger">삭제</button>
+              </div>
+            </div>
+          </article>
 
-        <!-- 케이블 상품에 사용하는 상세 필터 -->
-        <div class="filter-area" id="accessory-filters">
-            <section class="filter-section" aria-labelledby="cable-filter-title">
-                <h3 id="cable-filter-title">케이블</h3>
-                <div class="filter-row"><strong>단자 타입</strong><div class="filter-options">
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="xlr"> XLR</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="trs"> TRS</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="ts"> TS</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="connector" value="rca"> RCA/3.5mm</label>
-                </div></div>
-                <div class="filter-row"><strong>용도</strong><div class="filter-options">
-                    <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="microphone"> 마이크</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="instrument"> 악기</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="speaker"> 스피커/앰프</label>
-                </div></div>
-                <div class="filter-row"><strong>길이</strong><div class="filter-options">
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="1m"> 1m</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="3m"> 3m</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="5m"> 5m</label>
-                    <label><input type="checkbox" data-domain="cable" data-filter="length" value="10m"> 10m</label>
-                </div></div>
-            </section>
-        </div>
+          <article class="payment-method">
+            <div class="card-visual card-blue">
+              <div class="card-top">
+                <span class="card-chip" aria-hidden="true"></span>
+                <strong>MASTER</strong>
+              </div>
+              <p>••••&nbsp;&nbsp;••••&nbsp;&nbsp;••••&nbsp;&nbsp;7312</p>
+              <div class="card-bottom">
+                <span>KIM HYUNSOO</span>
+                <span>11/28</span>
+              </div>
+            </div>
+            <div class="method-info">
+              <div>
+                <h3>현대카드</h3>
+                <p>개인 · Mastercard · 7312</p>
+              </div>
+              <div class="method-actions">
+                <button type="button">기본으로 설정</button>
+                <button type="button">수정</button>
+                <button type="button" class="danger">삭제</button>
+              </div>
+            </div>
+          </article>
 
-        <div class="accessory-grid" id="accessory-grid" aria-live="polite">
-            <article class="accessory-card" data-price="39000" data-values="xlr microphone 1m">
-                <div class="image-box"><img src="./image/cable/cable_1.jpg" alt="Balanced XLR Cable 1M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Balanced XLR Cable 1M</h3>
-                <div class="price-row"><span class="sale-price">39,000원</span><span class="original-price">49,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-            <article class="accessory-card" data-price="59000" data-values="xlr microphone 3m">
-                <div class="image-box"><img src="./image/cable/cable_2.jpg" alt="Premium XLR Cable 3M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Premium XLR Cable 3M</h3>
-                <div class="price-row"><span class="sale-price">59,000원</span><span class="original-price">69,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-            <article class="accessory-card" data-price="32000" data-values="trs instrument 3m">
-                <div class="image-box"><img src="./image/cable/cable_3.jpg" alt="Studio TRS Cable 3M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Studio TRS Cable 3M</h3>
-                <div class="price-row"><span class="sale-price">32,000원</span><span class="original-price">39,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
-            <article class="accessory-card" data-price="65000" data-values="ts speaker 5m">
-                <div class="image-box"><img src="./image/cable/cable_5.jpg" alt="Speaker Cable 5M"><button class="cart-button" type="button">＋</button></div>
-                <div class="brand">NODE CABLE</div><h3 class="accessory-name">Speaker Cable 5M</h3>
-                <div class="price-row"><span class="sale-price">65,000원</span><span class="original-price">79,000원</span></div>
-                <label class="compare-check"><input type="checkbox"> 비교</label>
-            </article>
+          <article class="payment-method">
+            <div class="card-visual card-light">
+              <div class="card-top">
+                <span class="card-chip" aria-hidden="true"></span>
+                <strong>VISA</strong>
+              </div>
+              <p>••••&nbsp;&nbsp;••••&nbsp;&nbsp;••••&nbsp;&nbsp;9041</p>
+              <div class="card-bottom">
+                <span>KIM HYUNSOO</span>
+                <span>03/30</span>
+              </div>
+            </div>
+            <div class="method-info">
+              <div>
+                <h3>국민카드</h3>
+                <p>개인 · VISA · 9041</p>
+              </div>
+              <div class="method-actions">
+                <button type="button">기본으로 설정</button>
+                <button type="button">수정</button>
+                <button type="button" class="danger">삭제</button>
+              </div>
+            </div>
+          </article>
         </div>
+      </div>
+
+      <!-- [수정 포인트] 카드 등록 안내 및 보안 설명 문구 -->
+      <aside class="payment-side">
+        <section class="add-payment-panel">
+          <div class="add-icon" aria-hidden="true">+</div>
+          <h2>새 결제 수단</h2>
+          <p>신용카드 또는 체크카드를 추가할 수 있습니다.</p>
+          <button type="button" class="primary-button">카드 등록하기</button>
+        </section>
+
+        <section class="security-panel">
+          <p class="eyebrow">SECURITY</p>
+          <h2>안전한 결제 관리</h2>
+          <ul>
+            <li><span>01</span>카드 번호는 암호화되어 저장됩니다.</li>
+            <li><span>02</span>결제 시 추가 인증을 진행합니다.</li>
+            <li><span>03</span>언제든 등록 카드를 삭제할 수 있습니다.</li>
+          </ul>
+        </section>
+      </aside>
     </section>
   </main>
+  <!-- ==================== 결제 수단 관리 콘텐츠 끝 ==================== -->
 
   <!--------- 푸터 --------->
   <footer class="footer">

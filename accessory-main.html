@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>accessory-stand</title>
+    <title>accessory</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/accessory.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./script/common.js"></script>
-    <!-- defer: HTML 화면을 먼저 만든 뒤 액세서리 JS를 실행 -->
     <script src="./script/accessory.js" defer></script>
 </head>
-<body data-accessory-category="stand">
+<body data-accessory-category="all">
   <!--------- 헤더 --------->
   <div class="top-bar">
     <header class="top-menu-bar">
@@ -167,21 +166,21 @@
     </header>
   </div>
 
-    <!--------- 여기 메인 시작 여기서만 수정 요망--------->
+  <!--------- 여기 메인 시작 여기서만 수정 요망--------->
   <main>
-  <!-- 스탠드 배너 문구입니다. 배경 사진은 accessory.css에서 수정합니다. (사진 원본은 imge/hero) -->
+  <!-- 액세서리 배너 문구입니다. 배경 사진은 accessory.css에서 수정합니다. (사진 원본은 imge/hero) -->
   <section class="hero-accessory" aria-labelledby="hero-title">
       <div class="hero-copy">
-          <p class="eyebrow">Build a stable sound</p>
-          <h1 id="hero-title">STAND</h1>
-          <p class="hero-description">안정적인 설치가 더 정확한 사운드를 만듭니다.</p>
+          <p class="eyebrow">Complete your sound</p>
+          <h1 id="hero-title">ACCESSORY</h1>
+          <p class="hero-description">작은 차이가 더 선명한 사운드를 만듭니다.</p>
       </div>
   </section>
 
   <section class="accessory-container" id="accessories" aria-labelledby="accessory-title">
       <div class="section-heading">
-          <p class="eyebrow">Designed for stability</p>
-          <h2 id="accessory-title">STAND</h2>
+          <p class="eyebrow">Designed for every detail</p>
+          <h2 id="accessory-title">ALL</h2>
           <p id="accessory-count" class="accessory-count" aria-live="polite"></p>
       </div>
 
@@ -189,7 +188,8 @@
       <div class="toolbar">
           <div class="filter-actions">
               <button class="reset-filter" id="reset-filter" type="button">필터 초기화</button>
-              <label class="sort-control"><span>정렬</span>
+              <label class="sort-control">
+                  <span>정렬</span>
                   <select id="sort-select">
                       <option value="featured">추천순</option>
                       <option value="low">낮은 가격순</option>
@@ -199,45 +199,109 @@
           </div>
       </div>
 
-      <!-- 스탠드 상품에 사용하는 상세 필터 -->
+      <!-- 전체 액세서리 페이지에서는 케이블과 스탠드 필터를 모두 보여줍니다. -->
       <div class="filter-area" id="accessory-filters">
-          <section class="filter-section" aria-labelledby="stand-filter-title">
+          <section class="filter-section" data-filter-section="cable" aria-labelledby="cable-filter-title">
+              <h3 id="cable-filter-title">케이블</h3>
+              <div class="filter-row">
+                  <strong>단자 타입</strong>
+                  <div class="filter-options">
+                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="xlr"> XLR</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="trs"> TRS</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="ts"> TS</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="connector" value="rca"> RCA/3.5mm</label>
+                  </div>
+              </div>
+              <div class="filter-row">
+                  <strong>용도</strong>
+                  <div class="filter-options">
+                      <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="microphone"> 마이크</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="instrument"> 악기</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="purpose" value="speaker"> 스피커/앰프</label>
+                  </div>
+              </div>
+              <div class="filter-row">
+                  <strong>길이</strong>
+                  <div class="filter-options">
+                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="1m"> 1m</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="3m"> 3m</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="5m"> 5m</label>
+                      <label><input type="checkbox" data-domain="cable" data-filter="length" value="10m"> 10m</label>
+                  </div>
+              </div>
+          </section>
+
+          <section class="filter-section" data-filter-section="stand" aria-labelledby="stand-filter-title">
               <h3 id="stand-filter-title">스탠드</h3>
-              <div class="filter-row"><strong>설치 위치</strong><div class="filter-options">
-                  <label><input type="checkbox" data-domain="stand" data-filter="location" value="desktop"> 데스크탑(책상 위)</label>
-                  <label><input type="checkbox" data-domain="stand" data-filter="location" value="floor"> 플로어(바닥형)</label>
-              </div></div>
-              <div class="filter-row"><strong>적재 하중</strong><div class="filter-options">
-                  <label><input type="checkbox" data-domain="stand" data-filter="load" value="small"> 소형(니어필드)</label>
-                  <label><input type="checkbox" data-domain="stand" data-filter="load" value="large"> 중대형(미드필드 이상)</label>
-              </div></div>
-              <div class="filter-row"><strong>기능</strong><div class="filter-options">
-                  <label><input type="checkbox" data-domain="stand" data-filter="feature" value="angle"> 각도 조절 가능</label>
-                  <label><input type="checkbox" data-domain="stand" data-filter="feature" value="isolation"> 진동 차단(패드 포함)</label>
-              </div></div>
+              <div class="filter-row">
+                  <strong>설치 위치</strong>
+                  <div class="filter-options">
+                      <label><input type="checkbox" data-domain="stand" data-filter="location" value="desktop"> 데스크탑(책상 위)</label>
+                      <label><input type="checkbox" data-domain="stand" data-filter="location" value="floor"> 플로어(바닥형)</label>
+                  </div>
+              </div>
+              <div class="filter-row">
+                  <strong>적재 하중</strong>
+                  <div class="filter-options">
+                      <label><input type="checkbox" data-domain="stand" data-filter="load" value="small"> 소형(니어필드)</label>
+                      <label><input type="checkbox" data-domain="stand" data-filter="load" value="large"> 중대형(미드필드 이상)</label>
+                  </div>
+              </div>
+              <div class="filter-row">
+                  <strong>기능</strong>
+                  <div class="filter-options">
+                      <label><input type="checkbox" data-domain="stand" data-filter="feature" value="angle"> 각도 조절 가능</label>
+                      <label><input type="checkbox" data-domain="stand" data-filter="feature" value="isolation"> 진동 차단(패드 포함)</label>
+                  </div>
+              </div>
           </section>
       </div>
 
+      <!-- 액세서리 카드도 HTML에 직접 작성합니다. -->
       <div class="accessory-grid" id="accessory-grid" aria-live="polite">
-          <article class="accessory-card" data-price="89000" data-values="desktop small angle">
+          <article class="accessory-card" data-price="39000" data-values="cable xlr microphone 1m">
+              <div class="image-box"><img src="./image/cable/cable_1.jpg" alt="Balanced XLR Cable 1M"><button class="cart-button" type="button">＋</button></div>
+              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Balanced XLR Cable 1M</h3>
+              <div class="price-row"><span class="sale-price">39,000원</span><span class="original-price">49,000원</span></div>
+              <label class="compare-check"><input type="checkbox"> 비교</label>
+          </article>
+          <article class="accessory-card" data-price="59000" data-values="cable xlr microphone 3m">
+              <div class="image-box"><img src="./image/cable/cable_2.jpg" alt="Premium XLR Cable 3M"><button class="cart-button" type="button">＋</button></div>
+              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Premium XLR Cable 3M</h3>
+              <div class="price-row"><span class="sale-price">59,000원</span><span class="original-price">69,000원</span></div>
+              <label class="compare-check"><input type="checkbox"> 비교</label>
+          </article>
+          <article class="accessory-card" data-price="32000" data-values="cable trs instrument 3m">
+              <div class="image-box"><img src="./image/cable/cable_3.jpg" alt="Studio TRS Cable 3M"><button class="cart-button" type="button">＋</button></div>
+              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Studio TRS Cable 3M</h3>
+              <div class="price-row"><span class="sale-price">32,000원</span><span class="original-price">39,000원</span></div>
+              <label class="compare-check"><input type="checkbox"> 비교</label>
+          </article>
+          <article class="accessory-card" data-price="65000" data-values="cable ts speaker 5m">
+              <div class="image-box"><img src="./image/cable/cable_5.jpg" alt="Speaker Cable 5M"><button class="cart-button" type="button">＋</button></div>
+              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Speaker Cable 5M</h3>
+              <div class="price-row"><span class="sale-price">65,000원</span><span class="original-price">79,000원</span></div>
+              <label class="compare-check"><input type="checkbox"> 비교</label>
+          </article>
+          <article class="accessory-card" data-price="89000" data-values="stand desktop small angle">
               <div class="image-box"><img src="./image/stands/stand_1.jpg" alt="Desktop Monitor Stand"><button class="cart-button" type="button">＋</button></div>
               <div class="brand">NODE STAND</div><h3 class="accessory-name">Desktop Monitor Stand</h3>
               <div class="price-row"><span class="sale-price">89,000원</span><span class="original-price">109,000원</span></div>
               <label class="compare-check"><input type="checkbox"> 비교</label>
           </article>
-          <article class="accessory-card" data-price="129000" data-values="desktop small isolation">
-              <div class="image-box"><img src="./image/stands/stand_2.webp" alt="Isolation Speaker Stand"><button class="cart-button" type="button">＋</button></div>
+          <article class="accessory-card" data-price="129000" data-values="stand desktop small isolation">
+              <div class="image-box"><img src="./image/stands/stand_4.jpg" alt="Isolation Speaker Stand"><button class="cart-button" type="button">＋</button></div>
               <div class="brand">NODE STAND</div><h3 class="accessory-name">Isolation Speaker Stand</h3>
               <div class="price-row"><span class="sale-price">129,000원</span><span class="original-price">149,000원</span></div>
               <label class="compare-check"><input type="checkbox"> 비교</label>
           </article>
-          <article class="accessory-card" data-price="159000" data-values="floor large angle">
+          <article class="accessory-card" data-price="159000" data-values="stand floor large angle">
               <div class="image-box"><img src="./image/stands/stand_3.jpg" alt="Adjustable Studio Stand"><button class="cart-button" type="button">＋</button></div>
               <div class="brand">NODE STAND</div><h3 class="accessory-name">Adjustable Studio Stand</h3>
               <div class="price-row"><span class="sale-price">159,000원</span><span class="original-price">185,000원</span></div>
               <label class="compare-check"><input type="checkbox"> 비교</label>
           </article>
-          <article class="accessory-card" data-price="179000" data-values="floor large isolation">
+          <article class="accessory-card" data-price="179000" data-values="stand floor large isolation">
               <div class="image-box"><img src="./image/stands/stand_5.jpg" alt="Minimal Floor Stand"><button class="cart-button" type="button">＋</button></div>
               <div class="brand">NODE STAND</div><h3 class="accessory-name">Minimal Floor Stand</h3>
               <div class="price-row"><span class="sale-price">179,000원</span><span class="original-price">205,000원</span></div>
@@ -246,7 +310,6 @@
       </div>
   </section>
 </main>
-
 
   <!--------- 푸터 --------->
   <footer class="footer">
