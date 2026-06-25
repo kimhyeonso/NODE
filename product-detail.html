@@ -219,7 +219,7 @@
     </header>
   </div>
 
-  <!-- ==================== 상품 상단 정보 시작 ==================== -->
+  <!-- ==================== 상품상세페이지 상단 정보 시작 ==================== -->
   <main class="product-detail">
     <section class="product-detail-top">
       <div class="gallery">
@@ -233,19 +233,27 @@
           <button class="thumb" type="button" aria-label="두 번째 상품 이미지"></button>
         </div>
 
-        <div class="main-image" role="img" aria-label="상품 이미지"></div>
+        <div class="main-image">
+          <img src="" alt="상품 이미지">
+        </div>
       </div>
 
       <div class="product-info">
         <h1>상품명</h1>
         <p class="price">0원</p>
-        <div class="rating" aria-label="평점 2점, 리뷰 없음">★★☆☆☆ <span>(0 Reviews)</span></div>
+        <div class="rating" aria-label="평점 2점, 리뷰 없음">★★★★☆ <span>(5 Reviews)</span></div>
         <p class="description">
           상품 정보를 불러오는 중입니다.
         </p>
 
         <div class="options">
-          <div class="colors">COLOR <span class="color-chip" aria-label="블랙"></span></div>
+          <div class="colors">
+            COLOR
+            <div class="color-chips">
+              <button class="color-chip color-chip-black is-active" type="button" data-image-index="0" aria-label="블랙"></button>
+              <button class="color-chip color-chip-ivory" type="button" data-image-index="1" aria-label="아이보리"></button>
+            </div>
+          </div>
           <div class="quantity" aria-label="상품 수량 선택">
             <button class="quantity-button quantity-minus" type="button" aria-label="수량 줄이기">−</button>
             <span class="quantity-value" aria-live="polite">1</span>
@@ -323,8 +331,7 @@
         </div>
 
         <!--
-          포트폴리오 시안용 임시 상세정보입니다.
-          실제 판매 페이지로 사용할 때는 제조사 공식 성능 및 제원으로 교체해 주세요.
+          프로젝트 시안용 임시 상세정보입니다.
          아래 이미지들은 js/catalog/products.json의 sharedDetailImages를 반복 적용합니다.
         -->
         <section class="detail-performance">

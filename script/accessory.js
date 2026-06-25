@@ -185,6 +185,51 @@ resetButton.addEventListener("click", function () {
 // 장바구니 버튼
 const cartButtons = document.querySelectorAll(".cart-button");
 
+function showCartPopup() {
+  if (document.querySelector(".compare-popup") !== null) {
+    return;
+  }
+
+  const popup = document.createElement("div");
+  popup.className = "compare-popup";
+
+  const popupBox = document.createElement("div");
+  popupBox.className = "compare-popup-box";
+
+  const message = document.createElement("strong");
+  message.textContent = "장바구니 페이지로 이동할까요?";
+
+  const actions = document.createElement("div");
+  actions.className = "compare-popup-actions";
+
+  const cancelButton = document.createElement("button");
+  cancelButton.className = "compare-cancel";
+  cancelButton.type = "button";
+  cancelButton.textContent = "계속 보기";
+
+  const cartLink = document.createElement("a");
+  cartLink.className = "compare-go";
+  cartLink.href = "./shoppingCart.html";
+  cartLink.textContent = "이동하기";
+
+  actions.appendChild(cancelButton);
+  actions.appendChild(cartLink);
+  popupBox.appendChild(message);
+  popupBox.appendChild(actions);
+  popup.appendChild(popupBox);
+  document.body.appendChild(popup);
+
+  cancelButton.addEventListener("click", function () {
+    popup.remove();
+  });
+
+  popup.addEventListener("click", function (event) {
+    if (event.target === popup) {
+      popup.remove();
+    }
+  });
+}
+
 for (let i = 0; i < cartButtons.length; i++) {
   cartButtons[i].innerHTML =
     '<svg aria-hidden="true" viewBox="0 0 24 24">' +
@@ -195,7 +240,8 @@ for (let i = 0; i < cartButtons.length; i++) {
   cartButtons[i].setAttribute("aria-label", "장바구니에 담기");
 
   cartButtons[i].addEventListener("click", function () {
-    this.classList.toggle("active");
+    this.classList.add("active");
+    showCartPopup();
   });
 }
 
