@@ -78,8 +78,9 @@ SideMenu__show();
 
 // 로그인 상태 체크
 const userName = localStorage.getItem("userName");
+const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-if (userName) {
+if (isLoggedIn && userName) {
   $(".before-login").hide();
   $(".after-login").show();
   $("#header-username").text(userName);
@@ -87,7 +88,26 @@ if (userName) {
   $(".side-before-login").hide();
   $(".side-after-login").show();
   $("#side-username").text(userName);
+  $(".menu-icon .line").hide();
+} else {
+  $(".before-login").show();
+  $(".after-login").hide();
+
+  $(".side-before-login").show();
+  $(".side-after-login").hide();
+  $(".menu-icon .line").show();
 }
 
+// 로그인 전에는 공통 헤더의 마이페이지와 장바구니 이용 제한
+$(".top-menu-bar").on(
+  "click",
+  'a[href$="mypage-main.html"], a[href$="shoppingCart.html"]',
+  function (event) {
+    if (isLoggedIn) return;
+
+    event.preventDefault();
+    alert("로그인 해주세요.");
+  }
+);
 
 })
