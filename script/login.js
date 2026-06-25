@@ -13,6 +13,7 @@ document.getElementById("enter").addEventListener("click", function(){
     let savedPw = localStorage.getItem("userPw");
 
     if(id === savedId && passWord === savedPw){
+        localStorage.setItem("isLoggedIn", "true");
         window.location.href = "./index.html";
     } else {
         errorMsg.textContent = "아이디 또는 비밀번호가 틀렸습니다.";

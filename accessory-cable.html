@@ -37,12 +37,14 @@
                   </ul>
 
                   <div class="snb-banner">
+                    <!-- a태그 추가 예정 -->
                     <a href="#" class="banner-item">
                       <img src="https://img.hankyung.com/photo/201908/01.20266688.1.jpg" alt="snb image">
                       <span>구매하기</span>
                     </a>
 
                     <a href="#" class="banner-item">
+                      <!-- a태그 추가 예정 -->
                       <img src="https://cdn.imweb.me/upload/S2023122994c55b1490ca0/8b983a30316ee.png" alt="snb image">
                       <span>구매하기</span>
                     </a>
@@ -60,17 +62,19 @@
 
                   <ul class="snb-menu">
                     <li><a href="./accessory-main.html">ALL</a></li>
-                    <li><a href="./accessory-cable.html">STUDIO</a></li>
-                    <li><a href="./accessory-stand.html">LIVE</a></li>
+                    <li><a href="./accessory-cable.html">CABLE</a></li>
+                    <li><a href="./accessory-stand.html">STAND</a></li>
                   </ul>
 
                   <div class="snb-banner">
+                    <!-- a태그 추가 예정 -->
                     <a href="#" class="banner-item">
                       <img src="https://img.hankyung.com/photo/201908/01.20266688.1.jpg" alt="snb image">
                       <span>구매하기</span>
                     </a>
 
                     <a href="#" class="banner-item">
+                      <!-- a태그 추가 예정 -->
                       <img src="https://cdn.imweb.me/upload/S2023122994c55b1490ca0/8b983a30316ee.png" alt="snb image">
                       <span>구매하기</span>
                     </a>
@@ -85,11 +89,31 @@
           </ul>
         </nav>
 
-        <!-- 로그인 / 회원가입 -->
+        <!-- 로그인 / 회원가입
         <ul class="menu-icon">
           <li><a href="./login.html">Login</a></li>
           <li></li>
           <li><a href="./signup.html">Sign up</a></li>
+        </ul> -->
+
+        <!-- 로그인/회원가입 -->
+        <ul class="menu-icon">
+          <!-- 로그인 전 -->
+          <li class="before-login">
+            <a href="./login.html">Login</a>
+          </li>
+          <li class="line"></li>
+          <li class="before-login">
+            <a href="./signup.html">Sign up</a>
+          </li>
+
+          <!-- 로그인 후 -->
+          <li class="after-login" style="display:none">
+            <a href="./mypage-main.html"><span id="header-username" style="font-size: 15px;"></span> 님</a>
+          </li>
+          <li class="after-login" style="display:none">
+            <a href="./shoppingCart.html"><img src="./image/common/shopping-cart-white.png" alt="쇼핑카트" style="width:24px; height:24px;"></a>
+          </li>
         </ul>
 
         <!-- 사이드 메뉴-->
@@ -120,7 +144,9 @@
                       <li><a href="./product-live.html">LIVE</a></li>
                       <li>
                         <ul class="side-sub-menu__img">
+                          <!-- a태그 추가 예정 -->
                           <li><a href="#"><img src="https://img.hankyung.com/photo/201908/01.20266688.1.jpg" alt="new image"></a></li>
+                          <!-- a태그 추가 예정 -->
                           <li><a href="#"><img src="https://cdn.imweb.me/upload/S2023122994c55b1490ca0/8b983a30316ee.png" alt="best image"></a></li>
                         </ul>
                       </li>
@@ -128,11 +154,13 @@
                   <li><a href="./accessory-main.html">ACCESSORY</a>
                     <ul class="side-sub-menu">
                       <li><a href="./accessory-main.html">ALL</a></li>
-                      <li><a href="./accessory-cable.html">Nike & jordan</a></li>
-                      <li><a href="./accessory-stand.html">converse</a></li>
+                      <li><a href="./accessory-cable.html">CABLE</a></li>
+                      <li><a href="./accessory-stand.html">STAND</a></li>
                       <li>
                         <ul class="side-sub-menu__img">
+                          <!-- a태그 추가 예정 -->
                           <li><a href="#"><img src="https://img.segye.com/content/image/2019/09/03/20190903505866.jpg" alt="new image"></a></li>
+                          <!-- a태그 추가 예정 -->
                           <li><a href="#"><img src="https://img1.daumcdn.net/thumb/R1280x0.fwebp/?fname=http://t1.daumcdn.net/brunch/service/user/bLeH/image/sERcNnYV8tsIUD1RUg_oRN3PBDY.jfif" alt="best image"></a></li>
                         </ul>
                       </li>
@@ -154,12 +182,24 @@
                 </a></li>
               </ul>
             </div>
-            <div class="side-util">
+            <!-- <div class="side-util">
                 <ul>
                   <li><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
                   <li><a href="./signup.html">SIGN UP</a></li>
                 </ul>
-              </div>
+            </div> -->
+
+            <div class="side-util">
+              <ul>
+                <!-- 로그인 전 -->
+                <li class="side-before-login"><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                <li class="side-before-login"><a href="./signup.html">SIGN UP</a></li>
+
+                <!-- 로그인 후 -->
+                <li class="side-after-login" style="display:none"><a href="./mypage-main.html"><span id="side-username"></span> 님</a></li>
+                <li class="side-after-login" style="display:none"><a href="./shoppingCart.html">장바구니</a></li>
+              </ul>
+            </div>
           </div>
         </div>
 

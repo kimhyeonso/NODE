@@ -88,11 +88,31 @@
           </ul>
         </nav>
 
-        <!-- 로그인 / 회원가입 -->
+        <!-- 로그인 / 회원가입
         <ul class="menu-icon">
           <li><a href="./login.html">Login</a></li>
           <li></li>
           <li><a href="./signup.html">Sign up</a></li>
+        </ul> -->
+
+        <!-- 로그인/회원가입 -->
+        <ul class="menu-icon">
+          <!-- 로그인 전 -->
+          <li class="before-login">
+            <a href="./login.html">Login</a>
+          </li>
+          <li class="line"></li>
+          <li class="before-login">
+            <a href="./signup.html">Sign up</a>
+          </li>
+
+          <!-- 로그인 후 -->
+          <li class="after-login" style="display:none">
+            <a href="./mypage-main.html"><span id="header-username" style="font-size: 15px;"></span> 님</a>
+          </li>
+          <li class="after-login" style="display:none">
+            <a href="./shoppingCart.html"><img src="./image/common/shopping-cart-white.png" alt="쇼핑카트" style="width:24px; height:24px;"></a>
+          </li>
         </ul>
 
         <!-- 사이드 메뉴-->
@@ -161,12 +181,24 @@
                 </a></li>
               </ul>
             </div>
-            <div class="side-util">
+            <!-- <div class="side-util">
                 <ul>
                   <li><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
                   <li><a href="./signup.html">SIGN UP</a></li>
                 </ul>
-              </div>
+            </div> -->
+
+            <div class="side-util">
+              <ul>
+                <!-- 로그인 전 -->
+                <li class="side-before-login"><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                <li class="side-before-login"><a href="./signup.html">SIGN UP</a></li>
+
+                <!-- 로그인 후 -->
+                <li class="side-after-login" style="display:none"><a href="./mypage-main.html"><span id="side-username"></span> 님</a></li>
+                <li class="side-after-login" style="display:none"><a href="./shoppingCart.html">장바구니</a></li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -182,75 +214,85 @@
         <p>Share your setup with</p>
       </section>
 
+      <section class="gallery-section">
+        <img src="./image/lifeStyle/homesound-gallery-01.png" alt="식물과 오디오가 배치된 홈 사운드 공간">
+        <img src="./image/lifeStyle/homesound-gallery-02.png" alt="책상 위 오디오 시스템">
+        <img src="./image/lifeStyle/homesound-gallery-03.png" alt="다이닝 공간의 홈 오디오">
+        <img src="./image/lifeStyle/homesound-gallery-04.png" alt="침실에 배치된 오디오">
+        <img src="./image/lifeStyle/homesound-gallery-05.png" alt="채광이 좋은 주방의 오디오">
+        <img src="./image/lifeStyle/homesound-gallery-06.png" alt="의자와 조명이 있는 음악 감상 공간">
+        <img src="./image/lifeStyle/homesound-gallery-07.png" alt="테이블 위 소형 오디오">
+        <img src="./image/lifeStyle/homesound-gallery-08.png" alt="미니멀한 인테리어와 오디오">
+        <img src="./image/lifeStyle/homesound-gallery-09.png" alt="주방 선반 아래 오디오">
+      </section>
+
       <section class="sound-grid">
         <article class="intro-block">
-          <div class="intro-image image-box"></div>
+          <div class="intro-image image-box"><img src="./image/lifeStyle/liveing-room-edition.jfif" alt="liveing-room-edition"></div>
 
           <div class="intro-text">
-            <h2>UTOPIA EVO</h2>
+            <h2>Living Room Edition</h2>
             <p>
-              NODE는 소중한 당신의 공간에 건강한<br>
-              라이프 스타일 인테리어 스피커를 제안하고 있습니다
+              미니멀한 거실 속에서도깊고 섬세한 사운드는 공간의 중심이 됩니다.
+              <br>
+              음악과 인테리어가 자연스럽게 어우러지는 프리미엄 홈 오디오 경험을 제공합니다.
             </p>
           </div>
 
           <div class="small-images">
-            <div class="image-box"></div>
-            <div class="image-box"></div>
+            <div class="image-box"><img src="./image/lifeStyle/living-room-edition-02.jfif" alt="liveing-room-edition"></div>
+            <div class="image-box"><img src="./image/lifeStyle/living-room-edition-03.jfif" alt="liveing-room-edition"></div>
           </div>
         </article>
 
-        <article class="product-card left">
-          <div class="image-box"></div>
-          <h3>UTOPIA EVO</h3>
-          <p>세계 최고급 라우드스피커 중 하나인 Utopia 모델은 FOCAL의 우수성을 구현합니다.</p>
-        </article>
+        <div class="featured-card-pair">
+          <article class="product-card">
+            <div class="image-box"><img src="./image/lifeStyle/studio-inspired home.jfif" alt="Studio-Inspired Home"></div>
+            <h3>Studio-Inspired Home</h3>
+            <p>전문가를 위한 정밀한 음향 기술을 <br> 일상 속 라이프스타일 공간으로 확장했습니다.</p>
+          </article>
 
-        <article class="product-card right">
-          <div class="image-box"></div>
-          <h3>UTOPIA EVO</h3>
-          <p>독창적인 혁신 기술, 타의 추종을 불허하는 성능으로 공간을 완성합니다.</p>
-        </article>
+          <article class="product-card">
+            <div class="image-box"><img src="./image/lifeStyle/quiet-luxury-sound.jfif" alt="Quiet Luxury Sound"></div>
+            <h3>Quiet Luxury Sound</h3>
+            <p>절제된 디자인과 깊이 있는 사운드가 만나 <br> 공간에 자연스러운 존재감을 더합니다.</p>
+          </article>
+        </div>
 
-        <article class="product-card left">
-          <div class="image-box"></div>
-          <h3>UTOPIA EVO</h3>
-          <p>세계 최고급 라우드스피커 중 하나인 Utopia 모델은 FOCAL의 우수성을 구현합니다.</p>
-        </article>
+        <div class="featured-card-pair">
+          <article class="product-card">
+            <div class="image-box"><img src="./image/lifeStyle/MODERN LIVING SOUND.jfif" alt=""></div>
+            <h3>MODERN LIVING SOUND</h3>
+            <p>미니멀한 공간과 정교한 사운드가 만나 <br>
+              집 안의 새로운 중심을 만들어냅니다.</p>
+          </article>
 
-        <article class="product-card right">
-          <div class="image-box"></div>
-          <h3>UTOPIA EVO</h3>
-          <p>독창적인 혁신 기술, 타의 추종을 불허하는 성능으로 공간을 완성합니다.</p>
-        </article>
+          <article class="product-card">
+            <div class="image-box"><img src="./image/lifeStyle/EVERYDAY IMMERSION.png" alt=""></div>
+            <h3>EVERYDAY IMMERSION</h3>
+            <p>특별한 공간이 아니어도 <br>
+                좋은 음악은 일상을 더욱 풍요롭게 만듭니다.</p>
+          </article>
+        </div>
       </section>
 
       <section class="discover-section">
         <div class="discover-text">
-          <h2>UTOPIA EVO</h2>
+          <h2>HEAR YOUR SPACE</h2>
           <p>
-            세계 최고급 라우드스피커 중 하나인 Utopia 모델은 FOCAL의 우수성을 구현합니다.
-            특별한 혁신 기술, 타의 추종을 불허하는 성능, 모든 공간을 음악적 감동으로 만들어주는
-            스타일이 결합된 가장 완성도 높은 모델입니다.
+            좋은 사운드는 공간을 채우는 것이 아니라, <br> 공간의 분위기와 감정을 완성합니다.
+            NODE는 집이라는 가장 개인적인 공간 속에서 음악과 <br>
+            라이프스타일이 자연스럽게 연결될 수 있도록 설계되었습니다.<br>
           </p>
-          <a href="#" class="discover-btn">발견하기</a>
+          <a href="./product-main.html" class="discover-btn">발견하기</a>
         </div>
 
         <div class="discover-image">
-          <img src="./image/home-sound/main-room.jpg" alt="스피커가 설치된 홈 사운드 공간">
+          <img src="./image/lifeStyle/hear-your-space.jfif" alt="스피커가 설치된 홈 사운드 공간">
         </div>
       </section>
 
-      <section class="gallery-section">
-        <img src="./image/home-sound/gallery-01.jpg" alt="">
-        <img src="./image/home-sound/gallery-02.jpg" alt="">
-        <img src="./image/home-sound/gallery-03.jpg" alt="">
-        <img src="./image/home-sound/gallery-04.jpg" alt="">
-        <img src="./image/home-sound/gallery-05.jpg" alt="">
-        <img src="./image/home-sound/gallery-06.jpg" alt="">
-        <img src="./image/home-sound/gallery-07.jpg" alt="">
-        <img src="./image/home-sound/gallery-08.jpg" alt="">
-      </section>
+      
     </main>
   </section>
 

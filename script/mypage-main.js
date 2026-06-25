@@ -14,6 +14,15 @@ if (savedUserName) {
   userAvatarElement.textContent = savedUserName.charAt(0);
 }
 
+// 로그아웃 시 회원정보는 유지하고 로그인 상태만 해제
+const logoutLink = document.querySelector(".logo-out a");
+
+if (logoutLink) {
+  logoutLink.addEventListener("click", () => {
+    localStorage.removeItem("isLoggedIn");
+  });
+}
+
 // ==================== 2. 결제 수단 정보 표시 ====================
 const savedCards = localStorage.getItem("mypageCards");
 // 데이터가 없으면 빈 배열로 초기화 (에러 방지)

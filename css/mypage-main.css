@@ -80,6 +80,13 @@ body {
     font-size: 13px;
 }
 
+.logo-out{
+    margin: 10px;
+    font-size: .8rem;
+    color: #777;
+    text-decoration: underline;
+}
+
 .stats-box {
     display: flex;
     align-items: center;

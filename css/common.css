@@ -148,7 +148,7 @@ html > body {
   transition: color .3s ease;
 }
 
-.menu-icon li:nth-child(2) {
+.menu-icon .line {
   width: 1px;
   height: 14px;
   background: #222;
@@ -255,6 +255,11 @@ html > body {
   color: #111;
 
   font-size: 12px;
+}
+
+.banner-item span:hover{
+  background: #111;
+  color: #fff;
 }
 
 /* 사이드 메뉴 */
@@ -494,7 +499,7 @@ html > body {
 /* -------푸터------- */
 
 .footer {
-  background: #11101a;
+  background: #111111;
   color: #fff;
 }
 
@@ -562,7 +567,7 @@ html > body {
 
 .footer-bottom {
   height: 75px;
-  background: #181923;
+  background: #222222;
   display: flex;
   align-items: center;
   justify-content: space-between;

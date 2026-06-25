@@ -642,10 +642,56 @@ body {
   visibility: hidden;
 }
 
+/*********** 일곱번째 캔버스 섹션 구현 ***********/
+
+.sound-node-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #070707;
+}
+
+#soundNodeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y;
+}
+
+.sound-node-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+}
+
+.sound-node-text h2 {
+  font-family: "Nanum_Myeongjo";
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.sound-node-desc {
+  margin-top: 22px;
+  font-size: clamp(14px, 1.4vw, 18px);
+  color: rgba(255, 255, 255, 0.68);
+}
 
 
 
 @media (max-width: 768px) {
+  /*********** 세번째 모바일 섹션 구현 ***********/
   .brand-story-container {
     width: 100%;
   }
@@ -662,6 +708,8 @@ body {
   .brand-story-txt.mobile {
     display: block;
   }
+
+  /*********** 네번째 모바일 섹션 구현 ***********/
 
   .sound-section {
     padding: 60px 0 80px;
@@ -687,6 +735,8 @@ body {
   .sound-closing {
     margin-top: 75px;
   }
+
+  /*********** 네번째 모바일 섹션 구현 ***********/
 
   .menu-section {
     padding: 70px 0;
@@ -715,6 +765,8 @@ body {
   .menu-section .image-box > .lifestyle {
     min-height: 240px;
   }
+
+    /*********** 다섯번째 모바일 섹션 구현 ***********/
 
   .seach-section {
     min-height: auto;
@@ -759,6 +811,8 @@ body {
     padding: 15px;
   }
 
+  /*********** 여섯번째 모바일 섹션 구현 ***********/
+
   .artist-section {
     min-height: 600px;
   }
@@ -784,5 +838,21 @@ body {
 
   .artist-speaker {
     width: 46%;
+  }
+
+  /*********** 일곱번째 모바일 섹션 구현 ***********/
+
+  .sound-node-section {
+    min-height: 100vh;
+  }
+
+  .sound-node-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .sound-node-desc {
+    width: 80%;
+    margin: 18px auto 0;
   }
 }
