@@ -1,8 +1,6 @@
 /*
   ACCESSORY 페이지 JS
 
-  액세서리 카드는 HTML에 직접 작성되어 있습니다.
-  이 파일은 아래 기능만 담당합니다.
   1. 체크박스 필터
   2. 가격 정렬
   3. 필터 초기화
@@ -17,53 +15,117 @@ const sortSelect = document.getElementById("sort-select");
 const resetButton = document.getElementById("reset-filter");
 const accessoryCount = document.getElementById("accessory-count");
 
-// 액세서리 이미지를 누르면 상세페이지로 이동합니다.
-// 상세페이지가 완성되면 아래의 "#"만 실제 파일 주소로 바꾸면 됩니다.
-const accessoryImages = document.querySelectorAll(".image-box img");
-
-for (let i = 0; i < accessoryImages.length; i++) {
-  let imageLink = document.createElement("a");
-  imageLink.className = "product-link";
-  imageLink.href = "#";
-  imageLink.setAttribute("aria-label", "상품 상세페이지 보기");
-
-  accessoryImages[i].parentElement.insertBefore(imageLink, accessoryImages[i]);
-  imageLink.appendChild(accessoryImages[i]);
+// 상품명으로 고유 ID를 만들어 공통 상세페이지에 연결합니다.
+function createProductId(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
-// 체크된 필터 값을 배열에 담기
-function getSelectedValues() {
-  let selectedValues = [];
+for (let i = 0; i < accessoryCards.length; i++) {
+  const card = accessoryCards[i];
+  const accessoryImage = card.querySelector(".image-box img");
+  const accessoryName = card.querySelector(".accessory-name");
+  const productId = createProductId(accessoryName.textContent);
+  const detailUrl = "./product-detail.html?id=" + encodeURIComponent(productId);
+
+  card.dataset.productId = productId;
+
+  let imageLink = document.createElement("a");
+  imageLink.className = "product-link";
+  imageLink.href = detailUrl;
+  imageLink.setAttribute("aria-label", accessoryName.textContent + " 상세페이지 보기");
+
+  accessoryImage.parentElement.insertBefore(imageLink, accessoryImage);
+  imageLink.appendChild(accessoryImage);
+
+  let nameLink = document.createElement("a");
+  nameLink.href = detailUrl;
+  nameLink.textContent = accessoryName.textContent;
+  accessoryName.textContent = "";
+  accessoryName.appendChild(nameLink);
+}
+
+// 체크된 필터를 그룹별로 담기
+// 같은 필터 그룹 안에서는 OR, 같은 액세서리 영역의 다른 그룹끼리는 AND로 검사합니다.
+// ALL 페이지에서 CABLE과 STAND 영역을 함께 선택하면 두 영역의 결과를 모두 보여줍니다.
+function getSelectedFilters() {
+  let selectedFilters = {};
 
   for (let i = 0; i < filterInputs.length; i++) {
     if (filterInputs[i].checked === true) {
-      selectedValues.push(filterInputs[i].value);
+      const filterDomain = filterInputs[i].dataset.domain;
+      const filterGroup = filterInputs[i].dataset.filter;
+
+      if (!selectedFilters[filterDomain]) {
+        selectedFilters[filterDomain] = {};
+      }
+
+      if (!selectedFilters[filterDomain][filterGroup]) {
+        selectedFilters[filterDomain][filterGroup] = [];
+      }
+
+      selectedFilters[filterDomain][filterGroup].push(filterInputs[i].value);
     }
   }
 
-  return selectedValues;
+  return selectedFilters;
 }
 
 // 카드가 선택한 필터에 맞는지 확인
-function checkAccessoryCard(card, selectedValues) {
-  let cardValues = card.getAttribute("data-values");
+function checkAccessoryCard(card, selectedFilters) {
+  const cardValues = card.getAttribute("data-values").split(/\s+/);
+  const filterDomains = Object.keys(selectedFilters);
 
-  for (let i = 0; i < selectedValues.length; i++) {
-    if (cardValues.indexOf(selectedValues[i]) === -1) {
-      return false;
+  if (filterDomains.length === 0) {
+    return true;
+  }
+
+  for (let i = 0; i < filterDomains.length; i++) {
+    const filterDomain = filterDomains[i];
+    const domainFilters = selectedFilters[filterDomain];
+    const filterGroups = Object.keys(domainFilters);
+    const hasDomainTokens = cardValues.includes("cable") || cardValues.includes("stand");
+
+    if (hasDomainTokens && !cardValues.includes(filterDomain)) {
+      continue;
+    }
+
+    let matchesDomain = true;
+
+    for (let j = 0; j < filterGroups.length; j++) {
+      const groupValues = domainFilters[filterGroups[j]];
+      let matchesGroup = false;
+
+      for (let k = 0; k < groupValues.length; k++) {
+        if (cardValues.includes(groupValues[k])) {
+          matchesGroup = true;
+          break;
+        }
+      }
+
+      if (!matchesGroup) {
+        matchesDomain = false;
+        break;
+      }
+    }
+
+    if (matchesDomain) {
+      return true;
     }
   }
 
-  return true;
+  return false;
 }
 
 // 선택한 필터에 맞는 카드만 보여주기
 function filterAccessories() {
-  let selectedValues = getSelectedValues();
+  let selectedFilters = getSelectedFilters();
   let visibleCount = 0;
 
   for (let i = 0; i < accessoryCards.length; i++) {
-    if (checkAccessoryCard(accessoryCards[i], selectedValues) === true) {
+    if (checkAccessoryCard(accessoryCards[i], selectedFilters) === true) {
       accessoryCards[i].style.display = "grid";
       visibleCount++;
     } else {
