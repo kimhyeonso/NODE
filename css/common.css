@@ -492,6 +492,11 @@ html > body {
   padding: 0 10px;
 }
 
+/* 로그인 후 사이드 하단에는 사용자 이름만 표시 */
+.side-util .side-after-login + .side-after-login {
+  display: none !important;
+}
+
 /* -------헤더 끝------- */
 
 
