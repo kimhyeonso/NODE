@@ -35,7 +35,9 @@ async function initProductDetail() {
   const productDescription = document.querySelector(".product-info .description");
   const productCategory = document.querySelector(".product-info");
   const mainImage = document.querySelector(".main-image");
+  const mainImageElement = mainImage.querySelector("img");
   const thumbnails = document.querySelectorAll(".thumb");
+  const colorChips = document.querySelectorAll(".color-chip");
   const detailHero = document.querySelector(".detail-hero");
   const detailImagePrimary = document.querySelector(".detail-image-primary");
   const detailImageSecondary = document.querySelector(".detail-image-secondary");
@@ -53,11 +55,16 @@ async function initProductDetail() {
   }
   
   function setMainImage(image, index) {
-    mainImage.style.backgroundImage = 'url("' + image + '")';
-    mainImage.setAttribute("aria-label", product.name + " 상품 이미지 " + (index + 1));
+    mainImageElement.src = image;
+    mainImageElement.alt = product.name + " 상품 이미지 " + (index + 1);
   
     for (let i = 0; i < thumbnails.length; i++) {
       thumbnails[i].classList.toggle("is-active", i === index);
+    }
+
+    for (let i = 0; i < colorChips.length; i++) {
+      colorChips[i].classList.toggle("is-active", i === index);
+      colorChips[i].setAttribute("aria-pressed", i === index ? "true" : "false");
     }
   }
   
@@ -107,11 +114,33 @@ async function initProductDetail() {
   }
   
   for (let i = 0; i < thumbnails.length; i++) {
-    const image = product.images[i] || product.images[0];
+    const image = product.images[i];
+
+    if (!image) {
+      thumbnails[i].style.backgroundImage = "none";
+      thumbnails[i].classList.remove("is-active");
+      thumbnails[i].disabled = true;
+      thumbnails[i].setAttribute("aria-label", "등록된 상품 이미지 없음");
+      continue;
+    }
+
     thumbnails[i].style.backgroundImage = 'url("' + image + '")';
+    thumbnails[i].disabled = false;
     thumbnails[i].setAttribute("aria-label", product.name + " 상품 이미지 " + (i + 1));
     thumbnails[i].addEventListener("click", function () {
       setMainImage(image, i);
+    });
+  }
+
+  for (let i = 0; i < colorChips.length; i++) {
+    const imageIndex = Number(colorChips[i].dataset.imageIndex);
+    const image = product.images[imageIndex];
+
+    colorChips[i].disabled = !image;
+    colorChips[i].addEventListener("click", function () {
+      if (image) {
+        setMainImage(image, imageIndex);
+      }
     });
   }
   
