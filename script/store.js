@@ -16,36 +16,72 @@ $('#btn-parking').on('click', function () {
     placeOverlay.setMap(null);
   } else {
     activeFilter = 'parking';
-    $('#btn-parking, #btn-branch').removeClass('active');
+    $('#btn-parking, .branch-btn').removeClass('active');
     $(this).addClass('active');
     searchByCategory('PK6'); // PK6 = 주차장 카테고리 코드
   }
 });
 
 // 가맹점 버튼 (더미 처리)
-$('#btn-branch').on('click', function () {
-  if (activeFilter === 'branch') {
-    activeFilter = null;
+$('.branch-btn').on('click', function () {
+  var index = $(this).data('index');
+
+  if ($(this).hasClass('active')) {
     $(this).removeClass('active');
     removeMarker();
+    activeFilter = null;
   } else {
-    activeFilter = 'branch';
-    $('#btn-parking, #btn-branch').removeClass('active');
+    $('#btn-parking, .branch-btn').removeClass('active');
     $(this).addClass('active');
-    showBranch();
+    activeFilter = 'branch';
+    removeMarker();
+    showSingleBranch(index);
   }
 });
 
+function showSingleBranch(index) {
+  var b = branchData[index];
+
+  var markerImage = new kakao.maps.MarkerImage(
+    './image/common/location_05_gammang-05.png',
+    new kakao.maps.Size(60, 60),
+    { offset: new kakao.maps.Point(20, 40) }
+  );
+
+  var marker = new kakao.maps.Marker({
+    map: map,
+    position: new kakao.maps.LatLng(b.lat, b.lng),
+    title: b.name,
+    image: markerImage
+  });
+  var iw = new kakao.maps.InfoWindow({
+    content: '<div style="padding:8px 12px;font-size:12px;line-height:1.5;white-space:nowrap;">' +
+      '<strong>' + b.name + '</strong><br>' + b.addr + '</div>'
+  });
+  kakao.maps.event.addListener(marker, 'click', function () { iw.open(map, marker); });
+  markers.push(marker);
+  map.setCenter(new kakao.maps.LatLng(b.lat, b.lng));
+}
+
 function searchByCategory(code) {
   removeMarker();
+  map.setCenter(new kakao.maps.LatLng(37.30836859, 126.85098));
   var ps = new kakao.maps.services.Places();
   ps.categorySearch(code, function (data, status) {
     if (status === kakao.maps.services.Status.OK) {
       data.forEach(function (place) {
+
+        var markerImage = new kakao.maps.MarkerImage(
+          './image/common/location_parking-09.png',
+          new kakao.maps.Size(20, 20),
+          { offset: new kakao.maps.Point(20, 40) }
+        );
+
         var marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(place.y, place.x),
-          title: place.place_name
+          title: place.place_name,
+          image: markerImage
         });
         kakao.maps.event.addListener(marker, 'click', function () {
           displayPlaceInfo(place);

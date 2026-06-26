@@ -726,6 +726,84 @@
   line-height: 1.8;
 }
 
+/*=============== 장바구니 ================*/
+.compare-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* 팝업 박스 */
+.compare-popup-box {
+  width: 340px;
+  padding: 30px 25px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 제목 */
+.compare-popup-box strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 30px;
+}
+
+/* 버튼 영역 */
+.compare-popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* 공통 버튼 */
+.compare-popup-actions button,
+.compare-popup-actions a {
+  width: 90px;
+  height: 38px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+}
+
+/* 계속 보기 버튼 */
+.compare-cancel {
+  background: #fff;
+  color: #111;
+  border: 1px solid #111;
+}
+
+.compare-cancel:hover {
+  background: #f5f5f5;
+}
+
+/* 이동하기 버튼 */
+.compare-go {
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+}
+
+.compare-go:hover {
+  background: #333;
+}
+
 /* ==================== 배송·반품 영역 ==================== */
 .shipping-returns-section {
   max-width: 960px;

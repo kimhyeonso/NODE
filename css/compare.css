@@ -1,0 +1,275 @@
+/* ===================== 헤더바 글씨 색 변경 ======================= */
+.top-menu-bar:not(.scrolled) .gnb > li > a {
+  color: #ffffff;
+}
+
+.top-menu-bar:not(.scrolled) .gnb > li > a::after {
+  background: #ffffff;
+}
+
+.top-menu-bar:not(.scrolled) .menu-icon a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.top-menu-bar:not(.scrolled) .menu-icon .line {
+  background: #ffffff;
+}
+
+.top-menu-bar:not(.scrolled) .hamburger-btn img {
+  filter: none;
+}
+
+.top-menu-bar:not(.scrolled) .menu-icon .after-login img {
+  filter: none;
+}
+
+
+/* ===================== compare 스타일 시작 ======================= */
+.compare-page {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 62px;
+  background: #111111;
+  color: #ffffff;
+}
+
+.compare-hero {
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  padding: 120px 0 70px;
+}
+
+.section-label {
+  color: #ffcd4a;
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.compare-hero h1 {
+  font-size: clamp(42px, 6vw, 82px);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.compare-hero > p:last-child {
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.compare-section {
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  padding: 0 0 120px;
+}
+
+.compare-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.compare-top h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.compare-clear-btn {
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: #ffffff;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.compare-clear-btn:hover {
+  background: #ffcd4a;
+  border-color: #ffcd4a;
+  color: #111111;
+}
+
+.compare-empty {
+  display: none;
+  padding: 80px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.compare-empty h3 {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.compare-empty p {
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 28px;
+}
+
+.compare-empty a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 24px;
+  background: #ffffff;
+  color: #111111;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.compare-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 24px;
+  background: #ffffff;
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  color: #111111;
+}
+
+.compare-table th {
+  width: 180px;
+  padding: 24px 20px;
+  background: #f0ebe0 ;
+  border-bottom: 1px solid #dddddd;
+  font-size: 15px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.compare-table td {
+  padding: 24px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.compare-table tr:last-child th,
+.compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+.compare-table tr:first-child td {
+  vertical-align: top;
+  text-align: center;
+}
+
+.compare-table img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #f3f3f3;
+  display: block;
+  margin: 0 auto;
+}
+
+.compare-table h3 {
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.compare-table tr:first-child td {
+  vertical-align: top;
+  text-align: center;
+}
+
+.compare-table .compare-detail-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 22px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.compare-table .compare-detail-link:hover {
+  background: #ffcd4a;
+  color: #111111;
+}
+
+@media (max-width: 768px) {
+  .compare-page {
+    padding-top: 62px;
+  }
+
+  .compare-hero {
+    padding: 80px 0 50px;
+  }
+
+  .compare-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .compare-top h2 {
+    font-size: 23px;
+  }
+
+  .compare-clear-btn {
+    width: 100%;
+  }
+
+  .compare-table-wrap {
+    border-radius: 18px;
+    overflow-x: auto;
+  }
+
+  .compare-table {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .compare-table th {
+    width: 80px;
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+
+  .compare-table td {
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+
+  .compare-table img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .compare-table h3 {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .compare-table .compare-price {
+    font-size: 14px;
+  }
+
+  .compare-table .compare-detail-link {
+    height: 34px;
+    padding: 0 14px;
+    font-size: 12px;
+  }
+}

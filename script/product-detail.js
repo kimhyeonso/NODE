@@ -67,7 +67,6 @@ async function initProductDetail() {
       colorChips[i].setAttribute("aria-pressed", i === index ? "true" : "false");
     }
   }
-  
   document.title = product.name + " | NODE";
   productTitle.textContent = product.name;
   productPrice.textContent = formatPrice(product.price);
@@ -167,7 +166,82 @@ async function initProductDetail() {
   });
   
   updateQuantity();
+
+
   
+
+// ==================== 장바구니 담기 ====================
+const addToCartButton = document.querySelector(".add-cart-button");
+
+addToCartButton.addEventListener("click", function () {
+  const item = {
+    id: requestedId || fallbackId,
+    name: product.name,
+    brand: product.brand,
+    salePrice: product.price,
+    originalPrice: product.originalPrice || product.price,
+    img: product.images[0],
+    qty: quantity
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  let existing = null;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === item.id) {
+      existing = cart[i];
+      break;
+    }
+  }
+
+  if (existing !== null) {
+    existing.qty += quantity;
+  } else {
+    cart.push(item);
+  }
+
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+  showDetailCartPopup();
+});
+  
+function showDetailCartPopup() {
+  if (document.querySelector(".compare-popup") !== null) return;
+
+  const popup = document.createElement("div");
+  popup.className = "compare-popup";
+
+  const popupBox = document.createElement("div");
+  popupBox.className = "compare-popup-box";
+
+  const message = document.createElement("strong");
+  message.textContent = "장바구니에 담겼습니다.";
+
+  const actions = document.createElement("div");
+  actions.className = "compare-popup-actions";
+
+  const cancelButton = document.createElement("button");
+  cancelButton.className = "compare-cancel";
+  cancelButton.type = "button";
+  cancelButton.textContent = "계속 쇼핑";
+
+  const cartLink = document.createElement("a");
+  cartLink.className = "compare-go";
+  cartLink.href = "./shoppingCart.html";
+  cartLink.textContent = "장바구니 보기";
+
+  actions.appendChild(cancelButton);
+  actions.appendChild(cartLink);
+  popupBox.appendChild(message);
+  popupBox.appendChild(actions);
+  popup.appendChild(popupBox);
+  document.body.appendChild(popup);
+
+  cancelButton.addEventListener("click", function () { popup.remove(); });
+  popup.addEventListener("click", function (e) {
+    if (e.target === popup) popup.remove();
+  });
+}
+
   // ==================== 상세정보·리뷰·배송 탭 기능 ====================
   for (let i = 0; i < tabButtons.length; i++) {
     tabButtons[i].addEventListener("click", function () {
@@ -225,8 +299,43 @@ async function initProductDetail() {
       "</svg>";
   
     similarCartButton.addEventListener("click", function () {
-      this.classList.toggle("is-active");
-    });
+  this.classList.add("is-active");
+
+
+
+
+  const similarItem = {
+    id: similarId,
+    name: similarProduct.name,
+    brand: similarProduct.brand,
+    salePrice: similarProduct.price,
+    originalPrice: similarProduct.originalPrice || similarProduct.price,
+    img: similarProduct.images[0],
+    qty: 1
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  let existing = null;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === similarItem.id) {
+      existing = cart[i];
+      break;
+    }
+  }
+
+  if (existing !== null) {
+    existing.qty += 1;
+  } else {
+    cart.push(similarItem);
+  }
+
+
+
+
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+  showDetailCartPopup();
+});
   }
   
   if (!products[requestedId]) {

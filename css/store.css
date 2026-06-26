@@ -36,8 +36,16 @@
         transition: color 0.2s, border-color 0.2s, background 0.2s;
       }
  
-      .filter-btn:hover { color: #ffcd4a; border-color: rgba(255,255,255,0.4); }
-      .filter-btn.active { color: #111111; background: #ffcd4a; border-color: #ffcd4a; }
+      .filter-btn:hover{ 
+        color: #ffcd4a; 
+        border-color: rgba(255,255,255,0.4); 
+      }
+      .filter-btn.active {
+        color: #222222;
+        background: transparent;
+        border-color: transparent;
+        border-bottom: 2px solid #ffcd4a;
+      }
       .filter-btn svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
  
       /* 지도 */

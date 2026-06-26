@@ -281,6 +281,16 @@ html > body {
   filter: none;
 }
 
+/* 장바구니 아이콘 - 기본 검은색 */
+.menu-icon .after-login img {
+  filter: brightness(0);
+}
+
+/* 스크롤 후 흰색 */
+.top-menu-bar.scrolled .menu-icon .after-login img {
+  filter: none;
+}
+
 .dim{
   display: none;
   position: fixed;
