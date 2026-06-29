@@ -89,7 +89,7 @@ html > body {
 
 .main-logo img {
   width: auto;
-  height: 3rem;
+  height: 2.5rem;
   object-fit: contain;
 }
 
@@ -183,6 +183,10 @@ html > body {
   display: none;
 }
 
+body.popup-visible .snb {
+  top: calc(5rem + 50px);
+}
+
 .snb-inner {
   width: 100%;
   height: 100%;
@@ -220,7 +224,7 @@ html > body {
 
   width: 272px;
   height: 145px;
-  border-radius: 10px;
+  border-radius: 7px;
 
   background: #ddd;
   overflow: hidden;
@@ -518,10 +522,12 @@ html > body {
   padding: 0 80px;
   position: fixed;
   top: 5rem;
+  z-index: 90;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 }
 
 
@@ -576,6 +582,13 @@ html > body {
   right: 2%;
   transform: translate(-50%,-50%);
   cursor: pointer;
+
+  display: none;
+  z-index: 800;
+}
+
+.topBtn.scrolled{
+  display: block;
 }
 
 
