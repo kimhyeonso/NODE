@@ -11,8 +11,9 @@ body {
     margin: 0;
     color: #151515;
     background: #fff;
-    font-family: Arial, "Noto Sans KR", sans-serif;
+    font-family: "noto sans", Arial, sans-serif;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased; /* 폰트를 더 선명하게 만들어주는 옵션 */
 }
 
 a {
@@ -21,7 +22,7 @@ a {
 }
 
 button {
-    font: inherit;
+    font-family: inherit;
 }
 
 /* 고정 헤더 높이(5rem)만큼 본문을 아래로 내려 겹침 방지 */
@@ -42,8 +43,8 @@ main {
 .logo,
 .footer-logo {
     width: fit-content;
-    font-size: 21px;
-    font-weight: 800;
+    font-size: 1.3125rem;
+    font-weight: 600;
     letter-spacing: 0.16em;
 }
 
@@ -72,7 +73,7 @@ main {
     margin: 0;
     padding: 8px;
     border: 1px solid #e7e7e7;
-    border-radius: 10px;
+    border-radius: 8px;
     visibility: hidden;
     list-style: none;
     background: #fff;
@@ -95,7 +96,7 @@ main {
     display: block;
     padding: 9px 12px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 0.75rem;
     letter-spacing: 0.08em;
 }
 
@@ -127,7 +128,7 @@ main {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .sub-banner {
@@ -135,7 +136,7 @@ main {
     padding: 10px 16px;
     background: #f7d9df;
     text-align: center;
-    font-size: 13px;
+    font-size: 0.875rem;
 }
 
 .hero-product {
@@ -186,15 +187,17 @@ body[data-product-category="live"] .hero-product {
     letter-spacing: 0.1em;
 }
 
+
 .hero-product h1 {
-    font-size: 90px;
+    font-size: 4.8rem;
 }
 
 .eyebrow {
     margin: 0 0 16px;
     color: inherit;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }
@@ -220,14 +223,14 @@ body[data-product-category="live"] .hero-product {
 }
 
 .section-heading h2 {
-    font-size: 48px;
+    font-size: 3rem;
 }
 
 .product-count {
     min-height: 24px;
     margin: 12px 0 0;
     color: #717171;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 /* 필터 초기화 버튼과 가격 정렬 영역 */
@@ -269,7 +272,7 @@ body[data-product-category="live"] .hero-product {
 .filter-section {
     overflow: hidden;
     border: 1px solid #e7e7e7;
-    border-radius: 14px;
+    border-radius: 8px;
     background: #fff;
 }
 
@@ -278,7 +281,8 @@ body[data-product-category="live"] .hero-product {
     padding: 17px 20px;
     color: #fff;
     background: #151515;
-    font-size: 17px;
+    font-size: 1.0625rem;
+    font-weight: 400; 
     letter-spacing: 0.04em;
 }
 
@@ -291,7 +295,8 @@ body[data-product-category="live"] .hero-product {
 }
 
 .filter-row strong {
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .filter-options {
@@ -306,7 +311,8 @@ body[data-product-category="live"] .hero-product {
     gap: 7px;
     color: #444;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 300;
 }
 
 .filter-options input {
@@ -320,7 +326,7 @@ body[data-product-category="live"] .hero-product {
     display: grid;
     gap: 7px;
     color: #717171;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .sort-control select {
@@ -363,7 +369,7 @@ body[data-product-category="live"] .hero-product {
     position: relative;
     overflow: hidden;
     margin-bottom: 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     background: #fff;
     aspect-ratio: 4 / 5;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -449,8 +455,8 @@ body[data-product-category="live"] .hero-product {
     margin: 0 0 6px;
     color: #555;
     cursor: pointer;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 500;
     grid-column: 2;
     grid-row: 2;
 }
@@ -481,7 +487,7 @@ body[data-product-category="live"] .hero-product {
 .compare-popup-box {
     width: min(360px, 100%);
     padding: 26px;
-    border-radius: 14px;
+    border-radius: 8px;
     background: #fff;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
     text-align: center;
@@ -500,7 +506,7 @@ body[data-product-category="live"] .hero-product {
     border: 1px solid #151515;
     border-radius: 7px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 0.875rem;
 }
 
 .compare-cancel {
@@ -516,7 +522,8 @@ body[data-product-category="live"] .hero-product {
 .brand {
     margin-bottom: 6px;
     color: #717171;
-    font-size: 11px;
+    font-size: 0.6875rem;
+    font-family: "Roboto", sans-serif;
     font-weight: 700;
     grid-column: 1;
     grid-row: 2;
@@ -533,7 +540,7 @@ body[data-product-category="live"] .hero-product {
     overflow: hidden;
     margin: 0 0 10px;
     color: #151515;
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 500;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -557,23 +564,25 @@ body[data-product-category="live"] .hero-product {
     flex-wrap: wrap;
     align-items: baseline;
     gap: 6px;
-    font-size: 14px;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.875rem;
 }
 
 .sale-price {
-    font-size: 15px;
+    font-size: 0.875rem;
     font-weight: 700;
 }
 
 .original-price {
     color: #999;
-    font-size: 12px;
+    font-size: 0.75rem;
+    font-weight: 400;
     text-decoration: line-through;
 }
 
 .discount-rate {
     color: #ef5b45;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
 }
 
@@ -621,7 +630,7 @@ body[data-product-category="live"] .hero-product {
 .footer-content p,
 .copyright {
     color: #aaa;
-    font-size: 13px;
+    font-size: 0.875rem;
 }
 
 .copyright {
@@ -653,7 +662,7 @@ body[data-product-category="live"] .hero-product {
     .nav-links {
         justify-content: flex-end;
         gap: 18px;
-        font-size: 14px;
+        font-size: 1rem;
     }
 
     .sub-menu {
@@ -675,11 +684,13 @@ body[data-product-category="live"] .hero-product {
     }
 
     .hero-product h1 {
-        font-size: 52px;
+        font-size: 2.25rem;
+        font-family: "Roboto", sans-serif;
+        font-weight: 900;
     }
 
     .section-heading h2 {
-        font-size: 36px;
+        font-size: 2.25rem;
     }
 
     .product-container {
@@ -716,12 +727,12 @@ body[data-product-category="live"] .hero-product {
     }
 
     .image-box {
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .price-row {
         gap: 4px;
-        font-size: 13px;
+        font-size: 0.875rem;
     }
 
     .footer-content {
