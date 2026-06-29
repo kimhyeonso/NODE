@@ -11,7 +11,7 @@ body {
     margin: 0;
     color: #151515;
     background: #fff;
-    font-family: Arial, "Noto Sans KR", sans-serif;
+    font-family: "Roboto", "noto sans", sans-serif;
     line-height: 1.5;
 }
 
@@ -43,15 +43,15 @@ main {
 .logo,
 .footer-logo {
     width: fit-content;
-    font-size: 21px;
-    font-weight: 800;
+    font-size: 1.3125rem;
+    font-weight: 700;
     letter-spacing: 0.16em;
 }
 
 .nav-links,
 .footer-links {
     display: flex;
-    gap: 28px;
+    gap: 1.75rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -72,8 +72,8 @@ main {
     min-width: 150px;
     margin: 0;
     padding: 8px;
-    border: 1px solid #e7e7e3;
-    border-radius: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
     visibility: hidden;
     list-style: none;
     background: #fff;
@@ -96,7 +96,7 @@ main {
     display: block;
     padding: 9px 12px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 0.75rem;
     letter-spacing: 0.08em;
 }
 
@@ -128,7 +128,7 @@ main {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .sub-banner {
@@ -136,7 +136,7 @@ main {
     padding: 10px 16px;
     background: #f7d9df;
     text-align: center;
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .hero-accessory {
@@ -189,20 +189,21 @@ body[data-accessory-category="stand"] .hero-accessory {
 }
 
 .hero-accessory h1 {
-    font-size: 90px;
+    font-size: 4.8rem;
 }
 
 .hero-description {
     margin: 22px 0 0;
     color: #c8c8c8;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .eyebrow {
     margin: 0 0 16px;
     color: #747474;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 1rem;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }
@@ -224,14 +225,14 @@ body[data-accessory-category="stand"] .hero-accessory {
 }
 
 .section-heading h2 {
-    font-size: 48px;
+    font-size: clamp(2.25rem, 2.5vw, 3rem);
 }
 
 .accessory-count {
     min-height: 24px;
     margin: 12px 0 0;
-    color: #747474;
-    font-size: 14px;
+    color: #717171;
+    font-size: 1rem;
 }
 
 /* 필터 초기화 버튼과 가격 정렬 영역 */
@@ -272,8 +273,8 @@ body[data-accessory-category="stand"] .hero-accessory {
 
 .filter-section {
     overflow: hidden;
-    border: 1px solid #e7e7e3;
-    border-radius: 14px;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
     background: #fff;
 }
 
@@ -282,7 +283,8 @@ body[data-accessory-category="stand"] .hero-accessory {
     padding: 17px 20px;
     color: #fff;
     background: #151515;
-    font-size: 17px;
+    font-size: 1.0625rem;
+    font-weight: 400;
     letter-spacing: 0.04em;
 }
 
@@ -291,11 +293,12 @@ body[data-accessory-category="stand"] .hero-accessory {
     grid-template-columns: 130px 1fr;
     gap: 20px;
     padding: 16px 20px;
-    border-top: 1px solid #e7e7e3;
+    border-top: 1px solid #e7e7e7;
 }
 
 .filter-row strong {
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .filter-options {
@@ -310,7 +313,8 @@ body[data-accessory-category="stand"] .hero-accessory {
     gap: 7px;
     color: #444;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 300;
 }
 
 .filter-options input {
@@ -324,14 +328,14 @@ body[data-accessory-category="stand"] .hero-accessory {
     display: grid;
     gap: 7px;
     color: #747474;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .sort-control select {
     min-width: 136px;
     min-height: 40px;
     padding: 0 34px 0 12px;
-    border: 1px solid #d6d6d2;
+    border: 1px solid #d6d6d6;
     border-radius: 8px;
     color: #151515;
     background: #fff;
@@ -367,7 +371,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     position: relative;
     overflow: hidden;
     margin-bottom: 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     background: #fff;
     aspect-ratio: 4 / 5;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -413,8 +417,8 @@ body[data-accessory-category="stand"] .hero-accessory {
     border: 0;
     border-radius: 50%;
     place-items: center;
-    color: #151515;
-    background: rgba(255, 255, 255, 0.92);
+    color: #222;
+    background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
     transition: background 180ms ease, transform 180ms ease;
 }
@@ -452,8 +456,8 @@ body[data-accessory-category="stand"] .hero-accessory {
     margin: 0 0 6px;
     color: #555;
     cursor: pointer;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 500;
     grid-column: 2;
     grid-row: 2;
 }
@@ -484,7 +488,7 @@ body[data-accessory-category="stand"] .hero-accessory {
 .compare-popup-box {
     width: min(360px, 100%);
     padding: 26px;
-    border-radius: 14px;
+    border-radius: 8px;
     background: #fff;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
     text-align: center;
@@ -503,7 +507,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     border: 1px solid #151515;
     border-radius: 7px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 0.875rem;
 }
 
 .compare-cancel {
@@ -518,12 +522,13 @@ body[data-accessory-category="stand"] .hero-accessory {
 
 .brand {
     margin-bottom: 6px;
-    color: #747474;
-    font-size: 11px;
-    font-weight: 800;
+    color: #717171;
+    font-size: 0.6875rem;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-weight: 700;
     grid-column: 1;
     grid-row: 2;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
 }
 
 .accessory-name,
@@ -536,7 +541,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     overflow: hidden;
     margin: 0 0 10px;
     color: #151515;
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 500;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -547,24 +552,25 @@ body[data-accessory-category="stand"] .hero-accessory {
     flex-wrap: wrap;
     align-items: baseline;
     gap: 6px;
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-family: "Roboto", "noto sans", sans-serif;
 }
 
 .sale-price {
-    font-size: 15px;
+    font-size: 0.875rem;
     font-weight: 700;
 }
 
 .original-price {
     color: #999;
-    font-size: 12px;
+    font-size: 0.75rem;
     text-decoration: line-through;
 }
 
 .discount-rate {
     color: #ef5b45;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 0.75rem;
+    font-weight: 700;
 }
 
 .pagination {
@@ -579,7 +585,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     width: 40px;
     height: 40px;
     padding: 0;
-    border: 1px solid #e7e7e3;
+    border: 1px solid #e7e7e7;
     border-radius: 50%;
     place-items: center;
     color: #555;
@@ -607,10 +613,14 @@ body[data-accessory-category="stand"] .hero-accessory {
     gap: 40px;
 }
 
-.footer-content p,
+.footer-content p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
 .copyright {
     color: #aaa;
-    font-size: 13px;
+    font-size: 0.875rem;
 }
 
 .copyright {
@@ -652,8 +662,8 @@ body[data-accessory-category="stand"] .hero-accessory {
 
     .nav-links {
         justify-content: flex-end;
-        gap: 14px;
-        font-size: 13px;
+        gap: 0.875rem;
+        font-size: 0.8125rem;
     }
 
     .sub-menu {
@@ -675,11 +685,9 @@ body[data-accessory-category="stand"] .hero-accessory {
     }
 
     .hero-accessory h1 {
-        font-size: 52px;
-    }
-
-    .section-heading h2 {
-        font-size: 36px;
+        font-size: 2.25rem;
+        font-family: "Roboto", "noto sans", sans-serif;
+        font-weight: 900;
     }
 
     .accessory-container {
@@ -716,7 +724,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     }
 
     .image-box {
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .footer-content {
