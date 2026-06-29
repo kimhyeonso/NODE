@@ -61,7 +61,7 @@ main {
     position: relative;
 }
 
-/* Product 서브메뉴 디자인입니다. 메뉴 크기나 색상은 여기서 수정하세요. */
+/* Product 서브메뉴 디자인*/
 .sub-menu {
     position: absolute;
     top: 35px;
@@ -151,7 +151,7 @@ main {
     text-align: center;
 }
 
-/* 각 상품 페이지의 히어로 배경 이미지입니다. url 안의 경로만 바꾸면 됩니다. */
+/* 각 상품 페이지의 히어로 배경 이미지*/
 body[data-product-category="all"] .hero-product {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.62)),
@@ -604,6 +604,7 @@ body[data-product-category="live"] .hero-product {
     background: #151515;
 }
 
+/* ============footer=========== */
 .site-footer {
     padding: 56px 5% 28px;
     color: #fff;

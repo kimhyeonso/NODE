@@ -248,9 +248,42 @@ for (let i = 0; i < cartButtons.length; i++) {
 // 비교 상품은 최대 2개만 선택
 const compareInputs = document.querySelectorAll(".compare-check input");
 
-// 비교 액세서리 2개를 골랐을 때 안내창 만들기
+function getCompareItems() {
+  let compareItems = [];
+
+  for (let i = 0; i < compareInputs.length; i++) {
+    if (compareInputs[i].checked === true) {
+      const card = compareInputs[i].closest(".accessory-card");
+
+      compareItems.push({
+        id: card.dataset.productId,
+        name: card.querySelector(".accessory-name").textContent.trim(),
+        brand: card.querySelector(".brand").textContent.trim(),
+        price: Number(card.dataset.price),
+        img: card.querySelector(".image-box img").getAttribute("src"),
+        specs: null
+      });
+    }
+  }
+
+  return compareItems;
+}
+
+function saveCompareItems(callback) {
+  const compareItems = getCompareItems();
+
+  fetch("./js/catalog/products.json")
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      for (let i = 0; i < compareItems.length; i++) {
+        compareItems[i].specs = data.specifications[compareItems[i].id] || null;
+      }
+      localStorage.setItem("compareItems", JSON.stringify(compareItems));
+      if (callback) callback(compareItems);
+    });
+}
+
 function showComparePopup() {
-  // 안내창이 이미 열려 있으면 또 만들지 않습니다.
   if (document.querySelector(".compare-popup") !== null) {
     return;
   }
@@ -274,7 +307,7 @@ function showComparePopup() {
 
   let compareLink = document.createElement("a");
   compareLink.className = "compare-go";
-  compareLink.href = "#";
+  compareLink.href = "./compare.html";
   compareLink.textContent = "비교하기";
 
   actions.appendChild(cancelButton);
@@ -292,12 +325,14 @@ function showComparePopup() {
 for (let i = 0; i < compareInputs.length; i++) {
   compareInputs[i].addEventListener("change", function () {
     let checkedCount = 0;
-    let selectedCard = this.parentElement.parentElement;
+    let selectedCard = this.closest(".accessory-card");
 
-    if (this.checked === true) {
-      selectedCard.classList.add("compare-selected");
-    } else {
-      selectedCard.classList.remove("compare-selected");
+    if (selectedCard !== null) {
+      if (this.checked === true) {
+        selectedCard.classList.add("compare-selected");
+      } else {
+        selectedCard.classList.remove("compare-selected");
+      }
     }
 
     for (let j = 0; j < compareInputs.length; j++) {
@@ -308,13 +343,19 @@ for (let i = 0; i < compareInputs.length; i++) {
 
     if (checkedCount > 2) {
       this.checked = false;
-      selectedCard.classList.remove("compare-selected");
+      if (selectedCard !== null) {
+        selectedCard.classList.remove("compare-selected");
+      }
       alert("비교 상품은 2개까지만 선택할 수 있습니다.");
+      saveCompareItems();
+      return;
     }
 
-    if (checkedCount === 2) {
-      showComparePopup();
-    }
+    saveCompareItems(function(compareItems) {
+      if (compareItems.length === 2) {
+        showComparePopup();
+      }
+    });
   });
 }
 

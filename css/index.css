@@ -61,6 +61,10 @@ body {
   filter: none;
 }
 
+.menu-icon .after-login img {
+  filter: none;
+}
+
 
 /*********** 첫번째 섹션 구현 ***********/
 .movie-section{
