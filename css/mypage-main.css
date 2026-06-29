@@ -3,9 +3,6 @@
 /* ==================== 공통 배경 / 전체 콘텐츠 너비 ==================== */
 body {
     color: #202124;
-    background:
-        radial-gradient(circle at 12% 8%, rgba(255, 220, 120, 0.32), transparent 26rem),
-        #f4f5f8;
 }
 
 .mypage-container {
@@ -39,7 +36,7 @@ body {
     min-height: 144px;
     margin-bottom: 20px;
     padding: 28px 32px;
-    border-radius: 22px;
+    border-radius: 8px;
 }
 
 .user-profile {
@@ -54,7 +51,7 @@ body {
     height: 68px;
     flex: 0 0 auto;
     place-items: center;
-    border-radius: 22px;
+    border-radius: 7px;
     color: #fff;
     background: linear-gradient(145deg, #d29a00);
     box-shadow: 0 10px 24px rgba(33, 35, 50, 0.22);
