@@ -1,7 +1,8 @@
-* { box-sizing: border-box; }
+﻿* { box-sizing: border-box; }
 
 /* ==================== 공통 배경 / 전체 콘텐츠 너비 ==================== */
 body {
+  font-family: "Roboto", "noto sans", sans-serif;
     color: #202124;
 }
 
@@ -11,11 +12,11 @@ body {
     padding: 48px 0 72px;
 }
 
-/* [수정 포인트] 작은 영문 제목 공통 스타일 */
+/* 작은 영문 제목 공통 스타일 */
 .eyebrow {
     margin-bottom: 7px;
     color: #8b8e99;
-    font-size: 11px;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.15em;
 }
@@ -55,26 +56,26 @@ body {
     color: #fff;
     background: linear-gradient(145deg, #d29a00);
     box-shadow: 0 10px 24px rgba(33, 35, 50, 0.22);
-    font-size: 23px;
+    font-size: 1.4375rem;
     font-weight: 700;
 }
 
 .user-info-card h2 {
     margin: 0;
-    font-size: clamp(24px, 2.5vw, 31px);
+    font-size: clamp(1.5rem, 2.5vw, 1.9375rem);
     line-height: 1.15;
 }
 
 .user-info-card h2 span {
     color: #7b7e88;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .user-email {
     margin-top: 7px;
     color: #92949d;
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .logo-out{
@@ -88,7 +89,7 @@ body {
     display: flex;
     align-items: center;
     border: 1px solid #ececf1;
-    border-radius: 16px;
+    border-radius: 8px;
     background: #fafafe;
 }
 
@@ -104,13 +105,13 @@ body {
 }
 
 .stats-box strong {
-    font-size: 17px;
+    font-size: 1.0625rem;
 }
 
 .stats-box span {
     margin-top: 4px;
     color: #9698a1;
-    font-size: 11px;
+    font-size: 0.75rem;
 }
 
 /* ==================== 결제 요약 카드 4개 ==================== */
@@ -128,7 +129,7 @@ body {
     padding: 24px;
     overflow: hidden;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 8px;
     transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -138,7 +139,7 @@ body {
     right: 20px;
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: 8px;
     background: #d7d8df;
     content: "";
 }
@@ -150,26 +151,26 @@ body {
 
 .card-label {
     color: #777a84;
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .card > strong {
     margin: 14px 0 auto;
-    font-size: clamp(22px, 2vw, 28px);
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
     letter-spacing: -0.04em;
 }
 
 .card small {
     margin-left: 3px;
     color: #777a84;
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 500;
 }
 
 .card-change {
     margin-top: 12px;
     color: #a0a2aa;
-    font-size: 11px;
+    font-size: 0.75rem;
 }
 
 .card-change.is-up {
@@ -185,7 +186,7 @@ body {
     margin-bottom: 20px;
     padding: 24px 28px;
     border: 1px solid rgba(24, 25, 35, 0.08);
-    border-radius: 20px;
+    border-radius: 8px;
     background: #202124;
     box-shadow: 0 12px 34px rgba(32, 35, 48, 0.12);
     color: #fff;
@@ -195,7 +196,7 @@ body {
     display: grid;
     width: 54px;
     height: 54px;
-    border-radius: 16px;
+    border-radius: 7px;
     place-items: center;
     background: rgba(255, 255, 255, 0.1);
 }
@@ -213,13 +214,13 @@ body {
 
 .cart-shortcut-copy h2 {
     margin: 0;
-    font-size: 21px;
+    font-size: 1.3125rem;
 }
 
 .cart-shortcut-copy > p:last-child {
     margin: 6px 0 0;
     color: rgba(255, 255, 255, 0.62);
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .cart-shortcut-link {
@@ -228,9 +229,9 @@ body {
     gap: 18px;
     padding: 13px 18px;
     border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 999px;
+    border-radius: 8px;
     color: #fff;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     transition: color 180ms ease, background-color 180ms ease;
 }
@@ -259,7 +260,7 @@ body {
 .panel {
     min-width: 0;
     padding: 25px;
-    border-radius: 22px;
+    border-radius: 8px;
 }
 
 .chart-section .panel {
@@ -278,14 +279,14 @@ body {
 }
 
 .panel-heading h3 {
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .panel-heading > span,
 .panel-heading a,
 .panel-heading button {
     color: #9698a1;
-    font-size: 11px;
+    font-size: 0.75rem;
 }
 
 .panel-heading a,
@@ -296,7 +297,7 @@ body {
     background: #fff;
 }
 
-/* [수정 포인트] 월별 막대그래프 색상과 크기 */
+/* 월별 막대그래프 색상과 크기 */
 .bar-chart {
     display: flex;
     height: 218px;
@@ -322,7 +323,7 @@ body {
     width: min(38px, 100%);
     height: var(--value);
     min-height: 10px;
-    border-radius: 8px 8px 3px 3px;
+    border-radius: 8px 8px 5px 5px;
     background: linear-gradient(180deg, #b9bdcc, #737887);
 }
 
@@ -333,10 +334,10 @@ body {
 
 .bar-item small {
     color: #92949d;
-    font-size: 10px;
+    font-size: 0.75rem;
 }
 
-/* [수정 포인트] 카테고리 비율과 색상
+/* 카테고리 비율과 색상
    HTML 숫자와 conic-gradient 퍼센트를 같이 변경하세요. */
 .donut-wrap {
     display: grid;
@@ -366,11 +367,11 @@ body {
 .donut-chart strong {
     position: relative;
     z-index: 1;
-    font-size: 28px;
+    font-size: 1.75rem;
 }
 
 .donut-chart small {
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .chart-legend {
@@ -385,7 +386,7 @@ body {
     align-items: center;
     gap: 8px;
     color: #777a84;
-    font-size: 11px;
+    font-size: 0.75rem;
 }
 
 .chart-legend strong {
@@ -410,7 +411,7 @@ body {
     padding: 22px;
     justify-content: space-between;
     flex-direction: column;
-    border-radius: 18px;
+    border-radius: 8px;
     color: #fff;
     background:
         radial-gradient(circle at 90% 10%, rgba(255,255,255,.18), transparent 34%),
@@ -420,13 +421,13 @@ body {
 
 .credit-card > span {
     align-self: flex-end;
-    font-size: 16px;
+    font-size: 1rem;
     font-style: italic;
     font-weight: 700;
 }
 
 .credit-card > strong {
-    font-size: 15px;
+    font-size: 0.9375rem;
     letter-spacing: 0.12em;
 }
 
@@ -459,10 +460,10 @@ body {
     width: 36px;
     height: 36px;
     place-items: center;
-    border-radius: 11px;
+    border-radius: 8px;
     color: #795000;
     background: #fff1bf;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
 }
 
@@ -472,16 +473,16 @@ body {
 }
 
 .transaction-list li > div:nth-child(2) strong {
-    font-size: 12px;
+    font-size: 0.8125rem;
 }
 
 .transaction-list span {
     color: #9b9da6;
-    font-size: 10px;
+    font-size: 0.75rem;
 }
 
 .transaction-list li > strong {
-    font-size: 12px;
+    font-size: 0.8125rem;
 }
 
 /* ==================== 반응형: 태블릿 / 모바일 ==================== */

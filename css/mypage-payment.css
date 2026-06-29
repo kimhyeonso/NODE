@@ -1,11 +1,10 @@
-* { box-sizing: border-box; }
+﻿* { box-sizing: border-box; }
 
 /* ==================== 공통 배경 / 전체 콘텐츠 너비 ==================== */
 body {
+  font-family: "Roboto", "noto sans", sans-serif;
   color: #202124;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(255, 220, 120, .32), transparent 26rem),
-    #f4f5f8;
+  
 }
 
 button, select { font: inherit; }
@@ -31,26 +30,26 @@ button, select { font: inherit; }
 .eyebrow {
   margin-bottom: 7px;
   color: #8b8e99;
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: .15em;
 }
 
 .page-heading h1 {
   margin-bottom: 10px;
-  font-size: clamp(30px, 4vw, 46px);
+  font-size: clamp(1.875rem, 4vw, 2.875rem);
   letter-spacing: -.045em;
 }
 
 .page-heading > div > p:last-child {
   color: #858891;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .back-link,
 .section-heading > span {
   color: #80838d;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .back-link {
@@ -70,7 +69,7 @@ button, select { font: inherit; }
 .add-payment-panel,
 .security-panel {
   border: 1px solid rgba(24, 25, 35, .07);
-  border-radius: 22px;
+  border-radius: 8px;
   background: rgba(255,255,255,.95);
   box-shadow: 0 12px 34px rgba(32,35,48,.065);
 }
@@ -84,7 +83,7 @@ button, select { font: inherit; }
 
 .section-heading h2,
 .add-payment-panel h2,
-.security-panel h2 { font-size: 19px; }
+.security-panel h2 { font-size: 1.1875rem; }
 
 .payment-card-list { display: grid; }
 
@@ -97,18 +96,18 @@ button, select { font: inherit; }
 
 .payment-method + .payment-method { border-top: 1px solid #ececf1; }
 
-/* [수정 포인트] 카드 크기와 공통 모양 */
+/* 카드 크기와 공통 모양 */
 .card-visual {
   display: flex;
   height: 150px;
   padding: 20px;
   justify-content: space-between;
   flex-direction: column;
-  border-radius: 18px;
+  border-radius: 8px;
   box-shadow: 0 13px 24px rgba(28,30,42,.18);
 }
 
-/* [수정 포인트] 카드 종류별 배경색 */
+/* 카드 종류별 배경색 */
 .card-dark {
   color: #fff;
   background: radial-gradient(circle at 90% 10%, rgba(255,255,255,.18), transparent 34%), linear-gradient(145deg,#1e2029,#45495b);
@@ -132,7 +131,7 @@ button, select { font: inherit; }
   justify-content: space-between;
 }
 
-.card-top strong { font-size: 13px; font-style: italic; }
+.card-top strong { font-size: 0.8125rem; font-style: italic; }
 
 .card-chip {
   width: 31px;
@@ -141,20 +140,20 @@ button, select { font: inherit; }
   background: linear-gradient(135deg,#d6bd73,#fff0b4);
 }
 
-.card-visual > p { font-size: 14px; letter-spacing: .09em; }
-.card-bottom { opacity: .68; font-size: 9px; letter-spacing: .08em; }
+.card-visual > p { font-size: 0.875rem; letter-spacing: .09em; }
+.card-bottom { opacity: .68; font-size: 0.75rem; letter-spacing: .08em; }
 
 .method-info { align-items: flex-end; }
-.method-info h3 { margin: 9px 0 6px; font-size: 17px; }
-.method-info p { color: #92949d; font-size: 12px; }
+.method-info h3 { margin: 9px 0 6px; font-size: 1.0625rem; }
+.method-info p { color: #92949d; font-size: 0.8125rem; }
 
 .primary-badge {
   display: inline-block;
   padding: 5px 8px;
-  border-radius: 20px;
+  border-radius: 8px;
   color: #795000;
   background: #fff1bf;
-  font-size: 10px;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
@@ -173,7 +172,7 @@ button, select { font: inherit; }
   color: #777a84;
   background: #fff;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 0.75rem;
 }
 
 .method-actions .danger { color: #c15e68; }
@@ -192,17 +191,17 @@ button, select { font: inherit; }
   height: 52px;
   margin: 0 auto 18px;
   place-items: center;
-  border-radius: 17px;
+  border-radius: 8px;
   color: #795000;
   background: #fff1bf;
-  font-size: 27px;
+  font-size: 1.6875rem;
   font-weight: 300;
 }
 
 .add-payment-panel p {
   margin: 10px 0 22px;
   color: #92949d;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.7;
 }
 
@@ -210,11 +209,11 @@ button, select { font: inherit; }
   width: 100%;
   padding: 12px 16px;
   border: 0;
-  border-radius: 11px;
+  border-radius: 8px;
   color: #fff;
   background: #20222c;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .security-panel ul { display: grid; gap: 16px; margin-top: 22px; }
@@ -224,7 +223,7 @@ button, select { font: inherit; }
   grid-template-columns: 28px 1fr;
   gap: 10px;
   color: #777a84;
-  font-size: 11px;
+  font-size: 0.75rem;
   line-height: 1.5;
 }
 

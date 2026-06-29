@@ -44,14 +44,14 @@ main {
 .footer-logo {
     width: fit-content;
     font-size: 1.3125rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.16em;
 }
 
 .nav-links,
 .footer-links {
     display: flex;
-    gap: 32px;
+    gap: 1.75rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -178,6 +178,7 @@ body[data-product-category="live"] .hero-product {
 .hero-product > div {
     position: relative;
     z-index: 1;
+    animation: hero-in 700ms ease both;
 }
 
 .hero-product h1,
@@ -190,6 +191,12 @@ body[data-product-category="live"] .hero-product {
 
 .hero-product h1 {
     font-size: 4.8rem;
+}
+
+.hero-description {
+    margin: 22px 0 0;
+    color: #c8c8c8;
+    font-size: 0.875rem;
 }
 
 .eyebrow {
@@ -223,7 +230,7 @@ body[data-product-category="live"] .hero-product {
 }
 
 .section-heading h2 {
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 2.5vw, 3rem);
 }
 
 .product-count {
@@ -627,7 +634,11 @@ body[data-product-category="live"] .hero-product {
     gap: 40px;
 }
 
-.footer-content p,
+.footer-content p {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
 .copyright {
     color: #aaa;
     font-size: 0.875rem;
@@ -642,6 +653,17 @@ body[data-product-category="live"] .hero-product {
 :focus-visible {
     outline: 3px solid #6ba4ff;
     outline-offset: 3px;
+}
+
+@keyframes hero-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 태블릿 화면: 상품을 한 줄에 3개 표시 */
@@ -661,8 +683,8 @@ body[data-product-category="live"] .hero-product {
 
     .nav-links {
         justify-content: flex-end;
-        gap: 18px;
-        font-size: 1rem;
+        gap: 0.875rem;
+        font-size: 0.8125rem;
     }
 
     .sub-menu {
@@ -687,10 +709,6 @@ body[data-product-category="live"] .hero-product {
         font-size: 2.25rem;
         font-family: "Roboto", "noto sans", sans-serif;
         font-weight: 900;
-    }
-
-    .section-heading h2 {
-        font-size: 2.25rem;
     }
 
     .product-container {
