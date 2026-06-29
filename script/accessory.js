@@ -185,6 +185,46 @@ resetButton.addEventListener("click", function () {
 // 장바구니 버튼
 const cartButtons = document.querySelectorAll(".cart-button");
 
+function addToCart(button) {
+  const card = button.closest(".accessory-card");
+  const nameEl = card.querySelector(".accessory-name a") || card.querySelector(".accessory-name");
+  const name = nameEl.textContent.trim();
+  const brand = card.querySelector(".brand").textContent.trim();
+  const salePrice = Number(card.getAttribute("data-price"));
+  const originalPriceText = card.querySelector(".original-price").textContent.replace(/[^0-9]/g, "");
+  const originalPrice = Number(originalPriceText);
+  const img = card.querySelector("img").getAttribute("src");
+
+  const item = {
+    id: name,
+    name: name,
+    brand: brand,
+    salePrice: salePrice,
+    originalPrice: originalPrice,
+    img: img,
+    qty: 1
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  let existing = null;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === item.id) {
+      existing = cart[i];
+      break;
+    }
+  }
+
+  if (existing !== null) {
+    existing.qty += 1;
+  } else {
+    cart.push(item);
+  }
+
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+}
+
+
 function showCartPopup() {
   if (document.querySelector(".compare-popup") !== null) {
     return;
@@ -241,6 +281,7 @@ for (let i = 0; i < cartButtons.length; i++) {
 
   cartButtons[i].addEventListener("click", function () {
     this.classList.add("active");
+    addToCart(this);
     showCartPopup();
   });
 }
