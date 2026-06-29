@@ -1,10 +1,161 @@
 
 // 첫번째 섹션 구현
+function BrandLogoMorph__init() {
+  const scrollContainer = document.querySelector(".section-container");
+  const logoSection = document.querySelector(".brand-logo-section");
+  const storySection = document.querySelector(".brand-story-section");
+  const sourceImg = document.querySelector(".brand-logo-section img");
+  const targetImg = document.querySelector(".brand-story-container .logo img");
 
+  if (!scrollContainer || !logoSection || !storySection || !sourceImg || !targetImg) return;
+
+  const morph = document.createElement("div");
+  const morphSource = document.createElement("img");
+  const morphTarget = document.createElement("img");
+
+  morph.className = "brand-logo-morph";
+  morphSource.className = "brand-logo-morph-source";
+  morphTarget.className = "brand-logo-morph-target";
+  morphSource.src = sourceImg.src;
+  morphSource.alt = "";
+  morphTarget.src = targetImg.src;
+  morphTarget.alt = "";
+  morph.setAttribute("aria-hidden", "true");
+
+  morph.append(morphSource, morphTarget);
+  document.body.appendChild(morph);
+
+  let ticking = false;
+  let progress = 0;
+  let displayProgress = 0;
+  let animationId = null;
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function easeInOut(value) {
+    return value * value * (3 - 2 * value);
+  }
+
+  function getContentRect(element) {
+    const containerRect = scrollContainer.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
+
+    return {
+      top: rect.top - containerRect.top + scrollContainer.scrollTop,
+      left: rect.left - containerRect.left,
+      width: rect.width,
+      height: rect.height
+    };
+  }
+
+  function getViewportRectAt(element, sectionTop) {
+    const containerRect = scrollContainer.getBoundingClientRect();
+    const contentRect = getContentRect(element);
+
+    return {
+      top: containerRect.top + contentRect.top - sectionTop,
+      left: containerRect.left + contentRect.left,
+      width: contentRect.width,
+      height: contentRect.height
+    };
+  }
+
+  function renderMorph() {
+    const startY = logoSection.offsetTop;
+    const endY = storySection.offsetTop;
+    const easedProgress = easeInOut(displayProgress);
+    const sourceRect = getViewportRectAt(sourceImg, startY);
+    const targetRect = getViewportRectAt(targetImg, endY);
+
+    const currentLeft = sourceRect.left + (targetRect.left - sourceRect.left) * easedProgress;
+    const currentTop = sourceRect.top + (targetRect.top - sourceRect.top) * easedProgress;
+    const currentWidth = sourceRect.width + (targetRect.width - sourceRect.width) * easedProgress;
+    const currentHeight = sourceRect.height + (targetRect.height - sourceRect.height) * easedProgress;
+
+    morph.style.opacity = "1";
+    morph.style.width = `${currentWidth}px`;
+    morph.style.height = `${currentHeight}px`;
+    morph.style.transform = `translate3d(${currentLeft}px, ${currentTop}px, 0)`;
+
+    morphSource.style.opacity = String(1 - easedProgress);
+    morphTarget.style.opacity = String(easedProgress);
+  }
+
+  function animateMorph() {
+    const distance = progress - displayProgress;
+
+    displayProgress += distance * 0.12;
+
+    if (Math.abs(distance) < 0.001) {
+      displayProgress = progress;
+    }
+
+    const isActive = displayProgress > 0.001 && displayProgress < 0.999;
+
+    document.body.classList.toggle("brand-logo-morphing", isActive);
+
+    if (isActive) {
+      renderMorph();
+    } else {
+      morph.style.opacity = "0";
+    }
+
+    if (displayProgress !== progress) {
+      animationId = requestAnimationFrame(animateMorph);
+    } else {
+      animationId = null;
+    }
+  }
+
+  function updateMorph() {
+    ticking = false;
+
+    const startY = logoSection.offsetTop;
+    const endY = storySection.offsetTop;
+    const rawProgress = (scrollContainer.scrollTop - startY) / (endY - startY);
+
+    progress = clamp(rawProgress, 0, 1);
+
+    if (rawProgress <= 0 || rawProgress >= 1) {
+      progress = rawProgress <= 0 ? 0 : 1;
+      displayProgress = progress;
+      document.body.classList.remove("brand-logo-morphing");
+      morph.style.opacity = "0";
+
+      if (animationId !== null) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+
+      return;
+    }
+
+    if (animationId === null) {
+      animationId = requestAnimationFrame(animateMorph);
+    }
+  }
+
+  function requestUpdate() {
+    if (ticking) return;
+
+    ticking = true;
+    requestAnimationFrame(updateMorph);
+  }
+
+  scrollContainer.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  sourceImg.addEventListener("load", requestUpdate);
+  targetImg.addEventListener("load", requestUpdate);
+
+  updateMorph();
+}
+
+BrandLogoMorph__init();
 
 
 // 캔버스 구현
-
 const canvas = document.getElementById("soundNodeCanvas");
 const soundNodeSection = canvas?.closest(".sound-node-section");
 const ctx = canvas?.getContext("2d");
