@@ -18,15 +18,30 @@ TopMenuScroll__init();
 
 //호버시 서브 메뉴 보임
 function TopMenu__init() {
+  let closeTimer = null;
+
   $(".gnb > li").mouseenter(function () {
     let $snb = $(this).children(".snb");
 
+    clearTimeout(closeTimer);
     $(".snb").not($snb).stop(true, true).slideUp(250);
     $snb.stop(true, true).slideDown(250);
   });
 
   $(".top-menu-bar").mouseleave(function () {
-    $(".snb").stop(true, true).slideUp(250);
+    closeTimer = setTimeout(function () {
+      $(".snb").stop(true, true).slideUp(250);
+    }, 250);
+  });
+
+  $(".snb").mouseenter(function () {
+    clearTimeout(closeTimer);
+  });
+
+  $(".snb").mouseleave(function () {
+    closeTimer = setTimeout(function () {
+      $(".snb").stop(true, true).slideUp(250);
+    }, 250);
   });
 }
 
@@ -120,8 +135,53 @@ $(window).on("scroll", function () {
 });
 
 //쿠키창 x 클릭 시 24시간 보이지 않기
+function PopupVisibility__update() {
+  $("body").toggleClass("popup-visible", $(".popup").is(":visible"));
+}
+
+$(".closeBtn").on("click",()=>{
+    if($("#closeCheckBox").is(":checked")){
+        setCookie("todaypopup","close",1)
+    }
+
+$(".popup").hide()
+PopupVisibility__update();
+})
+
+function setCookie(name,value,day){
+    let date = new Date();
+    date.setDate(date.getDate() + day)
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`
+}
+
+function getCookie(name){
+    let cook = document.cookie.split(";")
+
+    for(let i = 0; i < cook.length; i++){
+        let cookie = cook[i].trim()
+        if(cookie.split("=")[0] === name){
+            return cookie.split("=")[1]
+        }
+    }
+
+    return '';
+}
+
+if( getCookie("todaypopup") === "close"){
+    $(".popup").hide()
+}
+
+PopupVisibility__update();
 
 //탑버튼 클릭시 맨 위로 올라가게하기
+function TopButton__update() {
+  $(".topBtn").toggleClass("scrolled", $(window).scrollTop() > 50);
+}
 
+TopButton__update();
+$(window).on("scroll", TopButton__update);
 
+$(".topBtn").on("click", function () {
+  $("html, body").animate({ scrollTop: 0 });
+});
 })
