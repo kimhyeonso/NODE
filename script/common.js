@@ -110,4 +110,18 @@ $(".top-menu-bar").on(
   }
 );
 
+//스크롤시 팝업창 불투명도 조절
+$(window).on("scroll", function () {
+  if ($(window).scrollTop() > 50) {
+    $(".popup").addClass("scrolled");
+  } else {
+    $(".popup").removeClass("scrolled");
+  }
+});
+
+//쿠키창 x 클릭 시 24시간 보이지 않기
+
+//탑버튼 클릭시 맨 위로 올라가게하기
+
+
 })
