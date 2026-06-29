@@ -261,8 +261,8 @@ btnCheckout.addEventListener("click", function () {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
  
   if (isLoggedIn) {
-    // 로그인 상태 → 결제 페이지로 (추후 연결)
-    alert("결제 페이지로 이동합니다.");
+    // 로그인 상태 → 결제 완료 메시지
+    alert("결제가 완료되었습니다. 이용해주셔서 감사합니다.");
   } else {
     // 비로그인 상태 → 로그인 유도 팝업
     showLoginPopup();

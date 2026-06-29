@@ -13,9 +13,10 @@
 }
 
 .cart-hero h1 {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-size: clamp(2.25rem, 3vw + 1rem, 3rem);
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
+  line-height: 1;
   color: #111111;
   margin: 7rem 0;
 }
@@ -26,7 +27,6 @@
   padding: 0 0 3.75rem;
 }
 
-/* 테이블 헤더 */
 .cart-table-head {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1.2fr 1fr 2.5rem;
@@ -36,7 +36,7 @@
   border-bottom: 0.0625rem solid #ddd;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.08em;
   color: #111111;
   text-align: center;
 }
@@ -45,14 +45,12 @@
   text-align: left;
 }
 
-/* 상품 목록 */
 .cart-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* 상품 한 행 */
 .cart-item {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1.2fr 1fr 2.5rem;
@@ -63,7 +61,6 @@
   text-align: center;
 }
 
-/* 상품 정보 */
 .cart-item-info {
   display: flex;
   gap: 1rem;
@@ -80,27 +77,25 @@
 }
 
 .cart-item-text .item-brand {
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  color: #888;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: #717171;
   text-transform: uppercase;
   margin-bottom: 0.25rem;
 }
 
 .cart-item-text .item-name {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #111111;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* 단가 */
 .cart-item-price {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: #111111;
 }
 
-/* 수량 조절 */
 .cart-qty {
   display: flex;
   align-items: center;
@@ -129,7 +124,7 @@
 .cart-qty-num {
   width: 2.125rem;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #111111;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
@@ -137,14 +132,12 @@
   user-select: none;
 }
 
-/* 합계 */
 .cart-item-total {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: #111111;
   font-weight: 500;
 }
 
-/* 삭제 버튼 */
 .cart-delete {
   background: none;
   border: none;
@@ -159,12 +152,11 @@
   color: #111111;
 }
 
-/* 빈 장바구니 */
 .cart-empty {
   padding: 5rem 0;
   text-align: center;
-  color: #888;
-  font-size: 0.9rem;
+  color: #717171;
+  font-size: 0.875rem;
 }
 
 .cart-empty p {
@@ -188,7 +180,7 @@
   color: #ffffff;
 }
 
-/* ---------- 하단 (YOU MAY NEED + SUBTOTAL) ---------- */
+/* ---------- 하단 ---------- */
 .cart-bottom {
   background-color: #f7f7f7;
   padding: 3.75rem 0 5rem;
@@ -244,15 +236,15 @@
 }
 
 .recommend-item-name {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: #111111;
   font-weight: 500;
   margin-bottom: 4px;
 }
 
 .recommend-item-price {
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: #717171;
 }
 
 .recommend-item-go {
@@ -292,7 +284,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   border-bottom: 1px solid #ddd;
 }
 
@@ -316,13 +308,13 @@
 }
 
 .summary-total dt {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #111111;
 }
 
 .summary-total dd {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #000000 !important;
 }
@@ -333,7 +325,7 @@
   background: #ffffff;
   color: #111111;
   border: 1px solid #111111;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   letter-spacing: 0.1em;
   cursor: pointer;
   font-weight: 600;
@@ -350,41 +342,38 @@
   .cart-wrap {
     padding: 0 20px;
   }
- 
+
   .cart-hero {
     padding: 60px 20px 30px;
   }
- 
-  /* 테이블 헤더 숨김 */
+
   .cart-table-head {
     display: none;
   }
- 
-  /* 상품 행 1열로 */
+
   .cart-item {
     grid-template-columns: 1fr;
     gap: 10px;
     padding: 20px 0;
     text-align: left;
   }
- 
-  .cart-item-price::before { content: "단가  "; color: #888; font-size: 0.7rem; }
-  .cart-item-total::before { content: "합계  "; color: #888; font-size: 0.7rem; }
- 
+
+  .cart-item-price::before { content: "단가  "; color: #717171; font-size: 0.6875rem; }
+  .cart-item-total::before { content: "합계  "; color: #717171; font-size: 0.6875rem; }
+
   .cart-qty {
     margin: 0;
   }
- 
-  /* 하단 영역: 세로로 쌓기 + YOU MAY NEED 숨김 */
+
   .cart-bottom .cart-wrap {
     flex-direction: column;
     gap: 0;
   }
- 
+
   .cart-recommend {
     display: none;
   }
- 
+
   .cart-summary {
     width: 100%;
   }

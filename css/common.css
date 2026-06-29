@@ -636,6 +636,7 @@ html > body {
   font-size: 1rem;
   font-weight: 500;
   margin-right: 50px;
+  transition: color 0.2s ease, letter-spacing 0.2s ease;
 }
 
 .footer-menu a::before {
@@ -644,7 +645,7 @@ html > body {
 }
 
 .footer-menu a:hover {
-  color: #fff;
+  color: #ffcd4a;
   font-size: 1rem;
 }
 
