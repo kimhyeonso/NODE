@@ -1,11 +1,10 @@
-* { box-sizing: border-box; }
+﻿* { box-sizing: border-box; }
 
 /* ==================== 공통 배경 / 전체 콘텐츠 너비 ==================== */
 body {
+  font-family: "Roboto", "noto sans", sans-serif;
   color: #202124;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(255,220,120,.32), transparent 26rem),
-    #f4f5f8;
+ 
 }
 
 button, select { font: inherit; }
@@ -31,27 +30,27 @@ button, select { font: inherit; }
 .eyebrow {
   margin-bottom: 7px;
   color: #8b8e99;
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: .15em;
 }
 
 .page-heading h1 {
   margin-bottom: 10px;
-  font-size: clamp(30px,4vw,46px);
+  font-size: clamp(1.875rem,4vw,2.875rem);
   letter-spacing: -.045em;
 }
 
 .page-heading > div > p:last-child {
   color: #858891;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .back-link {
   padding-bottom: 4px;
   border-bottom: 1px solid #aeb0b8;
   color: #80838d;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 /* ==================== 결제 요약 카드 3개 ==================== */
@@ -74,18 +73,18 @@ button, select { font: inherit; }
   min-height: 145px;
   padding: 24px;
   flex-direction: column;
-  border-radius: 20px;
+  border-radius: 8px;
 }
 
-.history-summary span { color: #777a84; font-size: 13px; }
-.history-summary strong { margin: 15px 0 auto; font-size: 29px; letter-spacing: -.04em; }
-.history-summary small { margin-left: 4px; color: #777a84; font-size: 13px; }
-.history-summary p { margin-top: 10px; color: #a0a2aa; font-size: 11px; }
+.history-summary span { color: #777a84; font-size: 0.8125rem; }
+.history-summary strong { margin: 15px 0 auto; font-size: 1.8125rem; letter-spacing: -.04em; }
+.history-summary small { margin-left: 4px; color: #777a84; font-size: 0.8125rem; }
+.history-summary p { margin-top: 10px; color: #a0a2aa; font-size: 0.75rem; }
 
 /* ==================== 필터와 결제내역 패널 ==================== */
 .history-panel {
   padding: 28px;
-  border-radius: 22px;
+  border-radius: 8px;
 }
 
 .history-toolbar {
@@ -93,14 +92,14 @@ button, select { font: inherit; }
   border-bottom: 1px solid #ececf1;
 }
 
-.history-toolbar h2 { font-size: 19px; }
+.history-toolbar h2 { font-size: 1.1875rem; }
 .history-filters { gap: 10px; }
 
 .history-filters label {
   display: grid;
   gap: 5px;
   color: #92949d;
-  font-size: 10px;
+  font-size: 0.75rem;
 }
 
 .history-filters select,
@@ -108,10 +107,10 @@ button, select { font: inherit; }
   height: 38px;
   padding: 0 12px;
   border: 1px solid #e1e2e8;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #fff;
   color: #666973;
-  font-size: 11px;
+  font-size: 0.75rem;
 }
 
 .history-filters button {
@@ -122,20 +121,21 @@ button, select { font: inherit; }
   cursor: pointer;
 }
 
-/* [수정 포인트] 결제내역 표 너비와 셀 간격 */
+/* 결제내역 표 너비와 셀 간격 */
 .history-table-wrap { overflow-x: auto; }
 
 .history-table {
   width: 100%;
   min-width: 850px;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .history-table th {
   padding: 18px 12px;
   color: #999ba4;
   text-align: left;
-  font-size: 10px;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 
@@ -143,7 +143,42 @@ button, select { font: inherit; }
   padding: 17px 12px;
   border-top: 1px solid #eeeeF2;
   color: #6f727c;
-  font-size: 11px;
+  font-size: 0.8125rem;
+}
+
+.history-table th:nth-child(1),
+.history-table td:nth-child(1) {
+  width: 34%;
+}
+
+.history-table th:nth-child(2),
+.history-table td:nth-child(2) {
+  width: 16%;
+}
+
+.history-table th:nth-child(3),
+.history-table td:nth-child(3) {
+  width: 18%;
+}
+
+.history-table th:nth-child(4),
+.history-table td:nth-child(4) {
+  width: 14%;
+}
+
+.history-table th:nth-child(5),
+.history-table td:nth-child(5) {
+  width: 12%;
+}
+
+.history-table th:nth-child(6),
+.history-table td:nth-child(6) {
+  width: 6%;
+}
+
+.history-table th:nth-child(n+2),
+.history-table td:nth-child(n+2) {
+  white-space: nowrap;
 }
 
 .order-info {
@@ -158,27 +193,27 @@ button, select { font: inherit; }
   height: 38px;
   flex: 0 0 auto;
   place-items: center;
-  border-radius: 12px;
+  border-radius: 8px;
   color: #795000;
   background: #fff1bf;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
 .order-info div { display: grid; gap: 5px; }
-.order-info strong { color: #2e3037; font-size: 12px; }
-.order-info small { color: #a0a2aa; font-size: 9px; }
+.order-info strong { color: #2e3037; font-size: 0.8125rem; }
+.order-info small { color: #a0a2aa; font-size: 0.75rem; }
 .history-table td > strong { color: #30323a; }
 .history-table td > a { color: #795000; font-weight: 700; }
 
-/* [수정 포인트] 결제 상태별 배지 색상 */
+/* 결제 상태별 배지 색상 */
 .status {
   display: inline-block;
   min-width: 66px;
   padding: 6px 8px;
-  border-radius: 20px;
+  border-radius: 8px;
   text-align: center;
-  font-size: 9px;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
@@ -199,11 +234,11 @@ button, select { font: inherit; }
   height: 36px;
   padding: 0 10px;
   border: 1px solid #e1e2e8;
-  border-radius: 9px;
+  border-radius: 8px;
   color: #777a84;
   background: #fff;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 0.75rem;
 }
 
 .pagination button.active {

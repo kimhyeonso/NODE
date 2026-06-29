@@ -1,11 +1,11 @@
-/*
+﻿/*
   ============================================================
   PRODUCT DETAIL CSS · 팀원 수정 가이드
   ============================================================
   - 상품 상단: .product-detail-top ~ .options
   - 탭 메뉴: .product-tabs
   - 공통 상세정보: .long-description ~ .detail-final-message
-  - 배송·환불: .shipping-returns-section ~ .visually-hidden
+  - 배송·반품: .shipping-returns-section ~ .visually-hidden
   - 리뷰: .review-section ~ .review-content
   - 추천 상품: .similar-products ~ .card
   - 태블릿/모바일: 파일 하단 @media
@@ -19,6 +19,7 @@
 
 /* ==================== 상품 상단 영역 ==================== */
 .product-detail {
+  font-family: "Roboto", "noto sans", sans-serif;
   padding-top: 5rem;
   background: #fff;
 }
@@ -98,14 +99,14 @@
   margin-bottom: 18px;
   color: #777;
   content: attr(data-brand);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.18em;
 }
 
 .product-info h1 {
   margin: 0;
-  font-size: clamp(42px, 4vw, 68px);
+  font-size: clamp(2.625rem, 4vw, 4.25rem);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.04em;
@@ -113,7 +114,7 @@
 
 .price {
   margin: 24px 0 0;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 600;
 }
 
@@ -123,14 +124,14 @@
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
   color: #555;
-  font-size: 26px;
+  font-size: 1.625rem;
   letter-spacing: 0.04em;
 }
 
 .description {
   margin: 26px 0 34px;
   color: #666;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.8;
 }
 
@@ -144,7 +145,7 @@
   grid-column: 1 / -1;
   min-height: 44px;
   color: #555;
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .color-chips {
@@ -191,7 +192,7 @@
   border: 0;
   color: #555;
   background: transparent;
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
 }
 
@@ -203,7 +204,7 @@
 .quantity-value {
   min-width: 24px;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -212,7 +213,7 @@
   border: 1px solid #151515;
   color: #fff;
   background: #151515;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -245,7 +246,7 @@
   border: 0;
   color: #777;
   background: transparent;
-  font-size: 15px;
+  font-size: 0.9375rem;
   cursor: pointer;
 }
 
@@ -288,14 +289,14 @@
 .section-label {
   margin: 0 0 20px;
   color: #aaa;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.2em;
 }
 
 .detail-hero h2 {
   margin: 0;
-  font-size: clamp(42px, 5vw, 76px);
+  font-size: clamp(2.625rem, 5vw, 4.75rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.04em;
@@ -305,7 +306,7 @@
   max-width: 480px;
   margin: 30px 0 0;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.8;
 }
 
@@ -322,7 +323,7 @@
 .detail-story-heading h3 {
   max-width: 700px;
   margin: 0;
-  font-size: clamp(38px, 5vw, 68px);
+  font-size: clamp(2.375rem, 5vw, 4.25rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.04em;
@@ -331,7 +332,7 @@
 .detail-story-text {
   margin: 0;
   color: #aaa;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.9;
 }
 
@@ -361,7 +362,7 @@
 .detail-figure figcaption {
   padding: 16px 0;
   color: #888;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .detail-features {
@@ -389,20 +390,20 @@
 
 .detail-feature > span {
   color: #777;
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
 }
 
 .detail-feature h3 {
   margin: 24px 0 18px;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 500;
 }
 
 .detail-feature p {
   margin: 0;
   color: #999;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.8;
 }
 
@@ -415,7 +416,7 @@
 .detail-editorial-copy h3,
 .detail-final-message h3 {
   margin: 0;
-  font-size: clamp(38px, 5vw, 68px);
+  font-size: clamp(2.375rem, 5vw, 4.25rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.04em;
@@ -426,7 +427,7 @@
 .detail-editorial-copy > p:last-child {
   margin: 28px 0 0;
   color: #999;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.9;
 }
 
@@ -459,7 +460,7 @@
 
 .performance-cards strong {
   display: block;
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: clamp(2.125rem, 4vw, 3.25rem);
   font-weight: 400;
 }
 
@@ -467,7 +468,7 @@
   display: block;
   margin-top: 8px;
   color: #aaa;
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -475,7 +476,7 @@
 .performance-cards p {
   margin: 54px 0 0;
   color: #888;
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1.8;
 }
 
@@ -535,14 +536,14 @@
 .engineering-grid span,
 .use-case-list span {
   color: #666;
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
 }
 
 .engineering-grid h4,
 .use-case-list h4 {
   margin: 60px 0 18px;
-  font-size: 21px;
+  font-size: 1.3125rem;
   font-weight: 500;
 }
 
@@ -550,7 +551,7 @@
 .use-case-list p {
   margin: 0;
   color: #888;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.8;
 }
 
@@ -627,7 +628,7 @@
 
 .spec-notice {
   color: #777 !important;
-  font-size: 12px !important;
+  font-size: 0.75rem !important;
 }
 
 .specification-list {
@@ -644,12 +645,12 @@
 
 .specification-list dt {
   color: #888;
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .specification-list dd {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .detail-final-message {
@@ -690,7 +691,7 @@
 
 .information-panel > h2 {
   margin: 0;
-  font-size: clamp(38px, 5vw, 62px);
+  font-size: clamp(2.375rem, 5vw, 3.875rem);
   font-weight: 500;
   letter-spacing: -0.04em;
 }
@@ -716,13 +717,13 @@
 
 .information-list h3 {
   margin: 0 0 18px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .information-list p {
   margin: 0;
   color: #666;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.8;
 }
 
@@ -743,7 +744,7 @@
   width: 340px;
   padding: 30px 25px;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 8px;
   text-align: center;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
@@ -751,7 +752,7 @@
 /* 제목 */
 .compare-popup-box strong {
   display: block;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #111;
   margin-bottom: 30px;
@@ -770,7 +771,7 @@
   width: 90px;
   height: 38px;
   border-radius: 8px;
-  font-size: 12.5px;
+  font-size: 0.7813rem;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
@@ -818,7 +819,7 @@
 
 .shipping-item-content h3 {
   margin: 0 0 28px;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 600;
 }
 
@@ -836,7 +837,7 @@
 .shipping-item-content dt {
   display: inline;
   color: #666;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.8;
 }
@@ -850,7 +851,7 @@
   display: inline;
   margin: 0;
   color: #666;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.8;
 }
@@ -880,7 +881,7 @@
 
 .review-summary h2 {
   margin: 0;
-  font-size: clamp(52px, 6vw, 76px);
+  font-size: clamp(3.25rem, 6vw, 4.75rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.05em;
@@ -889,14 +890,14 @@
 .review-stars {
   margin-top: 18px;
   color: #151515;
-  font-size: 24px;
+  font-size: 1.5rem;
   letter-spacing: 0.12em;
 }
 
 .review-count {
   margin: 10px 0 0;
   color: #777;
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .rating-bars {
@@ -911,7 +912,7 @@
   justify-content: space-between;
   margin-bottom: 9px;
   color: #555;
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .bar-label strong {
@@ -958,13 +959,13 @@
 
 .review-list-heading h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: 1.375rem;
 }
 
 .review-list-heading h3 span {
   margin-left: 5px;
   color: #777;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
 }
 
@@ -976,7 +977,7 @@
   color: #555;
   background: #fff;
   font: inherit;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .review-item {
@@ -987,7 +988,7 @@
 .review-date {
   margin: 0 0 16px;
   color: #888;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .review-user {
@@ -1004,19 +1005,19 @@
   place-items: center;
   color: #fff;
   background: #252525;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
 }
 
 .review-user strong {
   display: block;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .review-item-stars {
   margin-top: 4px;
   color: #151515;
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
 }
 
@@ -1050,7 +1051,7 @@
   max-width: 700px;
   margin: 0;
   color: #555;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.8;
 }
 
@@ -1074,7 +1075,7 @@
 
 .similar-heading h2 {
   margin: 0;
-  font-size: clamp(36px, 4vw, 54px);
+  font-size: clamp(2.25rem, 4vw, 3.375rem);
   font-weight: 500;
   letter-spacing: -0.04em;
 }
@@ -1093,7 +1094,7 @@
   padding-bottom: 16px;
   color: #151515;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 8px;
 
 
 }
@@ -1103,7 +1104,7 @@
 }
 
 .similar-image-box {
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 8px 8px 0 0;
 
   position: relative;
   aspect-ratio: 4 / 5;
@@ -1170,7 +1171,7 @@
 .similar-brand {
   margin: 0 20px 7px;
   color: #717171;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
@@ -1178,7 +1179,7 @@
 .similar-name {
   margin: 0 20px 12px;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
   text-overflow: ellipsis;
@@ -1188,7 +1189,7 @@
 .similar-price {
   margin: 0 20px;
   color: #333;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -1258,7 +1259,7 @@
   }
 
   .product-info h1 {
-    font-size: 42px;
+    font-size: 2.625rem;
   }
 
   .product-tabs {
