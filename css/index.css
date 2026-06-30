@@ -204,7 +204,7 @@ body.brand-logo-morphing .brand-story-container .logo img {
 
 .brand-story-section{
   width: 100%;
-  min-height: 100vh;
+  min-height: 200vh;
   height: auto;
   padding: clamp(80px, 10vh, 140px) 0;
   background-color: #070707;
@@ -275,7 +275,7 @@ body.brand-logo-morphing .brand-story-container .logo img {
 /*********** 세번째 섹션 구현 ***********/
 .sound-section {
   width: 100%;
-  height: auto;
+  height: 200vh;
   padding: clamp(65px, 8vw, 110px) 0 clamp(80px, 10vw, 140px);
   overflow: hidden;
   background-color: #070707;
@@ -379,7 +379,7 @@ body.brand-logo-morphing .brand-story-container .logo img {
   width: 100%;
   min-height: 100vh;
   background-color: #070707;
-  padding: clamp(70px, 9vh, 120px) 0;
+  padding: clamp(180px, 9vh, 120px) 0;
   color: #fff;
 
   /* 섹션 시작 부분에 맞춰 정렬 */
@@ -416,6 +416,24 @@ body.brand-logo-morphing .brand-story-container .logo img {
   padding-top: clamp(5px, 1.5vw, 24px);
 }
 
+.menu-section.menu-animation-ready .title-box > .title {
+  opacity: 0;
+  overflow: hidden;
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(36px);
+  transition:
+    clip-path 1s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s),
+    opacity 0.5s ease var(--menu-delay, 0s),
+    transform 1s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s);
+  will-change: clip-path, opacity, transform;
+}
+
+.menu-section.menu-animation-ready .title-box > .title.on {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+}
+
 .menu-section .title-txt {
   font-family: "Nanum_Myeongjo", serif;
   font-size: clamp(2rem , 2.5vw, 3.125rem);
@@ -438,6 +456,27 @@ body.brand-logo-morphing .brand-story-container .logo img {
   background-color: #111;
 }
 
+.menu-section.menu-animation-ready .title-box > .prouct,
+.menu-section.menu-animation-ready .image-box > .accessory,
+.menu-section.menu-animation-ready .image-box > .lifestyle {
+  opacity: 0;
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(52px);
+  transition:
+    clip-path 1.15s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s),
+    opacity 0.45s ease var(--menu-delay, 0s),
+    transform 1.15s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s);
+  will-change: clip-path, opacity, transform;
+}
+
+.menu-section.menu-animation-ready .title-box > .prouct.on,
+.menu-section.menu-animation-ready .image-box > .accessory.on,
+.menu-section.menu-animation-ready .image-box > .lifestyle.on {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+}
+
 .menu-section .title-box > .prouct::after,
 .menu-section .image-box > .accessory::after,
 .menu-section .image-box > .lifestyle::after {
@@ -447,6 +486,23 @@ body.brand-logo-morphing .brand-story-container .logo img {
   z-index: 1;
   background: linear-gradient(120deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 60%, transparent 100%);
   pointer-events: none;
+}
+
+@keyframes menuRollLine {
+  0% {
+    left: 100%;
+    opacity: 0;
+  }
+
+  12%,
+  72% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 0;
+    opacity: 0;
+  }
 }
 
 .menu-section .title-box > .prouct img,
@@ -475,6 +531,19 @@ body.brand-logo-morphing .brand-story-container .logo img {
   z-index: 2;
 }
 
+.menu-section.menu-animation-ready .menu-card-txt {
+  opacity: 0;
+  transform: translateX(22px);
+  transition:
+    opacity 0.5s ease calc(var(--menu-delay, 0s) + 0.5s),
+    transform 0.7s ease calc(var(--menu-delay, 0s) + 0.5s);
+}
+
+.menu-section.menu-animation-ready .box.on .menu-card-txt {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .menu-section .prouct-title,
 .menu-section .accessory-title,
 .menu-section .lifeStyle-title {
@@ -501,9 +570,11 @@ body.brand-logo-morphing .brand-story-container .logo img {
   z-index: 1;
   width: 100%;
   height: 100vh;
-  padding: 100px 0;
+  padding: 180px 0 0;
   overflow: hidden;
   background-color: #070707;
+  user-select: none;
+  -webkit-user-select: none;
 
   /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
@@ -522,10 +593,16 @@ body.brand-logo-morphing .brand-story-container .logo img {
 
 .search-copy {
   position: relative;
-  z-index: 4;
   align-self: start;
   padding-top: 2px;
   color: #fff;
+  transform: translateY(150px);
+  opacity: .3;
+}
+
+.search-copy.on{
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .search-kicker {
@@ -545,40 +622,89 @@ body.brand-logo-morphing .brand-story-container .logo img {
   position: relative;
   z-index: 2;
   min-width: 0;
-  display: flex;
-  gap: 24px;
   padding: 40px 0 18px;
-  cursor: grab;
 }
 
-.search-showcase:active {
+.dragArea {
+  width: 100%;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.dragArea:active,
+.dragArea.dragging {
   cursor: grabbing;
 }
 
-.search-circle {
-  position: absolute;
-  top: 0px;
-  left: -120px;
-  z-index: -1;
-  width: 250px;
-  height: 250px;
+.slider {
+  display: flex;
+  gap: 24px;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.08s linear;
+  touch-action: pan-y;
+  will-change: transform;
+}
+
+.search-card-link {
+  flex: 0 0 calc((100% - 24px) / 2);
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  -webkit-user-drag: none;
+}
+
+.cursorCircle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.85);
   border-radius: 50%;
-  background: #b79232;
-  opacity: .3;
+  color: #ffcd4a;
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: 0.82rem;
+  line-height: 80px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.cursorCircle.on {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cursorCircle.drag {
+  background-color: rgba(255, 255, 255, 0.28);
+  transform: translate(-50%, -50%) scale(0.72);
 }
 
 .search-card {
   position: relative;
-  flex: 0 0 calc((100% - 24px) / 2);
   border-radius: 5px;
   background: #fff;
   box-shadow: 0 8px 14px rgba(0, 0, 0, 0.28);
   width: 100%;
+  height: 100%;
   overflow-x: hidden;
   transform: translateY(-100px);
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
 }
 
 .search-image {
+  width: 100%;
   height: 300px;
   overflow: hidden;
   background: #ddd;
@@ -589,23 +715,26 @@ body.brand-logo-morphing .brand-story-container .logo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .search-card-copy {
-  padding: 18px;
+  padding: 35px 18px;
 }
 
 .search-card-copy h3 {
   color: #111;
   font-family: "noto sans", sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
 .search-card-copy p {
   margin-top: 7px;
   color: #555;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   line-height: 1.45;
 }
 
@@ -622,6 +751,7 @@ body.brand-logo-morphing .brand-story-container .logo img {
   width: 100%;
   height: 100vh;
   min-height: 620px;
+  padding: 180px 0 0;
   overflow: hidden;
   background-color: #070707;
   color: #fff;
@@ -633,7 +763,6 @@ body.brand-logo-morphing .brand-story-container .logo img {
 
 .artist-heading {
   position: absolute;
-  top: clamp(70px, 10vh, 110px);
   left: 6%;
   z-index: 3;
 }
@@ -659,7 +788,7 @@ body.brand-logo-morphing .brand-story-container .logo img {
   width: max-content;
   display: flex;
   align-items: flex-end;
-  gap: clamp(30px, 3vw, 56px);
+  gap: clamp(30px, 3vw, 60px);
   transform: translateX(-50%);
 }
 
@@ -713,21 +842,18 @@ body.brand-logo-morphing .brand-story-container .logo img {
 .artist-speaker {
   position: absolute;
   left: 50%;
-  bottom: 3px;
+  bottom: 0;
   z-index: 2;
   width: 43%;
   height: 48%;
   object-fit: cover;
   object-position: center;
-  border-radius: 8px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
   transform: translateX(-50%);
 }
 
 .artist-point {
   position: absolute;
-  top: 12%;
-  right: 7%;
+  top: -20px;
   z-index: 3;
   width: 11px;
   height: 11px;
@@ -865,19 +991,20 @@ body.brand-logo-morphing .brand-story-container .logo img {
   .menu-section .title-box > .prouct,
   .menu-section .image-box > .accessory,
   .menu-section .image-box > .lifestyle {
-    min-height: 240px;
+    min-height: 200px;
   }
 
     /*********** 다섯번째 모바일 섹션 구현 ***********/
 
   .seach-section {
-    min-height: auto;
-    padding: 70px 0 30px;
-    overflow: hidden;
+    min-height: 100vh;
+    padding: 70px 0;
+    overflow-x: hidden;
     background: #0c0c0c;
   }
 
   .search-inner {
+    margin-top: 40px;
     width: min(88%, 640px);
     height: auto;
     min-height: auto;
@@ -889,24 +1016,44 @@ body.brand-logo-morphing .brand-story-container .logo img {
   }
 
   .search-showcase {
-    display: flex;
+    display: block;
     gap: 15px;
-    padding: 150px 0 14px;
+    padding: 100px 0 14px;
   }
 
-  .search-circle {
-    top: 10px;
-    left: -50px;
-    width: 120px;
-    height: 120px;
+  .seach-section .dragArea {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: default;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
   }
 
-  .search-image {
-    height: 210px;
+  .seach-section .dragArea::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider {
+    gap: 15px;
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+
+  .seach-section .search-card-link {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .cursorCircle {
+    display: none;
   }
 
   .search-card {
-  transform: translateY(40px);
+     transform: translateY(0px);
   }
 
   .search-card-copy {
@@ -916,16 +1063,16 @@ body.brand-logo-morphing .brand-story-container .logo img {
   /*********** 여섯번째 모바일 섹션 구현 ***********/
 
   .artist-section {
-    min-height: 600px;
+    min-height: 100vh;
   }
 
   .artist-heading {
-    top: 65px;
+    top: 120px;
     left: 6%;
   }
 
   .artist-gallery {
-    bottom: 85px;
+    bottom: 150px;
     gap: 22px;
   }
 

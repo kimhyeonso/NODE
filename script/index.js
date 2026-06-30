@@ -155,6 +155,213 @@ function BrandLogoMorph__init() {
 BrandLogoMorph__init();
 
 
+// 네번째 섹션 애니메이션 구현
+function MenuScrollAnimation__init() {
+  const scrollContainer = document.querySelector(".section-container");
+  const menuSection = document.querySelector(".menu-section");
+  const menuItems = document.querySelectorAll(".menu-section .title-box > .title, .menu-section .box");
+
+  if (!menuSection || menuItems.length === 0) return;
+
+  menuSection.classList.add("menu-animation-ready");
+
+  menuItems.forEach(function(item, index) {
+    item.style.setProperty("--menu-delay", `${index * 0.16}s`);
+  });
+
+  const menuObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      menuItems.forEach(function(item) {
+        item.classList.toggle("on", entry.isIntersecting);
+      });
+
+      // if (entry.isIntersecting) {
+      //   menuObserver.unobserve(entry.target);
+      // }
+    });
+  }, {
+    root: scrollContainer || null,
+    threshold: 0.4
+  });
+
+  menuObserver.observe(menuSection);
+
+  function activateMenuIfInView() {
+    const sectionRect = menuSection.getBoundingClientRect();
+    const containerRect = scrollContainer
+      ? scrollContainer.getBoundingClientRect()
+      : { top: 0, bottom: window.innerHeight };
+    const isInView = sectionRect.top < containerRect.bottom * 0.75 && sectionRect.bottom > containerRect.top;
+
+    if (isInView) {
+      menuItems.forEach(function(item) {
+        item.classList.add("on");
+      });
+      menuObserver.unobserve(menuSection);
+    }
+  }
+
+  requestAnimationFrame(activateMenuIfInView);
+}
+
+MenuScrollAnimation__init();
+
+//다섯번째 섹션 애니메이션 구현
+const searchCopy = document.querySelectorAll(".search-copy")
+
+const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+        if(entry.isIntersecting){
+            entry.target.classList.add("on")
+        }else{
+            entry.target.classList.remove("on")
+        }
+    })
+},{
+    threshold : .3
+})
+
+searchCopy.forEach(function(box){
+    observer.observe(box)
+})
+
+
+function SearchDragAnimation__init() {
+  const $dragArea = $(".seach-section .dragArea");
+  const $slider = $(".seach-section .slider");
+  const $cursorCircle = $(".seach-section .cursorCircle");
+
+  if ($dragArea.length === 0 || $slider.length === 0) return;
+
+  let isDown = false;
+  let startX = 0;
+  let moveX = 0;
+  let mouseX = 0;
+  let mouseY = 0;
+  let circleX = 0;
+  let circleY = 0;
+  let dragDistance = 0;
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function getMinMoveX() {
+    return Math.min($dragArea.outerWidth() - $slider[0].scrollWidth, 0);
+  }
+
+  function moveSlider(value) {
+    moveX = clamp(value, getMinMoveX(), 0);
+    $slider.css({
+      transform: `translateX(${moveX}px)`
+    });
+  }
+
+  //드레그 영역에 마우스가 들어오면 원 보이기
+  $dragArea.on("pointerenter", function(e) {
+    const event = e.originalEvent || e;
+    if (event.pointerType === "touch") return;
+
+    $cursorCircle.addClass("on");
+    circleX = event.clientX;
+    circleY = event.clientY;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  });
+
+  // 드레그 영역에서 마우스가 나가면 원 숨기기
+  $dragArea.on("pointerleave", function(e) {
+    const event = e.originalEvent || e;
+    if (event.pointerType === "touch") return;
+
+    $cursorCircle.removeClass("on drag");
+    $dragArea.removeClass("dragging");
+    isDown = false;
+  });
+
+  //드레그 영역에서 시간차로 마우스 따라다님
+  $dragArea.on("pointermove", function(e) {
+    const event = e.originalEvent || e;
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  });
+
+  function cursorMove() {
+    if (isDown) {
+      circleX = mouseX;
+      circleY = mouseY;
+    } else {
+      circleX = circleX + (mouseX - circleX) * 0.1;
+      circleY = circleY + (mouseY - circleY) * 0.1;
+    }
+
+    $cursorCircle.css({
+      left: circleX,
+      top: circleY
+    });
+
+    requestAnimationFrame(cursorMove);
+  }
+
+  cursorMove();
+
+  //마우스 클릭할때
+  $dragArea.on("pointerdown", function(e) {
+    const event = e.originalEvent || e;
+
+    if (event.pointerType === "touch") return;
+
+    isDown = true;
+    dragDistance = 0;
+    startX = event.clientX - moveX;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    $dragArea.addClass("dragging");
+    $cursorCircle.addClass("drag");
+
+    e.preventDefault();
+
+    if (this.setPointerCapture && event.pointerId !== undefined) {
+      this.setPointerCapture(event.pointerId);
+    }
+  });
+
+  //클릭한 상태에서만 드레그
+  $(document).on("pointermove", function(e) {
+    if (!isDown) return;
+
+    const event = e.originalEvent || e;
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    const nextMoveX = event.clientX - startX;
+    dragDistance = Math.max(dragDistance, Math.abs(nextMoveX - moveX));
+
+    moveSlider(nextMoveX);
+  });
+
+  $(document).on("pointerup pointercancel", function() {
+    isDown = false;
+    $dragArea.removeClass("dragging");
+    $cursorCircle.removeClass("drag");
+  });
+
+  $dragArea.on("click", "a", function(e) {
+    if (dragDistance > 6) {
+      e.preventDefault();
+    }
+  });
+
+  $(window).on("resize", function() {
+    moveSlider(moveX);
+  });
+}
+
+SearchDragAnimation__init();
+
 // 캔버스 구현
 const canvas = document.getElementById("soundNodeCanvas");
 const soundNodeSection = canvas?.closest(".sound-node-section");
