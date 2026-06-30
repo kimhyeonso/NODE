@@ -308,57 +308,8 @@
           </section>
       </div>
 
-      <!-- 액세서리 카드도 HTML에 직접 작성합니다. -->
-      <div class="accessory-grid" id="accessory-grid" aria-live="polite">
-          <article class="accessory-card" data-price="39000" data-values="cable xlr microphone 1m">
-              <div class="image-box"><img src="./image/cable/cable_1.jpg" alt="Balanced XLR Cable 1M"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Balanced XLR Cable 1M</h3>
-              <div class="price-row"><span class="sale-price">39,000원</span><span class="original-price">49,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="59000" data-values="cable xlr microphone 3m">
-              <div class="image-box"><img src="./image/cable/cable_2.jpg" alt="Premium XLR Cable 3M"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Premium XLR Cable 3M</h3>
-              <div class="price-row"><span class="sale-price">59,000원</span><span class="original-price">69,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="32000" data-values="cable trs instrument 3m">
-              <div class="image-box"><img src="./image/cable/cable_3.jpg" alt="Studio TRS Cable 3M"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Studio TRS Cable 3M</h3>
-              <div class="price-row"><span class="sale-price">32,000원</span><span class="original-price">39,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="65000" data-values="cable ts speaker 5m">
-              <div class="image-box"><img src="./image/cable/cable_5.jpg" alt="Speaker Cable 5M"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE CABLE</div><h3 class="accessory-name">Speaker Cable 5M</h3>
-              <div class="price-row"><span class="sale-price">65,000원</span><span class="original-price">79,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="89000" data-values="stand desktop small angle">
-              <div class="image-box"><img src="./image/stands/stand_1.jpg" alt="Desktop Monitor Stand"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE STAND</div><h3 class="accessory-name">Desktop Monitor Stand</h3>
-              <div class="price-row"><span class="sale-price">89,000원</span><span class="original-price">109,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="129000" data-values="stand desktop small isolation">
-              <div class="image-box"><img src="./image/stands/isolation-speaker-stand-cutout.png" alt="Isolation Speaker Stand"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE STAND</div><h3 class="accessory-name">Isolation Speaker Stand</h3>
-              <div class="price-row"><span class="sale-price">129,000원</span><span class="original-price">149,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="159000" data-values="stand floor large angle">
-              <div class="image-box"><img src="./image/stands/stand_3.jpg" alt="Adjustable Studio Stand"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE STAND</div><h3 class="accessory-name">Adjustable Studio Stand</h3>
-              <div class="price-row"><span class="sale-price">159,000원</span><span class="original-price">185,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-          <article class="accessory-card" data-price="179000" data-values="stand floor large isolation">
-              <div class="image-box"><img src="./image/stands/minimal-floor-stand-cutout.png" alt="Minimal Floor Stand"><button class="cart-button" type="button">＋</button></div>
-              <div class="brand">NODE STAND</div><h3 class="accessory-name">Minimal Floor Stand</h3>
-              <div class="price-row"><span class="sale-price">179,000원</span><span class="original-price">205,000원</span></div>
-              <label class="compare-check"><input type="checkbox"> 비교</label>
-          </article>
-      </div>
+      <!-- 액세서리 카드는 category.json 데이터를 읽은 accessory.js가 자동으로 만들어 넣습니다. -->
+      <div class="accessory-grid" id="accessory-grid" aria-live="polite"></div>
   </section>
 </main>
 

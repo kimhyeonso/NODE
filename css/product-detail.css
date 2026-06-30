@@ -32,6 +32,7 @@
   min-height: 760px;
   margin: 0 auto;
   padding: clamp(70px, 8vw, 130px) 0;
+  align-items: start;
   color: #151515; 
 }
 
@@ -90,18 +91,10 @@
 }
 
 .product-info {
-  align-self: center;
-  padding: 24px 0;
-}
-
-.product-info::before {
-  display: block;
-  margin-bottom: 18px;
-  color: #777;
-  content: attr(data-brand);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  display: flex;
+  height: 620px;
+  padding: 8px 0 0;
+  flex-direction: column;
 }
 
 .product-info h1 {
@@ -113,14 +106,14 @@
 }
 
 .price {
-  margin: 24px 0 0;
+  margin: 20px 0 0;
   font-size: 1.375rem;
   font-weight: 600;
 }
 
 .rating {
-  margin-top: 24px;
-  padding: 18px 0;
+  margin-top: 22px;
+  padding: 16px 0;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
   color: #555;
@@ -129,7 +122,7 @@
 }
 
 .description {
-  margin: 26px 0 34px;
+  margin: 22px 0 28px;
   color: #666;
   font-size: 0.9375rem;
   line-height: 1.8;
@@ -137,8 +130,9 @@
 
 .options {
   display: grid;
-  grid-template-columns: 100px minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px 12px;
+  margin-top: auto;
 }
 
 .colors {
@@ -178,6 +172,9 @@
 }
 
 .quantity {
+  grid-column: 1 / -1;
+  justify-self: start;
+  width: 132px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -186,14 +183,36 @@
 }
 
 .quantity-button {
-  width: 34px;
+  position: relative;
+  width: 42px;
   min-height: 54px;
   padding: 0;
   border: 0;
   color: #555;
   background: transparent;
-  font-size: 1.25rem;
+  font-size: 0;
   cursor: pointer;
+}
+
+.quantity-button::before,
+.quantity-button::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.quantity-button::after {
+  width: 2px;
+  height: 12px;
+}
+
+.quantity-minus::after {
+  display: none;
 }
 
 .quantity-button:hover {
@@ -310,6 +329,56 @@
   line-height: 1.8;
 }
 
+.detail-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(90%, 1280px);
+  margin: 0 auto;
+  padding: 56px 0 96px;
+  border-top: 1px solid #2c2c2c;
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.detail-overview article {
+  min-height: 190px;
+  padding: 0 clamp(22px, 3vw, 48px);
+  border-right: 1px solid #2c2c2c;
+}
+
+.detail-overview article:first-child {
+  padding-left: 0;
+}
+
+.detail-overview article:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.detail-overview span {
+  display: block;
+  margin-bottom: 18px;
+  color: #777;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.detail-overview strong {
+  display: block;
+  color: #fff;
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.detail-overview p {
+  margin: 18px 0 0;
+  color: #999;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
 .detail-story {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
@@ -322,15 +391,15 @@
 
 .detail-story-heading h3 {
   max-width: 700px;
-  margin: 0;
-  font-size: clamp(2.375rem, 5vw, 4.25rem);
+  margin-top: 0;
+  font-size: clamp(2.375rem, 3vw, 4.25rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.04em;
 }
 
 .detail-story-text {
-  margin: 0;
+  margin-top: 30px;
   color: #aaa;
   font-size: 0.9375rem;
   line-height: 1.9;
@@ -449,9 +518,20 @@
 }
 
 .performance-cards article {
+  position: relative;
   min-height: 280px;
   padding: 44px 28px;
   border-right: 1px solid #333;
+}
+
+.performance-cards article::after {
+  position: absolute;
+  right: 28px;
+  bottom: 32px;
+  width: 34px;
+  height: 1px;
+  background: #777;
+  content: "";
 }
 
 .performance-cards article:last-child {
@@ -633,24 +713,30 @@
 
 .specification-list {
   margin: 0;
-  border-top: 1px solid #555;
+  border-top: 1px solid #666;
 }
 
 .specification-list > div {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  padding: 22px 0;
+  gap: 32px;
+  padding: 26px 0;
   border-bottom: 1px solid #333;
 }
 
 .specification-list dt {
-  color: #888;
+  color: #aaa;
   font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .specification-list dd {
   margin: 0;
+  color: #fff;
   font-size: 0.875rem;
+  line-height: 1.7;
 }
 
 .detail-final-message {
@@ -1224,6 +1310,34 @@
     height: 500px;
   }
 
+  .product-info {
+    height: 500px;
+    padding-top: 0;
+  }
+
+  .product-info h1 {
+    font-size: clamp(2.125rem, 4vw, 3rem);
+  }
+
+  .price {
+    margin-top: 14px;
+  }
+
+  .rating {
+    margin-top: 16px;
+    padding: 12px 0;
+    font-size: 1.25rem;
+  }
+
+  .description {
+    margin: 16px 0 18px;
+    line-height: 1.65;
+  }
+
+  .options {
+    gap: 12px;
+  }
+
 }
 
 /* ==================== 모바일 반응형 ==================== */
@@ -1255,6 +1369,7 @@
   }
 
   .product-info {
+    height: auto;
     padding-top: 48px;
   }
 
@@ -1278,8 +1393,28 @@
   }
 
   .detail-story {
+    margin-top: 100px; /* 원하는 만큼의 여백 (예: 80px) */
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+
+  .detail-overview {
+    grid-template-columns: 1fr;
+    width: calc(100% - 48px);
+    padding: 34px 0 54px;
+  }
+
+  .detail-overview article,
+  .detail-overview article:first-child,
+  .detail-overview article:last-child {
+    min-height: auto;
+    padding: 26px 0;
+    border-right: 0;
+    border-bottom: 1px solid #2c2c2c;
+  }
+
+  .detail-overview article:last-child {
+    border-bottom: 0;
   }
 
   .detail-image-grid {

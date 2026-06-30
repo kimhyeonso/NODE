@@ -2,8 +2,8 @@
 <html lang="ko">
 <!--
   
-  1. 상품명·가격·대표 이미지: js/catalog/products.json의 products 수정
-  2. 제품 사양: js/catalog/products.json의 specifications 수정
+  1. 상품명·가격·대표 이미지: js/catalog/category.json의 products 수정
+  2. 제품 사양: js/catalog/category.json의 specifications 수정
   3. 공통 상세정보 문구: 이 파일의 #detail 영역 수정
   4. 리뷰 내용: 이 파일의 #review 영역 수정
   5. 배송·반품 내용: 이 파일의 #shipping 영역 수정
@@ -263,6 +263,7 @@
             <button class="quantity-button quantity-plus" type="button" aria-label="수량 늘리기">+</button>
           </div>
           <button class="add-cart-button" type="button">Add to Cart</button>
+          <button class="add-cart-button" type="button">Buy Now</button>
         </div>
       </div>
     </section>
@@ -274,171 +275,179 @@
     </nav>
 
     <div class="product-tab-contents">
-      <section class="tab-panel long-description is-active" id="detail">
-        <div class="detail-hero">
-          <p class="section-label">DESIGNED FOR LISTENING</p>
-          <h2>공간을 채우는<br>정확하고 깊은 사운드</h2>
-          <p>NODE가 제안하는 제품의 분위기와 사용 경험을 긴 호흡의 이미지로 확인해 보세요.</p>
-        </div>
+  <section class="tab-panel long-description is-active" id="detail">
+    <div class="detail-hero">
+      <p class="section-label">DESIGNED FOR LISTENING</p>
+      <h2>공간을 채우는<br>정확하고 깊은 사운드</h2>
+      <p>NODE가 제안하는 제품의 분위기와 사용 경험을 긴 호흡의 이미지로 확인해 보세요.<br>소리의 본질에 집중하는 당신을 위한 가장 완벽한 해답입니다.</p>
+    </div>
 
-        <div class="detail-story">
-          <div class="detail-story-heading">
-            <p class="section-label">PRODUCT STORY</p>
-            <h3>소리를 위한 본질적인 디자인</h3>
-          </div>
-          <p class="detail-story-text">
-            NODE는 소리가 머무는 공간과 사용하는 사람의 경험을 함께 고민합니다.
-            절제된 형태와 정교한 설계를 통해 오래도록 편안한 오디오 경험을 완성합니다.
-          </p>
-        </div>
+    <section class="detail-overview" aria-label="제품 핵심 특징">
+      <article>
+        <span>Sound</span>
+        <strong>Balanced Response</strong>
+        <p>저역부터 고역까지 균형 잡힌 대역 표현으로 장시간 청취에도 편안한 사운드를 제공합니다.</p>
+      </article>
+      <article>
+        <span>Design</span>
+        <strong>Minimal Form</strong>
+        <p>불필요한 장식을 덜어낸 형태와 정돈된 비율로 어떤 공간에도 자연스럽게 어울립니다.</p>
+      </article>
+      <article>
+        <span>Control</span>
+        <strong>Simple Setup</strong>
+        <p>복잡한 설정 없이 필요한 순간 바로 사용할 수 있도록 연결과 조작 경험을 단순하게 다듬었습니다.</p>
+      </article>
+    </section>
 
-        <div class="detail-image-grid">
-          <figure class="detail-figure">
-            <img class="detail-image-primary" src="" alt="">
-            <figcaption>공간에 자연스럽게 어울리는 절제된 디자인</figcaption>
-          </figure>
-          <figure class="detail-figure">
-            <img class="detail-image-secondary" src="" alt="">
-            <figcaption>사용 경험을 고려해 완성한 섬세한 디테일</figcaption>
-          </figure>
-        </div>
+    <div class="detail-story">
+      <div class="detail-story-heading">
+        <p class="section-label">PRODUCT STORY</p>
+        <h3>소리를 위한 본질적인 디자인</h3>
+      </div>
+      <p class="detail-story-text">
+        NODE의 디자인 철학은 '비움'에서 시작됩니다. 불필요한 시각적 요소를 덜어내고, 오직 소리와 사용자의 감각이 맞닿는 지점에만 집중했습니다.
+        절제된 형태와 정교한 설계를 통해 오래도록 편안한 오디오 경험을 완성하며, 시간이 흘러도 변치 않는 단단한 마감과 손끝에 전해지는 질감은
+        단순한 기술적 도구를 넘어 당신의 공간을 완성하는 하나의 오브제로 존재합니다.
+      </p>
+    </div>
 
-        <div class="detail-features">
-          <div class="detail-feature">
-            <span>01</span>
-            <h3>정확한 설계</h3>
-            <p>제품의 기본 성능을 안정적으로 전달할 수 있도록 구조와 소재를 세심하게 설계했습니다.</p>
-          </div>
-          <div class="detail-feature">
-            <span>02</span>
-            <h3>편안한 사용</h3>
-            <p>설치부터 일상적인 사용까지 복잡함을 줄이고 직관적인 경험을 제공합니다.</p>
-          </div>
-          <div class="detail-feature">
-            <span>03</span>
-            <h3>오래가는 가치</h3>
-            <p>유행을 타지 않는 형태와 견고한 마감으로 다양한 공간에서 오래 사용할 수 있습니다.</p>
-          </div>
-        </div>
+    <div class="detail-image-grid">
+      <figure class="detail-figure">
+        <img class="detail-image-primary" src="" alt="공간과 어우러지는 디자인">
+        <figcaption>공간에 자연스럽게 스며드는 절제된 디자인의 미학</figcaption>
+      </figure>
+      <figure class="detail-figure">
+        <img class="detail-image-secondary" src="" alt="섬세한 디테일">
+        <figcaption>사용자의 모든 움직임을 고려해 완성한 정교한 디테일</figcaption>
+      </figure>
+    </div>
 
-        <section class="detail-performance">
-          <div class="detail-section-heading">
-            <p class="section-label">PERFORMANCE</p>
-            <h3>작은 차이까지 놓치지 않는<br>정교한 퍼포먼스</h3>
-            <p>
-              입력부터 출력까지 신호의 흐름을 섬세하게 다듬어 다양한 환경에서도
-              안정적이고 일관된 성능을 경험할 수 있도록 설계했습니다.
-            </p>
-          </div>
+    <div class="detail-features">
+      <div class="detail-feature">
+        <span>01</span>
+        <h3>정확한 설계</h3>
+        <p>제품의 기본 성능을 한 치의 오차 없이 전달할 수 있도록 내부 구조부터 외부 소재까지 세심하게 검증하고 설계했습니다.</p>
+      </div>
+      <div class="detail-feature">
+        <span>02</span>
+        <h3>편안한 사용</h3>
+        <p>설치부터 일상적인 조작까지 복잡함은 덜어내고, 가장 직관적인 사용자 경험을 제공하도록 UI를 최적화했습니다.</p>
+      </div>
+      <div class="detail-feature">
+        <span>03</span>
+        <h3>오래가는 가치</h3>
+        <p>유행에 휩쓸리지 않는 형태와 시간이 지날수록 빛을 발하는 견고한 마감으로 어떤 환경에서도 변치 않는 가치를 증명합니다.</p>
+      </div>
+    </div>
 
-          <div class="performance-cards">
-            <article>
-              <strong>24 bit</strong>
-              <span>High Resolution</span>
-              <p>미세한 표현과 풍부한 다이내믹을 자연스럽게 전달합니다.</p>
-            </article>
-            <article>
-              <strong>0.02%</strong>
-              <span>Low Distortion</span>
-              <p>불필요한 왜곡을 줄여 원래 신호의 질감을 선명하게 유지합니다.</p>
-            </article>
-            <article>
-              <strong>120 dB</strong>
-              <span>Dynamic Range</span>
-              <p>조용한 디테일부터 강한 에너지까지 폭넓게 표현합니다.</p>
-            </article>
-            <article>
-              <strong>360°</strong>
-              <span>Space Balance</span>
-              <p>설치 공간 안에서 자연스럽고 균형 잡힌 사용 경험을 제공합니다.</p>
-            </article>
-          </div>
-        </section>
+    <section class="detail-performance">
+      <div class="detail-section-heading">
+        <p class="section-label">PERFORMANCE</p>
+        <h3>작은 차이까지 놓치지 않는<br>정교한 퍼포먼스</h3>
+        <p>입력부터 출력까지 신호의 흐름을 섬세하게 다듬어, 어떤 환경에서도 왜곡 없는 일관된 고품질 사운드를 제공합니다.</p>
+      </div>
 
-        <section class="detail-wide-visual">
-          <img class="detail-repeat-image" src="" alt="">
-          <div>
-            <p class="section-label">PURE EXPERIENCE</p>
-            <h3>공간의 분위기까지<br>완성하는 하나의 오브제</h3>
-            <p>
-              절제된 비율과 단단한 마감으로 작업실, 무대, 거실 등 다양한 공간에
-              자연스럽게 어우러집니다.
-            </p>
-          </div>
-        </section>
+      <div class="performance-cards">
+        <article>
+          <strong>24 bit</strong>
+          <span>High Resolution</span>
+          <p>스튜디오에서 의도한 원음의 숨결까지 재현합니다. 미세한 배음과 보컬의 호흡까지 생생하게 전달합니다.</p>
+        </article>
+        <article>
+          <strong>0.02%</strong>
+          <span>Low Distortion</span>
+          <p>회로 순도를 극대화하여 불필요한 노이즈를 제거했습니다. 음량과 상관없이 선명한 질감을 유지합니다.</p>
+        </article>
+        <article>
+          <strong>120 dB</strong>
+          <span>Dynamic Range</span>
+          <p>정적인 디테일부터 폭발적인 에너지까지, 극명한 대비를 통해 음악의 생동감을 온전히 구현합니다.</p>
+        </article>
+        <article>
+          <strong>360°</strong>
+          <span>Space Balance</span>
+          <p>환경의 제약 없이 어느 위치에서도 음의 중심이 무너지지 않는 균형 잡힌 공간감을 형성합니다.</p>
+        </article>
+      </div>
+    </section>
 
-        <section class="detail-engineering">
-          <div class="detail-section-heading">
-            <p class="section-label">ENGINEERING</p>
-            <h3>보이지 않는 내부까지<br>완성도를 높였습니다</h3>
-          </div>
+    <section class="detail-wide-visual">
+      <img class="detail-repeat-image" src="" alt="공간 연출">
+      <div>
+        <p class="section-label">PURE EXPERIENCE</p>
+        <h3>공간의 분위기까지<br>완성하는 하나의 오브제</h3>
+        <p>절제된 비율과 프리미엄 마감은 작업실, 무대, 거실 등 당신의 어떤 공간과도 자연스럽게 어우러지며, 공간의 품격을 한 단계 높여줍니다.</p>
+      </div>
+    </section>
 
-          <div class="engineering-grid">
-            <article><span>01</span><h4>정밀한 신호 처리</h4><p>입력 신호의 손실을 줄이고 각 대역의 균형을 안정적으로 유지하도록 세밀하게 조정했습니다.</p></article>
-            <article><span>02</span><h4>견고한 구조</h4><p>진동과 외부 충격에 강한 구조를 적용해 장시간 사용에서도 안정적인 성능을 지원합니다.</p></article>
-            <article><span>03</span><h4>효율적인 열 관리</h4><p>내부에서 발생하는 열을 효율적으로 분산해 긴 작업과 공연 환경에서도 성능을 유지합니다.</p></article>
-            <article><span>04</span><h4>낮은 노이즈</h4><p>불필요한 전기적 간섭과 공진을 억제해 깨끗하고 집중도 높은 결과를 제공합니다.</p></article>
-            <article><span>05</span><h4>직관적인 인터페이스</h4><p>자주 사용하는 기능을 간결하게 배치해 처음 사용하는 순간부터 편안하게 조작할 수 있습니다.</p></article>
-            <article><span>06</span><h4>확장 가능한 연결</h4><p>다양한 장비 및 액세서리와 유연하게 조합할 수 있어 환경 변화에도 쉽게 대응합니다.</p></article>
-          </div>
-        </section>
+    <section class="detail-engineering">
+      <div class="detail-section-heading">
+        <p class="section-label">ENGINEERING</p>
+        <h3>보이지 않는 내부까지<br>완성도를 높였습니다</h3>
+      </div>
+      <div class="engineering-grid">
+        <article><span>01</span><h4>정밀한 신호 처리</h4><p>입력 신호의 손실을 최소화하고 각 대역의 밸런스를 안정적으로 유지합니다.</p></article>
+        <article><span>02</span><h4>견고한 구조</h4><p>진동과 충격에 강한 하우징을 적용해 장시간 사용에도 변함없는 성능을 지지합니다.</p></article>
+        <article><span>03</span><h4>효율적인 열 관리</h4><p>열을 효과적으로 분산하는 설계로 긴 작업 환경에서도 안정적인 궤도를 유지합니다.</p></article>
+        <article><span>04</span><h4>낮은 노이즈</h4><p>불필요한 전기적 간섭을 완벽히 차단하여 정숙한 배경을 확보했습니다.</p></article>
+        <article><span>05</span><h4>직관적인 인터페이스</h4><p>첫 접촉부터 완벽하게 익숙해지는 간결하고 효율적인 조작 체계를 갖췄습니다.</p></article>
+        <article><span>06</span><h4>확장 가능한 연결</h4><p>다양한 장비와 액세서리에 유연하게 대응하여 환경 변화에도 쉽게 적응합니다.</p></article>
+      </div>
+    </section>
 
-        <section class="detail-editorial-grid">
-          <figure class="detail-editorial-large">
-            <img class="detail-repeat-image" src="" alt="">
-          </figure>
-          <div class="detail-editorial-copy">
-            <p class="section-label">BUILT FOR EVERY DAY</p>
-            <h3>매일 사용할수록<br>느껴지는 편안함</h3>
-            <p>
-              복잡한 설정 없이 필요한 기능에 빠르게 접근할 수 있습니다.
-              반복되는 작업과 일상적인 사용 속에서도 자연스럽게 흐름을 이어갑니다.
-            </p>
-          </div>
-          <figure><img class="detail-repeat-image" src="" alt=""></figure>
-          <figure><img class="detail-repeat-image" src="" alt=""></figure>
-        </section>
+    <section class="detail-editorial-grid">
+      <figure class="detail-editorial-large"><img class="detail-repeat-image" src="" alt="에디토리얼 이미지"></figure>
+      <div class="detail-editorial-copy">
+        <p class="section-label">BUILT FOR EVERY DAY</p>
+        <h3>매일 사용할수록<br>느껴지는 편안함</h3>
+        <p>복잡한 설정은 잊으세요. 필요한 기능에 가장 빠르게 도달하며, 반복되는 작업 속에서도 흐름을 방해하지 않는 매끄러운 사용감을 선사합니다.</p>
+      </div>
+      <figure><img class="detail-repeat-image" src="" alt="상세컷1"></figure>
+      <figure><img class="detail-repeat-image" src="" alt="상세컷2"></figure>
+    </section>
 
-        <section class="detail-use-cases">
-          <div class="detail-section-heading">
-            <p class="section-label">MADE FOR YOUR SPACE</p>
-            <h3>어떤 공간에서도<br>자신만의 방식으로</h3>
-          </div>
+    <section class="detail-use-cases">
+      <div class="detail-section-heading">
+        <p class="section-label">MADE FOR YOUR SPACE</p>
+        <h3>어떤 공간에서도<br>자신만의 방식으로</h3>
+      </div>
+      <div class="use-case-list">
+        <article><span>01</span><h4>HOME</h4><p>일상의 음악과 콘텐츠를 가장 편안하고 풍부한 감동으로 채워줍니다.</p></article>
+        <article><span>02</span><h4>STUDIO</h4><p>창작자가 의도한 그대로의 사운드를 모니터링할 수 있는 가장 정확한 기준이 됩니다.</p></article>
+        <article><span>03</span><h4>LIVE</h4><p>이동과 설치가 잦은 환경에서도 일관된 출력과 연결 안정성을 완벽히 보장합니다.</p></article>
+        <article><span>04</span><h4>WORKSPACE</h4><p>집중이 필요한 당신의 작업실을 정돈된 사운드로 가장 몰입하기 좋은 환경으로 완성합니다.</p></article>
+      </div>
+    </section>
 
-          <div class="use-case-list">
-            <article><span>01</span><h4>HOME</h4><p>일상의 음악 감상과 콘텐츠 경험을 더욱 풍부하고 편안하게 만듭니다.</p></article>
-            <article><span>02</span><h4>STUDIO</h4><p>작은 변화까지 빠르게 확인해야 하는 창작 환경에서 정확한 기준을 제공합니다.</p></article>
-            <article><span>03</span><h4>LIVE</h4><p>설치와 이동이 반복되는 현장에서도 안정적인 연결과 일관된 성능을 지원합니다.</p></article>
-            <article><span>04</span><h4>WORKSPACE</h4><p>절제된 디자인과 효율적인 기능으로 집중도 높은 작업 공간을 완성합니다.</p></article>
-          </div>
-        </section>
+    <section class="detail-full-images">
+      <img class="detail-repeat-image" src="" alt="이미지">
+      <img class="detail-repeat-image" src="" alt="이미지">
+      <img class="detail-repeat-image" src="" alt="이미지">
+    </section>
 
-        <section class="detail-full-images">
-          <img class="detail-repeat-image" src="" alt="">
-          <img class="detail-repeat-image" src="" alt="">
-          <img class="detail-repeat-image" src="" alt="">
-        </section>
+    <section class="detail-specifications">
+      <div class="detail-section-heading">
+        <p class="section-label">SPECIFICATIONS</p>
+        <h3>제품 사양</h3>
+      </div>
+      <dl class="specification-list">
+        <div><dt>제품 유형</dt><dd>Professional Audio Reference Monitor</dd></div>
+        <div><dt>샘플링 레이트</dt><dd>24-bit / 192kHz High Resolution</dd></div>
+        <div><dt>주파수 응답</dt><dd>35Hz – 25kHz (±3dB)</dd></div>
+        <div><dt>왜곡율 (THD+N)</dt><dd>< 0.02%</dd></div>
+        <div><dt>연결성</dt><dd>XLR Balanced, TRS Input, USB-C Digital</dd></div>
+      </dl>
+    </section>
 
-        <section class="detail-specifications">
-          <div class="detail-section-heading">
-            <p class="section-label">SPECIFICATIONS</p>
-            <h3>제품 사양</h3>
-            <p class="spec-notice">아래 제원은 포트폴리오 시안을 위한 임시 정보입니다.</p>
-          </div>
-
-          <dl class="specification-list">
-            <div><dt>제품 유형</dt><dd>Professional Audio Product</dd></div>
-          </dl>
-        </section>
-
-        <section class="detail-final-message">
-          <img class="detail-repeat-image" src="" alt="">
-          <div>
-            <p class="section-label">NODE AUDIO</p>
-            <h3>당신의 공간에서<br>새로운 기준을 만나보세요</h3>
-            <p>모든 순간을 위한 완성도 높은 선택</p>
-          </div>
-        </section>
+    <section class="detail-final-message">
+      <img class="detail-repeat-image" src="" alt="마지막">
+      <div>
+        <p class="section-label">NODE AUDIO</p>
+        <h3>당신의 공간에서<br>새로운 기준을 만나보세요</h3>
+        <p>음악과 당신을 잇는 가장 완벽한 접점, NODE와 함께하는 매 순간이 예술이 됩니다.</p>
+      </div>
+    </section>
 
         <section class="similar-products">
           <div class="similar-heading">
@@ -564,6 +573,4 @@
   </footer>
 </body>
 </html>
-
-
 
