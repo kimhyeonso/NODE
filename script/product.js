@@ -287,6 +287,10 @@ function toggleCartItem(button) {
   }
 
   localStorage.setItem("cartItems", JSON.stringify(cart));
+  
+  if (typeof updateCartBadge === "function") {
+    updateCartBadge();
+  }
 }
 
 function setupCartButtons() {

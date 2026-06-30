@@ -290,6 +290,33 @@ body.popup-visible .snb {
   filter: brightness(0);
 }
 
+/* 장바구니 아이콘 + 개수 뱃지 */
+.cartIconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+
+  background-color: #ffcd4a;
+  color: #111;
+
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+
+  border-radius: 50%;
+}
+
 /* 스크롤 후 흰색 */
 .top-menu-bar.scrolled .menu-icon .after-login img {
   filter: none;

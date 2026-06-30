@@ -184,4 +184,51 @@ $(window).on("scroll", TopButton__update);
 $(".topBtn").on("click", function () {
   $("html, body").animate({ scrollTop: 0 });
 });
+
+
+// 장바구니 총 개수(badge) 업데이트
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let totalQty = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    totalQty += cart[i].qty;
+  }
+
+  const $badge = $(".cartCount");
+
+  if (totalQty > 0) {
+    $badge.text(totalQty).show();
+  } else {
+    $badge.text(0).hide();
+  }
+}
+
+// 페이지 로드 시 1회 실행
+updateCartBadge();
+
+// 장바구니 총 개수(badge) 업데이트
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let totalQty = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    totalQty += cart[i].qty;
+  }
+
+  const $badge = $(".cartCount");
+
+  if (totalQty > 0) {
+    $badge.text(totalQty).show();
+  } else {
+    $badge.text(0).hide();
+  }
+}
+
+// 페이지 로드 시 1회 실행
+updateCartBadge();
+
+// 다른 JS 파일(product.js, accessory.js 등)에서도 호출할 수 있게 전역으로 등록
+window.updateCartBadge = updateCartBadge;
+
 })

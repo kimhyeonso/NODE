@@ -43,9 +43,9 @@ function showSingleBranch(index) {
   var b = branchData[index];
 
   var markerImage = new kakao.maps.MarkerImage(
-    './image/common/location_05_gammang-05.png',
-    new kakao.maps.Size(60, 60),
-    { offset: new kakao.maps.Point(20, 40) }
+    './image/common/location-05.png', // 기본 주소 마커 이미지
+    new kakao.maps.Size(64, 69),
+    { offset: new kakao.maps.Point(32, 69) }
   );
 
   var marker = new kakao.maps.Marker({
@@ -54,11 +54,18 @@ function showSingleBranch(index) {
     title: b.name,
     image: markerImage
   });
+
   var iw = new kakao.maps.InfoWindow({
-    content: '<div style="padding:8px 12px;font-size:12px;line-height:1.5;white-space:nowrap;">' +
-      '<strong>' + b.name + '</strong><br>' + b.addr + '</div>'
+    content:
+      '<div style="padding:8px 12px;font-size:12px;line-height:1.5;white-space:nowrap;">' +
+      '<strong>' + b.name + '</strong><br>' + b.addr +
+      '</div>'
   });
-  kakao.maps.event.addListener(marker, 'click', function () { iw.open(map, marker); });
+
+  kakao.maps.event.addListener(marker, 'click', function () {
+    iw.open(map, marker);
+  });
+
   markers.push(marker);
   map.setCenter(new kakao.maps.LatLng(b.lat, b.lng));
 }
