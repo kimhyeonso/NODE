@@ -79,21 +79,28 @@
   color: #111111;
 }
 
-.closeBtn {
+.loginBox .closeBtn {
   position: absolute;
-  top: 1rem;
-  right: 1.25rem;
+  top: 0rem;
+  right: -3rem;
   background: none;
   border: none;
   font-size: 1.75rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.15s ease;
 }
 
-.closeBtn:hover {
-  color: #ffffff;
+.loginBox> .closeBtn:hover {
+  color: #ffcd4a;
+  background: none;
 }
 
 .divider {

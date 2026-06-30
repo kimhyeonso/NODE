@@ -9,24 +9,6 @@
   justify-content: space-evenly;
   align-items: center;
 }
-
-.backBtn {
-  position: absolute;
-  top: 1rem;
-  left: 1.25rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.backBtn:hover {
-  color: #ffcd4a;
-}
-
 .signupBox {
   position: relative;
   display: flex;
@@ -102,7 +84,7 @@
   margin-left: clamp(5rem, 10vw, 8.75rem);
 }
 
-.signupBox > button {
+.signupBox > #signupCheck {
   font-size: 1rem;
   letter-spacing: 0.05em;
   background-color: #ffcd4a;
@@ -116,28 +98,56 @@
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-.signupBox > button:hover {
+.signupBox > #signupCheck:hover {
   transform: scale(1.02);
   background-color: white;
 }
 
-.closeBtn {
+.signupBox> .backBtn {
   position: absolute;
   top: 1rem;
-  right: 1.25rem;
+  left: 2rem;
   background: none;
   border: none;
   font-size: 1.75rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.15s ease;
 }
 
-.closeBtn:hover {
-  color: #ffffff;
+.signupBox> .backBtn:hover {
+  color: #ffcd4a;
 }
 
+.signupBox> .closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.signupBox> .closeBtn:hover {
+  color: #ffcd4a;
+}
 /* signup.css */
 .signupBox {
   animation: slideInRight 0.4s ease;

@@ -10,23 +10,6 @@
   align-items: center;
 }
 
-.backBtn {
-  position: absolute;
-  top: 1rem;
-  left: 1.25rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.backBtn:hover {
-  color: #ffcd4a;
-}
-
 .findBox {
   position: relative;
   display: flex;
@@ -80,7 +63,7 @@
   margin-bottom: 0.5rem;
 }
 
-.findBox > button {
+.findBox > #pwFind {
   width: 100%;
   font-size: 1rem;
   letter-spacing: 0.08em;
@@ -94,26 +77,55 @@
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-.findBox > button:hover {
+.findBox > #pwFind:hover {
   transform: scale(1.02);
   background-color: white;
 }
 
-.closeBtn {
+.findBox> .backBtn {
   position: absolute;
   top: 1rem;
-  right: 1.25rem;
+  left: 2rem;
   background: none;
   border: none;
   font-size: 1.75rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.15s ease;
 }
 
-.closeBtn:hover {
-  color: #ffffff;
+.findBox> .backBtn:hover {
+  color: #ffcd4a;
+}
+
+.findBox> .closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.findBox> .closeBtn:hover {
+  color: #ffcd4a;
 }
 
 /* 진입 애니메이션 */
