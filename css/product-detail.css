@@ -9,8 +9,6 @@
   - 리뷰: .review-section ~ .review-content
   - 추천 상품: .similar-products ~ .card
   - 태블릿/모바일: 파일 하단 @media
-
-  common.css의 헤더·푸터 스타일은 이 파일에서 수정하지 마세요.
 */
 
 * {
@@ -57,7 +55,7 @@
   background-color: #ffffff;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 83.333%;
+  background-size: 50%;
   cursor: pointer;
   transition: border-color 180ms ease, opacity 180ms ease;
   border-color: #dededb;
@@ -99,7 +97,7 @@
 
 .product-info h1 {
   margin: 0;
-  font-size: clamp(2.625rem, 4vw, 4.25rem);
+  font-size: clamp(2.625rem, 3vw, 4.25rem);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.04em;
@@ -122,7 +120,7 @@
 }
 
 .description {
-  margin: 22px 0 28px;
+  margin: 50px 0 30px;
   color: #666;
   font-size: 0.9375rem;
   line-height: 1.8;
@@ -161,14 +159,6 @@
 
 .color-chip.is-active {
   outline: 2px solid #151515;
-}
-
-.color-chip-black {
-  background: #171717;
-}
-
-.color-chip-ivory {
-  background: #eee9dc;
 }
 
 .quantity {
@@ -315,17 +305,17 @@
 
 .detail-hero h2 {
   margin: 0;
-  font-size: clamp(2.625rem, 5vw, 4.75rem);
+  font-size: clamp(2.625rem, 2vw, 4.75rem);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.45;
   letter-spacing: -0.04em;
 }
 
 .detail-hero > p:last-child {
-  max-width: 480px;
-  margin: 30px 0 0;
+  max-width: 600px;
+  margin: 20px 0 0;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.8;
 }
 
@@ -334,7 +324,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: min(90%, 1280px);
   margin: 0 auto;
-  padding: 56px 0 96px;
+  padding: 350px 0 96px;
   border-top: 1px solid #2c2c2c;
   border-bottom: 1px solid #2c2c2c;
 }
@@ -380,29 +370,36 @@
 }
 
 .detail-story {
+  /* 그리드 레이아웃 설정 */
   display: grid;
+  /* 1열: 남은 공간만큼 유연하게 차지 (최소 0)
+     2열: 최소 280px, 최대 0.7fr 비율로 고정 
+  */
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
+  /* 간격: 40px ~ 130px 사이에서 화면 크기에 따라 유동적으로 조절 */
   gap: clamp(40px, 8vw, 130px);
   width: min(90%, 1280px);
   margin: 0 auto;
+  /* 패딩(위아래): 100px ~ 180px 사이에서 화면 크기에 따라 유동적으로 조절 */
   padding: clamp(100px, 12vw, 180px) 0;
-  align-items: end;
+  /* 제목과 본문 문단의 상단 기준선을 맞춥니다. */
+  align-items: start;
 }
 
 .detail-story-heading h3 {
   max-width: 700px;
   margin-top: 0;
-  font-size: clamp(2.375rem, 3vw, 4.25rem);
+  font-size: clamp(2.625rem, 2vw, 4.75rem);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.45;
   letter-spacing: -0.04em;
 }
 
 .detail-story-text {
-  margin-top: 30px;
+  margin-top: 0;
   color: #aaa;
   font-size: 0.9375rem;
-  line-height: 1.9;
+  line-height: 2.2;
 }
 
 .detail-image-grid {
@@ -429,9 +426,11 @@
 }
 
 .detail-figure figcaption {
-  padding: 16px 0;
+  padding: 16px 0px 0px;
   color: #888;
-  font-size: 0.75rem;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  margin-bottom: 150px;
 }
 
 .detail-features {
@@ -459,7 +458,7 @@
 
 .detail-feature > span {
   color: #777;
-  font-size: 0.6875rem;
+  font-size: 1rem;
   letter-spacing: 0.14em;
 }
 
@@ -485,9 +484,9 @@
 .detail-editorial-copy h3,
 .detail-final-message h3 {
   margin: 0;
-  font-size: clamp(2.375rem, 5vw, 4.25rem);
+  font-size: clamp(2.625rem, 2vw, 4.75rem);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.45;
   letter-spacing: -0.04em;
 }
 
@@ -504,7 +503,7 @@
 .detail-engineering,
 .detail-use-cases,
 .detail-specifications {
-  width: min(90%, 1280px);
+  width: min(100%, 1280px);
   margin: 0 auto;
   padding: clamp(110px, 12vw, 190px) 0;
 }
@@ -616,7 +615,7 @@
 .engineering-grid span,
 .use-case-list span {
   color: #666;
-  font-size: 0.6875rem;
+  font-size: 1rem;
   letter-spacing: 0.14em;
 }
 
@@ -1145,13 +1144,12 @@
 .similar-products {
   width: 100%;
   margin: 0;
-  padding: clamp(80px, 9vw, 130px) 0;
+  padding: clamp(80px, 9vw, 130px) max(5%, calc((100vw - 1480px) / 2));
+  overflow: hidden;
 }
 
 .similar-heading {
-  width: min(90%, 1480px);
-  margin-right: auto;
-  margin-left: auto;
+  width: 100%;
   margin-bottom: 36px;
 }
 
@@ -1167,26 +1165,21 @@
 }
 
 .product-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 15px;
-  width: max-content;
-  
+  width: 100%;
 }
 
 .card {
   display: block;
-  width: clamp(300px, 28vw, 420px);
-  flex: 0 0 auto;
+  min-width: 0;
   padding-bottom: 16px;
   color: #151515;
   background: #fff;
   border-radius: 8px;
 
 
-}
-
-.similar-products {
-  overflow: hidden;
 }
 
 .similar-image-box {
@@ -1570,10 +1563,11 @@
   }
 
   .product-list {
-    width: max-content;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
 
   .card {
-    width: min(78vw, 360px);
+    min-width: 0;
   }
 }
