@@ -2,24 +2,45 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-image: url('../image/login/login_bgi.png');
+  background-image: url('../image/login/login_bgi-01.png');
+  background-position: center;
   opacity: 0.9;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.imgBox {
-  width: 24%;
+.backBtn {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.backBtn:hover {
+  color: #ffcd4a;
 }
 
 .signupBox {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 2rem 0.2rem 2rem 0.2rem;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   width: clamp(17.5rem, 40%, 37.5rem);
   padding: 3rem 0;
 }
@@ -27,11 +48,11 @@
 .signupBox > h2 {
   font-size: clamp(1.75rem, 2vw + 1rem, 2rem);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   line-height: 1;
   margin-top: 2rem;
   margin-bottom: 2.5rem;
-  color: #111111;
+  color: #ffffff;
 }
 
 .inBox {
@@ -48,23 +69,34 @@
   white-space: nowrap;
   font-size: 0.875rem;
   letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .inBox > input {
   flex: 1;
   padding: 0.5rem 0;
   border: none;
-  border-bottom: 0.0625rem solid #333;
+  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.3);
   margin: 1rem;
   outline: none;
+  background: transparent;
+  color: #ffffff;
   font-size: 0.875rem;
   letter-spacing: 0.04em;
   line-height: 1.5;
 }
 
+.inBox > input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.inBox > input:focus {
+  border-bottom-color: #ffcd4a;
+}
+
 .errorMsg {
   width: 100%;
-  color: red;
+  color: #ff6b6b;
   font-size: 0.875rem;
   margin-top: 0.3rem;
   margin-left: clamp(5rem, 10vw, 8.75rem);
@@ -72,21 +104,47 @@
 
 .signupBox > button {
   font-size: 1rem;
-  letter-spacing: 0.08em;
-  background-color: white;
-  border: 0.0625rem solid #333;
-  color: #333;
+  letter-spacing: 0.05em;
+  background-color: #ffcd4a;
+  border: none;
+  color: #111111;
   font-weight: 700;
   border-radius: 0.5rem;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   padding: 1rem clamp(2rem, 4vw, 5.5rem);
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 .signupBox > button:hover {
   transform: scale(1.02);
-  background-color: #ffcd4a;
+  background-color: white;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
   border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.closeBtn:hover {
+  color: #ffffff;
+}
+
+/* signup.css */
+.signupBox {
+  animation: slideInRight 0.4s ease;
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 /* 모바일 반응형 */

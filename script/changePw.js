@@ -22,9 +22,12 @@ document.getElementById("changeBtn").addEventListener("click", function(){
 
     if(!isValid) return;
 
-    //로그인 창으로 넘어가기-> 바꾸었으면
-    localStorage.setItem("userPw", newPw);
-    window.location.href = "./login.html";
+    alert("비밀번호가 변경되었습니다.");
+    document.querySelector('.changeBox').classList.add('fadeOut');
+    setTimeout(() => {
+        localStorage.setItem("userPw", newPw);
+        window.location.href = "./login.html";
+    }, 300);
 });
 
 //키보드 엔터 키 적용
@@ -32,4 +35,18 @@ document.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
         document.getElementById("changeBtn").click();
     }
+});
+
+//닫기
+document.getElementById('closeBtn').addEventListener('click', () => {
+  location.href = './index.html';
+});
+
+
+//뒤로가기
+document.getElementById('backBtn').addEventListener('click', () => {
+  document.querySelector('.changeBox').classList.add('fadeOut');
+  setTimeout(() => {
+    location.href = './find.html';
+  }, 300);
 });

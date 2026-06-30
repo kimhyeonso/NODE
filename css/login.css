@@ -2,7 +2,8 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-image: url('../image/login/login_bgi.png');
+  background-image: url('../image/login/login_bgi-01.png');
+  background-position: center;
   opacity: 0.9;
   display: flex;
   justify-content: space-evenly;
@@ -14,14 +15,21 @@
 }
 
 .loginBox {
+  position: relative; /* 닫기 버튼 기준점 */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 2rem 0.2rem 2rem 0.2rem;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   width: clamp(17.5rem, 40%, 31.25rem);
-  height: clamp(18.75rem, 60%, 37.5rem);
+  padding: 3rem 2rem;
 }
 
 .loginBox > h2 {
@@ -31,51 +39,161 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 1;
-  color: #111111;
+  color: #ffffff;
 }
 
 .loginBox > input {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  border: 0.0625rem solid #333;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
   font-size: 0.875rem;
   letter-spacing: 0.04em;
   line-height: 1.5;
 }
 
-.errorMsg {
-  color: red;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
+.loginBox > input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .loginBox > button {
+  font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.08em;
   background-color: #ffcd4a;
-  color: #333;
+  color: #111111;
   font-weight: 700;
   padding: 1rem 5.5rem;
   border-radius: 0.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.15s ease;
 }
 
 .loginBox > button:hover {
   transform: scale(1.02);
+  background-color: white;
+  color: #111111;
 }
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.closeBtn:hover {
+  color: #ffffff;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 0.0625rem;
+  background:  rgba(255, 255, 255, 0.15);
+}
+
+.divider span {
+  padding: 0 0.75rem;
+  white-space: nowrap;
+}
+
+.socialLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.socialBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.socialBtn:hover {
+  transform: scale(1.01);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.socialBtn img {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.socialBtn.naver { border-color: rgba(3, 199, 90, 0.4); }
+.socialBtn.kakao { border-color: rgba(254, 229, 0, 0.4); }
+.socialBtn.google { border-color: rgba(255, 255, 255, 0.2); }
 
 .find {
   font-size: 0.875rem;
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
+  color: #ffffff;
 }
 
 #findBtn {
   font-weight: 700;
-  border-bottom: 0.0625rem solid #333;
+  border-bottom: 0.0625rem solid #ffffff;
+  color: #ffffff;
+}
+
+.errorMsg {
+  font-size: 0.875rem;
+  color: #ff6b6b;
+  margin-bottom: 0.5rem;
+}
+
+/* 진입 애니메이션 추가 */
+.loginBox {
+  animation: fadeScaleIn 0.4s ease;
+}
+@keyframes fadeScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 퇴장 애니메이션(js에서 fadeout코드 이용) */
+.fadeOut {
+  animation: fadeOutDown 0.3s ease forwards;
+}
+
+@keyframes fadeOutDown {
+  to { opacity: 0; transform: translateY(20px); }
 }
 
 /* 모바일 반응형 */
@@ -97,7 +215,7 @@
   }
 
   .loginBox > input,
-  button {
+  .loginBox > button {
     width: 55%;
   }
 
