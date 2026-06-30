@@ -114,7 +114,7 @@ body {
 
 .movie-section p {
   font-family: "Nanum_Myeongjo";
-  font-size: clamp(.9rem, 2.5vw, 1.2rem);
+  font-size: clamp(.7rem, 2.5vw, .9rem);
   margin-bottom: 20px;
 }
 
@@ -165,43 +165,6 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.brand-logo-morph {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  pointer-events: none;
-  opacity: 0;
-  will-change: transform, width, height, opacity;
-}
-
-.brand-logo-morph img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  will-change: opacity;
-}
-
-.brand-logo-morph-source {
-  opacity: 1;
-}
-
-.brand-logo-morph-target {
-  opacity: 0;
-}
-
-.brand-logo-section img,
-.brand-story-container .logo img {
-  transition: opacity 0.15s ease;
-}
-
-body.brand-logo-morphing .brand-logo-section img,
-body.brand-logo-morphing .brand-story-container .logo img {
-  opacity: 0;
-}
-
 .brand-story-section{
   width: 100%;
   min-height: 200vh;
@@ -212,6 +175,8 @@ body.brand-logo-morphing .brand-story-container .logo img {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 1;
+  transition: opacity 0.6s ease;
 
   /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
@@ -220,12 +185,24 @@ body.brand-logo-morphing .brand-story-container .logo img {
 .brand-story-container{
   width: min(90%, 1600px);
   position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.brand-logo-section.fade-out img {
+  opacity: 0;
+}
+
+.brand-story-section.fade-in .brand-story-container {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .brand-story-container .logo{
-  width: 500px;
+  width: 350px;
   margin: 0 auto;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
   padding-left: 70px;
 }
 
@@ -598,6 +575,10 @@ body.brand-logo-morphing .brand-story-container .logo img {
   color: #fff;
   transform: translateY(150px);
   opacity: .3;
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .search-copy.on{
@@ -751,20 +732,28 @@ body.brand-logo-morphing .brand-story-container .logo img {
   width: 100%;
   height: 100vh;
   min-height: 620px;
-  padding: 180px 0 0;
   overflow: hidden;
   background-color: #070707;
   color: #fff;
-
-  /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
-
 }
 
 .artist-heading {
   position: absolute;
+  top: 180px;
   left: 6%;
   z-index: 3;
+  transform: translateY(150px);
+  opacity: .3;
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.artist-heading.on {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .artist-heading h2 {
@@ -781,15 +770,21 @@ body.brand-logo-morphing .brand-story-container .logo img {
   line-height: 1.55;
 }
 
-.artist-gallery {
+.artist-slider {
   position: absolute;
   left: 50%;
   bottom: clamp(100px, 13vh, 150px);
-  width: max-content;
+  width: 100%;
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.artist-gallery {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   gap: clamp(30px, 3vw, 60px);
-  transform: translateX(-50%);
+  transition: transform 0.8s ease;
 }
 
 .artist-item {
@@ -797,11 +792,14 @@ body.brand-logo-morphing .brand-story-container .logo img {
   flex: 0 0 auto;
   width: clamp(190px, 20vw, 310px);
   text-align: center;
+  opacity: 0.45;
+  transform: scale(0.82);
+  transition: all 0.8s ease;
 }
 
 .artist-photo {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 50%;
   background-color: #171717;
@@ -823,23 +821,25 @@ body.brand-logo-morphing .brand-story-container .logo img {
   font-weight: 400;
 }
 
-.artist-item-featured {
+.artist-item.active {
   width: clamp(290px, 30vw, 440px);
-  margin: 0 clamp(4px, 1vw, 18px);
+  opacity: 1;
+  transform: scale(1);
 }
 
-.artist-item-featured .artist-photo {
-  border: 1px dashed rgba(255, 255, 255, 0.7);
+.artist-item.active .artist-photo {
   padding: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.7);
   background-color: transparent;
 }
 
-.artist-item-featured .artist-photo img {
+.artist-item.active .artist-photo img {
   border-radius: 50%;
   filter: brightness(0.9);
 }
 
 .artist-speaker {
+  display: none;
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -851,19 +851,51 @@ body.brand-logo-morphing .brand-story-container .logo img {
   transform: translateX(-50%);
 }
 
-.artist-point {
-  position: absolute;
-  top: -20px;
-  z-index: 3;
-  width: 11px;
-  height: 11px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background-color: #c9a24b;
+.artist-item.active .artist-speaker {
+  display: block;
 }
 
-.artist-item-featured h3 {
+.artist-point {
+  display: none;
+}
+
+.artist-item.active .artist-point {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #c9a24b;
+
+  /* 원의 시작 위치 */
+  transform: translate(-50%, -50%)
+             rotate(0deg);
+
+  animation: artistPointRotate 15s linear infinite;
+}
+
+.artist-item.active h3 {
   visibility: hidden;
+}
+
+@keyframes artistPointRotate {
+  from {
+    transform:
+      rotate(0deg)
+      translateY(-1800%);
+  }
+
+  to {
+    transform:
+      rotate(360deg)
+      translateY(-2000%);
+  }
 }
 
 /*********** 일곱번째 캔버스 섹션 구현 ***********/
@@ -935,6 +967,10 @@ body.brand-logo-morphing .brand-story-container .logo img {
 
   .brand-story-txt.mobile {
     display: block;
+  }
+
+  .brand-story-section{
+    min-height: 150vh;
   }
 
   /*********** 네번째 모바일 섹션 구현 ***********/
@@ -1062,7 +1098,7 @@ body.brand-logo-morphing .brand-story-container .logo img {
 
   /*********** 여섯번째 모바일 섹션 구현 ***********/
 
-  .artist-section {
+.artist-section {
     min-height: 100vh;
   }
 
@@ -1071,8 +1107,11 @@ body.brand-logo-morphing .brand-story-container .logo img {
     left: 6%;
   }
 
-  .artist-gallery {
+  .artist-slider {
     bottom: 150px;
+  }
+
+  .artist-gallery {
     gap: 22px;
   }
 
@@ -1080,9 +1119,8 @@ body.brand-logo-morphing .brand-story-container .logo img {
     width: 175px;
   }
 
-  .artist-item-featured {
+  .artist-item.active {
     width: 265px;
-    margin: 0;
   }
 
   .artist-speaker {
