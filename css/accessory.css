@@ -424,7 +424,21 @@ body[data-accessory-category="stand"] .hero-accessory {
     color: #222;
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
-    transition: background 180ms ease, transform 180ms ease;
+    transition: transform 180ms ease, color 180ms ease;
+}
+
+.cart-button::before {
+    display: none;
+}
+
+.cart-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
 }
 
 .cart-button:hover {
@@ -450,6 +464,18 @@ body[data-accessory-category="stand"] .hero-accessory {
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
     transition: transform 180ms ease, background 180ms ease;
+}
+
+.compare-check input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #151515;
+}
+
+.compare-check:hover {
+    transform: scale(1.08);
 }
 
 .compare-check:has(input:checked) {
@@ -488,6 +514,25 @@ body[data-accessory-category="stand"] .hero-accessory {
     margin-top: 22px;
 }
 
+.compare-popup-actions button,
+.compare-popup-actions a {
+    padding: 9px 15px;
+    border: 1px solid #151515;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.compare-cancel {
+    color: #151515;
+    background: #fff;
+}
+
+.compare-go {
+    color: #fff;
+    background: #151515;
+}
+
 /* 상품 상세 정보 (텍스트) */
 .brand {
     margin-bottom: 6px;
@@ -498,6 +543,11 @@ body[data-accessory-category="stand"] .hero-accessory {
     grid-column: 1;
     grid-row: 2;
     letter-spacing: 0.04em;
+}
+
+.accessory-name,
+.price-row {
+    grid-column: 1 / -1;
 }
 
 .accessory-name {
