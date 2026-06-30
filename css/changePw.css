@@ -10,23 +10,6 @@
   align-items: center;
 }
 
-.backBtn {
-  position: absolute;
-  top: 1rem;
-  left: 1.25rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.backBtn:hover {
-  color: #ffcd4a;
-}
-
 .changeBox {
   position: relative;
   display: flex;
@@ -46,8 +29,8 @@
 }
 
 .changeBox > h2 {
-  margin-top: -0.5rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
   font-size: clamp(1.75rem, 2vw + 1rem, 2rem);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -84,7 +67,7 @@
   margin-bottom: 1rem;
 }
 
-.changeBox > button {
+.changeBox > #changeBtn {
   width: 100%;
   font-size: 1rem;
   letter-spacing: 0.08em;
@@ -98,28 +81,57 @@
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-.changeBox > button:hover {
+.changeBox > #changeBtn:hover {
   transform: scale(1.02);
   background-color: white;
 }
 
-.closeBtn {
+.changeBox> .backBtn {
   position: absolute;
   top: 1rem;
-  right: 1.25rem;
+  left: 2rem;
   background: none;
   border: none;
   font-size: 1.75rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.15s ease;
 }
 
-.closeBtn:hover {
-  color: #ffffff;
+.changeBox> .backBtn:hover {
+  color: #ffcd4a;
 }
 
+.changeBox> .closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.changeBox> .closeBtn:hover {
+  color: #ffcd4a;
+}
+  
 /* 진입 애니메이션 */
 .changeBox {
   animation: fadeScaleIn 0.4s ease;
