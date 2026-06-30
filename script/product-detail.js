@@ -1,5 +1,5 @@
 async function loadProductCatalog() {
-  const response = await fetch("./js/catalog/products.json");
+  const response = await fetch("./js/catalog/category.json");
 
   if (!response.ok) {
     throw new Error("상품 데이터를 불러오지 못했습니다.");

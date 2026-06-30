@@ -1,10 +1,12 @@
-/* 전체 페이지에서 공통으로 사용하는 기본 스타일 */
+/* ==========================================================================
+   기본 설정 및 전역 스타일
+   ========================================================================== */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* 박스 모델 계산 방식 설정 */
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* 부드러운 페이지 스크롤 효과 */
 }
 
 body {
@@ -25,11 +27,13 @@ select {
     font: inherit;
 }
 
-/* 고정 헤더 높이(5rem)만큼 본문을 아래로 내려 겹침 방지 */
 main {
-    margin-top: 5rem;
+    margin-top: 5rem; /* 고정 헤더 높이만큼 본문 상단 여백 확보 */
 }
 
+/* ==========================================================================
+   네비게이션 (GNB)
+   ========================================================================== */
 .main-nav {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -58,11 +62,10 @@ main {
 }
 
 .has-submenu {
-    /* GNB 아래 서브메뉴의 위치 기준 */
-    position: relative;
+    position: relative; /* 서브메뉴 배치를 위한 기준점 */
 }
 
-/* Product와 Accessory 서브메뉴 디자인 */
+/* 서브메뉴 애니메이션 및 드롭다운 스타일 */
 .sub-menu {
     position: absolute;
     top: 35px;
@@ -89,7 +92,7 @@ main {
     bottom: 100%;
     left: 0;
     height: 16px;
-    content: "";
+    content: ""; /* 호버 유지 영역(gap 메우기) */
 }
 
 .sub-menu a {
@@ -131,6 +134,9 @@ main {
     font-size: 0.875rem;
 }
 
+/* ==========================================================================
+   히어로 섹션 및 배너
+   ========================================================================== */
 .sub-banner {
     margin: 0;
     padding: 10px 16px;
@@ -152,25 +158,19 @@ main {
     text-align: center;
 }
 
-/* 각 액세서리 페이지의 히어로 배경 이미지입니다. url 경로만 바꾸면 됩니다. */
+/* 카테고리별 동적 히어로 배경 이미지 적용 */
 body[data-accessory-category="all"] .hero-accessory {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.58)),
-        url("../image/hero/accessory-all-banner.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.58)), url("../image/hero/accessory-all-banner.png");
     background-position: center;
 }
 
 body[data-accessory-category="cable"] .hero-accessory {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.62)),
-        url("../image/hero/accessory-cable-banner.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.62)), url("../image/hero/accessory-cable-banner.png");
     background-position: center;
 }
 
 body[data-accessory-category="stand"] .hero-accessory {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.58)),
-        url("../image/hero/accessory-stand-banner.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.58)), url("../image/hero/accessory-stand-banner.png");
     background-position: center;
 }
 
@@ -212,7 +212,9 @@ body[data-accessory-category="stand"] .hero-accessory {
     color: #aaa;
 }
 
-/* 액세서리 목록 전체 너비와 위아래 여백 */
+/* ==========================================================================
+   상품 목록 및 필터링 시스템
+   ========================================================================== */
 .accessory-container {
     max-width: 1480px;
     margin: 0 auto;
@@ -235,7 +237,6 @@ body[data-accessory-category="stand"] .hero-accessory {
     font-size: 1rem;
 }
 
-/* 필터 초기화 버튼과 가격 정렬 영역 */
 .toolbar {
     display: flex;
     align-items: flex-end;
@@ -264,7 +265,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     background: #151515;
 }
 
-/* 케이블과 스탠드 상세 필터 박스 */
+/* 상품 상세 필터 영역 */
 .filter-area {
     display: grid;
     gap: 24px;
@@ -342,7 +343,9 @@ body[data-accessory-category="stand"] .hero-accessory {
     cursor: pointer;
 }
 
-/* 액세서리 카드 그리드: PC에서 한 줄에 4개 표시 */
+/* ==========================================================================
+   상품 카드 리스트
+   ========================================================================== */
 .accessory-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -366,7 +369,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     text-align: center;
 }
 
-/* 상품 이미지 크기, 비율, 그림자 */
+/* 카드 이미지 및 호버 효과 */
 .image-box {
     position: relative;
     overflow: hidden;
@@ -405,6 +408,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
+/* 카트 및 비교 기능 버튼 */
 .cart-button {
     position: absolute;
     top: 12px;
@@ -423,20 +427,6 @@ body[data-accessory-category="stand"] .hero-accessory {
     transition: background 180ms ease, transform 180ms ease;
 }
 
-.cart-button::before {
-    display: none;
-}
-
-.cart-button svg {
-    width: 19px;
-    height: 19px;
-    fill: none;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.8;
-}
-
 .cart-button:hover {
     transform: scale(1.08);
 }
@@ -446,27 +436,24 @@ body[data-accessory-category="stand"] .hero-accessory {
     background: #151515;
 }
 
-/* 액세서리 비교 체크박스 */
 .compare-check {
-    display: inline-flex;
-    align-items: center;
-    align-self: start;
-    justify-self: end;
-    gap: 5px;
-    margin: 0 0 6px;
-    color: #555;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    border-radius: 50%;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 500;
-    grid-column: 2;
-    grid-row: 2;
+    transition: transform 180ms ease, background 180ms ease;
 }
 
-.compare-check input {
-    width: 15px;
-    height: 15px;
-    margin: 0;
-    accent-color: #151515;
+.compare-check:has(input:checked) {
+    background: #151515;
 }
 
 .accessory-card.compare-selected .image-box {
@@ -474,7 +461,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     outline-offset: -3px;
 }
 
-/* 비교 상품 2개 선택 후 나타나는 안내창 */
+/* 비교 팝업창 스타일 */
 .compare-popup {
     position: fixed;
     inset: 0;
@@ -501,25 +488,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     margin-top: 22px;
 }
 
-.compare-popup-actions button,
-.compare-popup-actions a {
-    padding: 9px 15px;
-    border: 1px solid #151515;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 0.875rem;
-}
-
-.compare-cancel {
-    color: #151515;
-    background: #fff;
-}
-
-.compare-go {
-    color: #fff;
-    background: #151515;
-}
-
+/* 상품 상세 정보 (텍스트) */
 .brand {
     margin-bottom: 6px;
     color: #717171;
@@ -529,12 +498,6 @@ body[data-accessory-category="stand"] .hero-accessory {
     grid-column: 1;
     grid-row: 2;
     letter-spacing: 0.04em;
-}
-
-.accessory-name,
-.price-row,
-.colors {
-    grid-column: 1 / -1;
 }
 
 .accessory-name {
@@ -553,7 +516,6 @@ body[data-accessory-category="stand"] .hero-accessory {
     align-items: baseline;
     gap: 6px;
     font-size: 0.875rem;
-    font-family: "Roboto", "noto sans", sans-serif;
 }
 
 .sale-price {
@@ -567,30 +529,14 @@ body[data-accessory-category="stand"] .hero-accessory {
     text-decoration: line-through;
 }
 
-.discount-rate {
-    color: #ef5b45;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
+/* ==========================================================================
+   기타 컴포넌트 및 푸터
+   ========================================================================== */
 .pagination {
     display: flex;
     justify-content: center;
     gap: 8px;
     margin-top: 56px;
-}
-
-.page-button {
-    display: grid;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: 1px solid #e7e7e7;
-    border-radius: 50%;
-    place-items: center;
-    color: #555;
-    background: #fff;
-    cursor: pointer;
 }
 
 .page-button:hover,
@@ -613,127 +559,46 @@ body[data-accessory-category="stand"] .hero-accessory {
     gap: 40px;
 }
 
-.footer-content p {
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.copyright {
-    color: #aaa;
-    font-size: 0.875rem;
-}
-
 .copyright {
     margin: 48px 0 0;
     padding-top: 20px;
     border-top: 1px solid #333;
+    color: #aaa;
+    font-size: 0.875rem;
 }
 
 :focus-visible {
-    outline: 3px solid #6ba4ff;
+    outline: 3px solid #6ba4ff; /* 접근성을 위한 포커스 아웃라인 */
     outline-offset: 3px;
 }
 
 @keyframes hero-in {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* 태블릿 화면: 상품을 한 줄에 3개 표시 */
+/* ==========================================================================
+   반응형 미디어 쿼리
+   ========================================================================== */
+/* 태블릿: 상품 한 줄 3개 */
 @media (max-width: 1024px) {
-    .accessory-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .accessory-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* 모바일 화면: 메뉴, 필터, 상품 카드 크기를 여기서 수정하세요. */
+/* 모바일: 레이아웃 재배치 및 메뉴 스타일 변경 */
 @media (max-width: 768px) {
-    .main-nav {
-        grid-template-columns: auto 1fr;
-        min-height: 64px;
-        padding: 0 18px;
-    }
-
-    .nav-links {
-        justify-content: flex-end;
-        gap: 0.875rem;
-        font-size: 0.8125rem;
-    }
-
-    .sub-menu {
-        left: auto;
-        right: 0;
-        transform: translateY(-6px);
-    }
-
-    .has-submenu:hover .sub-menu {
-        transform: translateY(0);
-    }
-
-    .user-nav {
-        display: none;
-    }
-
-    .hero-accessory {
-        min-height: 270px;
-    }
-
-    .hero-accessory h1 {
-        font-size: 2.25rem;
-        font-family: "Roboto", "noto sans", sans-serif;
-        font-weight: 900;
-    }
-
-    .accessory-container {
-        padding: 56px 16px 72px;
-    }
-
-    .toolbar {
-        justify-content: stretch;
-    }
-
-    .filter-actions {
-        width: 100%;
-        align-items: stretch;
-        flex-direction: column-reverse;
-    }
-
-    .sort-control select {
-        width: 100%;
-    }
-
-    .filter-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 14px 16px;
-    }
-
-    .filter-options {
-        gap: 10px 18px;
-    }
-
-    .accessory-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px 14px;
-    }
-
-    .image-box {
-        border-radius: 8px;
-    }
-
-    .footer-content {
-        flex-direction: column;
-    }
+    .main-nav { grid-template-columns: auto 1fr; min-height: 64px; padding: 0 18px; }
+    .nav-links { justify-content: flex-end; gap: 0.875rem; font-size: 0.8125rem; }
+    .sub-menu { right: 0; transform: translateY(-6px); }
+    .user-nav { display: none; }
+    .hero-accessory { min-height: 270px; }
+    .hero-accessory h1 { font-size: 2.25rem; }
+    .filter-actions { flex-direction: column-reverse; }
+    .accessory-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 14px; }
+    .footer-content { flex-direction: column; }
 }
 
+/* 작은 모바일: 상품 한 줄 1개 */
 @media (max-width: 380px) {
-    .accessory-grid {
-        grid-template-columns: 1fr;
-    }
+    .accessory-grid { grid-template-columns: 1fr; }
 }

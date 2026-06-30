@@ -12,128 +12,160 @@
       "brand": "NODE STUDIO",
       "price": 390000,
       "originalPrice": 470000,
+      "category": "studio",
+      "filters": ["near-field", "2-way", "flat", "under-50"],
       "images": ["./image/Studio/studio_11.jpg", "./image/Studio/studio_11-ivory.png"],
-      "description": "Entry near-field monitor for balanced sound in a small workspace."
+      "description": "제한된 작업 공간에서도 왜곡 없이 균형 잡힌 사운드를 경험할 수 있는 입문자 맞춤형 니어필드 모니터입니다."
     },
     "best-value-nearfield-monitor": {
       "name": "Best Value Nearfield Monitor",
       "brand": "NODE STUDIO",
       "price": 790000,
       "originalPrice": 950000,
+      "category": "studio",
+      "filters": ["near-field", "2-way", "all-rounder", "50-100"],
       "images": ["./image/Studio/studio_8.jpg", "./image/Studio/studio_8-white.png"],
-      "description": "All-round near-field monitor for music production and listening."
+      "description": "음악 프로듀싱부터 일반적인 감상까지, 모든 영역에서 범용적으로 활용 가능한 가성비 최고의 니어필드 모니터입니다."
     },
     "professional-coaxial-monitor": {
       "name": "Professional Coaxial Monitor",
       "brand": "NODE STUDIO",
       "price": 1890000,
       "originalPrice": 2270000,
+      "category": "studio",
+      "filters": ["near-field", "coaxial", "flat", "100-300"],
       "images": ["./image/Studio/studio_4.jpg", "./image/Studio/studio_4-white.png"],
-      "description": "Professional coaxial monitor with precise imaging and consistent detail."
+      "description": "정밀한 위상 일치로 완벽한 이미징을 구현하며, 모든 대역에서 일관된 디테일을 보장하는 전문가용 동축 모니터입니다."
     },
     "3-way-studio-monitor": {
       "name": "3-Way Studio Monitor",
       "brand": "NODE STUDIO",
       "price": 3890000,
       "originalPrice": 4670000,
+      "category": "studio",
+      "filters": ["mid-field", "3-way", "flat", "300-500"],
       "images": ["./image/Studio/studio_6.jpg", "./image/Studio/studio_6-white.png"],
-      "description": "Three-way studio monitor with wide frequency response and high resolution."
+      "description": "놀라운 광대역 주파수 응답과 초고해상도 사운드를 바탕으로 미드필드 환경에서 최상의 모니터링 기준을 제시합니다."
     },
     "battery-busking-amp-set": {
       "name": "Battery Busking Amp Set",
       "brand": "NODE LIVE",
       "price": 620000,
       "originalPrice": 750000,
+      "category": "live",
+      "filters": ["portable", "small", "battery", "stand"],
       "images": ["./image/stage/stage_1.jpg", "./image/stage/stage_1-white.png"],
-      "description": "Portable battery amp set for outdoor performance and small events."
+      "description": "전원 연결이 어려운 야외 공간이나 소규모 버스킹 현장에서도 고품질 사운드를 출력하는 강력한 휴대용 배터리 앰프 세트입니다."
     },
     "compact-pa-speaker": {
       "name": "Compact PA Speaker",
       "brand": "NODE LIVE",
       "price": 790000,
       "originalPrice": 950000,
+      "category": "live",
+      "filters": ["portable", "small", "active", "stand"],
       "images": ["./image/stage/stage_2.jpg", "./image/stage/stage_2-white.png"],
-      "description": "Compact active PA speaker with balanced output and mobility."
+      "description": "작은 체구에도 불구하고 균형 잡힌 출력과 뛰어난 휴대성을 자랑하여 다양한 이벤트 공간에 최적화된 콤팩트 액티브 PA 스피커입니다."
     },
     "12-inch-live-main-speaker": {
       "name": "12-Inch Live Main Speaker",
       "brand": "NODE LIVE",
       "price": 1180000,
       "originalPrice": 1420000,
+      "category": "live",
+      "filters": ["main", "medium", "active", "stand"],
       "images": ["./image/stage/stage_3.jpg", "./image/stage/stage_3-white.png"],
-      "description": "12-inch main speaker for clear and powerful medium-size live sound."
+      "description": "중규모 공연장에서 선명하고 타격감 있는 메인 사운드를 출력하며, 신뢰도 높은 라이브 환경을 구축해 주는 12인치 메인 스피커입니다."
     },
     "festival-main-speaker": {
       "name": "Festival Main Speaker",
       "brand": "NODE LIVE",
       "price": 3290000,
       "originalPrice": 3950000,
+      "category": "live",
+      "filters": ["main", "large", "passive", "flying"],
       "images": ["./image/stage/stage_11.jpg", "./image/stage/stage_11-white.png"],
-      "description": "High-output main speaker for large stages and outdoor festivals."
+      "description": "대형 무대 및 야외 페스티벌의 압도적인 규모에 맞춰 설계된 고출력 메인 스피커로, 넓은 공간을 깊이 있는 사운드로 채워줍니다."
     },
     "balanced-xlr-cable-1m": {
       "name": "Balanced XLR Cable 1M",
       "brand": "NODE CABLE",
       "price": 39000,
       "originalPrice": 47000,
+      "category": "cable",
+      "filters": ["xlr", "microphone", "1m"],
       "images": ["./image/cable/cable_1.jpg", "./image/cable/cable_1-blue.png"],
-      "description": "One-meter balanced XLR cable for stable microphone and audio connections."
+      "description": "마이크 및 주요 오디오 장비 간의 노이즈 없는 안정적인 연결을 위해 고순도 동선을 사용한 1미터 밸런스 XLR 케이블입니다."
     },
     "premium-xlr-cable-3m": {
       "name": "Premium XLR Cable 3M",
       "brand": "NODE CABLE",
       "price": 59000,
       "originalPrice": 71000,
+      "category": "cable",
+      "filters": ["xlr", "microphone", "3m"],
       "images": ["./image/cable/cable_2.jpg", "./image/cable/cable_2-blue.png"],
-      "description": "Three-meter premium XLR cable for reliable signal transfer."
+      "description": "금도금 단자와 다중 차폐 설계를 적용하여 신호 손실을 최소화하고 가장 정밀한 오디오 데이터를 전송하는 프리미엄 XLR 케이블입니다."
     },
     "studio-trs-cable-3m": {
       "name": "Studio TRS Cable 3M",
       "brand": "NODE CABLE",
       "price": 32000,
       "originalPrice": 39000,
+      "category": "cable",
+      "filters": ["trs", "instrument", "3m"],
       "images": ["./image/cable/cable_3.jpg", "./image/cable/cable_3-gray.png"],
-      "description": "Three-meter TRS cable for interfaces, mixers, and monitors."
+      "description": "오디오 인터페이스와 모니터 스피커, 외부 믹서 등을 연결할 때 노이즈를 억제하여 순수한 원음을 전달하는 3미터 규격의 TRS 케이블입니다."
     },
     "speaker-cable-5m": {
       "name": "Speaker Cable 5M",
       "brand": "NODE CABLE",
       "price": 65000,
       "originalPrice": 78000,
+      "category": "cable",
+      "filters": ["ts", "speaker", "5m"],
       "images": ["./image/cable/cable_5.jpg", "./image/cable/cable_5-red.png"],
-      "description": "Five-meter speaker cable for amp-to-passive-speaker connections."
+      "description": "앰프의 고출력 신호를 패시브 스피커로 전달하는 고성능 스피커 케이블로, 내구성이 뛰어난 외피를 적용해 어떤 환경에서도 안심하고 사용할 수 있습니다."
     },
     "desktop-monitor-stand": {
       "name": "Desktop Monitor Stand",
       "brand": "NODE STAND",
       "price": 89000,
       "originalPrice": 107000,
+      "category": "stand",
+      "filters": ["desktop", "small", "angle"],
       "images": ["./image/stands/stand_1.jpg", "./image/stands/stand_1-white.png"],
-      "description": "Desktop stand for stable monitor speaker height and angle."
+      "description": "데스크톱 환경에서 최적의 모니터 청취 각도와 이상적인 높이를 제공하여 사용자의 청취 경험을 개선해 주는 튼튼한 모니터 스탠드입니다."
     },
     "isolation-speaker-stand": {
       "name": "Isolation Speaker Stand",
       "brand": "NODE STAND",
       "price": 129000,
       "originalPrice": 155000,
+      "category": "stand",
+      "filters": ["desktop", "small", "isolation"],
       "images": ["./image/stands/isolation-speaker-stand-cutout.png", "./image/stands/isolation-speaker-stand-white.png"],
-      "description": "Desktop isolation stand that reduces unwanted vibration transfer."
+      "description": "스피커에서 발생하는 원치 않는 진동을 바닥면과 완벽히 격리하여 저음의 해상도를 비약적으로 높여주는 프리미엄 아이솔레이션 스탠드입니다."
     },
     "adjustable-studio-stand": {
       "name": "Adjustable Studio Stand",
       "brand": "NODE STAND",
       "price": 159000,
       "originalPrice": 191000,
+      "category": "stand",
+      "filters": ["floor", "large", "angle"],
       "images": ["./image/stands/stand_3.jpg", "./image/stands/stand_3-white.png"],
-      "description": "Adjustable floor studio stand for flexible monitor positioning."
+      "description": "스튜디오 공간의 크기나 청취 위치에 맞춰 유연하게 높이를 조절할 수 있는 다목적 플로어 스탠드로, 무거운 모니터도 흔들림 없이 지지합니다."
     },
     "minimal-floor-stand": {
       "name": "Minimal Floor Stand",
       "brand": "NODE STAND",
       "price": 179000,
       "originalPrice": 215000,
+      "category": "stand",
+      "filters": ["floor", "large", "isolation"],
       "images": ["./image/stands/minimal-floor-stand-cutout.png", "./image/stands/minimal-floor-stand-black.png"],
-      "description": "Minimal floor speaker stand designed for clean living and studio spaces."
+      "description": "군더더기 없는 세련된 디자인과 안정적인 지지 구조가 결합된 플로어 스탠드로, 주거 공간의 인테리어와 스튜디오의 전문성을 동시에 완성합니다."
     }
   },
   "specifications": {

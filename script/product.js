@@ -1,50 +1,96 @@
-/*
-  PRODUCT 페이지 JS
+/* * PRODUCT 페이지 JS
+ * 역할 분리:
+ * 1. js/catalog/category.json: 제품과 액세서리의 공통 카탈로그 데이터
+ * 2. product.js: 데이터 로드, 상품 카드 생성, 필터링, 정렬, 장바구니/비교 기능 관리
+ * 3. product-*.html: 상품 카드가 들어갈 자리(#product-grid) 제공
+ */
 
-  1. 체크박스 필터
-  2. 가격 정렬
-  3. 필터 초기화
-  4. 장바구니 버튼
-  5. 비교 상품 2개 선택
+const productGrid = document.getElementById("product-grid");
+const noProductsMsg = document.getElementById("no-products-msg");
+const filterInputs = document.querySelectorAll("#product-filters input");
+const sortSelect = document.getElementById("sort-select");
+const resetButton = document.getElementById("reset-filter");
+const productCount = document.getElementById("product-count");
+const pageCategory = document.body.dataset.productCategory || "all"; // 페이지별 카테고리 설정
 
-*/
+let productCards = []; // 화면에 그려진 모든 상품 카드 DOM 배열
+let compareInputs = []; // 비교 선택 체크박스 요소 배열
+let productSpecs = {}; // 상세 스펙 정보를 담을 객체
 
+// 장바구니 아이콘 (SVG)
+const CART_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24">' +
+  '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
+  '<circle cx="9" cy="20" r="1"></circle>' +
+  '<circle cx="17" cy="20" r="1"></circle>' +
+  "</svg>";
 
-// 페이지 요소들을 불러옵니다 (DOM 선택)
-const productGrid = document.getElementById("product-grid"); // 상품들이 담길 전체 박스
-const productCards = document.querySelectorAll(".product-card"); // 각 상품 카드들
-const filterInputs = document.querySelectorAll("#product-filters input"); // 카테고리 체크박스들
-const sortSelect = document.getElementById("sort-select"); // 가격 정렬 선택창
-const resetButton = document.getElementById("reset-filter"); // 초기화 버튼
-const productCount = document.getElementById("product-count"); // 상품 개수 표시란
-
-// 상세 페이지로 이동할 링크를 자동으로 생성하는 루프
-for (let i = 0; i < productCards.length; i++) {
-  const card = productCards[i];
-  const productImage = card.querySelector(".image-box img"); // 상품 이미지
-  const productName = card.querySelector(".product-name"); // 상품 이름
-  const productId = card.getAttribute("data-product-id"); // HTML에서 가져온 상품 고유 ID
-  const detailUrl = "./product-detail.html?id=" + encodeURIComponent(productId); // 상세페이지 URL 완성
-
-  // 이미지에 링크 입히기
-  let imageLink = document.createElement("a");
-  imageLink.className = "product-link";
-  imageLink.href = detailUrl;
-  imageLink.setAttribute("aria-label", productName.textContent + " 상세페이지 보기");
-  productImage.parentElement.insertBefore(imageLink, productImage);
-  imageLink.appendChild(productImage);
-
-  // 이름에 링크 입히기
-  let nameLink = document.createElement("a");
-  nameLink.href = detailUrl;
-  nameLink.textContent = productName.textContent;
-  productName.textContent = "";
-  productName.appendChild(nameLink);
+// 가격 천 단위 콤마 추가 함수
+function formatPrice(price) {
+  return Number(price).toLocaleString("ko-KR") + "원";
 }
 
-// 필터 관련 함수들
-// 같은 필터 그룹 안에서는 OR, 같은 상품 영역의 다른 그룹끼리는 AND로 검사합니다.
-// ALL 페이지에서 STUDIO와 LIVE 영역을 함께 선택하면 두 영역의 결과를 모두 보여줍니다.
+// 상세 페이지 주소 생성 함수
+function getDetailUrl(productId) {
+  return "./product-detail.html?id=" + encodeURIComponent(productId);
+}
+
+// 현재 페이지 카테고리에 맞는 상품 데이터만 추출
+function getVisibleProductEntries(products) {
+  return Object.entries(products).filter(function ([, product]) {
+    if (pageCategory === "all") {
+      return product.category === "studio" || product.category === "live";
+    }
+    return product.category === pageCategory;
+  });
+}
+
+// 상품 카드 HTML 동적 생성 함수
+function createProductCard(productId, product) {
+  const card = document.createElement("article");
+  const filterValues = [product.category].concat(product.filters || []);
+  const detailUrl = getDetailUrl(productId);
+
+  card.className = "product-card";
+  card.dataset.productId = productId;
+  card.dataset.price = product.price;
+  card.dataset.values = filterValues.join(" "); // 필터링을 위해 값들을 데이터셋에 저장
+
+  card.innerHTML =
+    '<div class="image-box">' +
+    '<a class="product-link" href="' + detailUrl + '" aria-label="' + product.name + ' 상세페이지 보기">' +
+    '<img src="' + product.images[0] + '" alt="' + product.name + '">' +
+    "</a>" +
+    '<button class="cart-button" type="button" aria-label="장바구니에 담기">' + CART_ICON + "</button>" +
+    '<label class="compare-check" aria-label="비교 상품 선택"><input type="checkbox"></label>' +
+    "</div>" +
+    '<div class="brand">' + product.brand + "</div>" +
+    '<h3 class="product-name"><a href="' + detailUrl + '">' + product.name + "</a></h3>" +
+    '<div class="price-row">' +
+    '<span class="sale-price">' + formatPrice(product.price) + "</span>" +
+    '<span class="original-price">' + formatPrice(product.originalPrice) + "</span>" +
+    "</div>";
+
+  return card;
+}
+
+// 화면에 상품 카드들을 렌더링하는 함수
+function renderProductCards(products) {
+  const productEntries = getVisibleProductEntries(products);
+  productGrid.textContent = "";
+
+  for (let i = 0; i < productEntries.length; i++) {
+    const productId = productEntries[i][0];
+    const product = productEntries[i][1];
+    productGrid.appendChild(createProductCard(productId, product));
+  }
+
+  // 카드 생성 후 요소 참조 갱신
+  productCards = Array.from(document.querySelectorAll(".product-card"));
+  compareInputs = Array.from(document.querySelectorAll(".compare-check input"));
+}
+
+// 현재 체크된 필터들을 수집하는 함수
 function getSelectedFilters() {
   let selectedFilters = {};
 
@@ -53,41 +99,30 @@ function getSelectedFilters() {
       const filterDomain = filterInputs[i].dataset.domain;
       const filterGroup = filterInputs[i].dataset.filter;
 
-      if (!selectedFilters[filterDomain]) {
-        selectedFilters[filterDomain] = {};
-      }
-
-      if (!selectedFilters[filterDomain][filterGroup]) {
-        selectedFilters[filterDomain][filterGroup] = [];
-      }
+      if (!selectedFilters[filterDomain]) selectedFilters[filterDomain] = {};
+      if (!selectedFilters[filterDomain][filterGroup]) selectedFilters[filterDomain][filterGroup] = [];
 
       selectedFilters[filterDomain][filterGroup].push(filterInputs[i].value);
     }
   }
-
   return selectedFilters;
 }
 
+// 각 카드가 선택된 필터 조건과 일치하는지 확인하는 함수
 function checkProductCard(card, selectedFilters) {
-  const cardValues = card.getAttribute("data-values").split(/\s+/);
+  const cardValues = card.dataset.values.split(/\s+/);
   const filterDomains = Object.keys(selectedFilters);
 
-  if (filterDomains.length === 0) {
-    return true;
-  }
+  if (filterDomains.length === 0) return true;
 
   for (let i = 0; i < filterDomains.length; i++) {
     const filterDomain = filterDomains[i];
     const domainFilters = selectedFilters[filterDomain];
     const filterGroups = Object.keys(domainFilters);
-    const hasDomainTokens = cardValues.includes("studio") || cardValues.includes("live");
 
-    if (hasDomainTokens && !cardValues.includes(filterDomain)) {
-      continue;
-    }
+    if (!cardValues.includes(filterDomain)) continue;
 
     let matchesDomain = true;
-
     for (let j = 0; j < filterGroups.length; j++) {
       const groupValues = domainFilters[filterGroups[j]];
       let matchesGroup = false;
@@ -98,376 +133,209 @@ function checkProductCard(card, selectedFilters) {
           break;
         }
       }
-
-      if (!matchesGroup) {
-        matchesDomain = false;
-        break;
-      }
+      if (!matchesGroup) { matchesDomain = false; break; }
     }
-
-    if (matchesDomain) {
-      return true;
-    }
+    if (matchesDomain) return true;
   }
-
   return false;
 }
 
-function filterProducts() { // 조건에 맞는 상품만 화면에 표시
-  let selectedFilters = getSelectedFilters();
+// 필터 조건에 따라 상품 가시성 조절
+function filterProducts() {
+  const selectedFilters = getSelectedFilters();
   let visibleCount = 0;
+
   for (let i = 0; i < productCards.length; i++) {
+    // 상품 카드 표시/숨김 로직
     if (checkProductCard(productCards[i], selectedFilters) === true) {
-      productCards[i].style.display = "grid"; // 일치하면 보여줌
+      productCards[i].style.display = "grid";
       visibleCount++;
     } else {
-      productCards[i].style.display = "none"; // 불일치하면 숨김
+      productCards[i].style.display = "none";
     }
   }
-  productCount.textContent = visibleCount + " products"; // 남은 상품 수 표시
+
+  // 상품 개수 텍스트 업데이트
+  productCount.textContent = visibleCount + " products";
+
+  // 메시지 표시 여부 결정
+  if (noProductsMsg) {
+    noProductsMsg.style.display = (visibleCount === 0) ? "block" : "none";
+  }
+
+  // 상품이 하나도 없으면 메시지를 보여주고, 있으면 숨김
+  if (visibleCount === 0) {
+    noProductsMsg.style.display = "block";
+  } else {
+    noProductsMsg.style.display = "none";
+  }
 }
 
-// 정렬 관련 함수
-function sortProducts() { // 가격 오름차순/내림차순 정렬
-  let cardArray = [];
-  for (let i = 0; i < productCards.length; i++) {
-    cardArray.push(productCards[i]);
-  }
+// 가격 기준 정렬 함수
+function sortProducts() {
+  let cardArray = productCards.slice();
 
-  if (sortSelect.value === "low") { // 가격 낮은 순 정렬
-    cardArray.sort(function (a, b) {
-      return Number(a.getAttribute("data-price")) - Number(b.getAttribute("data-price"));
-    });
-  }
-  if (sortSelect.value === "high") { // 가격 높은 순 정렬
-    cardArray.sort(function (a, b) {
-      return Number(b.getAttribute("data-price")) - Number(a.getAttribute("data-price"));
-    });
+  if (sortSelect.value === "low") {
+    cardArray.sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
+  } else if (sortSelect.value === "high") {
+    cardArray.sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
   }
 
   for (let i = 0; i < cardArray.length; i++) {
-    productGrid.appendChild(cardArray[i]); // 정렬된 순서대로 HTML에 다시 배치
+    productGrid.appendChild(cardArray[i]);
   }
 }
 
-// 5. 이벤트 리스너 (사용자의 동작 감지)
-for (let i = 0; i < filterInputs.length; i++) {
-  filterInputs[i].addEventListener("change", filterProducts); // 필터 클릭 시 실행
-}
-
-sortSelect.addEventListener("change", function () { // 정렬 변경 시 실행
-  sortProducts();
-});
-
-resetButton.addEventListener("click", function () { // 초기화 클릭 시 실행
-  for (let i = 0; i < filterInputs.length; i++) {
-    filterInputs[i].checked = false;
-  }
-  sortSelect.value = "featured";
-  filterProducts();
-  sortProducts();
-});
-
-// 6. 장바구니 버튼 아이콘 생성 및 동작
-const cartButtons = document.querySelectorAll(".cart-button");
-
-function showCartPopup() {
-  if (document.querySelector(".compare-popup") !== null) {
-    return;
-  }
+// 상품 페이지 이동 여부를 묻는 팝업창
+function showMovePopup(messageText, linkText, linkHref) {
+  if (document.querySelector(".compare-popup") !== null) return;
 
   const popup = document.createElement("div");
   popup.className = "compare-popup";
-
-  const popupBox = document.createElement("div");
-  popupBox.className = "compare-popup-box";
-
-  const message = document.createElement("strong");
-  message.textContent = "장바구니 페이지로 이동할까요?";
-
-  const actions = document.createElement("div");
-  actions.className = "compare-popup-actions";
-
-  const cancelButton = document.createElement("button");
-  cancelButton.className = "compare-cancel";
-  cancelButton.type = "button";
-  cancelButton.textContent = "계속 보기";
-
-  const cartLink = document.createElement("a");
-  cartLink.className = "compare-go";
-  cartLink.href = "./shoppingCart.html";
-  cartLink.textContent = "이동하기";
-
-  actions.appendChild(cancelButton);
-  actions.appendChild(cartLink);
-  popupBox.appendChild(message);
-  popupBox.appendChild(actions);
-  popup.appendChild(popupBox);
+  popup.innerHTML = `
+    <div class="compare-popup-box">
+      <strong>${messageText}</strong>
+      <div class="compare-popup-actions">
+        <button class="compare-cancel" type="button">계속 보기</button>
+        <a class="compare-go" href="${linkHref}">${linkText}</a>
+      </div>
+    </div>
+  `;
   document.body.appendChild(popup);
 
-  cancelButton.addEventListener("click", function () {
-    popup.remove();
-  });
-
-  popup.addEventListener("click", function (event) {
-    if (event.target === popup) {
-      popup.remove();
-    }
-  });
+  popup.querySelector(".compare-cancel").addEventListener("click", () => popup.remove());
+  popup.addEventListener("click", (e) => { if (e.target === popup) popup.remove(); });
 }
 
-for (let i = 0; i < cartButtons.length; i++) {
-  cartButtons[i].innerHTML =
-    '<svg aria-hidden="true" viewBox="0 0 24 24">' +
-    '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
-    '<circle cx="9" cy="20" r="1"></circle>' +
-    '<circle cx="17" cy="20" r="1"></circle>' +
-    "</svg>";
-  cartButtons[i].setAttribute("aria-label", "장바구니에 담기");
-
-  cartButtons[i].addEventListener("click", function () {
-    this.classList.add("active");
-    addToCart(this);
-    showCartPopup();
-  });
-}
-
-
-function addToCart(button) {
+// 토글 방식의 장바구니 로직
+function toggleCartItem(button) {
   const card = button.closest(".product-card");
-  const name = card.querySelector(".product-name").textContent.trim();
-  const brand = card.querySelector(".brand").textContent.trim();
-  const salePrice = Number(card.getAttribute("data-price"));
-  const originalPriceText = card.querySelector(".original-price").textContent.replace(/[^0-9]/g, "");
-  const originalPrice = Number(originalPriceText);
-  const img = card.querySelector("img").getAttribute("src");
-
-  const item = {
-    id: name, // 상품명을 고유 ID로 사용
-    name: name,
-    brand: brand,
-    salePrice: salePrice,
-    originalPrice: originalPrice,
-    img: img,
-    qty: 1
-  };
+  const productId = card.dataset.productId;
 
   let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const existingIndex = cart.findIndex(item => item.id === productId);
 
-  // 이미 담긴 상품이면 수량만 +1
-  let existing = null;
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].id === item.id) {
-      existing = cart[i];
-      break;
-    }
-  }
-
-  if (existing !== null) {
-    existing.qty += 1;
+  if (existingIndex !== -1) {
+    cart.splice(existingIndex, 1);
+    button.classList.remove("active");
   } else {
+    const item = {
+      id: productId,
+      name: card.querySelector(".product-name").textContent.trim(),
+      brand: card.querySelector(".brand").textContent.trim(),
+      salePrice: Number(card.dataset.price),
+      originalPrice: Number(card.querySelector(".original-price").textContent.replace(/[^0-9]/g, "")),
+      img: card.querySelector("img").getAttribute("src"),
+      qty: 1
+    };
     cart.push(item);
+    button.classList.add("active");
   }
 
   localStorage.setItem("cartItems", JSON.stringify(cart));
 }
 
+// [교체할 함수 2: 버튼 설정 및 상태 동기화]
+function setupCartButtons() {
+  const cartButtons = document.querySelectorAll(".cart-button");
 
+  // 페이지 로드 시 기존 장바구니 상태와 버튼 동기화
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cart.forEach(item => {
+    const card = document.querySelector(`.product-card[data-product-id="${item.id}"]`);
+    if (card) card.querySelector(".cart-button").classList.add("active");
+  });
 
+  cartButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      toggleCartItem(this);
+      if (this.classList.contains("active")) {
+        showMovePopup("장바구니에 담겼습니다. 이동할까요?", "이동하기", "./shoppingCart.html");
+      }
+    });
+  });
+}
 
-
-
-// 비교 기능 (최대 2개 선택)
-const compareInputs = document.querySelectorAll(".compare-check input");
-
+// 비교 상품 선택 데이터 추출
 function getCompareItems() {
-  let compareItems = [];
+  return compareInputs.filter(input => input.checked).map(input => {
+    const card = input.closest(".product-card");
+    return {
+      id: card.dataset.productId,
+      name: card.querySelector(".product-name").textContent.trim(),
+      brand: card.querySelector(".brand").textContent.trim(),
+      price: Number(card.dataset.price),
+      img: card.querySelector(".image-box img").getAttribute("src"),
+      specs: productSpecs[card.dataset.productId] || null
+    };
+  });
+}
 
-  for (let i = 0; i < compareInputs.length; i++) {
-    if (compareInputs[i].checked === true) {
-      const card = compareInputs[i].closest(".product-card");
-
-      compareItems.push({
-        id: card.dataset.productId,
-        name: card.querySelector(".product-name").textContent.trim(),
-        brand: card.querySelector(".brand").textContent.trim(),
-        price: Number(card.dataset.price),
-        img: card.querySelector(".image-box img").getAttribute("src"),
-        specs: null
-      });
-    }
-  }
-
+// 비교 항목 저장
+function saveCompareItems() {
+  const compareItems = getCompareItems();
+  localStorage.setItem("compareItems", JSON.stringify(compareItems));
   return compareItems;
 }
 
-function saveCompareItems(callback) {
-  const compareItems = getCompareItems();
+// 비교 체크박스 로직
+function setupCompareInputs() {
+  compareInputs.forEach(input => {
+    input.addEventListener("change", function () {
+      const selectedCard = this.closest(".product-card");
+      selectedCard.classList.toggle("compare-selected", this.checked);
 
-  fetch("./js/catalog/products.json")
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      for (let i = 0; i < compareItems.length; i++) {
-        compareItems[i].specs = data.specifications[compareItems[i].id] || null;
-      }
-      localStorage.setItem("compareItems", JSON.stringify(compareItems));
-      if (callback) callback(compareItems);
-    });
-}
-
-function showComparePopup() {
-  if (document.querySelector(".compare-popup") !== null) {
-    return;
-  }
-
-  let popup = document.createElement("div");
-  popup.className = "compare-popup";
-
-  let popupBox = document.createElement("div");
-  popupBox.className = "compare-popup-box";
-
-  let message = document.createElement("strong");
-  message.textContent = "비교 페이지로 이동할까요?";
-
-  let actions = document.createElement("div");
-  actions.className = "compare-popup-actions";
-
-  let cancelButton = document.createElement("button");
-  cancelButton.className = "compare-cancel";
-  cancelButton.type = "button";
-  cancelButton.textContent = "계속 보기";
-
-  let compareLink = document.createElement("a");
-  compareLink.className = "compare-go";
-  compareLink.href = "./compare.html";
-  compareLink.textContent = "비교하기";
-
-  actions.appendChild(cancelButton);
-  actions.appendChild(compareLink);
-  popupBox.appendChild(message);
-  popupBox.appendChild(actions);
-  popup.appendChild(popupBox);
-  document.body.appendChild(popup);
-
-  cancelButton.addEventListener("click", function () {
-    popup.remove();
-  });
-}
-
-for (let i = 0; i < compareInputs.length; i++) {
-  compareInputs[i].addEventListener("change", function () {
-    let checkedCount = 0;
-    let selectedCard = this.closest(".product-card");
-
-    if (selectedCard !== null) {
-      if (this.checked === true) {
-        selectedCard.classList.add("compare-selected");
-      } else {
+      const checkedCount = compareInputs.filter(i => i.checked).length;
+      if (checkedCount > 2) {
+        this.checked = false;
         selectedCard.classList.remove("compare-selected");
+        alert("비교 상품은 2개까지만 선택할 수 있습니다.");
+        saveCompareItems();
+        return;
       }
-    }
 
-    for (let j = 0; j < compareInputs.length; j++) {
-      if (compareInputs[j].checked === true) {
-        checkedCount++;
-      }
-    }
-
-    if (checkedCount > 2) {
-      this.checked = false;
-      if (selectedCard !== null) {
-        selectedCard.classList.remove("compare-selected");
-      }
-      alert("비교 상품은 2개까지만 선택할 수 있습니다.");
-      saveCompareItems();
-      return;
-    }
-
-    saveCompareItems(function(compareItems) {
+      const compareItems = saveCompareItems();
       if (compareItems.length === 2) {
-        showComparePopup();
+        showMovePopup("비교 페이지로 이동할까요?", "비교하기", "./compare.html");
       }
     });
   });
 }
 
-function showComparePopup() {
-  if (document.querySelector(".compare-popup") !== null) {
-    return;
+// 필터 및 정렬 이벤트 등록
+function setupFilterAndSort() {
+  filterInputs.forEach(input => input.addEventListener("change", filterProducts));
+  sortSelect.addEventListener("change", () => { sortProducts(); filterProducts(); });
+  resetButton.addEventListener("click", () => {
+    filterInputs.forEach(i => i.checked = false);
+    sortSelect.value = "featured";
+    sortProducts();
+    filterProducts();
+  });
+}
+
+// 초기화 함수
+async function initProductPage() {
+  if (!productGrid) return;
+  productGrid.textContent = "상품을 불러오는 중입니다.";
+
+  try {
+    const response = await fetch("./js/catalog/category.json");
+    if (!response.ok) throw new Error("데이터 로드 실패");
+
+    const catalog = await response.json();
+    productSpecs = catalog.specifications || {};
+
+    renderProductCards(catalog.products || {});
+    setupFilterAndSort();
+    setupCartButtons();
+    setupCompareInputs();
+    sortProducts();
+    filterProducts();
+  } catch (error) {
+    productGrid.innerHTML = '<p class="no-results">상품 정보를 불러오지 못했습니다.</p>';
+    console.error(error);
   }
-
-  let popup = document.createElement("div");
-  popup.className = "compare-popup";
-
-  let popupBox = document.createElement("div");
-  popupBox.className = "compare-popup-box";
-
-  let message = document.createElement("strong");
-  message.textContent = "비교 페이지로 이동할까요?";
-
-  let actions = document.createElement("div");
-  actions.className = "compare-popup-actions";
-
-  let cancelButton = document.createElement("button");
-  cancelButton.className = "compare-cancel";
-  cancelButton.type = "button";
-  cancelButton.textContent = "계속 보기";
-
-  let compareLink = document.createElement("a");
-  compareLink.className = "compare-go";
-  compareLink.href = "./compare.html";
-  compareLink.textContent = "비교하기";
-
-  actions.appendChild(cancelButton);
-  actions.appendChild(compareLink);
-  popupBox.appendChild(message);
-  popupBox.appendChild(actions);
-  popup.appendChild(popupBox);
-  document.body.appendChild(popup);
-
-  cancelButton.addEventListener("click", function () {
-    popup.remove();
-  });
 }
 
-for (let i = 0; i < compareInputs.length; i++) {
-  compareInputs[i].addEventListener("change", function () {
-    let checkedCount = 0;
-    let selectedCard = this.closest(".product-card");
-
-    if (selectedCard !== null) {
-      if (this.checked === true) {
-        selectedCard.classList.add("compare-selected");
-      } else {
-        selectedCard.classList.remove("compare-selected");
-      }
-    }
-
-    for (let j = 0; j < compareInputs.length; j++) {
-      if (compareInputs[j].checked === true) {
-        checkedCount++;
-      }
-    }
-
-    if (checkedCount > 2) {
-      this.checked = false;
-
-      if (selectedCard !== null) {
-        selectedCard.classList.remove("compare-selected");
-      }
-
-      alert("비교 상품은 2개까지만 선택할 수 있습니다.");
-      saveCompareItems();
-      return;
-    }
-
-    const compareItems = saveCompareItems();
-
-    if (compareItems.length === 2) {
-      showComparePopup();
-    }
-  });
-}
-
-// 8. 초기 실행
-filterProducts(); // 페이지 열리자마자 필터 상태 적용
+initProductPage();

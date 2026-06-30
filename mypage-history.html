@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -200,7 +200,6 @@
     </header>
   </div>
 
-  
   <!--------- 쿠키창 --------->
   <div class="popup">
     <p>회원가입시 5,000원 할인 쿠폰 지급</p>
@@ -218,7 +217,163 @@
     TOP
   </div>
 
-    <!--------- 푸터 --------->
+  <!-- ==================== 최근 결제 내역 콘텐츠 시작 ==================== -->
+
+  <main class="history-page">
+    <!-- [수정 포인트] 페이지 제목과 안내 문구 -->
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">MY ACCOUNT</p>
+        <h1>최근 결제 내역</h1>
+        <p>주문별 결제 상태와 상세 내역을 확인할 수 있습니다.</p>
+      </div>
+      <a class="back-link" href="./mypage-main.html">마이페이지로 돌아가기</a>
+    </div>
+
+    <!-- [수정 포인트] 총 결제액, 완료 건수, 환불 건수 -->
+    <section class="history-summary">
+      <article>
+        <span>총 결제액</span>
+        <strong>2,850,000<small>원</small></strong>
+        <p>최근 12개월 기준</p>
+      </article>
+      <article>
+        <span>결제 완료</span>
+        <strong>12<small>건</small></strong>
+        <p>정상 처리된 주문</p>
+      </article>
+      <article>
+        <span>취소·환불</span>
+        <strong>1<small>건</small></strong>
+        <p>총 50,000원</p>
+      </article>
+    </section>
+
+    <section class="history-panel">
+      <div class="history-toolbar">
+        <div>
+          <p class="eyebrow">PAYMENT HISTORY</p>
+          <h2>결제 내역</h2>
+        </div>
+        <!-- [수정 포인트] 필터 문구를 바꾸면 JS의 비교 문구도 함께 수정 -->
+        <div class="history-filters">
+          <label>
+            <span>기간</span>
+            <select>
+              <option>최근 6개월</option>
+              <option>최근 1년</option>
+              <option>전체 기간</option>
+            </select>
+          </label>
+          <label>
+            <span>상태</span>
+            <select>
+              <option>전체 상태</option>
+              <option>결제 완료</option>
+              <option>배송 중</option>
+              <option>취소·환불</option>
+            </select>
+          </label>
+          <button type="button">조회</button>
+        </div>
+      </div>
+
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>주문 정보</th>
+              <th>결제일</th>
+              <th>결제 수단</th>
+              <th>결제 금액</th>
+              <th>상태</th>
+              <th><span class="sr-only">상세 보기</span></th>
+            </tr>
+          </thead>
+          <!-- [수정 포인트] 결제내역 추가/삭제는 tr 한 묶음 단위로 수정 -->
+          <tbody>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">S</span>
+                  <div><strong>Studio Monitor S8</strong><small>NODE-260618-0124</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 18</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>320,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">C</span>
+                  <div><strong>Balanced XLR Cable</strong><small>NODE-260612-0088</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 12</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>59,000원</strong></td>
+              <td><span class="status shipping">배송 중</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">A</span>
+                  <div><strong>Monitor Stand Pair</strong><small>NODE-260603-0051</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 03</td>
+              <td>현대카드 · 7312</td>
+              <td><strong>121,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">P</span>
+                  <div><strong>Premium Speaker Cable</strong><small>NODE-260521-0392</small></div>
+                </div>
+              </td>
+              <td>2026. 05. 21</td>
+              <td>국민카드 · 9041</td>
+              <td><strong>50,000원</strong></td>
+              <td><span class="status refund">환불 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">L</span>
+                  <div><strong>Live Speaker L12</strong><small>NODE-260409-0217</small></div>
+                </div>
+              </td>
+              <td>2026. 04. 09</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>790,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 페이지당 표시 개수는 mypage-history.js의 ITEMS_PER_PAGE에서 수정 -->
+      <nav class="pagination" aria-label="결제 내역 페이지">
+        <button type="button" disabled>이전</button>
+        <button type="button" class="active">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button">다음</button>
+      </nav>
+    </section>
+  </main>
+  <!-- ==================== 최근 결제 내역 콘텐츠 끝 ==================== -->
+
+  <!--------- 푸터 --------->
   <footer class="footer">
     <div class="footer-top">
       <div class="footer-info">
@@ -248,11 +403,8 @@
 
     <div class="footer-bottom">
       <h1 class="footer-logo"><img src="image/common/node_logo.png" alt="footer logo"></h1>
-      <p>© 2026 본 사이트는 학생용 포트폴리오입니다.</p>
+      <p>© 2026 본 사이트는 학생용 포트폴리오 입니다</p>
     </div>
   </footer>
 </body>
 </html>
-
-
-

@@ -1,55 +1,92 @@
 /*
   ACCESSORY 페이지 JS
 
-  1. 체크박스 필터
-  2. 가격 정렬
-  3. 필터 초기화
-  4. 장바구니 버튼
-  5. 비교 상품 2개 선택
+  역할 분리
+  1. category.json: 제품과 액세서리의 공통 카탈로그 데이터를 보관
+  2. accessory.js: category.json에서 cable/stand 데이터를 읽어 액세서리 카드를 생성
+  3. accessory-*.html: 액세서리 카드가 들어갈 자리(#accessory-grid)만 제공
 */
 
 const accessoryGrid = document.getElementById("accessory-grid");
-const accessoryCards = document.querySelectorAll(".accessory-card");
 const filterInputs = document.querySelectorAll("#accessory-filters input");
 const sortSelect = document.getElementById("sort-select");
 const resetButton = document.getElementById("reset-filter");
 const accessoryCount = document.getElementById("accessory-count");
+const pageCategory = document.body.dataset.accessoryCategory || "all";
 
-// 상품명으로 고유 ID를 만들어 공통 상세페이지에 연결합니다.
-function createProductId(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+let accessoryCards = [];
+let compareInputs = [];
+let catalogSpecs = {};
+
+const CART_ICON =
+  '<svg aria-hidden="true" viewBox="0 0 24 24">' +
+  '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
+  '<circle cx="9" cy="20" r="1"></circle>' +
+  '<circle cx="17" cy="20" r="1"></circle>' +
+  "</svg>";
+
+function formatPrice(price) {
+  return Number(price).toLocaleString("ko-KR") + "원";
 }
 
-for (let i = 0; i < accessoryCards.length; i++) {
-  const card = accessoryCards[i];
-  const accessoryImage = card.querySelector(".image-box img");
-  const accessoryName = card.querySelector(".accessory-name");
-  const productId = createProductId(accessoryName.textContent);
-  const detailUrl = "./product-detail.html?id=" + encodeURIComponent(productId);
+function getDetailUrl(productId) {
+  return "./product-detail.html?id=" + encodeURIComponent(productId);
+}
 
+function getVisibleAccessoryEntries(products) {
+  return Object.entries(products).filter(function ([, product]) {
+    if (pageCategory === "all") {
+      return product.category === "cable" || product.category === "stand";
+    }
+
+    return product.category === pageCategory;
+  });
+}
+
+function createAccessoryCard(productId, product) {
+  const card = document.createElement("article");
+  const filterValues = [product.category].concat(product.filters || []);
+  const detailUrl = getDetailUrl(productId);
+
+  card.className = "accessory-card";
   card.dataset.productId = productId;
+  card.dataset.price = product.price;
+  card.dataset.values = filterValues.join(" ");
 
-  let imageLink = document.createElement("a");
-  imageLink.className = "product-link";
-  imageLink.href = detailUrl;
-  imageLink.setAttribute("aria-label", accessoryName.textContent + " 상세페이지 보기");
+  // 카드 마크업은 JS에서 만들고, 상품 내용은 category.json에서 가져옵니다.
+  card.innerHTML =
+    '<div class="image-box">' +
+    '<a class="product-link" href="' + detailUrl + '" aria-label="' + product.name + ' 상세페이지 보기">' +
+    '<img src="' + product.images[0] + '" alt="' + product.name + '">' +
+    "</a>" +
+    '<button class="cart-button" type="button" aria-label="장바구니에 담기">' + CART_ICON + "</button>" +
+    '<label class="compare-check" aria-label="비교 상품 선택"><input type="checkbox"></label>' +
+    "</div>" +
+    '<div class="brand">' + product.brand + "</div>" +
+    '<h3 class="accessory-name"><a href="' + detailUrl + '">' + product.name + "</a></h3>" +
+    '<div class="price-row">' +
+    '<span class="sale-price">' + formatPrice(product.price) + "</span>" +
+    '<span class="original-price">' + formatPrice(product.originalPrice) + "</span>" +
+    "</div>";
 
-  accessoryImage.parentElement.insertBefore(imageLink, accessoryImage);
-  imageLink.appendChild(accessoryImage);
-
-  let nameLink = document.createElement("a");
-  nameLink.href = detailUrl;
-  nameLink.textContent = accessoryName.textContent;
-  accessoryName.textContent = "";
-  accessoryName.appendChild(nameLink);
+  return card;
 }
 
-// 체크된 필터를 그룹별로 담기
-// 같은 필터 그룹 안에서는 OR, 같은 액세서리 영역의 다른 그룹끼리는 AND로 검사합니다.
-// ALL 페이지에서 CABLE과 STAND 영역을 함께 선택하면 두 영역의 결과를 모두 보여줍니다.
+function renderAccessoryCards(products) {
+  const accessoryEntries = getVisibleAccessoryEntries(products);
+
+  accessoryGrid.textContent = "";
+
+  for (let i = 0; i < accessoryEntries.length; i++) {
+    const productId = accessoryEntries[i][0];
+    const product = accessoryEntries[i][1];
+    accessoryGrid.appendChild(createAccessoryCard(productId, product));
+  }
+
+  accessoryCards = Array.from(document.querySelectorAll(".accessory-card"));
+  compareInputs = Array.from(document.querySelectorAll(".compare-check input"));
+}
+
 function getSelectedFilters() {
   let selectedFilters = {};
 
@@ -73,9 +110,8 @@ function getSelectedFilters() {
   return selectedFilters;
 }
 
-// 카드가 선택한 필터에 맞는지 확인
 function checkAccessoryCard(card, selectedFilters) {
-  const cardValues = card.getAttribute("data-values").split(/\s+/);
+  const cardValues = card.dataset.values.split(/\s+/);
   const filterDomains = Object.keys(selectedFilters);
 
   if (filterDomains.length === 0) {
@@ -86,9 +122,8 @@ function checkAccessoryCard(card, selectedFilters) {
     const filterDomain = filterDomains[i];
     const domainFilters = selectedFilters[filterDomain];
     const filterGroups = Object.keys(domainFilters);
-    const hasDomainTokens = cardValues.includes("cable") || cardValues.includes("stand");
 
-    if (hasDomainTokens && !cardValues.includes(filterDomain)) {
+    if (!cardValues.includes(filterDomain)) {
       continue;
     }
 
@@ -119,9 +154,8 @@ function checkAccessoryCard(card, selectedFilters) {
   return false;
 }
 
-// 선택한 필터에 맞는 카드만 보여주기
 function filterAccessories() {
-  let selectedFilters = getSelectedFilters();
+  const selectedFilters = getSelectedFilters();
   let visibleCount = 0;
 
   for (let i = 0; i < accessoryCards.length; i++) {
@@ -136,23 +170,18 @@ function filterAccessories() {
   accessoryCount.textContent = visibleCount + " accessories";
 }
 
-// 가격순으로 카드 순서 변경
 function sortAccessories() {
-  let cardArray = [];
-
-  for (let i = 0; i < accessoryCards.length; i++) {
-    cardArray.push(accessoryCards[i]);
-  }
+  let cardArray = accessoryCards.slice();
 
   if (sortSelect.value === "low") {
     cardArray.sort(function (a, b) {
-      return Number(a.getAttribute("data-price")) - Number(b.getAttribute("data-price"));
+      return Number(a.dataset.price) - Number(b.dataset.price);
     });
   }
 
   if (sortSelect.value === "high") {
     cardArray.sort(function (a, b) {
-      return Number(b.getAttribute("data-price")) - Number(a.getAttribute("data-price"));
+      return Number(b.dataset.price) - Number(a.dataset.price);
     });
   }
 
@@ -161,71 +190,7 @@ function sortAccessories() {
   }
 }
 
-// 필터 체크 이벤트
-for (let i = 0; i < filterInputs.length; i++) {
-  filterInputs[i].addEventListener("change", filterAccessories);
-}
-
-// 가격 정렬 이벤트
-sortSelect.addEventListener("change", function () {
-  sortAccessories();
-});
-
-// 필터 초기화
-resetButton.addEventListener("click", function () {
-  for (let i = 0; i < filterInputs.length; i++) {
-    filterInputs[i].checked = false;
-  }
-
-  sortSelect.value = "featured";
-  filterAccessories();
-  sortAccessories();
-});
-
-// 장바구니 버튼
-const cartButtons = document.querySelectorAll(".cart-button");
-
-function addToCart(button) {
-  const card = button.closest(".accessory-card");
-  const nameEl = card.querySelector(".accessory-name a") || card.querySelector(".accessory-name");
-  const name = nameEl.textContent.trim();
-  const brand = card.querySelector(".brand").textContent.trim();
-  const salePrice = Number(card.getAttribute("data-price"));
-  const originalPriceText = card.querySelector(".original-price").textContent.replace(/[^0-9]/g, "");
-  const originalPrice = Number(originalPriceText);
-  const img = card.querySelector("img").getAttribute("src");
-
-  const item = {
-    id: name,
-    name: name,
-    brand: brand,
-    salePrice: salePrice,
-    originalPrice: originalPrice,
-    img: img,
-    qty: 1
-  };
-
-  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-  let existing = null;
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].id === item.id) {
-      existing = cart[i];
-      break;
-    }
-  }
-
-  if (existing !== null) {
-    existing.qty += 1;
-  } else {
-    cart.push(item);
-  }
-
-  localStorage.setItem("cartItems", JSON.stringify(cart));
-}
-
-
-function showCartPopup() {
+function showMovePopup(messageText, linkText, linkHref) {
   if (document.querySelector(".compare-popup") !== null) {
     return;
   }
@@ -237,7 +202,7 @@ function showCartPopup() {
   popupBox.className = "compare-popup-box";
 
   const message = document.createElement("strong");
-  message.textContent = "장바구니 페이지로 이동할까요?";
+  message.textContent = messageText;
 
   const actions = document.createElement("div");
   actions.className = "compare-popup-actions";
@@ -247,13 +212,13 @@ function showCartPopup() {
   cancelButton.type = "button";
   cancelButton.textContent = "계속 보기";
 
-  const cartLink = document.createElement("a");
-  cartLink.className = "compare-go";
-  cartLink.href = "./shoppingCart.html";
-  cartLink.textContent = "이동하기";
+  const moveLink = document.createElement("a");
+  moveLink.className = "compare-go";
+  moveLink.href = linkHref;
+  moveLink.textContent = linkText;
 
   actions.appendChild(cancelButton);
-  actions.appendChild(cartLink);
+  actions.appendChild(moveLink);
   popupBox.appendChild(message);
   popupBox.appendChild(actions);
   popup.appendChild(popupBox);
@@ -270,24 +235,55 @@ function showCartPopup() {
   });
 }
 
-for (let i = 0; i < cartButtons.length; i++) {
-  cartButtons[i].innerHTML =
-    '<svg aria-hidden="true" viewBox="0 0 24 24">' +
-    '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
-    '<circle cx="9" cy="20" r="1"></circle>' +
-    '<circle cx="17" cy="20" r="1"></circle>' +
-    "</svg>";
-  cartButtons[i].setAttribute("aria-label", "장바구니에 담기");
+function addToCart(button) {
+  const card = button.closest(".accessory-card");
+  const name = card.querySelector(".accessory-name").textContent.trim();
+  const brand = card.querySelector(".brand").textContent.trim();
+  const salePrice = Number(card.dataset.price);
+  const originalPriceText = card.querySelector(".original-price").textContent.replace(/[^0-9]/g, "");
+  const originalPrice = Number(originalPriceText);
+  const img = card.querySelector("img").getAttribute("src");
 
-  cartButtons[i].addEventListener("click", function () {
-    this.classList.add("active");
-    addToCart(this);
-    showCartPopup();
-  });
+  const item = {
+    id: card.dataset.productId,
+    name: name,
+    brand: brand,
+    salePrice: salePrice,
+    originalPrice: originalPrice,
+    img: img,
+    qty: 1
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let existing = null;
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === item.id) {
+      existing = cart[i];
+      break;
+    }
+  }
+
+  if (existing !== null) {
+    existing.qty += 1;
+  } else {
+    cart.push(item);
+  }
+
+  localStorage.setItem("cartItems", JSON.stringify(cart));
 }
 
-// 비교 상품은 최대 2개만 선택
-const compareInputs = document.querySelectorAll(".compare-check input");
+function setupCartButtons() {
+  const cartButtons = document.querySelectorAll(".cart-button");
+
+  for (let i = 0; i < cartButtons.length; i++) {
+    cartButtons[i].addEventListener("click", function () {
+      this.classList.add("active");
+      addToCart(this);
+      showMovePopup("장바구니 페이지로 이동할까요?", "이동하기", "./shoppingCart.html");
+    });
+  }
+}
 
 function getCompareItems() {
   let compareItems = [];
@@ -302,7 +298,7 @@ function getCompareItems() {
         brand: card.querySelector(".brand").textContent.trim(),
         price: Number(card.dataset.price),
         img: card.querySelector(".image-box img").getAttribute("src"),
-        specs: null
+        specs: catalogSpecs[card.dataset.productId] || null
       });
     }
   }
@@ -310,95 +306,95 @@ function getCompareItems() {
   return compareItems;
 }
 
-function saveCompareItems(callback) {
+function saveCompareItems() {
   const compareItems = getCompareItems();
-
-  fetch("./js/catalog/products.json")
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      for (let i = 0; i < compareItems.length; i++) {
-        compareItems[i].specs = data.specifications[compareItems[i].id] || null;
-      }
-      localStorage.setItem("compareItems", JSON.stringify(compareItems));
-      if (callback) callback(compareItems);
-    });
+  localStorage.setItem("compareItems", JSON.stringify(compareItems));
+  return compareItems;
 }
 
-function showComparePopup() {
-  if (document.querySelector(".compare-popup") !== null) {
-    return;
-  }
+function setupCompareInputs() {
+  for (let i = 0; i < compareInputs.length; i++) {
+    compareInputs[i].addEventListener("change", function () {
+      let checkedCount = 0;
+      const selectedCard = this.closest(".accessory-card");
 
-  let popup = document.createElement("div");
-  popup.className = "compare-popup";
-
-  let popupBox = document.createElement("div");
-  popupBox.className = "compare-popup-box";
-
-  let message = document.createElement("strong");
-  message.textContent = "비교 페이지로 이동할까요?";
-
-  let actions = document.createElement("div");
-  actions.className = "compare-popup-actions";
-
-  let cancelButton = document.createElement("button");
-  cancelButton.className = "compare-cancel";
-  cancelButton.type = "button";
-  cancelButton.textContent = "계속 보기";
-
-  let compareLink = document.createElement("a");
-  compareLink.className = "compare-go";
-  compareLink.href = "./compare.html";
-  compareLink.textContent = "비교하기";
-
-  actions.appendChild(cancelButton);
-  actions.appendChild(compareLink);
-  popupBox.appendChild(message);
-  popupBox.appendChild(actions);
-  popup.appendChild(popupBox);
-  document.body.appendChild(popup);
-
-  cancelButton.addEventListener("click", function () {
-    popup.remove();
-  });
-}
-
-for (let i = 0; i < compareInputs.length; i++) {
-  compareInputs[i].addEventListener("change", function () {
-    let checkedCount = 0;
-    let selectedCard = this.closest(".accessory-card");
-
-    if (selectedCard !== null) {
       if (this.checked === true) {
         selectedCard.classList.add("compare-selected");
       } else {
         selectedCard.classList.remove("compare-selected");
       }
-    }
 
-    for (let j = 0; j < compareInputs.length; j++) {
-      if (compareInputs[j].checked === true) {
-        checkedCount++;
+      for (let j = 0; j < compareInputs.length; j++) {
+        if (compareInputs[j].checked === true) {
+          checkedCount++;
+        }
       }
-    }
 
-    if (checkedCount > 2) {
-      this.checked = false;
-      if (selectedCard !== null) {
+      if (checkedCount > 2) {
+        this.checked = false;
         selectedCard.classList.remove("compare-selected");
+        alert("비교 상품은 2개까지만 선택할 수 있습니다.");
+        saveCompareItems();
+        return;
       }
-      alert("비교 상품은 2개까지만 선택할 수 있습니다.");
-      saveCompareItems();
-      return;
-    }
 
-    saveCompareItems(function(compareItems) {
+      const compareItems = saveCompareItems();
+
       if (compareItems.length === 2) {
-        showComparePopup();
+        showMovePopup("비교 페이지로 이동할까요?", "비교하기", "./compare.html");
       }
     });
+  }
+}
+
+function setupFilterAndSort() {
+  for (let i = 0; i < filterInputs.length; i++) {
+    filterInputs[i].addEventListener("change", filterAccessories);
+  }
+
+  sortSelect.addEventListener("change", function () {
+    sortAccessories();
+    filterAccessories();
+  });
+
+  resetButton.addEventListener("click", function () {
+    for (let i = 0; i < filterInputs.length; i++) {
+      filterInputs[i].checked = false;
+    }
+
+    sortSelect.value = "featured";
+    sortAccessories();
+    filterAccessories();
   });
 }
 
-// 페이지를 열었을 때 액세서리 개수 표시
-filterAccessories();
+async function initAccessoryPage() {
+  if (accessoryGrid === null) {
+    return;
+  }
+
+  accessoryGrid.textContent = "액세서리를 불러오는 중입니다.";
+
+  try {
+    const response = await fetch("./js/catalog/category.json");
+
+    if (!response.ok) {
+      throw new Error("액세서리 데이터를 불러오지 못했습니다.");
+    }
+
+    const catalog = await response.json();
+    catalogSpecs = catalog.specifications || {};
+
+    renderAccessoryCards(catalog.products || {});
+    setupFilterAndSort();
+    setupCartButtons();
+    setupCompareInputs();
+    sortAccessories();
+    filterAccessories();
+  } catch (error) {
+    accessoryGrid.innerHTML = '<p class="no-results">액세서리 정보를 불러오지 못했습니다.</p>';
+    console.error(error);
+  }
+}
+
+initAccessoryPage();
