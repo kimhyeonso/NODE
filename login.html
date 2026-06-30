@@ -10,16 +10,34 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="imgBox">
-            <img src="./image/common/node_logo.png" alt="logo">
-        </div>
+         <button class="closeBtn" id="closeBtn" aria-label="닫기">&times;</button>
         <div class="loginBox">
+           
             <h2>로그인</h2>
             <input id="id" type="text" placeholder="전화번호 혹은 이메일">
             <input id="passWord" type="password" placeholder="비밀번호">
             <p class="errorMsg" id="errorMsg"></p>
 
             <button id="enter">로그인</button>
+
+            <div class="divider">
+                <span>또는</span>
+            </div>
+
+            <div class="socialLogin">
+                <button class="socialBtn naver" type="button">
+                    <img src="./image/login/naver-12.png" alt="네이버">
+                    네이버로 시작하기
+                </button>
+                <button class="socialBtn kakao" type="button">
+                    <img src="./image/login/kakao-13.png" alt="카카오">
+                    카카오로 시작하기
+                </button>
+                <button class="socialBtn google" type="button">
+                    <img src="./image/login/goggle-11.png" alt="구글">
+                    Google로 계속하기
+                </button>
+            </div>
 
             <div class="find">
                 <p>비밀번호를 잊으셨나요?</p>

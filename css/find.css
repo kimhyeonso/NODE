@@ -2,68 +2,135 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-image: url('../image/login/login_bgi.png');
+  background-image: url('../image/login/login_bgi-01.png');
+  background-position: center;
   opacity: 0.9;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.imgBox {
-  width: 24%;
+.backBtn {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.backBtn:hover {
+  color: #ffcd4a;
 }
 
 .findBox {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 2rem 0.2rem 2rem 0.2rem;
-  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   width: clamp(17.5rem, 40%, 31.25rem);
-  height: clamp(18.75rem, 60%, 37.5rem);
+  padding: 3rem 2rem;
 }
 
 .findBox > h2 {
-  margin-top: -2rem;
-  margin-bottom: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
   font-size: clamp(1.75rem, 2vw + 1rem, 2rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 1;
-  color: #111111;
+  color: #ffffff;
 }
 
 .findBox > input {
+  width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  border: 0.0625rem solid #333;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
   font-size: 0.875rem;
   letter-spacing: 0.04em;
   line-height: 1.5;
 }
 
+.findBox > input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .errorMsg {
-  color: red;
+  width: 100%;
+  color: #ff6b6b;
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
 }
 
 .findBox > button {
+  width: 100%;
   font-size: 1rem;
   letter-spacing: 0.08em;
-  background-color: #c4c4c4;
-  color: #333;
+  background-color: #ffcd4a;
+  color: #111111;
   font-weight: 700;
-  padding: 1rem 5.5rem;
+  padding: 1rem 0;
   border-radius: 0.5rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 .findBox > button:hover {
   transform: scale(1.02);
+  background-color: white;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.closeBtn:hover {
+  color: #ffffff;
+}
+
+/* 진입 애니메이션 */
+.findBox {
+  animation: slideInUp 0.4s ease;
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 퇴장 애니메이션 (JS에서 fadeOut 클래스 추가 시 작동) */
+.fadeOut {
+  animation: fadeOutDown 0.3s ease forwards;
+}
+@keyframes fadeOutDown {
+  to { opacity: 0; transform: translateY(20px); }
 }
 
 /* 모바일 반응형 */
@@ -74,23 +141,14 @@
     gap: 2rem;
   }
 
-  .imgBox {
-    width: 20%;
-  }
-
   .findBox {
     width: 55%;
-    padding: 10rem 0;
     min-width: 17.5rem;
-  }
-
-  .findBox > input,
-  button {
-    width: 55%;
+    padding: 2.5rem 1.5rem;
   }
 
   .findBox > button {
-    padding: 1rem 4rem;
+    padding: 1rem 0; /* 여기도 좌우 패딩 제거 */
     white-space: nowrap;
   }
 }

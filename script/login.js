@@ -31,3 +31,17 @@ document.addEventListener("keydown", function(e){
 document.getElementById("findBtn").addEventListener("click", function(){
     window.location.href = "./find.html";
 });
+
+//닫기 버튼 구현하기
+document.getElementById('closeBtn').addEventListener('click', () => {
+  location.href = './index.html';
+});
+
+// signup.html로 가는 링크/버튼에 적용
+document.getElementById('findBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelector('.loginBox').classList.add('fadeOut');
+  setTimeout(() => {
+    location.href = './signup.html';
+  }, 300); // 애니메이션 길이랑 맞춰야 함
+});
