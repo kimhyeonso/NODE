@@ -29,122 +29,9 @@ button {
     font-family: inherit;
 }
 
-/* 고정 헤더 높이(5rem)만큼 본문을 아래로 내려 겹침 방지 */
+/* 본문이 상단 고정 영역과 겹치지 않도록 시작 여백을 둡니다. */
 main {
     margin-top: 5rem;
-}
-
-/* ==========================================================================
-   헤더 및 내비게이션
-   ========================================================================== */
-
-.main-nav {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    max-width: 1280px;
-    min-height: 72px;
-    margin: 0 auto;
-    padding: 0 32px;
-}
-
-.logo,
-.footer-logo {
-    width: fit-content;
-    font-size: 1.3125rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-}
-
-.nav-links,
-.footer-links {
-    display: flex;
-    gap: 1.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.has-submenu {
-    /* Product 메뉴 아래의 ALL / STUDIO / LIVE 서브메뉴 위치 기준 */
-    position: relative;
-}
-
-/* Product 서브메뉴 디자인*/
-.sub-menu {
-    position: absolute;
-    top: 35px;
-    left: 50%;
-    z-index: 30;
-    display: grid;
-    min-width: 150px;
-    margin: 0;
-    padding: 8px;
-    border: 1px solid #e7e7e7;
-    border-radius: 8px;
-    visibility: hidden;
-    list-style: none;
-    background: #fff;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
-    opacity: 0;
-    transform: translate(-50%, -6px);
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
-}
-
-.sub-menu::before {
-    position: absolute;
-    right: 0;
-    bottom: 100%;
-    left: 0;
-    height: 16px;
-    content: "";
-}
-
-.sub-menu a {
-    display: block;
-    padding: 9px 12px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-}
-
-.sub-menu a:hover,
-.sub-menu a[aria-current="page"] {
-    opacity: 1;
-    background: #f7f7f5;
-}
-
-.has-submenu:hover .sub-menu {
-    visibility: visible;
-    opacity: 1;
-    transform: translate(-50%, 0);
-}
-
-.nav-links a,
-.user-nav a,
-.footer-links a {
-    transition: opacity 180ms ease;
-}
-
-.nav-links a:hover,
-.user-nav a:hover,
-.footer-links a:hover {
-    opacity: 0.55;
-}
-
-.user-nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    font-size: 0.875rem;
-}
-
-.sub-banner {
-    margin: 0;
-    padding: 10px 16px;
-    background: #f7d9df;
-    text-align: center;
-    font-size: 0.875rem;
 }
 
 /* ==========================================================================
@@ -650,39 +537,6 @@ body[data-product-category="live"] .hero-product {
     background: #151515;
 }
 
-/* ==========================================================================
-   푸터 및 유틸리티
-   ========================================================================== */
-
-.site-footer {
-    padding: 56px 5% 28px;
-    color: #fff;
-    background: #17171f;
-}
-
-.footer-content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 40px;
-}
-
-.footer-content p {
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-.copyright {
-    color: #aaa;
-    font-size: 0.875rem;
-}
-
-.copyright {
-    margin: 48px 0 0;
-    padding-top: 20px;
-    border-top: 1px solid #333;
-}
-
 :focus-visible {
     outline: 3px solid #6ba4ff;
     outline-offset: 3px;
@@ -710,34 +564,8 @@ body[data-product-category="live"] .hero-product {
     }
 }
 
-/* 모바일 화면: 메뉴, 필터, 상품 카드 크기 최적화 */
+/* 모바일 화면: 본문, 필터, 상품 카드 크기 최적화 */
 @media (max-width: 768px) {
-    .main-nav {
-        grid-template-columns: auto 1fr;
-        min-height: 64px;
-        padding: 0 18px;
-    }
-
-    .nav-links {
-        justify-content: flex-end;
-        gap: 0.875rem;
-        font-size: 0.8125rem;
-    }
-
-    .sub-menu {
-        left: auto;
-        right: 0;
-        transform: translateY(-6px);
-    }
-
-    .has-submenu:hover .sub-menu {
-        transform: translateY(0);
-    }
-
-    .user-nav {
-        display: none;
-    }
-
     .hero-product {
         min-height: 270px;
     }
@@ -790,9 +618,6 @@ body[data-product-category="live"] .hero-product {
         font-size: 0.875rem;
     }
 
-    .footer-content {
-        flex-direction: column;
-    }
 }
 
 /* 아주 작은 화면 */
