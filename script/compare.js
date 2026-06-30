@@ -29,25 +29,25 @@ const firstId = compareItems[0].id;
 const isAccessory = firstId.includes("cable") || firstId.includes("stand");
 
 const productSpecRows = [
-  { label: "제품 유형",  keys: ["제품 유형"] },
-  { label: "주파수 응답", keys: ["주파수 응답"] },
-  { label: "최대 출력",  keys: ["최대 출력"] },
-  { label: "출력",       keys: ["앰프 출력", "정격 출력", "허용 입력"] },
-  { label: "드라이버",   keys: ["드라이버"] },
-  { label: "입력 방식",  keys: ["입력 방식"] },
-  { label: "크기",       keys: ["크기"] },
-  { label: "무게",       keys: ["무게", "제품 무게"] },
+  { label: "제품 유형",  keys: ["Product Type"] },
+  { label: "주파수 응답", keys: ["Frequency Response"] },
+  { label: "최대 출력",  keys: ["Max Output"] },
+  { label: "출력",       keys: ["Amp Power", "Rated Power", "Power Handling"] },
+  { label: "드라이버",   keys: ["Driver"] },
+  { label: "입력 방식",  keys: ["Input"] },
+  { label: "크기",       keys: ["Size"] },
+  { label: "무게",       keys: ["Weight"] },
 ];
 
 const accessorySpecRows = [
-  { label: "제품 유형",  keys: ["제품 유형"] },
-  { label: "길이",       keys: ["길이", "전체 높이", "높이", "높이 조절"] },
-  { label: "커넥터",     keys: ["커넥터"] },
-  { label: "도체",       keys: ["도체"] },
-  { label: "차폐 방식",  keys: ["차폐 방식"] },
-  { label: "외경",       keys: ["외경", "상판 크기"] },
-  { label: "피복",       keys: ["피복", "소재"] },
-  { label: "보증 기간",  keys: ["보증 기간"] },
+  { label: "제품 유형",  keys: ["Product Type"] },
+  { label: "길이/높이",  keys: ["Length", "Height", "Height Range"] },
+  { label: "커넥터",     keys: ["Connector"] },
+  { label: "도체/소재",  keys: ["Conductor", "Material"] },
+  { label: "차폐 방식",  keys: ["Shield"] },
+  { label: "외경/상판",  keys: ["Outer Diameter", "Top Plate"] },
+  { label: "피복/관리",  keys: ["Jacket", "Cable Management"] },
+  { label: "보증/구성",  keys: ["Warranty", "Included"] },
 ];
 
 const specRows = isAccessory ? accessorySpecRows : productSpecRows;

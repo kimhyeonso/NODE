@@ -10,14 +10,11 @@ category.json 설명
    - studio, live, cable, stand 데이터를 한 파일에서 관리합니다.
 
 2. product.js
-   - category.json에서 studio/live 데이터를 읽습니다.
+   - category.json에서 studio/live/cable/stand 데이터를 읽습니다.
    - product-main.html, product-studio.html, product-live.html의 상품 카드를 자동 생성합니다.
+   - accessory-main.html, accessory-cable.html, accessory-stand.html의 액세서리 카드도 자동 생성합니다.
 
-3. accessory.js
-   - category.json에서 cable/stand 데이터를 읽습니다.
-   - accessory-main.html, accessory-cable.html, accessory-stand.html의 액세서리 카드를 자동 생성합니다.
-
-4. product-detail.js
+3. product-detail.js
    - category.json에서 상품 상세 정보와 스펙을 읽습니다.
    - 제품과 액세서리 모두 같은 product-detail.html을 사용합니다.
 
@@ -47,6 +44,5 @@ category.json 설명
 
 정리하면:
 category.json = 제품과 액세서리의 통합 데이터
-product.js = studio/live 카드 생성
-accessory.js = cable/stand 카드 생성
+product.js = studio/live/cable/stand 카드 생성
 HTML 파일 = 카드가 들어갈 자리
