@@ -70,12 +70,3 @@ document.getElementById('backBtn').addEventListener('click', () => {
 document.getElementById('closeBtn').addEventListener('click', () => {
   location.href = './index.html';
 });
-
-// signup.js
-document.getElementById('toLoginBtn').addEventListener('click', (e) => {
-  e.preventDefault();
-  document.querySelector('.signupBox').classList.add('fadeOut');
-  setTimeout(() => {
-    location.href = './login.html';
-  }, 300);
-});
