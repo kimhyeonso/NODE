@@ -1,17 +1,17 @@
 // 두번째 섹션 헤더 배경색
 function HeaderSecondSection__init() {
   const scrollContainer = document.querySelector(".section-container");
-  const header = document.querySelector(".top-menu-bar");
+  const topBar = document.querySelector(".top-bar");
   const brandLogoSection = document.querySelector(".brand-logo-section");
 
-  if (!scrollContainer || !header || !brandLogoSection) return;
+  if (!scrollContainer || !topBar || !brandLogoSection) return;
 
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        header.classList.add("second-section-header");
+        topBar.classList.add("second-section-header");
       } else {
-        header.classList.remove("second-section-header");
+        topBar.classList.remove("second-section-header");
       }
     });
   }, {
@@ -439,7 +439,7 @@ MenuScrollAnimation__init();
 
 //다섯번째 섹션 애니메이션 구현
 const searchScrollContainer = document.querySelector(".section-container")
-const sectionCopyItems = document.querySelectorAll(".search-copy, .artist-heading, .sound-node-text")
+const sectionCopyItems = document.querySelectorAll(".search-copy, .artist-heading, .sound-node-text, .logo-mask")
 
 const observer = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
