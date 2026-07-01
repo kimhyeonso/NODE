@@ -144,6 +144,11 @@ html > body {
   transition: color .3s ease;
 }
 
+.menu-icon a:hover{
+  font-weight: bold;
+  color: #ffcd4a;
+}
+
 .menu-icon .line {
   width: 1px;
   height: 14px;
