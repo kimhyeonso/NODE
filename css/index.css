@@ -42,6 +42,10 @@ body {
   transition: none;
 }
 
+.top-menu-bar.second-section-header {
+  background-color: #070707;
+}
+
 .gnb > li > a {
   color: #fff;
 }
@@ -146,13 +150,57 @@ body {
 /*********** 두번째 섹션 구현 ***********/
 
 .brand-logo-section{
+  position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #fff;
-  position: relative;
+  overflow: hidden;
+  background: #fff;
 
   /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
+}
+
+.logo-mask {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+.logo-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-full-image {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url("../image/index/logo-in-image.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 1s ease,
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-logo-section.logo-zoom .logo-mask {
+  transform: translate(-50%, -50%) scale(5);
+  opacity: 0;
+}
+
+.brand-logo-section.logo-zoom .logo-full-image {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .brand-logo-section img{
@@ -188,8 +236,29 @@ body {
   transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-.brand-logo-section.fade-out img {
+.brand-logo-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #070707;
   opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.brand-logo-section img {
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+.brand-logo-section.logo-zoom img {
+  transform: translate(-50%, -50%) scale(3.8);
+  opacity: 0;
+}
+
+.brand-logo-section.logo-zoom::after {
+  opacity: 1;
 }
 
 .brand-story-section.fade-in .brand-story-container {
@@ -876,7 +945,6 @@ body {
   left: 50%;
   bottom: clamp(100px, 13vh, 150px);
   width: 100%;
-  overflow: hidden;
   transform: translateX(-50%);
 }
 
@@ -1024,10 +1092,20 @@ body {
   top: 50%;
   left: 50%;
   z-index: 2;
-  transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
   pointer-events: none;
+  opacity: .3;
+  transform: translate(-50%, calc(-50% + 150px));
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.sound-node-text.on {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 .sound-node-text h2 {

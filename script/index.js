@@ -1,5 +1,30 @@
+// 두번째 섹션 헤더 배경색
+function HeaderSecondSection__init() {
+  const scrollContainer = document.querySelector(".section-container");
+  const header = document.querySelector(".top-menu-bar");
+  const brandLogoSection = document.querySelector(".brand-logo-section");
 
-// 두번째 섹션 구현
+  if (!scrollContainer || !header || !brandLogoSection) return;
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        header.classList.add("second-section-header");
+      } else {
+        header.classList.remove("second-section-header");
+      }
+    });
+  }, {
+    root: scrollContainer,
+    threshold: 0.6
+  });
+
+  observer.observe(brandLogoSection);
+}
+
+HeaderSecondSection__init();
+
+// 두번째 섹션 애니메이션 구현
 function BrandFade__init() {
   const scrollContainer = document.querySelector(".section-container");
   const logoSection = document.querySelector(".brand-logo-section");
@@ -14,9 +39,9 @@ function BrandFade__init() {
     const fadeStart = logoTop + window.innerHeight * 0.35;
 
     if (scrollTop >= fadeStart) {
-      logoSection.classList.add("fade-out");
+      logoSection.classList.add("logo-zoom");
     } else {
-      logoSection.classList.remove("fade-out");
+      logoSection.classList.remove("logo-zoom");
     }
   }
 
@@ -414,7 +439,7 @@ MenuScrollAnimation__init();
 
 //다섯번째 섹션 애니메이션 구현
 const searchScrollContainer = document.querySelector(".section-container")
-const sectionCopyItems = document.querySelectorAll(".search-copy, .artist-heading")
+const sectionCopyItems = document.querySelectorAll(".search-copy, .artist-heading, .sound-node-text")
 
 const observer = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -634,6 +659,7 @@ setCenterItem();
 setInterval(() => {
   moveNextArtist();
 }, pointTime);
+
 
 // 일곱번째 캔버스 구현
 const canvas = document.getElementById("soundNodeCanvas");
