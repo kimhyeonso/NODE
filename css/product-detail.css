@@ -303,6 +303,7 @@
   letter-spacing: 0.2em;
 }
 
+
 .detail-hero h2 {
   margin: 0;
   font-size: clamp(2.625rem, 2vw, 4.75rem);
@@ -315,8 +316,12 @@
   max-width: 600px;
   margin: 20px 0 0;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 1rem;
+  font-size: 1em;
   line-height: 1.8;
+}
+
+.mobile-hide {
+  display: inline; 
 }
 
 .detail-overview {
@@ -378,7 +383,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
   /* 간격: 40px ~ 130px 사이에서 화면 크기에 따라 유동적으로 조절 */
   gap: clamp(40px, 8vw, 130px);
-  width: min(90%, 1280px);
+  width: min(80%, 1280px);
   margin: 0 auto;
   /* 패딩(위아래): 100px ~ 180px 사이에서 화면 크기에 따라 유동적으로 조절 */
   padding: clamp(100px, 12vw, 180px) 0;
@@ -398,8 +403,8 @@
 .detail-story-text {
   margin-top: 0;
   color: #aaa;
-  font-size: 0.9375rem;
-  line-height: 2.2;
+  font-size: 1.2rem;
+  line-height: 1.8;
 }
 
 .detail-image-grid {
@@ -1066,7 +1071,7 @@
 }
 
 .review-item {
-  padding: 32px 0 42px;
+  padding: 10px 10px;
   border-bottom: 1px solid #dedede;
 }
 
@@ -1372,10 +1377,42 @@
 
   .product-tabs {
     top: 5rem;
-    justify-content: flex-start;
-    gap: 28px;
-    overflow-x: auto;
-    white-space: nowrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    overflow-x: visible;
+    white-space: normal;
+  }
+
+  .product-tabs button {
+    justify-self: center;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .detail-hero h2,
+  .information-panel > h2,
+  .review-summary h2,
+  .similar-heading h2 {
+    font-size: 2rem;
+    line-height: 1.65;
+    letter-spacing: -0.03em;
+  }
+
+ 
+  .mobile-hide {
+    display: none; /* 모바일에서만 br을 숨김 */
+  }
+
+
+  .detail-story-heading h3,
+  .detail-section-heading h3,
+  .detail-wide-visual h3,
+  .detail-editorial-copy h3,
+  .detail-final-message h3 {
+    font-size: 1.8rem;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
   }
 
   .detail-hero {
@@ -1385,16 +1422,38 @@
     background-position: 62% center;
   }
 
+  .detail-hero > p:last-child{
+    font-size: 0.9rem;
+  }
+
   .detail-story {
     margin-top: 100px; /* 원하는 만큼의 여백 (예: 80px) */
     grid-template-columns: 1fr;
     gap: 30px;
+    width: 100%;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .detail-story-text{
+    font-size: 0.8rem;
+  }
+
+  .detail-section-heading {
+    width: 100%;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 
   .detail-overview {
     grid-template-columns: 1fr;
     width: calc(100% - 48px);
     padding: 34px 0 54px;
+
+  }
+
+  .detail-overview p {
+    font-size: 0.8rem;
   }
 
   .detail-overview article,
@@ -1425,10 +1484,13 @@
   .detail-figure figcaption {
     padding-right: 20px;
     padding-left: 20px;
+    font-size: 0.95rem;
   }
 
   .detail-features {
     grid-template-columns: 1fr;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 
   .detail-feature,
@@ -1476,6 +1538,8 @@
 
   .engineering-grid {
     grid-template-columns: 1fr;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 
   .engineering-grid article,
@@ -1508,6 +1572,8 @@
 
   .use-case-list {
     grid-template-columns: 1fr;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 
   .use-case-list article,
@@ -1526,6 +1592,8 @@
   .specification-list > div {
     grid-template-columns: 1fr;
     gap: 8px;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 
   .information-panel {
@@ -1555,11 +1623,38 @@
   }
 
   .review-list {
-    margin-top: 60px;
+    margin-top: 86px;
+  }
+
+  .review-user + .review-content {
+    margin-top: 18px;
+    margin-bottom: 18px;
+
   }
 
   .review-image {
     width: 82px;
+  }
+
+  .similar-products {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .similar-cart-button {
+    top: 8px;
+    left: 8px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .similar-cart-button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .similar-products .card:nth-child(n + 5) {
+    display: none;
   }
 
   .product-list {
@@ -1569,5 +1664,16 @@
 
   .card {
     min-width: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .similar-products {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
   }
 }

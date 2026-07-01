@@ -10,6 +10,7 @@
 const ITEMS_PER_PAGE = 2;
 
 // 필터와 표 요소 가져오기
+// 결제내역 페이지는 HTML 테이블에 있는 tr들을 가져와서 필터링/페이지네이션만 JS로 처리합니다.
 const periodSelect = document.querySelector(".history-filters label:nth-child(1) select");
 const statusSelect = document.querySelector(".history-filters label:nth-child(2) select");
 const searchButton = document.querySelector(".history-filters button");
@@ -22,6 +23,7 @@ let visibleRows = [];
 // ==================== 상태 / 기간 필터 ====================
 // [수정 포인트] HTML 옵션 문구를 바꾸면 아래 문자열도 함께 변경
 function checkStatus(row) {
+  // 선택된 상태값과 각 행의 .status 텍스트를 비교해서 보여줄 행인지 판단합니다.
   const selectedStatus = statusSelect.value;
   const rowStatus = row.querySelector(".status").textContent;
 
@@ -38,6 +40,7 @@ function checkStatus(row) {
 
 // 선택한 기간 안에 있는 결제인지 확인
 function checkPeriod(row) {
+  // 선택된 기간값과 각 행의 결제 날짜를 비교해서 기간 안에 있는 행인지 판단합니다.
   const selectedPeriod = periodSelect.value;
 
   if (selectedPeriod === "전체 기간") {
@@ -50,6 +53,7 @@ function checkPeriod(row) {
   dateText = dateText.replace(".", "");
   const paymentDate = new Date(dateText);
   // [수정 포인트] 샘플 데이터의 조회 기준 날짜
+  // 현재 날짜 대신 샘플 결제내역 기준일을 고정해서 필터 결과가 항상 같게 나오도록 했습니다.
   const standardDate = new Date("2026-06-23");
   let monthCount = 6;
 
@@ -66,6 +70,7 @@ function checkPeriod(row) {
 function filterRows() {
   visibleRows = [];
 
+  // 상태 조건과 기간 조건을 모두 만족하는 행만 visibleRows에 모아둡니다.
   for (let i = 0; i < tableRows.length; i++) {
     if (checkStatus(tableRows[i]) && checkPeriod(tableRows[i])) {
       visibleRows.push(tableRows[i]);
@@ -75,6 +80,7 @@ function filterRows() {
 
 // ==================== 결제내역 출력 / 페이지 번호 ====================
 function renderHistory() {
+  // 먼저 전체 행을 숨기고, 현재 페이지에 해당하는 행만 다시 보여줍니다.
   for (let i = 0; i < tableRows.length; i++) {
     tableRows[i].style.display = "none";
   }
@@ -95,6 +101,7 @@ function renderHistory() {
 function updatePagination() {
   const totalPages = Math.max(1, Math.ceil(visibleRows.length / ITEMS_PER_PAGE));
 
+  // 필터 결과 개수에 따라 페이지 번호 버튼을 숨기거나 활성화합니다.
   for (let i = 0; i < pageButtons.length; i++) {
     const button = pageButtons[i];
     const text = button.textContent;
@@ -126,6 +133,8 @@ for (let i = 0; i < pageButtons.length; i++) {
     const buttonText = this.textContent;
     const totalPages = Math.max(1, Math.ceil(visibleRows.length / ITEMS_PER_PAGE));
 
+    // 이전/다음/숫자 버튼을 모두 같은 이벤트 안에서 처리합니다.
+
     if (buttonText === "이전" && currentPage > 1) {
       currentPage--;
     } else if (buttonText === "다음" && currentPage < totalPages) {
@@ -140,6 +149,7 @@ for (let i = 0; i < pageButtons.length; i++) {
 
 // 조회 버튼 클릭
 searchButton.addEventListener("click", function () {
+  // 조회 버튼을 누르면 1페이지로 돌아간 뒤 필터 결과를 다시 계산합니다.
   currentPage = 1;
   filterRows();
   renderHistory();
@@ -157,6 +167,7 @@ for (let i = 0; i < detailLinks.length; i++) {
     event.preventDefault();
 
     // 상세 링크(td)의 부모는 td, 그 부모가 현재 결제내역 tr입니다.
+    // 상세 링크는 실제 상세 페이지 이동 대신 현재 행의 주문 정보를 alert로 보여주는 방식입니다.
     const row = this.parentElement.parentElement;
     const productName = row.querySelector(".order-info strong").textContent;
     const orderNumber = row.querySelector(".order-info small").textContent;
