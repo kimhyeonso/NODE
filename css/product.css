@@ -643,6 +643,10 @@ body[data-product-category="live"] .hero-product {
         font-size: 0.875rem;
     }
 
+    .hero-description {
+        font-size: 1.1rem;
+    }
+
 }
 
 /* 아주 작은 화면 */

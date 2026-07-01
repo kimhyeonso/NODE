@@ -370,7 +370,7 @@
 .detail-overview p {
   margin: 18px 0 0;
   color: #999;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.75;
 }
 
@@ -474,10 +474,10 @@
 }
 
 .detail-feature p {
-  margin: 0;
+  margin: 18px 0 0;
   color: #999;
-  font-size: 0.875rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.75;
 }
 
 .detail-section-heading {
@@ -499,9 +499,9 @@
 .detail-wide-visual > div > p:last-child,
 .detail-editorial-copy > p:last-child {
   margin: 28px 0 0;
-  color: #999;
-  font-size: 0.9375rem;
-  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
 .detail-performance,
@@ -560,7 +560,7 @@
 .performance-cards p {
   margin: 54px 0 0;
   color: #888;
-  font-size: 0.8125rem;
+  font-size: 1rem;
   line-height: 1.8;
 }
 
@@ -635,7 +635,7 @@
 .use-case-list p {
   margin: 0;
   color: #888;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   line-height: 1.8;
 }
 
@@ -1057,6 +1057,7 @@
   color: #777;
   font-size: 0.875rem;
   font-weight: 400;
+  
 }
 
 .review-list-heading select {
@@ -1071,8 +1072,9 @@
 }
 
 .review-item {
-  padding: 10px 10px;
+  padding: 20px 20px;
   border-bottom: 1px solid #dedede;
+  
 }
 
 .review-date {
@@ -1101,11 +1103,11 @@
 
 .review-user strong {
   display: block;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .review-item-stars {
-  margin-top: 4px;
+  display: flex;
   color: #151515;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
@@ -1122,6 +1124,7 @@
 }
 
 .review-image {
+  
   width: 96px;
   aspect-ratio: 1;
   background-color: #eee;
@@ -1134,12 +1137,12 @@
 }
 
 .review-image-two {
-  background-image: url("../image/Studio/studio_12.jpg");
+  background-image: url("../image/Studio/studio_8-white.png");
 }
 
 .review-content {
   max-width: 700px;
-  margin: 0;
+  margin-top: 20px;
   color: #555;
   font-size: 0.875rem;
   line-height: 1.8;
@@ -1344,7 +1347,7 @@
     display: block;
     width: 100%;
     min-height: auto;
-    padding: 34px 20px 70px;
+    padding: 30px 20px 34px;
   }
 
   .gallery {
@@ -1363,16 +1366,16 @@
 
   .main-image {
     height: auto;
-    aspect-ratio: 1 / 1.08;
+    aspect-ratio: 1 / 1.1;
   }
 
   .product-info {
     height: auto;
-    padding-top: 48px;
+    padding-top: 20px;
   }
 
   .product-info h1 {
-    font-size: 2.625rem;
+    font-size: 2.4rem;
   }
 
   .product-tabs {
@@ -1400,18 +1403,14 @@
   }
 
  
-  .mobile-hide {
-    display: none; /* 모바일에서만 br을 숨김 */
-  }
-
 
   .detail-story-heading h3,
   .detail-section-heading h3,
   .detail-wide-visual h3,
   .detail-editorial-copy h3,
   .detail-final-message h3 {
-    font-size: 1.8rem;
-    line-height: 1.25;
+    font-size: 2rem;
+    line-height: 1.65;
     letter-spacing: -0.03em;
   }
 
@@ -1423,7 +1422,7 @@
   }
 
   .detail-hero > p:last-child{
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .detail-story {
@@ -1436,7 +1435,7 @@
   }
 
   .detail-story-text{
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .detail-section-heading {
@@ -1453,7 +1452,17 @@
   }
 
   .detail-overview p {
-    font-size: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .detail-feature p,
+  .detail-section-heading > p:last-child,
+  .performance-cards p,
+  .detail-wide-visual > div > p:last-child,
+  .engineering-grid p,
+  .detail-editorial-copy > p:last-child,
+  .use-case-list p {
+    font-size: 1rem;
   }
 
   .detail-overview article,
@@ -1484,7 +1493,7 @@
   .detail-figure figcaption {
     padding-right: 20px;
     padding-left: 20px;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .detail-features {
@@ -1665,6 +1674,10 @@
   .card {
     min-width: 0;
   }
+
+  .mobile-hide{
+    display: none;
+  }
 }
 
 @media (max-width: 380px) {
@@ -1676,4 +1689,7 @@
   .product-list {
     grid-template-columns: 1fr;
   }
+
+  
+
 }

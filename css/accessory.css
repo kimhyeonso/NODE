@@ -537,6 +537,10 @@ body[data-accessory-category="stand"] .hero-accessory {
         height: 14px;
     }
     .accessory-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 14px; }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
 }
 
 /* 작은 모바일: 상품 한 줄 1개 */

@@ -179,6 +179,8 @@ function filterListings() {
 }
 
 function sortListings() {
+  if (!pageSettings.sortSelect) return;
+
   let cardArray = [...listingCards];
   const sortVal = pageSettings.sortSelect.value;
   // 가격순 정렬은 카드에 저장해둔 data-price 값을 기준으로 합니다.
