@@ -42,6 +42,11 @@ body {
   transition: none;
 }
 
+.top-bar.second-section-header {
+  background-color: #070707 !important;
+  background-image: none !important;
+}
+
 .gnb > li > a {
   color: #fff;
 }
@@ -146,13 +151,67 @@ body {
 /*********** 두번째 섹션 구현 ***********/
 
 .brand-logo-section{
+  position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #fff;
-  position: relative;
-
+  overflow: hidden;
+  background: #fff;
+  transform: translateY(150px);
+  
   /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
+  z-index: 0;
+}
+
+.logo-mask {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 60%;
+  height: 60%;
+  opacity: .3;
+  transform: translate(-50%, 0) scale(.5);
+  will-change: opacity, transform;
+  transition:
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+.logo-mask.on{
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.logo-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-full-image {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url("../image/index/logo-in-image.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 1s ease,
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-logo-section.logo-zoom .logo-mask {
+  transform: translate(-50%, -50%) scale(5);
+  opacity: 0;
+  background-color: #070707;
+}
+
+.brand-logo-section.logo-zoom .logo-full-image {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .brand-logo-section img{
@@ -174,6 +233,7 @@ body {
   align-items: flex-start;
   opacity: 1;
   transition: opacity 0.6s ease;
+  z-index: 3;
 
   /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
@@ -188,8 +248,35 @@ body {
   transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-.brand-logo-section.fade-out img {
+.brand-logo-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #070707;
   opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.brand-logo-section img {
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+.brand-logo-section.logo-zoom img {
+  transform: translate(-50%, -50%) scale(3.8);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.brand-logo-section.logo-zoom .brand-logo-bg {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.brand-logo-section.logo-zoom::after {
+  opacity: 1;
 }
 
 .brand-story-section.fade-in .brand-story-container {
@@ -243,11 +330,6 @@ body {
 .brand-story-txt.pc {
   white-space: nowrap;
 }
-
-/* .brand-story-container .logo img{
-  width: 100%;
-  object-fit: cover;
-} */
 
 .sound-wave-section {
   position: absolute;
@@ -367,7 +449,7 @@ body {
   color: #fff;
   text-shadow: 0 2px 16px #000, 0 0 30px #000;
   opacity: 0;
-  transform: translateX(-50%) scale(0.78);
+  transform: translate(-50%, -50%) scale(0.78);
   transition:
     opacity 0.45s ease,
     transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
@@ -377,7 +459,7 @@ body {
 
 .sound-label.active {
   opacity: 1;
-  transform: translateX(-50%) scale(1.08);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
 .sound-section.sound-step-origin .sound-flow {
@@ -418,26 +500,26 @@ body {
 }
 
 .sound-origin {
-  top: 8%;
+  top: 33.333%;
 }
 
 .sound-node {
-  top: 43%;
+  top: 66.666%;
 }
 
 .sound-destination {
-  bottom: 12%;
+  top: 90%;
 }
 
 .sound-closing {
   position: fixed;
-  top: 50%;
+  top: calc(50% + clamp(76px, 10vh, 120px));
   left: 50%;
   z-index: 20;
   width: min(90%, 720px);
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
-  font-size: clamp(1rem, 1vw, 1.5rem);
+  font-size: clamp(1.5rem, 1vw, 2rem);
   line-height: 1.55;
   opacity: 0;
   transform: translate(-50%, -40%) scale(0.94);
@@ -876,7 +958,6 @@ body {
   left: 50%;
   bottom: clamp(100px, 13vh, 150px);
   width: 100%;
-  overflow: hidden;
   transform: translateX(-50%);
 }
 
@@ -899,9 +980,11 @@ body {
 }
 
 .artist-photo {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  overflow: hidden;
+  box-sizing: border-box;
+  overflow: visible;
   border-radius: 50%;
   background-color: #171717;
 }
@@ -911,6 +994,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
   filter: brightness(0.7);
 }
 
@@ -963,7 +1047,7 @@ body {
 .artist-item.active .artist-point {
   display: block;
   position: absolute;
-  top: 50%;
+  top: calc(50% - var(--point-radius));
   left: 50%;
   z-index: 10;
 
@@ -973,7 +1057,8 @@ body {
   border-radius: 50%;
   background: #c9a24b;
 
-  transform-origin: center;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% calc(var(--point-radius) + 50%);
   animation: artistPointRotate 4s linear forwards;
 }
 
@@ -983,17 +1068,11 @@ body {
 
 @keyframes artistPointRotate {
   from {
-    transform:
-      translate(-50%, -50%)
-      rotate(0deg)
-      translateY(calc(var(--point-radius) * -1));
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
   to {
-    transform:
-      translate(-50%, -50%)
-      rotate(360deg)
-      translateY(calc(var(--point-radius) * -1));
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -1026,10 +1105,20 @@ body {
   top: 50%;
   left: 50%;
   z-index: 2;
-  transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
   pointer-events: none;
+  opacity: .3;
+  transform: translate(-50%, calc(-50% + 150px));
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.sound-node-text.on {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 .sound-node-text h2 {
@@ -1103,15 +1192,15 @@ body {
   }
 
   .sound-origin {
-    top: 7%;
+    top: 33.333%;
   }
 
   .sound-node {
-    top: 42%;
+    top: 66.666%;
   }
 
   .sound-destination {
-    bottom: 10%;
+    top: 90%;
   }
 
   .sound-closing {
