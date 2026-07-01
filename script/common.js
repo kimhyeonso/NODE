@@ -197,8 +197,8 @@ function TopButton__update() {
 TopButton__update();
 $(window).on("scroll", TopButton__update);
 
-$(".topBtn").on("click", function () {
-  $("html, body").animate({ scrollTop: 0 });
+  $(".topBtn").on("click", function () {
+    $("html, body").animate({ scrollTop: 0 },500);
 });
 
 // 페이지 로드 시 뱃지 1회 실행

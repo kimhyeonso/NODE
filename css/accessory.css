@@ -27,6 +27,29 @@ select {
     font: inherit;
 }
 
+/* 비교 팝업 */
+.vspopup{
+    width: 80%;
+    height: 100px;
+    background-color: rgba(245, 245, 245, 0.8);
+    position: fixed;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+
+    z-index: 99;
+}
+
+.vstext{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+}
+
 main {
     margin-top: 5rem; /* 본문 시작 여백 */
 }

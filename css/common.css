@@ -34,10 +34,6 @@
   font-weight: 900;
 }
 
-html {
-  font-size: 16px;
-}
-
 html > body {
 	font-family: "roboto-regular";
 	text-underline-position: under;
@@ -89,7 +85,7 @@ html > body {
 
 .main-logo img {
   width: auto;
-  height: 2.5rem;
+  height: 2.3rem;
   object-fit: contain;
 }
 
@@ -204,7 +200,7 @@ body.popup-visible .snb {
 }
 
 .snb-menu a {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #fff;
   font-weight: 400;
 }
@@ -330,7 +326,7 @@ body.popup-visible .snb {
   width: 100%;
   height: 100vh;
   background-color: rgba(0,0,0,.3);
-  z-index: 150;
+  z-index: 800;
 }
 
 .dim.active {
@@ -350,6 +346,8 @@ body.popup-visible .snb {
   z-index: 300;
   transform: all .3s;
   overflow-y: auto;
+
+  z-index: 800;
 }
 
 .side-menu-box.active {
@@ -554,7 +552,7 @@ body.popup-visible .snb {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+  z-index: 95;
 }
 
 
@@ -608,6 +606,7 @@ body.popup-visible .snb {
   bottom: 2%;
   right: 2%;
   transform: translate(-50%,-50%);
+  transition: all .5s;
   cursor: pointer;
 
   display: none;
