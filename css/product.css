@@ -264,6 +264,14 @@ body[data-product-category="live"] .hero-product {
     display: grid;
     grid-template-columns: 1fr auto;
     min-width: 0;
+    opacity: 0;
+    transform: translateY(-34px);
+    transition: 1.8s ease;
+}
+
+.product-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .product-card .image-box {

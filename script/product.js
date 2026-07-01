@@ -129,6 +129,7 @@ function renderListingCards(products) {
   entries.forEach(([id, product]) => pageSettings.grid.appendChild(createListingCard(id, product)));
   listingCards = Array.from(document.querySelectorAll("." + pageSettings.cardClass));
   compareInputs = Array.from(document.querySelectorAll(".compare-check input"));
+  observeListingCards();
 }
 
 /** 4. 필터 및 정렬 로직 */
@@ -356,3 +357,29 @@ async function initListingPage() {
 }
 
 initListingPage();
+
+
+
+
+
+
+// 스크롤 애니메이션 함수
+function observeListingCards() {
+  if (!listingCards.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    listingCards.forEach(card => card.classList.add("fade-in"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  listingCards.forEach(card => observer.observe(card));
+}

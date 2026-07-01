@@ -100,6 +100,68 @@ function showDetailCartPopup() {
 }
 
 // 6. 메인 초기화: 상세 페이지의 데이터 바인딩 및 이벤트 설정
+function setupSimilarSwiper() {
+  const container = document.querySelector(".swiper-container");
+  if (!container) return;
+
+  const wrapper = container.querySelector(".swiper-wrapper");
+  if (!wrapper) return;
+
+  // 5개가 한 화면에 보이면 슬라이드할 여분이 없어서, 같은 5개를 한 번 더 복사합니다.
+  if (!wrapper.dataset.cloned) {
+    const slides = Array.from(wrapper.querySelectorAll(".swiper-slide"));
+    slides.forEach(function (slide) {
+      wrapper.appendChild(slide.cloneNode(true));
+    });
+    wrapper.dataset.cloned = "true";
+  }
+
+  if (typeof Swiper === "undefined") {
+    return;
+  }
+
+  const swiper = new Swiper(".similar-swiper", {
+    loop: true,
+    speed: 500,
+    slidesPerView: 1.2,
+    spaceBetween: 14,
+    autoplay: {
+      delay: 1800,
+      disableOnInteraction: false
+    },
+    breakpoints: {
+      640: { slidesPerView: 2, spaceBetween: 16 },
+      900: { slidesPerView: 3, spaceBetween: 18 },
+      1200: { slidesPerView: 5, spaceBetween: 15 }
+    }
+  });
+
+  const slides = Array.from(wrapper.querySelectorAll(".swiper-slide"));
+  slides.forEach(function (slide, index) {
+    // 1번째 상품에 마우스를 올리면 이전 방향으로 움직입니다.
+    if (index % 5 === 0) {
+      slide.addEventListener("mouseenter", function () {
+        swiper.autoplay.stop();
+        swiper.slidePrev();
+      });
+      slide.addEventListener("mouseleave", function () {
+        swiper.autoplay.start();
+      });
+    }
+
+    // 5번째 상품에 마우스를 올리면 다음 방향으로 움직입니다.
+    if (index % 5 === 4) {
+      slide.addEventListener("mouseenter", function () {
+        swiper.autoplay.stop();
+        swiper.slideNext();
+      });
+      slide.addEventListener("mouseleave", function () {
+        swiper.autoplay.start();
+      });
+    }
+  });
+}
+
 async function initProductDetail() {
   const catalog = await loadProductCatalog();
   const products = catalog.products;
@@ -282,6 +344,8 @@ async function initProductDetail() {
   });
 
   // 잘못된 id로 들어온 경우 주소창도 fallback 상품 id로 정리합니다.
+  setupSimilarSwiper();
+
   if (!products[requestedId]) history.replaceState(null, "", "./product-detail.html?id=" + fallbackId);
   updateQuantity();
 }

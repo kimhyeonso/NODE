@@ -1179,6 +1179,23 @@
   width: 100%;
 }
 
+.similar-swiper {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Swiper를 쓰는 추천 상품 영역에서만 grid 대신 슬라이드 구조를 사용합니다. */
+.similar-swiper .product-list {
+  display: flex;
+  gap: 0;
+}
+
+.similar-swiper .card {
+  flex: 0 0 calc((100% - 60px) / 5);
+  height: auto;
+  margin-right: 15px;
+}
+
 .card {
   display: block;
   min-width: 0;
@@ -1664,6 +1681,10 @@
 
   .similar-products .card:nth-child(n + 5) {
     display: none;
+  }
+
+  .similar-swiper .card:nth-child(n + 5) {
+    display: block;
   }
 
   .product-list {
