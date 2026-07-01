@@ -271,36 +271,58 @@ if (soundHeading) {
 function SoundFlowSteps__init() {
   const scrollContainer = document.querySelector(".section-container");
   const soundSection = document.querySelector(".sound-section");
+  const soundFlow = soundSection?.querySelector(".sound-flow");
+  const soundFlowImage = soundSection?.querySelector(".sound-flow > img");
 
-  if (!scrollContainer || !soundSection) return;
+  if (!scrollContainer || !soundSection || !soundFlow) return;
 
   const steps = [
     {
       sectionClass: "sound-step-origin",
-      label: soundSection.querySelector(".sound-origin")
+      label: soundSection.querySelector(".sound-origin"),
+      focusPoint: 1 / 3
     },
     {
       sectionClass: "sound-step-node",
-      label: soundSection.querySelector(".sound-node")
+      label: soundSection.querySelector(".sound-node"),
+      focusPoint: 2 / 3
     },
     {
       sectionClass: "sound-step-destination",
-      label: soundSection.querySelector(".sound-destination")
+      label: soundSection.querySelector(".sound-destination"),
+      focusPoint: 0.9
     },
     {
       sectionClass: "sound-step-closing",
-      label: soundSection.querySelector(".sound-closing")
+      label: soundSection.querySelector(".sound-closing"),
+      focusPoint: 0.9
     }
   ];
 
   function setActiveStep(activeIndex) {
     steps.forEach(function(step, index) {
-      soundSection.classList.toggle(step.sectionClass, index === activeIndex);
+      const isDestinationHeld = activeIndex === 3 && index === 2;
+      const isActive = index === activeIndex || isDestinationHeld;
+
+      soundSection.classList.toggle(step.sectionClass, isActive);
 
       if (step.label) {
-        step.label.classList.toggle("active", index === activeIndex);
+        step.label.classList.toggle("active", isActive);
       }
     });
+
+    if (activeIndex < 0) return;
+
+    const activeStep = steps[activeIndex];
+    const flowRect = soundFlow.getBoundingClientRect();
+    const currentShift = parseFloat(getComputedStyle(soundFlow).getPropertyValue("--sound-flow-shift")) || 0;
+    const stickyTop = parseFloat(getComputedStyle(soundFlow).top);
+    const flowTop = Number.isNaN(stickyTop) ? flowRect.top - currentShift : stickyTop;
+    const imageHeight = soundFlow.offsetHeight || flowRect.height;
+    const viewportCenter = window.innerHeight / 2;
+    const nextShift = viewportCenter - flowTop - imageHeight * activeStep.focusPoint;
+
+    soundFlow.style.setProperty("--sound-flow-shift", nextShift + "px");
   }
 
   function updateSoundStep() {
@@ -314,13 +336,16 @@ function SoundFlowSteps__init() {
     }
 
     const progress = Math.min(Math.max(rawProgress, 0), 0.999);
+    const nodeProgress = 0.25;
+    const destinationProgress = 0.5;
+    const closingProgress = 0.75;
     let activeIndex = 0;
 
-    if (progress >= 0.75) {
+    if (progress >= closingProgress) {
       activeIndex = 3;
-    } else if (progress >= 0.5) {
+    } else if (progress >= destinationProgress) {
       activeIndex = 2;
-    } else if (progress >= 0.25) {
+    } else if (progress >= nodeProgress) {
       activeIndex = 1;
     }
 
@@ -329,6 +354,7 @@ function SoundFlowSteps__init() {
 
   scrollContainer.addEventListener("scroll", updateSoundStep, { passive: true });
   window.addEventListener("resize", updateSoundStep);
+  soundFlowImage?.addEventListener("load", updateSoundStep);
 
   updateSoundStep();
 }
@@ -567,14 +593,10 @@ function setCenterItem() {
   centerItem.classList.add("active");
 
   const activePhoto = centerItem.querySelector(".artist-photo");
-const activePoint = centerItem.querySelector(".artist-point");
+  const activePoint = centerItem.querySelector(".artist-point");
 
   if (activePhoto && activePoint) {
-    const photoRect = activePhoto.getBoundingClientRect();
-    const pointRect = activePoint.getBoundingClientRect();
-
-    // artist-photo의 바깥 원 기준
-    const radius = photoRect.width / 2 + pointRect.width / 12 + 30;
+    const radius = activePhoto.offsetWidth / 2 + activePoint.offsetWidth + 52;
 
     activePoint.style.setProperty("--point-radius", `${radius}px`);
 

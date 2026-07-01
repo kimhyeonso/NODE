@@ -367,7 +367,7 @@ body {
   color: #fff;
   text-shadow: 0 2px 16px #000, 0 0 30px #000;
   opacity: 0;
-  transform: translateX(-50%) scale(0.78);
+  transform: translate(-50%, -50%) scale(0.78);
   transition:
     opacity 0.45s ease,
     transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
@@ -377,7 +377,7 @@ body {
 
 .sound-label.active {
   opacity: 1;
-  transform: translateX(-50%) scale(1.08);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
 .sound-section.sound-step-origin .sound-flow {
@@ -418,26 +418,26 @@ body {
 }
 
 .sound-origin {
-  top: 8%;
+  top: 33.333%;
 }
 
 .sound-node {
-  top: 43%;
+  top: 66.666%;
 }
 
 .sound-destination {
-  bottom: 12%;
+  top: 90%;
 }
 
 .sound-closing {
   position: fixed;
-  top: 50%;
+  top: calc(50% + clamp(76px, 10vh, 120px));
   left: 50%;
   z-index: 20;
   width: min(90%, 720px);
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
-  font-size: clamp(1rem, 1vw, 1.5rem);
+  font-size: clamp(1.5rem, 1vw, 2rem);
   line-height: 1.55;
   opacity: 0;
   transform: translate(-50%, -40%) scale(0.94);
@@ -899,9 +899,11 @@ body {
 }
 
 .artist-photo {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  overflow: hidden;
+  box-sizing: border-box;
+  overflow: visible;
   border-radius: 50%;
   background-color: #171717;
 }
@@ -911,6 +913,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
   filter: brightness(0.7);
 }
 
@@ -963,7 +966,7 @@ body {
 .artist-item.active .artist-point {
   display: block;
   position: absolute;
-  top: 50%;
+  top: calc(50% - var(--point-radius));
   left: 50%;
   z-index: 10;
 
@@ -973,7 +976,8 @@ body {
   border-radius: 50%;
   background: #c9a24b;
 
-  transform-origin: center;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% calc(var(--point-radius) + 50%);
   animation: artistPointRotate 4s linear forwards;
 }
 
@@ -983,17 +987,11 @@ body {
 
 @keyframes artistPointRotate {
   from {
-    transform:
-      translate(-50%, -50%)
-      rotate(0deg)
-      translateY(calc(var(--point-radius) * -1));
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
   to {
-    transform:
-      translate(-50%, -50%)
-      rotate(360deg)
-      translateY(calc(var(--point-radius) * -1));
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -1103,15 +1101,15 @@ body {
   }
 
   .sound-origin {
-    top: 7%;
+    top: 33.333%;
   }
 
   .sound-node {
-    top: 42%;
+    top: 66.666%;
   }
 
   .sound-destination {
-    bottom: 10%;
+    top: 90%;
   }
 
   .sound-closing {
