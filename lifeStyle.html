@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/lifeStyle.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="./script/common.js"></script>
-    <!-- 여기에 섹션 작업 스크립트 추가해주세요 -->
+    <script src="./script/lifeStyle.js"></script>
 </head>
 <body>
   <!--------- 헤더 --------->
@@ -227,30 +229,44 @@
         <p>Share your setup with</p>
       </section>
 
-      <section class="gallery-section">
-        <img src="./image/lifeStyle/homesound-gallery-01.png" alt="식물과 오디오가 배치된 홈 사운드 공간">
-        <img src="./image/lifeStyle/homesound-gallery-02.png" alt="책상 위 오디오 시스템">
-        <img src="./image/lifeStyle/homesound-gallery-03.png" alt="다이닝 공간의 홈 오디오">
-        <img src="./image/lifeStyle/homesound-gallery-04.png" alt="침실에 배치된 오디오">
-        <img src="./image/lifeStyle/homesound-gallery-05.png" alt="채광이 좋은 주방의 오디오">
-        <img src="./image/lifeStyle/homesound-gallery-06.png" alt="의자와 조명이 있는 음악 감상 공간">
-        <img src="./image/lifeStyle/homesound-gallery-07.png" alt="테이블 위 소형 오디오">
-        <img src="./image/lifeStyle/homesound-gallery-08.png" alt="미니멀한 인테리어와 오디오">
-        <img src="./image/lifeStyle/homesound-gallery-09.png" alt="주방 선반 아래 오디오">
-      </section>
+      <div class="gallery-wrapper">
+        <section class="gallery-section">
+          <img src="./image/lifeStyle/homesound-gallery-01.png" alt="식물과 오디오가 배치된 홈 사운드 공간">
+          <img src="./image/lifeStyle/homesound-gallery-02.png" alt="책상 위 오디오 시스템">
+          <img src="./image/lifeStyle/homesound-gallery-03.png" alt="다이닝 공간의 홈 오디오">
+          <img src="./image/lifeStyle/homesound-gallery-04.png" alt="침실에 배치된 오디오">
+          <img src="./image/lifeStyle/homesound-gallery-05.png" alt="채광이 좋은 주방의 오디오">
+          <img src="./image/lifeStyle/homesound-gallery-06.png" alt="의자와 조명이 있는 음악 감상 공간">
+          <img src="./image/lifeStyle/homesound-gallery-07.png" alt="테이블 위 소형 오디오">
+          <img src="./image/lifeStyle/homesound-gallery-08.png" alt="미니멀한 인테리어와 오디오">
+          <img src="./image/lifeStyle/homesound-gallery-09.png" alt="주방 선반 아래 오디오">
+
+          <div class="gallery-message">
+
+            <h2>소리의 연결점</h2>
+
+            <p>
+              Sound connects spaces,<br>
+              emotions, and people.
+            </p>
+
+          </div>
+        </section>
+      </div>
 
       <section class="sound-grid">
         <article class="intro-block">
-          <div class="intro-image image-box"><img src="./image/lifeStyle/liveing-room-edition.jfif" alt="liveing-room-edition"></div>
 
           <div class="intro-text">
             <h2>Living Room Edition</h2>
             <p>
-              미니멀한 거실 속에서도깊고 섬세한 사운드는 공간의 중심이 됩니다.
+              미니멀한 거실 속에서도깊고 섬세한 사운드는 공간의 중심이 됩니다. 
               <br>
               음악과 인테리어가 자연스럽게 어우러지는 프리미엄 홈 오디오 경험을 제공합니다.
             </p>
           </div>
+
+          <div class="intro-image image-box"><img src="./image/lifeStyle/liveing-room-edition.jfif" alt="liveing-room-edition"></div>
 
           <div class="small-images">
             <div class="image-box"><img src="./image/lifeStyle/living-room-edition-02.jfif" alt="liveing-room-edition"></div>

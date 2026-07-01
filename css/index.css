@@ -47,6 +47,11 @@ body {
   background-image: none !important;
 }
 
+.top-bar.second-section-header .top-menu-bar {
+  background-color: #070707;
+  border-bottom-color: transparent;
+}
+
 .gnb > li > a {
   color: #fff;
 }
@@ -156,7 +161,6 @@ body {
   height: 100vh;
   overflow: hidden;
   background: #fff;
-  transform: translateY(150px);
   
   /* 섹션 시작 부분에 맞춰 정렬 */
   scroll-snap-align: start;
@@ -223,6 +227,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/*********** 세번째 섹션 구현 (소리의 연결점) ***********/
 
 .brand-story-section{
   width: 100%;
@@ -335,7 +341,7 @@ body {
   position: absolute;
   top: 40%;
   width: 100%;
-  height: 60vh;
+  height: 50vh;
   overflow: hidden;
 }
 
@@ -345,14 +351,7 @@ body {
   display: block;
 }
 
-.brand-story-container > img{
-  display: block;
-  width: 100%;
-  margin-top: clamp(60px, 8vh, 100px);
-  object-fit: contain;
-}
-
-/*********** 세번째 섹션 구현 ***********/
+/*********** 네번째 섹션 구현 (소리의 흐름) ***********/
 .sound-section {
   width: 100%;
   height: 400vh;
@@ -393,7 +392,7 @@ body {
 .sound-heading p {
   margin-top: 12px;
   color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.15vw, 1.5rem);
 }
 
 .sound-flow {
@@ -447,6 +446,7 @@ body {
   z-index: 3;
   width: 90%;
   color: #fff;
+  isolation: isolate;
   text-shadow: 0 2px 16px #000, 0 0 30px #000;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.78);
@@ -455,6 +455,25 @@ body {
     transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
   pointer-events: none;
+}
+
+.sound-label::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: min(520px, 86vw);
+  height: clamp(95px, 11vw, 155px);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.34) 30%,
+      rgba(255, 255, 255, 0.14) 55%,
+      rgba(255, 255, 255, 0) 78%);
+  filter: blur(18px);
+  transform: translate(-50%, -50%) scaleX(1.25);
 }
 
 .sound-label.active {
@@ -496,7 +515,7 @@ body {
 .sound-label p {
   margin-top: 6px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(0.72rem, 0.9vw, 0.95rem);
+  font-size: clamp(0.8rem, 0.9vw, 1.2rem);
 }
 
 .sound-origin {
@@ -519,7 +538,7 @@ body {
   width: min(90%, 720px);
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
-  font-size: clamp(1.5rem, 1vw, 2rem);
+  font-size: clamp(1.2rem, 1vw, 2rem);
   line-height: 1.55;
   opacity: 0;
   transform: translate(-50%, -40%) scale(0.94);
@@ -534,7 +553,7 @@ body {
   transform: translate(-50%, -50%) scale(1);
 }
 
-/*********** 네번째 섹션 구현 ***********/
+/*********** 다섯번째 섹션 구현 ***********/
 .menu-section{
   width: 100%;
   min-height: 100vh;
@@ -724,7 +743,7 @@ body {
   font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
-/*********** 다섯번째 검색 섹션 구현 ***********/
+/*********** 여섯번째 검색 섹션 구현 (select) ***********/
 .seach-section {
   position: relative;
   z-index: 1;
@@ -742,7 +761,7 @@ body {
 }
 
 .search-inner {
-  width: min(92%, 1640px);
+  width: min(90%, 1870px);
   height: 100%;
   margin: 0 auto;
   display: grid;
@@ -891,7 +910,7 @@ body {
 .search-card-copy h3 {
   color: #111;
   font-family: "noto sans", sans-serif;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 1vw, 2rem);
   font-weight: 600;
 }
 
@@ -909,7 +928,7 @@ body {
   font-size: 0.72rem;
 }
 
-/*********** 여섯번째 아티스트 섹션 구현 ***********/
+/*********** 일곱번째 아티스트 섹션 구현 (artist) ***********/
 .artist-section {
   position: relative;
   width: 100%;
@@ -1029,8 +1048,8 @@ body {
   left: 50%;
   bottom: 0;
   z-index: 2;
-  width: 43%;
-  height: 48%;
+  width: 40%;
+  height: 45%;
   object-fit: cover;
   object-position: center;
   transform: translateX(-50%);
@@ -1076,13 +1095,12 @@ body {
   }
 }
 
-/*********** 일곱번째 캔버스 섹션 구현 ***********/
+/*********** 여덟번째 캔버스 섹션 구현 (sound connect) ***********/
 
 .sound-node-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 600px;
+  min-height:calc(100vh + 300px);
   overflow: hidden;
   background: #070707;
 
@@ -1109,7 +1127,7 @@ body {
   color: #fff;
   pointer-events: none;
   opacity: .3;
-  transform: translate(-50%, calc(-50% + 150px));
+  transform: translate(-50%, calc(-100% + 150px));
   transition:
     opacity 0.8s ease,
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1118,35 +1136,49 @@ body {
 
 .sound-node-text.on {
   opacity: 1;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -100%);
 }
 
 .sound-node-text h2 {
   font-family: "Nanum_Myeongjo";
   font-weight: 900;
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.2rem, 6vw, 4rem);
   line-height: 1.05;
+  white-space: nowrap;
   font-weight: 400;
   letter-spacing: -1px;
 }
 
-.sound-node-desc {
+.sound-node-desc, .sound-node-desc-mo {
   margin-top: 22px;
   font-size: clamp(14px, 1.4vw, 18px);
   color: rgba(255, 255, 255, 0.68);
 }
 
+.sound-node-desc-mo{
+  display: none;
+}
+
+
+/* 푸터 수정 */
+.footer{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 
 
 @media (max-width: 768px) {
-  /*********** 세번째 모바일 섹션 구현 ***********/
+  /*********** 세번째 모바일 섹션 구현 (소리의 연결점) ***********/
   .brand-story-container {
     width: 100%;
   }
 
   .brand-story-container .logo {
     transform: translateX(-7%);
-    width: 180px;
+    width: 110px;
     padding-left: 0;
   }
 
@@ -1167,11 +1199,11 @@ body {
   }
 
   .sound-wave-section{
-    height: 45vh;
+    height: 50vh;
     top: 50%;
   }
 
-  /*********** 네번째 모바일 섹션 구현 ***********/
+  /*********** 네번째 모바일 섹션 구현 (소리의 흐름) ***********/
 
   .sound-section {
     padding: 60px 0 80px;
@@ -1207,7 +1239,7 @@ body {
     margin: 0;
   }
 
-  /*********** 네번째 모바일 섹션 구현 ***********/
+  /*********** 다섯번째 모바일 섹션 구현 (node)***********/
 
   .menu-section {
     padding: 70px 0;
@@ -1215,18 +1247,18 @@ body {
 
   .menu-container {
     min-height: auto;
-    gap: 18px;
+    gap: 5px;
   }
 
   .menu-section .title-box,
   .menu-section .image-box {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 5px;
   }
 
   .menu-section .title-box > .title {
-    min-height: 180px;
+    min-height: 130px;
     justify-content: center;
     padding: 0;
   }
@@ -1237,7 +1269,7 @@ body {
     min-height: 200px;
   }
 
-    /*********** 다섯번째 모바일 섹션 구현 ***********/
+    /*********** 여섯번째 모바일 섹션 구현 (select) ***********/
 
   .seach-section {
     min-height: 100vh;
@@ -1261,7 +1293,7 @@ body {
   .search-showcase {
     display: block;
     gap: 15px;
-    padding: 100px 0 14px;
+    padding: 30px 0 14px;
   }
 
   .seach-section .dragArea {
@@ -1303,7 +1335,7 @@ body {
     padding: 15px;
   }
 
-  /*********** 여섯번째 모바일 섹션 구현 ***********/
+  /*********** 일곱번째 모바일 섹션 구현 (artist)***********/
 
 .artist-section {
     min-height: 100vh;
@@ -1315,7 +1347,7 @@ body {
   }
 
   .artist-slider {
-    bottom: 150px;
+    bottom: 70px;
   }
 
   .artist-gallery {
@@ -1334,10 +1366,23 @@ body {
     width: 46%;
   }
 
-  /*********** 일곱번째 모바일 섹션 구현 ***********/
+  /*********** 여덟번째 모바일 섹션 구현 (sound connected) ***********/
 
   .sound-node-section {
-    min-height: 100vh;
+    min-height: calc(100vh + 300px);
+  }
+
+  .sound-node-text.on {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+
+  .sound-node-desc{
+    display: none;
+  }
+
+  .sound-node-desc-mo{
+    display: block;
   }
 
   .sound-node-label {
