@@ -41,9 +41,11 @@ let cards = [];
 const savedCards = localStorage.getItem("mypageCards");
 
 if (savedCards) {
+  // 이전에 결제수단 페이지에서 저장한 카드 목록이 있으면 그 데이터를 우선 사용합니다.
   // 저장된 글자를 다시 카드 배열로 바꿉니다.
   cards = JSON.parse(savedCards);
 } else {
+  // 저장된 데이터가 없으면 화면 예시용 기본 카드 3개를 localStorage에 저장해 초기값으로 사용합니다.
   cards = defaultCards;
   saveCards();
 }
@@ -54,6 +56,7 @@ const addCardButton = document.querySelector(".primary-button");
 
 // 카드 정보를 브라우저 localStorage에 저장
 function saveCards() {
+  // 카드 배열은 페이지를 이동해도 유지되어야 하므로 localStorage에 문자열로 저장합니다.
   // 배열은 바로 저장할 수 없어서 JSON.stringify로 글자로 바꿉니다.
   localStorage.setItem("mypageCards", JSON.stringify(cards));
 }
@@ -65,6 +68,7 @@ function createCardHtml(card, index) {
   let primaryButton = '<button type="button" data-action="primary" data-index="' + index + '">기본으로 설정</button>';
 
   if (card.primary === true) {
+    // 기본 결제수단인 카드는 배지를 보여주고, 기본 설정 버튼은 숨깁니다.
     primaryBadge = '<span class="primary-badge">기본 결제 수단</span>';
     primaryButton = "";
   }
@@ -105,6 +109,8 @@ function createCardHtml(card, index) {
 function renderCards() {
   let html = "";
 
+  // 현재 cards 배열을 기준으로 카드 HTML을 다시 만듭니다.
+  // 추가/수정/삭제 후에는 이 함수를 다시 호출해서 화면을 최신 상태로 맞춥니다.
   for (let i = 0; i < cards.length; i++) {
     html += createCardHtml(cards[i], i);
   }
@@ -115,6 +121,7 @@ function renderCards() {
 
   cardList.innerHTML = html;
   cardCount.textContent = "총 " + cards.length + "개";
+  // innerHTML로 버튼들이 새로 만들어지기 때문에 렌더링 후 이벤트를 다시 연결해야 합니다.
   addCardEvents();
 }
 
@@ -125,6 +132,7 @@ function addCardEvents() {
 
   for (let i = 0; i < actionButtons.length; i++) {
     actionButtons[i].addEventListener("click", function () {
+      // 버튼의 data-action 값으로 기본 설정/수정/삭제 중 어떤 동작인지 구분합니다.
       const action = this.getAttribute("data-action");
       const index = Number(this.getAttribute("data-index"));
 
@@ -145,6 +153,7 @@ function addCardEvents() {
 
 // 기본 결제수단 설정
 function setPrimaryCard(index) {
+  // 한 번에 하나의 카드만 기본 결제수단이 될 수 있으므로 전체 primary를 false로 초기화합니다.
   for (let i = 0; i < cards.length; i++) {
     cards[i].primary = false;
   }
@@ -157,6 +166,7 @@ function setPrimaryCard(index) {
 
 // [수정 포인트] 현재는 prompt로 카드사와 유효기간만 수정
 function editCard(index) {
+  // 현재 프로젝트에서는 별도 모달 대신 prompt로 카드 이름과 유효기간만 간단히 수정합니다.
   const company = prompt("카드사 이름을 입력해주세요.", cards[index].company);
   const expiry = prompt("유효기간을 입력해주세요. 예: 08/29", cards[index].expiry);
 
@@ -188,6 +198,7 @@ function deleteCard(index) {
   const wasPrimary = cards[index].primary;
   cards.splice(index, 1);
 
+  // 삭제한 카드가 기본 카드였으면 남아 있는 첫 번째 카드를 새 기본 카드로 지정합니다.
   if (wasPrimary === true && cards.length > 0) {
     cards[0].primary = true;
   }
@@ -198,6 +209,7 @@ function deleteCard(index) {
 
 // [수정 포인트] 현재는 prompt로 새 카드 정보를 입력받음
 function addNewCard() {
+  // 새 카드 등록도 prompt로 값을 입력받고, 필수값 검증 후 cards 배열에 추가합니다.
   const company = prompt("카드사 이름을 입력해주세요. 예: 삼성카드");
 
   if (company === null) {
@@ -225,6 +237,7 @@ function addNewCard() {
   let isPrimary = false;
 
   if (cards.length === 0) {
+    // 카드가 하나도 없는 상태에서 새로 등록하면 자동으로 기본 결제수단이 됩니다.
     isPrimary = true;
   }
 

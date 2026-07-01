@@ -613,6 +613,31 @@ body[data-product-category="live"] .hero-product {
         border-radius: 8px;
     }
 
+    .cart-button,
+    .compare-check {
+        top: 8px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .cart-button {
+        left: 8px;
+    }
+
+    .compare-check {
+        right: 8px;
+    }
+
+    .cart-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .compare-check input {
+        width: 14px;
+        height: 14px;
+    }
+
     .price-row {
         gap: 4px;
         font-size: 0.875rem;
