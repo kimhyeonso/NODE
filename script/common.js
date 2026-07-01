@@ -1,5 +1,23 @@
 console.clear();
 
+// 장바구니 총 개수(badge) 업데이트 - 전역 함수로 선언
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let totalQty = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    totalQty += cart[i].qty;
+  }
+
+  const $badge = $(".cartCount");
+
+  if (totalQty > 0) {
+    $badge.text(totalQty).css("display", "inline-block");
+  } else {
+    $badge.hide();
+  }
+}
+
 $(function(){
 
 // 스크롤 위치에 따라 메인 메뉴바 스타일 변경
@@ -64,7 +82,6 @@ function MobileSideBar__init() {
 
 MobileSideBar__init();
 
-//사이드 1차메뉴 클릭시 2차메뉴
 // 사이드 1차 메뉴 클릭 시 2차 메뉴 열기
 function SideMenu__show() {
   $(".side-main-gnb > li > a").on("click", function (e) {
@@ -89,7 +106,6 @@ function SideMenu__show() {
 }
 
 SideMenu__show();
-
 
 // 로그인 상태 체크
 const userName = localStorage.getItem("userName");
@@ -139,36 +155,36 @@ function PopupVisibility__update() {
   $("body").toggleClass("popup-visible", $(".popup").is(":visible"));
 }
 
-$(".closeBtn").on("click",()=>{
-    if($("#closeCheckBox").is(":checked")){
-        setCookie("todaypopup","close",1)
-    }
+$(".closeBtn").on("click", () => {
+  if ($("#closeCheckBox").is(":checked")) {
+    setCookie("todaypopup", "close", 1);
+  }
 
-$(".popup").hide()
-PopupVisibility__update();
-})
+  $(".popup").hide();
+  PopupVisibility__update();
+});
 
-function setCookie(name,value,day){
-    let date = new Date();
-    date.setDate(date.getDate() + day)
-    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`
+function setCookie(name, value, day) {
+  let date = new Date();
+  date.setDate(date.getDate() + day);
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
 }
 
-function getCookie(name){
-    let cook = document.cookie.split(";")
+function getCookie(name) {
+  let cook = document.cookie.split(";");
 
-    for(let i = 0; i < cook.length; i++){
-        let cookie = cook[i].trim()
-        if(cookie.split("=")[0] === name){
-            return cookie.split("=")[1]
-        }
+  for (let i = 0; i < cook.length; i++) {
+    let cookie = cook[i].trim();
+    if (cookie.split("=")[0] === name) {
+      return cookie.split("=")[1];
     }
+  }
 
-    return '';
+  return '';
 }
 
-if( getCookie("todaypopup") === "close"){
-    $(".popup").hide()
+if (getCookie("todaypopup") === "close") {
+  $(".popup").hide();
 }
 
 PopupVisibility__update();
@@ -185,50 +201,7 @@ $(".topBtn").on("click", function () {
   $("html, body").animate({ scrollTop: 0 });
 });
 
-
-// 장바구니 총 개수(badge) 업데이트
-function updateCartBadge() {
-  const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-  let totalQty = 0;
-
-  for (let i = 0; i < cart.length; i++) {
-    totalQty += cart[i].qty;
-  }
-
-  const $badge = $(".cartCount");
-
-  if (totalQty > 0) {
-    $badge.text(totalQty).show();
-  } else {
-    $badge.text(0).hide();
-  }
-}
-
-// 페이지 로드 시 1회 실행
+// 페이지 로드 시 뱃지 1회 실행
 updateCartBadge();
-
-// 장바구니 총 개수(badge) 업데이트
-function updateCartBadge() {
-  const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-  let totalQty = 0;
-
-  for (let i = 0; i < cart.length; i++) {
-    totalQty += cart[i].qty;
-  }
-
-  const $badge = $(".cartCount");
-
-  if (totalQty > 0) {
-    $badge.text(totalQty).show();
-  } else {
-    $badge.text(0).hide();
-  }
-}
-
-// 페이지 로드 시 1회 실행
-updateCartBadge();
-
-// 다른 JS 파일(product.js, accessory.js 등)에서도 호출할 수 있게 전역으로 등록
-window.updateCartBadge = updateCartBadge;
 
 })

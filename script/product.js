@@ -207,6 +207,10 @@ function toggleCartItem(button) {
   if (index !== -1) { cart.splice(index, 1); button.classList.remove("active"); }
   else { cart.push(getCardItem(card)); button.classList.add("active"); }
   localStorage.setItem("cartItems", JSON.stringify(cart));
+
+  if (typeof updateCartBadge === "function") {
+    updateCartBadge();
+  }
 }
 
 function getCardItem(card) {
