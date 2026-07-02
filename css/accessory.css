@@ -29,15 +29,16 @@ select {
 
 /* 비교 팝업 */
 .vspopup{
-    width: 80%;
-    height: 100px;
-    background-color: rgba(245, 245, 245, 0.8);
+    width: 23%;
+    min-width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
     position: fixed;
     bottom: 2%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 20px;
-
+    left: 2%;
+    border-radius: 7px;
+    padding: 25px 15px;
+    overflow: hidden;
     z-index: 99;
 }
 
@@ -45,9 +46,93 @@ select {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: clamp(1rem, 2vw, 2rem);
+    text-align: center;
+}
+
+.vstext p:nth-child(1){
+    font-size: clamp(0.5rem, 2vw, 0.8rem);
+    color: #333;
+}
+
+.vstext h3{
+    margin-top: 10px;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.vstext p:nth-child(3){
+    margin-top: 5px;
+    font-size: clamp(0.5rem, 2vw, 1rem);
+}
+
+.vsimg{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.vsimg img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.vsexplain{
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vsexplain img{
+    width: 70px;
+}
+
+.vsexplain .vsbox span{
+    font-weight: bold;
+}
+
+.vsexplain .vsbox p{
+    margin-top: 5px;
+    font-size:  clamp(0.7rem, 2vw, 0.9rem);
+}
+
+.button{
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #070707;
+    color: #fff;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.vspopup .closeBtn{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    margin-top: 25px;
+    gap: 5px;
+    padding: 20px 0 0;
+}
+
+.vspopup .closeBtn input{
+    display: block;
+}
+
+.vspopup .closeBtn p{
+    margin-left: 200px;
+    cursor: pointer;
+}
+
+.vspopup .closeBtn p:hover{
+    font-weight: bold;
 }
 
 main {
@@ -97,7 +182,7 @@ body[data-accessory-category="stand"] .hero-accessory {
 .section-heading h2 {
     margin: 0;
     line-height: 1;
-    letter-spacing: 0.1em;
+    /* letter-spacing: 0.1em; */
 }
 
 .hero-accessory h1 {
@@ -528,6 +613,83 @@ body[data-accessory-category="stand"] .hero-accessory {
 
 /* 모바일: 본문 레이아웃 재배치 */
 @media (max-width: 768px) {
+    .vspopup {
+        width: calc(100vw - 28px);
+        min-width: 0;
+        max-width: 390px;
+        max-height: calc(100vh - 28px);
+        max-height: calc(100dvh - 28px);
+        left: 50%;
+        bottom: 14px;
+        padding: 16px 14px;
+        transform: translateX(-50%);
+        overflow-y: auto;
+        background-color: rgba(255, 255, 255, 0.96);
+    }
+
+    .vspopup .vstext p:nth-child(1) {
+        font-size: 0.7rem;
+    }
+
+    .vspopup .vstext h3 {
+        margin-top: 6px;
+        font-size: 1.12rem;
+        line-height: 1.35;
+    }
+
+    .vspopup .vstext p:nth-child(3) {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .vspopup .vsimg {
+        margin-top: 10px;
+    }
+
+    .vspopup .vsimg img {
+        max-height: 135px;
+        object-fit: contain;
+    }
+
+    .vspopup .vsexplain {
+        gap: 10px;
+        padding: 14px 4px;
+    }
+
+    .vspopup .vsexplain img {
+        width: 52px;
+        flex: 0 0 auto;
+    }
+
+    .vspopup .vsexplain .vsbox span {
+        font-size: 0.88rem;
+        line-height: 1.35;
+    }
+
+    .vspopup .vsexplain .vsbox p {
+        font-size: 0.76rem;
+        line-height: 1.35;
+    }
+
+    .vspopup .button {
+        width: 100%;
+        height: 44px;
+        font-size: 0.92rem;
+        line-height: 44px;
+    }
+
+    .vspopup .closeBtn {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 16px;
+        padding-top: 14px;
+        font-size: 0.82rem;
+    }
+
+    .vspopup .closeBtn p {
+        margin-left: auto;
+    }
+
     .hero-accessory { min-height: 270px; }
     .hero-accessory h1 { font-size: 2.25rem; }
     .toolbar { justify-content: stretch; }

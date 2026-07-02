@@ -54,6 +54,10 @@ function saveCartItem(item) {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 }
 
+function getImageFileName(imagePath) {
+  return imagePath.split("/").pop().split(".").slice(0, -1).join(".") || "product image";
+}
+
 // 5. 팝업 UI: 장바구니 담기 성공 시 확인 팝업을 띄웁니다.
 function showDetailCartPopup() {
   // 같은 팝업이 여러 번 겹쳐 뜨지 않도록 이미 있으면 새로 만들지 않습니다.
@@ -181,6 +185,7 @@ async function initProductDetail() {
   // 썸네일이나 색상 칩을 클릭했을 때 메인 이미지와 활성 표시를 동시에 바꿉니다.
   function setMainImage(image, index) {
     mainImageElement.src = image;
+    mainImageElement.alt = getImageFileName(image);
     thumbnails.forEach(function (thumbnail, thumbnailIndex) {
       thumbnail.classList.toggle("is-active", thumbnailIndex === index);
     });
