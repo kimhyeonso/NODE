@@ -1193,21 +1193,28 @@
   width: 100%;
 }
 
-.similar-swiper {
+.similar-slider {
   width: 100%;
   overflow: hidden;
 }
 
-/* Swiper를 쓰는 추천 상품 영역에서만 grid 대신 슬라이드 구조를 사용합니다. */
-.similar-swiper .product-list {
-  display: flex;
-  gap: 0;
+/* Slick jQuery 플러그인을 쓰는 추천 상품 영역에서만 grid 대신 슬라이드 구조를 사용합니다. */
+.similar-slider .product-list {
+  display: block;
 }
 
-.similar-swiper .card {
-  flex: 0 0 calc((100% - 60px) / 5);
+.similar-slider .card {
   height: auto;
-  margin-right: 15px;
+  margin: 0 7.5px;
+}
+
+.similar-slider .slick-list {
+  cursor: grab;
+  margin: 0 -7.5px;
+}
+
+.similar-slider .slick-list:active {
+  cursor: grabbing;
 }
 
 .card {
@@ -1861,24 +1868,24 @@
     display: none;
   }
 
-  .similar-swiper .card:nth-child(n + 5) {
+  .similar-slider .card:nth-child(n + 5) {
     display: none;
   }
 
-  .similar-swiper {
+  .similar-slider {
     overflow: visible;
   }
 
-  .similar-swiper .product-list {
+  .similar-slider .product-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px 14px;
     transform: none !important;
   }
 
-  .similar-swiper .card {
+  .similar-slider .card {
     width: auto !important;
-    margin-right: 0;
+    margin: 0;
     flex: initial;
   }
 
@@ -1923,7 +1930,7 @@
     grid-template-columns: 1fr;
   }
 
-  .similar-swiper .product-list {
+  .similar-slider .product-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
