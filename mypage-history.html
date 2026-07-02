@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/mypage-history.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./script/common.js"></script>
-    <!-- 결제내역 기능: 기간/상태 조회, 페이지 이동, 상세보기 -->
+    <!-- 결제내역 기능: 페이지 이동, 상세보기 -->
     <script src="./script/mypage-history.js" defer></script>
 </head>
 <body>
@@ -257,27 +257,6 @@
         <div>
           <p class="eyebrow">PAYMENT HISTORY</p>
           <h2>결제 내역</h2>
-        </div>
-        <!-- [수정 포인트] 필터 문구를 바꾸면 JS의 비교 문구도 함께 수정 -->
-        <div class="history-filters">
-          <label>
-            <span>기간</span>
-            <select>
-              <option>최근 6개월</option>
-              <option>최근 1년</option>
-              <option>전체 기간</option>
-            </select>
-          </label>
-          <label>
-            <span>상태</span>
-            <select>
-              <option>전체 상태</option>
-              <option>결제 완료</option>
-              <option>배송 중</option>
-              <option>취소·환불</option>
-            </select>
-          </label>
-          <button type="button">조회</button>
         </div>
       </div>
 

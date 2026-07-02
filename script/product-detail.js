@@ -1,9 +1,21 @@
 /**
- * [상품 상세 페이지 로직 관리]
+ * Product Detail Page
+ *
+ * 이 파일은 product-detail.html 한 페이지에서 사용하는 스크립트입니다.
+ * 상품 데이터는 js/catalog/category.json에서 가져오고,
+ * URL의 id 값에 맞춰 상세 정보 / 이미지 / 추천 상품을 화면에 렌더링합니다.
+ *
+ * 섹션 안내
+ * 1. 공통 상수 / 유틸
+ * 2. 장바구니 저장 로직
+ * 3. 장바구니 완료 팝업
+ * 4. 애니메이션 구현: Similar Products 자동 슬라이드
+ * 5. 상품 상세 데이터 렌더링
+ * 6. 이벤트 연결
  */
 
-// Similar Products 카드 안의 장바구니 버튼에 넣을 SVG 아이콘입니다.
-// product.js의 목록 카드와 같은 아이콘을 사용해서 상세페이지와 목록페이지의 UI를 맞춥니다.
+// ==================== 1. 공통 상수 / 유틸 ====================
+
 const SIMILAR_CART_ICON =
   '<svg aria-hidden="true" viewBox="0 0 24 24">' +
   '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
@@ -11,58 +23,74 @@ const SIMILAR_CART_ICON =
   '<circle cx="17" cy="20" r="1"></circle>' +
   "</svg>";
 
+// 상품 목록, 상세 이미지, 스펙 데이터가 모여 있는 JSON 파일을 불러옵니다.
 async function loadProductCatalog() {
-  // 상품명, 가격, 이미지, 색상, 스펙 정보는 HTML에 직접 쓰지 않고 JSON에서 가져옵니다.
-  // 이렇게 하면 상품이 바뀌어도 HTML 구조를 다시 만들 필요 없이 데이터만 수정하면 됩니다.
   const response = await fetch("./js/catalog/category.json");
+
   if (!response.ok) {
     throw new Error("상품 데이터를 불러오지 못했습니다.");
   }
+
   return response.json();
 }
 
-// 2. 유틸리티: 숫자를 한국식 가격 표기(원)로 변환합니다.
+// 가격 숫자를 한국어 표기 방식으로 바꿉니다. 예: 2850000 -> 2,850,000원
 function formatPrice(price) {
-  // 숫자 가격을 390000 -> 390,000원 형태로 보여주기 위한 공통 함수입니다.
   return price.toLocaleString("ko-KR") + "원";
 }
 
-// 3. 장바구니 관리: 로컬 스토리지 데이터를 읽어옵니다.
+// ==================== 2. 장바구니 저장 로직 ====================
+
 function readCartItems() {
   try {
-    // 장바구니 데이터는 다른 페이지와 공유해야 하므로 localStorage에 저장해 둡니다.
+    // localStorage에는 문자열로 저장되기 때문에 JSON.parse로 배열 형태로 되돌립니다.
     return JSON.parse(localStorage.getItem("cartItems")) || [];
   } catch (error) {
-    // 저장된 값이 깨져 있어도 상세페이지가 멈추지 않도록 빈 배열로 복구합니다.
+    // 저장된 값이 깨져 있어도 페이지가 멈추지 않도록 빈 배열로 처리합니다.
     return [];
   }
 }
 
-// 4. 장바구니 저장: 상품 추가 시 수량을 합산하여 저장합니다.
 function saveCartItem(item) {
   const cart = readCartItems();
+
+  // 이미 장바구니에 있는 상품이면 새로 추가하지 않고 수량만 더합니다.
   const existing = cart.find(function (cartItem) {
     return cartItem.id === item.id;
   });
 
   if (existing) {
-    // 이미 담긴 상품이면 새로 추가하지 않고 수량만 더합니다.
     existing.qty += item.qty;
   } else {
     cart.push(item);
   }
+
   localStorage.setItem("cartItems", JSON.stringify(cart));
 }
 
-function getImageFileName(imagePath) {
-  return imagePath.split("/").pop().split(".").slice(0, -1).join(".") || "product image";
+function removeCartItem(productId) {
+  // 추천 상품 카드에서 아이콘을 한 번 더 눌렀을 때 해당 상품만 장바구니에서 제거합니다.
+  const nextCart = readCartItems().filter(function (cartItem) {
+    return cartItem.id !== productId;
+  });
+
+  localStorage.setItem("cartItems", JSON.stringify(nextCart));
 }
 
-// 5. 팝업 UI: 장바구니 담기 성공 시 확인 팝업을 띄웁니다.
+function hasCartItem(productId) {
+  // 새로고침 후에도 이미 담긴 추천 상품이면 버튼 active 상태를 유지하기 위한 확인 함수입니다.
+  return readCartItems().some(function (cartItem) {
+    return cartItem.id === productId;
+  });
+}
+
+// ==================== 3. 장바구니 완료 팝업 ====================
+
 function showDetailCartPopup() {
-  // 같은 팝업이 여러 번 겹쳐 뜨지 않도록 이미 있으면 새로 만들지 않습니다.
+  // 팝업이 이미 떠 있으면 중복 생성하지 않습니다.
   if (document.querySelector(".compare-popup")) return;
 
+  // HTML에 미리 넣지 않고, 장바구니 버튼을 눌렀을 때 필요한 팝업 요소를 만듭니다.
   const popup = document.createElement("div");
   popup.className = "compare-popup";
 
@@ -103,21 +131,127 @@ function showDetailCartPopup() {
   });
 }
 
-// 6. 메인 초기화: 상세 페이지의 데이터 바인딩 및 이벤트 설정
+// ==================== 4. 애니메이션 구현: Similar Products ====================
+
+function setupSimilarSwiper() {
+  const container = document.querySelector(".swiper-container");
+  if (!container) return;
+
+  const wrapper = container.querySelector(".swiper-wrapper");
+  if (!wrapper) return;
+
+  // 모바일에서는 CSS 그리드로 2열 고정 배치하므로 Swiper를 실행하지 않습니다.
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+
+  // 5개 카드만 있을 때도 loop/autoplay가 끊기지 않도록 원본 슬라이드를 한 번 복제합니다.
+  if (!wrapper.dataset.cloned) {
+    const slides = Array.from(wrapper.querySelectorAll(".swiper-slide"));
+
+    slides.forEach(function (slide) {
+      wrapper.appendChild(slide.cloneNode(true));
+    });
+
+    wrapper.dataset.cloned = "true";
+  }
+
+  if (typeof Swiper === "undefined") return;
+
+  // 데스크톱/태블릿 화면에서는 추천 상품을 자동 슬라이드로 보여줍니다.
+  const swiper = new Swiper(".similar-swiper", {
+    loop: true,
+    speed: 500,
+    slidesPerView: 1.2,
+    spaceBetween: 14,
+    autoplay: {
+      delay: 1800,
+      disableOnInteraction: false
+    },
+    breakpoints: {
+      640: { slidesPerView: 2, spaceBetween: 16 },
+      900: { slidesPerView: 3, spaceBetween: 18 },
+      1200: { slidesPerView: 5, spaceBetween: 15 }
+    }
+  });
+
+  let hoverDirection = null;
+  let hoverTimer = null;
+
+  // 왼쪽/오른쪽 hover 이동을 멈추고 기본 자동 슬라이드를 다시 시작합니다.
+  function stopHoverSlide() {
+    hoverDirection = null;
+    window.clearInterval(hoverTimer);
+    hoverTimer = null;
+    swiper.autoplay.start();
+  }
+
+  // 슬라이더 가장자리 영역에 마우스가 올라가면 해당 방향으로 반복 이동합니다.
+  function startHoverSlide(direction) {
+    // 이미 같은 방향으로 움직이는 중이면 interval을 새로 만들지 않습니다.
+    if (hoverDirection === direction) return;
+
+    window.clearInterval(hoverTimer);
+    hoverDirection = direction;
+    swiper.autoplay.stop();
+
+    function moveSlide() {
+      if (direction === "prev") {
+        swiper.slidePrev();
+        return;
+      }
+
+      swiper.slideNext();
+    }
+
+    moveSlide();
+    // 마우스를 가장자리에 계속 두면 0.9초마다 한 칸씩 추가 이동합니다.
+    hoverTimer = window.setInterval(moveSlide, 900);
+  }
+
+  // 카드가 아니라 슬라이더 박스 전체 기준으로 마우스 위치를 계산합니다.
+  container.addEventListener("mousemove", function (event) {
+    const rect = container.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+
+    // 양쪽 25%를 방향 이동 영역으로 사용합니다.
+    const edgeSize = rect.width * 0.25;
+
+    if (mouseX <= edgeSize) {
+      startHoverSlide("prev");
+      return;
+    }
+
+    if (mouseX >= rect.width - edgeSize) {
+      startHoverSlide("next");
+      return;
+    }
+
+    // 가운데 영역으로 돌아오면 hover 이동을 멈추고 autoplay로 복귀합니다.
+    if (hoverDirection) {
+      stopHoverSlide();
+    }
+  });
+
+  // 슬라이더 밖으로 마우스가 나가도 interval이 남지 않도록 정리합니다.
+  container.addEventListener("mouseleave", stopHoverSlide);
+}
+
+// ==================== 5. 상품 상세 데이터 렌더링 ====================
+
 async function initProductDetail() {
   const catalog = await loadProductCatalog();
   const products = catalog.products;
+
+  // product-detail.html?id=상품ID 형태의 URL에서 id 값을 읽습니다.
   const params = new URLSearchParams(window.location.search);
   const requestedId = params.get("id");
   const fallbackId = catalog.fallbackId;
-  // URL의 id 값으로 어떤 상품을 보여줄지 결정합니다.
-  // 예: product-detail.html?id=home-studio-entry-monitor
-  // 잘못된 id로 들어오면 fallbackId 상품을 보여줘서 빈 화면을 막습니다.
+
+  // 없는 id로 접근하면 기본 상품으로 보여줍니다.
   const currentId = products[requestedId] ? requestedId : fallbackId;
   const product = products[currentId];
   const sharedDetailImages = catalog.sharedDetailImages;
 
-  // DOM 요소 참조
+  // 아래 DOM 변수들은 렌더링/이벤트 함수 안에서 반복해서 사용됩니다.
   const productTitle = document.querySelector(".product-info h1");
   const productPrice = document.querySelector(".product-info .price");
   const productDescription = document.querySelector(".product-info .description");
@@ -137,161 +271,303 @@ async function initProductDetail() {
   const tabPanels = document.querySelectorAll(".tab-panel");
   const specificationList = document.querySelector(".specification-list");
   const similarCards = document.querySelectorAll(".similar-products .card");
+  let quantity = 1;
 
-  // 페이지 기본 정보 설정
-  // JSON에서 가져온 상품 데이터를 화면의 제목, 가격, 설명 영역에 바로 반영합니다.
-  document.title = product.name + " | NODE";
-  productTitle.textContent = product.name;
-  productPrice.textContent = formatPrice(product.price);
-  productDescription.textContent = product.description;
-  productInfo.setAttribute("data-brand", product.brand);
+  // 페이지 진입 시 필요한 화면 렌더링과 이벤트 연결을 한 번에 실행합니다.
+  renderProductSummary();
+  renderDetailImages();
+  renderColorChips();
+  renderSpecifications();
+  bindQuantityControls();
+  bindAddToCart();
+  bindTabs();
+  renderSimilarProducts();
+  setupSimilarSwiper();
 
-  // 상세 이미지 및 배경 이미지 설정
-  // 상세페이지 중간의 큰 이미지들은 모든 상품이 공통으로 쓰는 sharedDetailImages를 순서대로 배치합니다.
-  detailHero.style.backgroundImage = 'linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.18)), url("' + sharedDetailImages[0] + '")';
-  detailImagePrimary.src = sharedDetailImages[2];
-  detailImageSecondary.src = sharedDetailImages[1];
+  // fallback 상품을 보여준 경우, 주소창도 실제 fallback id로 정리합니다.
+  if (!products[requestedId]) {
+    history.replaceState(null, "", "./product-detail.html?id=" + fallbackId);
+  }
 
-  detailRepeatImages.forEach(function (image, index) {
-    image.src = sharedDetailImages[index % sharedDetailImages.length];
-  });
+  // ---------- 기본 상품 정보 ----------
 
-  // 색상 칩 생성 및 이벤트 등록
-  // 상품마다 colors 데이터가 있으면 그 색상 칩을 만들고, 없으면 이미지 개수 기준으로 기본 칩을 만듭니다.
-  const productColors = Array.isArray(product.colors) && product.colors.length > 0
-    ? product.colors
-    : product.images.map(function (image, index) {
-        return { name: index === 0 ? "Default" : "Option " + (index + 1), hex: index === 0 ? "#171717" : "#f5f5f0", imageIndex: index };
-      });
+  function renderProductSummary() {
+    // 브라우저 탭 제목과 상단 상품명/가격/설명을 현재 상품 데이터로 채웁니다.
+    document.title = product.name + " | NODE";
+    productTitle.textContent = product.name;
+    productPrice.textContent = formatPrice(product.price);
+    productDescription.textContent = product.description;
+    productInfo.setAttribute("data-brand", product.brand);
+  }
 
-  colorChipList.textContent = "";
-  productColors.forEach(function (color, colorIndex) {
-    const imageIndex = Number(color.imageIndex);
-    const image = product.images[imageIndex];
-    const chip = document.createElement("button");
-    chip.className = "color-chip";
-    chip.type = "button";
-    chip.dataset.imageIndex = String(imageIndex);
-    chip.style.backgroundColor = color.hex || "#ddd";
-    // 연결할 이미지가 없는 색상은 클릭할 수 없게 비활성화합니다.
-    chip.disabled = !image;
-    chip.addEventListener("click", function () {
-      if (image) setMainImage(image, imageIndex);
+  // ---------- 상세 이미지 ----------
+
+  function renderDetailImages() {
+    // 상세 페이지 중간에 들어가는 공통 이미지 영역입니다.
+    // 상품별 이미지가 아니라 catalog의 sharedDetailImages를 함께 사용합니다.
+    detailHero.style.backgroundImage =
+      'linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.18)), url("' +
+      sharedDetailImages[0] +
+      '")';
+
+    detailImagePrimary.src = sharedDetailImages[2];
+    detailImageSecondary.src = sharedDetailImages[1];
+
+    detailRepeatImages.forEach(function (image, index) {
+      image.src = sharedDetailImages[index % sharedDetailImages.length];
     });
-    colorChipList.appendChild(chip);
-  });
+  }
 
-  // 메인 이미지 변경 함수
-  // 썸네일이나 색상 칩을 클릭했을 때 메인 이미지와 활성 표시를 동시에 바꿉니다.
+  // ---------- 색상칩 / 대표 이미지 ----------
+
+  function getProductColors() {
+    // JSON에 colors 배열이 있으면 그 값을 그대로 색상칩에 사용합니다.
+    if (Array.isArray(product.colors) && product.colors.length > 0) {
+      return product.colors;
+    }
+
+    // colors가 없는 상품도 이미지 개수만큼 기본 색상칩이 나오도록 fallback을 만듭니다.
+    return product.images.map(function (image, index) {
+      return {
+        name: index === 0 ? "Default" : "Option " + (index + 1),
+        hex: index === 0 ? "#171717" : "#f5f5f0",
+        imageIndex: index
+      };
+    });
+  }
+
   function setMainImage(image, index) {
+    // 대표 이미지를 바꾸고, 썸네일/색상칩의 활성 상태도 같은 index로 맞춥니다.
     mainImageElement.src = image;
-    mainImageElement.alt = getImageFileName(image);
+
     thumbnails.forEach(function (thumbnail, thumbnailIndex) {
       thumbnail.classList.toggle("is-active", thumbnailIndex === index);
     });
+
     colorChipList.querySelectorAll(".color-chip").forEach(function (chip) {
       const isActive = Number(chip.dataset.imageIndex) === index;
       chip.classList.toggle("is-active", isActive);
     });
   }
 
-  // 썸네일 클릭 이벤트
-  // 상품 이미지 배열을 기준으로 왼쪽 썸네일 배경을 만들고 클릭 이벤트를 연결합니다.
-  thumbnails.forEach(function (thumbnail, index) {
-    const image = product.images[index];
-    if (!image) return thumbnail.disabled = true;
-    thumbnail.style.backgroundImage = 'url("' + image + '")';
-    thumbnail.addEventListener("click", function () { setMainImage(image, index); });
-  });
+  function renderColorChips() {
+    const productColors = getProductColors();
 
-  setMainImage(product.images[0], 0);
+    // 기존 색상칩을 비운 뒤 현재 상품 기준으로 다시 생성합니다.
+    colorChipList.textContent = "";
 
-  // 사양 정보 렌더링
-  // specifications 데이터는 [항목명, 값] 형태라서 dt/dd 구조로 반복 생성합니다.
-  const currentSpecifications = catalog.specifications[currentId] || [];
-  specificationList.textContent = "";
-  currentSpecifications.forEach(function (specification) {
-    const row = document.createElement("div");
-    const name = document.createElement("dt");
-    const value = document.createElement("dd");
-    name.textContent = specification[0];
-    value.textContent = specification[1];
-    row.appendChild(name);
-    row.appendChild(value);
-    specificationList.appendChild(row);
-  });
+    productColors.forEach(function (color) {
+      const imageIndex = Number(color.imageIndex);
+      const image = product.images[imageIndex];
+      const chip = document.createElement("button");
 
-  // 수량 조절 버튼 로직
-  // 수량은 1개 미만으로 내려가지 않게 minus 버튼을 비활성화합니다.
-  let quantity = 1;
+      chip.className = "color-chip";
+      chip.type = "button";
+      chip.dataset.imageIndex = String(imageIndex);
+      chip.style.backgroundColor = color.hex || "#ddd";
+      chip.disabled = !image;
+
+      // 색상칩 클릭 시 해당 색상에 연결된 상품 이미지로 변경합니다.
+      chip.addEventListener("click", function () {
+        if (image) setMainImage(image, imageIndex);
+      });
+
+      colorChipList.appendChild(chip);
+    });
+
+    thumbnails.forEach(function (thumbnail, index) {
+      const image = product.images[index];
+
+      // 상품 이미지보다 썸네일 버튼이 많을 경우 빈 썸네일은 비활성화합니다.
+      if (!image) {
+        thumbnail.disabled = true;
+        return;
+      }
+
+      thumbnail.style.backgroundImage = 'url("' + image + '")';
+
+      // 썸네일 클릭 시 대표 이미지를 해당 이미지로 변경합니다.
+      thumbnail.addEventListener("click", function () {
+        setMainImage(image, index);
+      });
+    });
+
+    // 첫 진입 시에는 첫 번째 상품 이미지를 대표 이미지로 보여줍니다.
+    setMainImage(product.images[0], 0);
+  }
+
+  // ---------- 사양 정보 ----------
+
+  function renderSpecifications() {
+    const currentSpecifications = catalog.specifications[currentId] || [];
+
+    // 상품마다 스펙 개수가 다를 수 있어서 비운 뒤 현재 상품 스펙만 다시 넣습니다.
+    specificationList.textContent = "";
+
+    currentSpecifications.forEach(function (specification) {
+      const row = document.createElement("div");
+      const name = document.createElement("dt");
+      const value = document.createElement("dd");
+
+      name.textContent = specification[0];
+      value.textContent = specification[1];
+      row.appendChild(name);
+      row.appendChild(value);
+      specificationList.appendChild(row);
+    });
+  }
+
+  // ==================== 6. 이벤트 연결 ====================
+
+  // ---------- 수량 조절 ----------
+
   function updateQuantity() {
+    // 화면에 보이는 수량과 minus 버튼 활성 상태를 현재 quantity 값에 맞춥니다.
     quantityValue.textContent = quantity;
     quantityMinus.disabled = quantity === 1;
   }
-  quantityMinus.addEventListener("click", function () { if (quantity > 1) { quantity--; updateQuantity(); } });
-  quantityPlus.addEventListener("click", function () { quantity++; updateQuantity(); });
 
-  // 장바구니 버튼 이벤트
-  addToCartButton.addEventListener("click", function () {
-    // 현재 보고 있는 상품 id와 선택 수량을 cartItems에 저장합니다.
-    // shoppingCart.html에서도 같은 localStorage 키를 읽어서 장바구니 목록을 보여줍니다.
-    saveCartItem({ id: currentId, name: product.name, brand: product.brand, salePrice: product.price, qty: quantity, img: product.images[0] });
-    showDetailCartPopup();
-  });
+  function bindQuantityControls() {
+    updateQuantity();
 
-  // 탭 전환 이벤트
-  // 버튼의 data-tab 값과 section의 id 값을 맞춰서 해당 상세정보/리뷰/배송 탭만 보이게 합니다.
-  tabButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const selectedTab = button.dataset.tab;
-      tabButtons.forEach(btn => btn.classList.toggle("is-active", btn === button));
-      tabPanels.forEach(panel => panel.hidden = panel.id !== selectedTab);
+    // 수량은 1보다 작아질 수 없게 막습니다.
+    quantityMinus.addEventListener("click", function () {
+      if (quantity > 1) {
+        quantity--;
+        updateQuantity();
+      }
     });
-  });
 
-  // 관련 상품 표시 로직
-  // 우선 현재 상품과 같은 브랜드의 상품을 추천하고, 카드 개수가 부족하면 다른 브랜드 상품으로 채웁니다.
-  // 현재 보고 있는 상품은 추천 목록에서 제외합니다.
-  let similarEntries = Object.entries(products).filter(entry => entry[0] !== currentId && entry[1].brand === product.brand);
-  if (similarEntries.length < similarCards.length) {
-    const otherEntries = Object.entries(products).filter(entry => entry[0] !== currentId && entry[1].brand !== product.brand);
-    similarEntries = similarEntries.concat(otherEntries);
+    quantityPlus.addEventListener("click", function () {
+      quantity++;
+      updateQuantity();
+    });
   }
 
-  similarCards.forEach(function (card, index) {
-    const entry = similarEntries[index];
-    if (!entry) return;
-    const [similarId, similarProduct] = entry;
-    // HTML에 미리 만들어 둔 카드 틀에 JSON 상품 데이터를 채워 넣습니다.
-    // 이미지, 링크, 브랜드, 이름, 가격, 장바구니 아이콘을 모두 JS에서 갱신합니다.
-    const similarUrl = "./product-detail.html?id=" + encodeURIComponent(similarId);
-    const imageBox = card.querySelector(".similar-image-box");
-    const productLink = card.querySelector(".similar-product-link");
-    const nameLink = card.querySelector(".similar-name a");
-    const cartButton = card.querySelector(".similar-cart-button");
+  // ---------- 상세 상품 장바구니 ----------
 
-    imageBox.style.backgroundImage = 'url("' + similarProduct.images[0] + '")';
-    productLink.href = similarUrl;
-    productLink.setAttribute("aria-label", similarProduct.name + " 상세페이지 보기");
-    card.querySelector(".similar-brand").textContent = similarProduct.brand;
-    nameLink.href = similarUrl;
-    nameLink.textContent = similarProduct.name;
-    card.querySelector(".similar-price").textContent = formatPrice(similarProduct.price);
-    cartButton.innerHTML = SIMILAR_CART_ICON;
-    cartButton.addEventListener("click", () => {
-      // 추천 상품의 장바구니 버튼은 기본 수량 1개로 저장합니다.
-      saveCartItem({ id: similarId, name: similarProduct.name, brand: similarProduct.brand, salePrice: similarProduct.price, qty: 1, img: similarProduct.images[0] });
-      cartButton.classList.add("is-active");
+  function bindAddToCart() {
+    addToCartButton.addEventListener("click", function () {
+      // 현재 상세 상품과 선택한 수량을 장바구니 저장 형식에 맞춰 넘깁니다.
+      saveCartItem({
+        id: currentId,
+        name: product.name,
+        brand: product.brand,
+        salePrice: product.price,
+        qty: quantity,
+        img: product.images[0]
+      });
+
       showDetailCartPopup();
     });
-  });
+  }
 
-  // 잘못된 id로 들어온 경우 주소창도 fallback 상품 id로 정리합니다.
-  if (!products[requestedId]) history.replaceState(null, "", "./product-detail.html?id=" + fallbackId);
-  updateQuantity();
+  // ---------- 탭 전환 ----------
+
+  function bindTabs() {
+    tabButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const selectedTab = button.dataset.tab;
+
+        // 클릭한 탭 버튼만 is-active 상태로 만듭니다.
+        tabButtons.forEach(function (tabButton) {
+          tabButton.classList.toggle("is-active", tabButton === button);
+        });
+
+        // 버튼의 data-tab 값과 id가 일치하는 패널만 보여줍니다.
+        tabPanels.forEach(function (panel) {
+          panel.hidden = panel.id !== selectedTab;
+        });
+      });
+    });
+  }
+
+  // ---------- 추천 상품 ----------
+
+  function getSimilarEntries() {
+    // 1순위: 현재 상품과 같은 브랜드이면서 현재 상품은 아닌 것.
+    let similarEntries = Object.entries(products).filter(function (entry) {
+      return entry[0] !== currentId && entry[1].brand === product.brand;
+    });
+
+    // 같은 브랜드 상품이 부족하면 다른 브랜드 상품으로 남은 칸을 채웁니다.
+    if (similarEntries.length < similarCards.length) {
+      const otherEntries = Object.entries(products).filter(function (entry) {
+        return entry[0] !== currentId && entry[1].brand !== product.brand;
+      });
+
+      similarEntries = similarEntries.concat(otherEntries);
+    }
+
+    return similarEntries;
+  }
+
+  function renderSimilarProducts() {
+    const similarEntries = getSimilarEntries();
+
+    similarCards.forEach(function (card, index) {
+      const entry = similarEntries[index];
+      if (!entry) return;
+
+      // HTML에 미리 만들어둔 카드 틀에 실제 추천 상품 데이터를 주입합니다.
+      const similarId = entry[0];
+      const similarProduct = entry[1];
+      const similarUrl = "./product-detail.html?id=" + encodeURIComponent(similarId);
+      const imageBox = card.querySelector(".similar-image-box");
+      const productLink = card.querySelector(".similar-product-link");
+      const nameLink = card.querySelector(".similar-name a");
+      const cartButton = card.querySelector(".similar-cart-button");
+
+      imageBox.style.backgroundImage = 'url("' + similarProduct.images[0] + '")';
+      productLink.href = similarUrl;
+      productLink.setAttribute("aria-label", similarProduct.name + " 상세페이지 보기");
+      card.querySelector(".similar-brand").textContent = similarProduct.brand;
+      nameLink.href = similarUrl;
+      nameLink.textContent = similarProduct.name;
+      card.querySelector(".similar-price").textContent = formatPrice(similarProduct.price);
+      cartButton.innerHTML = SIMILAR_CART_ICON;
+      cartButton.classList.toggle("is-active", hasCartItem(similarId));
+      cartButton.setAttribute("aria-pressed", String(hasCartItem(similarId)));
+
+      cartButton.addEventListener("click", function () {
+        const isAlreadyInCart = hasCartItem(similarId);
+
+        if (isAlreadyInCart) {
+          removeCartItem(similarId);
+          cartButton.classList.remove("is-active");
+          cartButton.setAttribute("aria-pressed", "false");
+
+          if (typeof updateCartBadge === "function") {
+            updateCartBadge();
+          }
+
+          return;
+        }
+
+        // 추천 상품 카드에서는 수량 선택이 없으므로 1개로 장바구니에 담습니다.
+        saveCartItem({
+          id: similarId,
+          name: similarProduct.name,
+          brand: similarProduct.brand,
+          salePrice: similarProduct.price,
+          qty: 1,
+          img: similarProduct.images[0]
+        });
+
+        cartButton.classList.add("is-active");
+        cartButton.setAttribute("aria-pressed", "true");
+
+        if (typeof updateCartBadge === "function") {
+          updateCartBadge();
+        }
+
+        showDetailCartPopup();
+      });
+    });
+  }
 }
 
-// 에러 처리 및 초기 실행
 initProductDetail().catch(function (error) {
+  // 데이터 로딩 실패나 렌더링 에러가 나면 콘솔에서 확인할 수 있게 남깁니다.
   console.error(error);
 });

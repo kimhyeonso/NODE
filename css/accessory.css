@@ -219,7 +219,7 @@ body[data-accessory-category="stand"] .hero-accessory {
 }
 
 .section-heading {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
     text-align: center;
 }
 
@@ -238,7 +238,7 @@ body[data-accessory-category="stand"] .hero-accessory {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .filter-actions {
@@ -265,8 +265,8 @@ body[data-accessory-category="stand"] .hero-accessory {
 /* 상품 상세 필터 영역 */
 .filter-area {
     display: grid;
-    gap: 24px;
-    margin-bottom: 42px;
+    gap: 18px;
+    margin-bottom: 48px;
 }
 
 .filter-section {
@@ -278,19 +278,19 @@ body[data-accessory-category="stand"] .hero-accessory {
 
 .filter-section h3 {
     margin: 0;
-    padding: 17px 20px;
-    color: #fff;
-    background: #151515;
-    font-size: 1.0625rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
+    padding: 14px 20px;
+    color: #3d3d3d;
+    background: #f4f2ee;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
 }
 
 .filter-row {
     display: grid;
     grid-template-columns: 130px 1fr;
     gap: 20px;
-    padding: 16px 20px;
+    padding: 15px 20px;
     border-top: 1px solid #e7e7e7;
 }
 
@@ -353,6 +353,14 @@ body[data-accessory-category="stand"] .hero-accessory {
     display: grid;
     grid-template-columns: 1fr auto;
     min-width: 0;
+    opacity: 0;
+    transform: translateY(34px);
+    transition: 1.8s ease;
+}
+
+.accessory-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .accessory-card .image-box {
@@ -613,98 +621,78 @@ body[data-accessory-category="stand"] .hero-accessory {
 
 /* 모바일: 본문 레이아웃 재배치 */
 @media (max-width: 768px) {
-    .vspopup {
-        width: calc(100vw - 28px);
-        min-width: 0;
-        max-width: 390px;
-        max-height: calc(100vh - 28px);
-        max-height: calc(100dvh - 28px);
-        left: 50%;
-        bottom: 14px;
-        padding: 16px 14px;
-        transform: translateX(-50%);
-        overflow-y: auto;
-        background-color: rgba(255, 255, 255, 0.96);
+    .hero-accessory {
+        min-height: 300px;
+        padding-right: 20px;
+        padding-left: 20px;
     }
 
-    .vspopup .vstext p:nth-child(1) {
-        font-size: 0.7rem;
+    .hero-accessory h1 {
+        font-size: 2.25rem;
+        font-weight: 900;
     }
 
-    .vspopup .vstext h3 {
-        margin-top: 6px;
-        font-size: 1.12rem;
-        line-height: 1.35;
+    .accessory-container {
+        padding: 58px 18px 76px;
     }
 
-    .vspopup .vstext p:nth-child(3) {
-        font-size: 0.82rem;
-        line-height: 1.45;
+    .section-heading {
+        margin-bottom: 32px;
     }
 
-    .vspopup .vsimg {
-        margin-top: 10px;
+    .section-heading h2 {
+        font-size: 2rem;
     }
 
-    .vspopup .vsimg img {
-        max-height: 135px;
-        object-fit: contain;
-    }
-
-    .vspopup .vsexplain {
-        gap: 10px;
-        padding: 14px 4px;
-    }
-
-    .vspopup .vsexplain img {
-        width: 52px;
-        flex: 0 0 auto;
-    }
-
-    .vspopup .vsexplain .vsbox span {
-        font-size: 0.88rem;
-        line-height: 1.35;
-    }
-
-    .vspopup .vsexplain .vsbox p {
-        font-size: 0.76rem;
-        line-height: 1.35;
-    }
-
-    .vspopup .button {
-        width: 100%;
-        height: 44px;
-        font-size: 0.92rem;
-        line-height: 44px;
-    }
-
-    .vspopup .closeBtn {
-        width: 100%;
-        justify-content: flex-start;
-        margin-top: 16px;
-        padding-top: 14px;
-        font-size: 0.82rem;
-    }
-
-    .vspopup .closeBtn p {
-        margin-left: auto;
-    }
-
-    .hero-accessory { min-height: 270px; }
-    .hero-accessory h1 { font-size: 2.25rem; }
     .toolbar { justify-content: stretch; }
+
     .filter-actions {
         width: 100%;
         align-items: stretch;
         flex-direction: column-reverse;
     }
-    .sort-control select { width: 100%; }
+
+    .sort-control select {
+        width: 100%;
+        min-height: 46px;
+        font-size: 0.95rem;
+    }
+
+    .filter-area {
+        gap: 16px;
+        margin-bottom: 34px;
+    }
+
+    .filter-section h3 {
+        padding: 15px 18px;
+        font-size: 1.05rem;
+    }
+
     .filter-row {
         grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 14px 16px;
+        gap: 12px;
+        padding: 16px 18px;
     }
-    .filter-options { gap: 10px 18px; }
+
+    .filter-row strong {
+        font-size: 1rem;
+    }
+
+    .filter-options {
+        gap: 12px 18px;
+    }
+
+    .filter-options label {
+        min-height: 28px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .filter-options input {
+        width: 18px;
+        height: 18px;
+    }
+
     .cart-button,
     .compare-check {
         top: 8px;
@@ -721,14 +709,70 @@ body[data-accessory-category="stand"] .hero-accessory {
         width: 14px;
         height: 14px;
     }
-    .accessory-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 14px; }
+
+    .accessory-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 14px;
+    }
+
+    .image-box {
+        margin-bottom: 14px;
+    }
+
+    .brand {
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+    }
+
+    .accessory-name {
+        display: -webkit-box;
+        min-height: 2.8em;
+        margin-bottom: 8px;
+        overflow: hidden;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        text-overflow: initial;
+        white-space: normal;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .price-row {
+        gap: 4px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .sale-price {
+        font-size: 0.95rem;
+    }
+
+    .original-price {
+        font-size: 0.82rem;
+    }
 
     .hero-description {
         font-size: 1.1rem;
     }
 }
 
-/* 작은 모바일: 상품 한 줄 1개 */
+/* 작은 모바일에서도 액세서리 카드 2열 유지 */
 @media (max-width: 380px) {
-    .accessory-grid { grid-template-columns: 1fr; }
+    .accessory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 12px;
+    }
+
+    .accessory-container {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .accessory-name {
+        font-size: 0.98rem;
+    }
+
+    .sale-price {
+        font-size: 0.9rem;
+    }
 }

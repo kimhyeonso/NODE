@@ -37,7 +37,7 @@ button, select { font: inherit; }
 
 .page-heading h1 {
   margin-bottom: 10px;
-  font-size: clamp(1.875rem, 4vw, 2.875rem);
+  font-size: 1.875rem;
   letter-spacing: -.045em;
 }
 
@@ -239,12 +239,65 @@ button, select { font: inherit; }
 }
 
 @media (max-width: 700px) {
-  .payment-page { width: min(100% - 32px, 1100px); padding-top: 24px; }
+  .payment-page {
+    --mypage-mobile-copy-size: 1.125rem;
+    width: min(100% - 32px, 1100px);
+    padding-top: 24px;
+  }
+
+  .page-heading h1 {
+    font-size: 2.45rem;
+  }
+
+  .page-heading > div > p:last-child,
+  .back-link,
+  .section-heading > span,
+  .card-top strong,
+  .card-visual > p,
+  .card-bottom,
+  .method-info p,
+  .primary-badge,
+  .method-actions button,
+  .add-payment-panel p,
+  .primary-button,
+  .security-panel li {
+    font-size: var(--mypage-mobile-copy-size);
+  }
+
   .page-heading { align-items: flex-start; flex-direction: column; }
-  .payment-method { grid-template-columns: 1fr; }
-  .card-visual { max-width: 330px; width: 100%; }
-  .method-info { align-items: flex-start; flex-direction: column; }
-  .method-actions { justify-content: flex-start; }
+  .payment-main { padding: 24px; }
+  .payment-method {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 0;
+  }
+  .card-visual {
+    width: 100%;
+    max-width: none;
+    height: 170px;
+  }
+  .method-info {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .method-info h3 {
+    font-size: 1.35rem;
+  }
+  .method-actions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .method-actions button {
+    min-height: 42px;
+    padding: 8px 6px;
+    text-align: center;
+  }
+  .primary-button {
+    min-height: 46px;
+  }
   .payment-side { grid-template-columns: 1fr; }
 }
 

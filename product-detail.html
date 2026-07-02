@@ -20,8 +20,10 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="./css/product-detail.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script src="./script/common.js"></script>
     <script src="./script/product-detail.js" defer></script>
     <script src="./script/product.js" defer></script>
@@ -461,12 +463,14 @@
             <h2>Similar Products</h2>
           </div>
 
-          <div class="product-list">
-            <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
-            <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
-            <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
-            <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
-            <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+          <div class="swiper swiper-container similar-swiper">
+            <div class="product-list swiper-wrapper">
+              <article class="card swiper-slide"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card swiper-slide"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card swiper-slide"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card swiper-slide"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card swiper-slide"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+            </div>
           </div>
         </section>
       </section>

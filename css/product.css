@@ -123,7 +123,7 @@ body[data-product-category="live"] .hero-product {
 }
 
 .section-heading {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
     text-align: center;
 }
 
@@ -147,7 +147,7 @@ body[data-product-category="live"] .hero-product {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .filter-actions {
@@ -174,8 +174,8 @@ body[data-product-category="live"] .hero-product {
 /* 상세 필터 박스 */
 .filter-area {
     display: grid;
-    gap: 24px;
-    margin-bottom: 42px;
+    gap: 18px;
+    margin-bottom: 48px;
 }
 
 .filter-section {
@@ -187,19 +187,19 @@ body[data-product-category="live"] .hero-product {
 
 .filter-section h3 {
     margin: 0;
-    padding: 17px 20px;
+    padding: 14px 20px;
     color: #fff;
     background: #151515;
-    font-size: 1.0625rem;
-    font-weight: 400; 
-    letter-spacing: 0.04em;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
 }
 
 .filter-row {
     display: grid;
     grid-template-columns: 130px 1fr;
     gap: 20px;
-    padding: 16px 20px;
+    padding: 15px 20px;
     border-top: 1px solid #e7e7e7;
 }
 
@@ -264,6 +264,14 @@ body[data-product-category="live"] .hero-product {
     display: grid;
     grid-template-columns: 1fr auto;
     min-width: 0;
+    opacity: 0;
+    transform: translateY(34px);
+    transition: 1.8s ease;
+}
+
+.product-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .product-card .image-box {
@@ -567,7 +575,9 @@ body[data-product-category="live"] .hero-product {
 /* 모바일 화면: 본문, 필터, 상품 카드 크기 최적화 */
 @media (max-width: 768px) {
     .hero-product {
-        min-height: 270px;
+        min-height: 300px;
+        padding-right: 20px;
+        padding-left: 20px;
     }
 
     .hero-product h1 {
@@ -577,7 +587,15 @@ body[data-product-category="live"] .hero-product {
     }
 
     .product-container {
-        padding: 56px 16px 72px;
+        padding: 58px 18px 76px;
+    }
+
+    .section-heading {
+        margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
     }
 
     .filter-toolbar {
@@ -592,24 +610,52 @@ body[data-product-category="live"] .hero-product {
 
     .sort-control select {
         width: 100%;
+        min-height: 46px;
+        font-size: 0.95rem;
+    }
+
+    .filter-area {
+        gap: 16px;
+        margin-bottom: 34px;
+    }
+
+    .filter-section h3 {
+        padding: 15px 18px;
+        font-size: 1.05rem;
     }
 
     .filter-row {
         grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 14px 16px;
+        gap: 12px;
+        padding: 16px 18px;
+    }
+
+    .filter-row strong {
+        font-size: 1rem;
     }
 
     .filter-options {
-        gap: 10px 18px;
+        gap: 12px 18px;
+    }
+
+    .filter-options label {
+        min-height: 28px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .filter-options input {
+        width: 18px;
+        height: 18px;
     }
 
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 32px 14px;
+        gap: 36px 14px;
     }
 
     .image-box {
+        margin-bottom: 14px;
         border-radius: 8px;
     }
 
@@ -638,9 +684,37 @@ body[data-product-category="live"] .hero-product {
         height: 14px;
     }
 
+    .brand {
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+    }
+
+    .product-name {
+        display: -webkit-box;
+        min-height: 2.8em;
+        margin-bottom: 8px;
+        overflow: hidden;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        text-overflow: initial;
+        white-space: normal;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
     .price-row {
         gap: 4px;
-        font-size: 0.875rem;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .sale-price {
+        font-size: 0.95rem;
+    }
+
+    .original-price,
+    .discount-rate {
+        font-size: 0.82rem;
     }
 
     .hero-description {
@@ -649,9 +723,23 @@ body[data-product-category="live"] .hero-product {
 
 }
 
-/* 아주 작은 화면 */
+/* 아주 작은 화면에서도 상품 카드 2열 유지 */
 @media (max-width: 380px) {
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 12px;
+    }
+
+    .product-container {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .product-name {
+        font-size: 0.98rem;
+    }
+
+    .sale-price {
+        font-size: 0.9rem;
     }
 }

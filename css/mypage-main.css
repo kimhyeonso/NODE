@@ -63,7 +63,7 @@ body {
 
 .user-info-card h2 {
     margin: 0;
-    font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+    font-size: 1.5rem;
     line-height: 1.15;
 }
 
@@ -157,7 +157,7 @@ body {
 
 .card > strong {
     margin: 14px 0 auto;
-    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    font-size: 1.5rem;
     letter-spacing: -0.04em;
 }
 
@@ -280,7 +280,7 @@ body {
 }
 
 .panel-heading h3 {
-    margin: 0;
+    padding-bottom: 20px;
     font-size: 1.1875rem;
     font-weight: 600;
 }
@@ -304,7 +304,7 @@ body {
 .bar-chart {
     display: flex;
     height: 218px;
-    padding: 25px 12px 0;
+    padding: 25px 12px 20px;
     align-items: flex-end;
     justify-content: space-around;
     gap: 14px;
@@ -349,6 +349,7 @@ body {
 }
 
 .donut-chart {
+    margin-bottom: 20px;
     position: relative;
     display: grid;
     width: 138px;
@@ -378,6 +379,7 @@ body {
 }
 
 .chart-legend {
+    margin-bottom: 20px;
     display: grid;
     width: 100%;
     gap: 9px;
@@ -443,7 +445,7 @@ body {
 
 /* ==================== 최근 결제 내역 3개 ==================== */
 .transaction-list {
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
 .transaction-list li {
@@ -452,6 +454,7 @@ body {
     grid-template-columns: 40px 1fr auto;
     align-items: center;
     gap: 12px;
+    padding: 20px 0;
 }
 
 .transaction-list li + li {
@@ -506,8 +509,42 @@ body {
 
 @media (max-width: 768px) {
     .mypage-container {
+        --mypage-mobile-copy-size: 1.125rem;
         width: min(100% - 32px, 1100px);
         padding-top: 24px;
+        padding-bottom: 64px;
+    }
+
+    .user-info-card h2 span,
+    .user-email,
+    .stats-box span,
+    .logo-out,
+    .card-label,
+    .card small,
+    .card-change,
+    .cart-shortcut-copy > p:last-child,
+    .cart-shortcut-link,
+    .panel-heading > span,
+    .panel-heading a,
+    .panel-heading button,
+    .bar-item small,
+    .chart-legend li,
+    .transaction-list li > div:nth-child(2) strong,
+    .transaction-list span {
+        font-size: var(--mypage-mobile-copy-size);
+    }
+
+    .panel-heading h3{
+        font-size: 1.5rem;
+    }
+
+    .panel-heading a,
+    .panel-heading button,
+    .cart-shortcut-link {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .user-info-card {
@@ -515,6 +552,10 @@ body {
         align-items: flex-start;
         flex-direction: column;
         gap: 20px;
+    }
+
+    .user-info-card h2 {
+        font-size: clamp(1.75rem, 2.5vw, 2.25rem);
     }
 
     .stats-box {
@@ -526,6 +567,18 @@ body {
         flex: 1;
     }
 
+    .stats-box strong{
+        font-size: 1.5rem;
+    }
+
+    .card > strong {
+        font-size: clamp(1.375rem, 2vw, 1.75rem);
+    }
+
+    .transaction-list li > strong {
+        font-size: 1.5rem;
+    }
+
     .cart-shortcut {
         grid-template-columns: auto 1fr;
     }
@@ -534,6 +587,45 @@ body {
         grid-column: 1 / -1;
         justify-content: center;
     }
+
+    .donut-wrap {
+        height: auto;
+        padding-top: 12px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        justify-items: center;
+    }
+
+    .chart-legend {
+        width: min(100%, 260px);
+    }
+
+    .chart-legend li {
+        grid-template-columns: 10px minmax(0, 1fr) 56px;
+        column-gap: 10px;
+    }
+
+    .chart-legend strong {
+        text-align: right;
+    }
+
+    .transaction-list li strong{
+        font-size: 1.2rem;
+    }
+
+    .panel {
+        padding: 22px;
+    }
+
+    .chart-section .panel {
+        min-height: auto;
+    }
+
+    .bar-chart {
+        height: 190px;
+        padding-top: 18px;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -554,7 +646,7 @@ body {
 
     .summary-grid .card-label,
     .summary-grid .card-change {
-        font-size: 0.6875rem;
+        font-size: var(--mypage-mobile-copy-size);
     }
 
     .summary-grid .card > strong {
@@ -564,7 +656,7 @@ body {
     }
 
     .summary-grid .card small {
-        font-size: 0.6875rem;
+        font-size: var(--mypage-mobile-copy-size);
     }
 
     .cart-shortcut {
@@ -572,19 +664,12 @@ body {
     }
 
     .panel {
-        padding: 20px;
+        padding: 18px;
     }
 
     .bar-chart {
         padding-inline: 0;
         gap: 8px;
-    }
-
-    .donut-wrap {
-        height: auto;
-        padding-top: 24px;
-        grid-template-columns: 1fr;
-        gap: 22px;
     }
 
     .transaction-list li {
@@ -593,5 +678,18 @@ body {
 
     .transaction-list li > strong {
         grid-column: 2;
+    }
+
+    .panel-heading {
+        gap: 10px;
+    }
+
+    .panel-heading h3 {
+        padding-bottom: 14px;
+        font-size: 1.35rem;
+    }
+
+    .chart-legend {
+        width: min(100%, 240px);
     }
 }

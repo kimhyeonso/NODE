@@ -1,4 +1,4 @@
-﻿* { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
 /* ==================== 공통 배경 / 전체 콘텐츠 너비 ==================== */
 body {
@@ -17,15 +17,16 @@ button, select { font: inherit; }
 
 /* ==================== 페이지 제목 영역 ==================== */
 .page-heading,
-.history-toolbar,
-.history-filters {
+.history-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
 
-.page-heading { margin-bottom: 32px; }
+.page-heading {
+  margin-bottom: 32px;
+}
 
 .eyebrow {
   margin-bottom: 7px;
@@ -37,7 +38,7 @@ button, select { font: inherit; }
 
 .page-heading h1 {
   margin-bottom: 10px;
-  font-size: clamp(1.875rem,4vw,2.875rem);
+  font-size: 1.875rem;
   letter-spacing: -.045em;
 }
 
@@ -93,33 +94,6 @@ button, select { font: inherit; }
 }
 
 .history-toolbar h2 { font-size: 1.1875rem; }
-.history-filters { gap: 10px; }
-
-.history-filters label {
-  display: grid;
-  gap: 5px;
-  color: #92949d;
-  font-size: 0.75rem;
-}
-
-.history-filters select,
-.history-filters button {
-  height: 38px;
-  padding: 0 12px;
-  border: 1px solid #e1e2e8;
-  border-radius: 8px;
-  background: #fff;
-  color: #666973;
-  font-size: 0.75rem;
-}
-
-.history-filters button {
-  align-self: flex-end;
-  border-color: #20222c;
-  color: #fff;
-  background: #20222c;
-  cursor: pointer;
-}
 
 /* 결제내역 표 너비와 셀 간격 */
 .history-table-wrap { overflow-x: auto; }
@@ -252,17 +226,135 @@ button, select { font: inherit; }
 
 /* ==================== 반응형: 태블릿 / 모바일 ==================== */
 @media (max-width: 800px) {
-  .history-page { width: min(100% - 32px,1100px); padding-top: 24px; }
+  .history-page {
+    --mypage-mobile-copy-size: 1.125rem;
+    width: min(100% - 32px, 1100px);
+    padding-top: 24px;
+  }
+
+  .page-heading h1 {
+    font-size: 2.45rem;
+  }
+
+  .page-heading > div > p:last-child,
+  .back-link,
+  .history-summary span,
+  .history-summary small,
+  .history-summary p,
+  .history-table th,
+  .history-table td,
+  .order-icon,
+  .order-info strong,
+  .order-info small,
+  .status,
+  .pagination button {
+    font-size: var(--mypage-mobile-copy-size);
+  }
+
+  .history-summary strong {
+    font-size: 2.25rem;
+  }
+
   .page-heading,
   .history-toolbar { align-items: flex-start; flex-direction: column; }
-  .history-filters { width: 100%; align-items: stretch; }
-  .history-filters label { flex: 1; }
 }
-
 @media (max-width: 620px) {
   .history-summary { grid-template-columns: 1fr; gap: 14px; }
   .history-summary article { min-height: 125px; }
   .history-panel { padding: 20px; }
-  .history-filters { flex-direction: column; }
-  .history-filters button { width: 100%; }
+
+  .history-table-wrap {
+    overflow: visible;
+  }
+
+  .history-table,
+  .history-table tbody,
+  .history-table tr,
+  .history-table td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .history-table {
+    border-collapse: separate;
+  }
+
+  .history-table thead {
+    display: none;
+  }
+
+  .history-table tbody {
+    display: grid;
+    gap: 14px;
+  }
+
+  .history-table tr {
+    padding: 18px;
+    border: 1px solid #ececf1;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .history-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 10px 0;
+    border-top: 0;
+    white-space: normal;
+  }
+
+  .history-table td:nth-child(n) {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .history-table td:first-child {
+    display: block;
+    padding-top: 0;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eeeeF2;
+  }
+
+  .history-table td::before {
+    color: #999ba4;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .history-table td:nth-child(2)::before { content: "결제일"; }
+  .history-table td:nth-child(3)::before { content: "결제 수단"; }
+  .history-table td:nth-child(4)::before { content: "결제 금액"; }
+  .history-table td:nth-child(5)::before { content: "상태"; }
+
+  .history-table td:nth-child(6) {
+    justify-content: stretch;
+    padding-bottom: 0;
+  }
+
+  .history-table td:nth-child(6) a {
+    display: grid;
+    width: 100%;
+    min-height: 44px;
+    place-items: center;
+    border: 1px solid #20222c;
+    border-radius: 8px;
+    color: #fff;
+    background: #20222c;
+  }
+
+  .order-info {
+    align-items: flex-start;
+  }
+
+  .pagination {
+    gap: 8px;
+  }
+
+  .pagination button {
+    min-width: 42px;
+    height: 42px;
+  }
 }
