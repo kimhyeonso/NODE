@@ -219,7 +219,7 @@
 .product-card p,
 .discover-text p {
   margin-top: 36px;
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-size: clamp(1.02rem, 1.25vw, 1.12rem);
   line-height: 1.6;
   color: #777;
 }
@@ -424,12 +424,12 @@
   }
 
   .home-hero {
-    top: 80px;
+    top: 50px;
     transform: translateX(-50%);
   }
 
   .home-hero h1 {
-    font-size: 22px;
+    font-size: clamp(2.25rem, 2.5vw, 3rem);
   }
 
   .home-hero p {
@@ -493,7 +493,7 @@
 
   .sound-grid {
     width: 86%;
-    margin-top: 35px;
+    margin-top: -300px;
   }
 
   .intro-block {
@@ -503,6 +503,7 @@
   .intro-image {
     grid-row: auto;
     aspect-ratio: 1 / 0.96;
+    margin-top: 32px;
   }
 
   .intro-text {
@@ -522,7 +523,7 @@
   .product-card p,
   .discover-text p {
     margin-top: 16px;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.5;
   }
 
@@ -588,10 +589,15 @@
   .discover-btn {
     margin-top: 28px;
     padding: 10px 18px;
-    font-size: 10px;
+    font-size: 17px;
   }
 
   .discover-image {
     margin-top: 36px;
   }
+
+  .product-card h3, .discover-section h2, .intro-text h2{
+    font-size: 2rem;
+  }
+
 }
