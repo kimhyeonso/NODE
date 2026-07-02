@@ -35,7 +35,6 @@
   margin-bottom: 2.5rem;
   font-size: clamp(1.75rem, 2vw + 1rem, 2rem);
   font-weight: 700;
-  letter-spacing: 0.1em;
   line-height: 1;
   color: #ffffff;
 }
@@ -74,7 +73,7 @@
   color: #111111;
   padding: 1rem 0;
   border-radius: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
@@ -255,7 +254,7 @@
   .find {
     flex-direction: row; /* 혹은 column, 디자인 의도에 맞게 선택 */
     gap: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     flex-wrap: wrap; /* 요소가 넘치면 줄바꿈 */
     justify-content: center;
   }

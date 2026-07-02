@@ -31,7 +31,9 @@
 html,
 body {
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  overscroll-behavior-x: none;
   background-color: #070707;
   overflow-y: hidden;
 }
@@ -73,8 +75,11 @@ body {
 
 .section-container{
   width: 100%;
+  max-width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior-x: none;
 
   /* 스크롤 스냅 */
   scroll-snap-type: y mandatory;
@@ -998,6 +1003,8 @@ body {
   justify-content: center;
   gap: clamp(30px, 3vw, 60px);
   transition: transform 0.8s ease;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .artist-item {
@@ -1183,6 +1190,12 @@ body {
 
 
 @media (max-width: 768px) {
+  /*********** 두번째 모바일 섹션 구현 ***********/
+  .brand-logo-section img{
+  width: 80%;
+  height: 80%;
+  }
+
   /*********** 세번째 모바일 섹션 구현 (소리의 연결점) ***********/
   .brand-story-container {
     width: 100%;
@@ -1311,6 +1324,7 @@ body {
   .seach-section .dragArea {
     overflow-x: auto;
     overflow-y: hidden;
+    overscroll-behavior-x: contain;
     cursor: default;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;

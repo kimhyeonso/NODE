@@ -804,6 +804,7 @@ SearchDragAnimation__init();
 const gallery = document.querySelector(".artist-gallery");
 
 let isMoving = false;
+let artistTimer = null;
 const pointTime = 4000; // 점이 한 바퀴 도는 시간
 const slideTime = 800; // 슬라이드 이동 시간
 
@@ -836,16 +837,27 @@ function setCenterItem() {
   }
 }
 
-function moveNextArtist() {
+function getArtistMoveSize(item) {
+  const gap = parseFloat(getComputedStyle(gallery).gap) || 0;
+  return item.offsetWidth + gap;
+}
+
+function restartArtistTimer() {
+  clearInterval(artistTimer);
+  artistTimer = setInterval(() => {
+    moveNextArtist();
+  }, pointTime);
+}
+
+function moveNextArtist(shouldRestartTimer = false) {
   if (isMoving) return;
   isMoving = true;
 
   const firstItem = gallery.firstElementChild;
-  const firstItemWidth = firstItem.offsetWidth;
-  const gap = parseInt(getComputedStyle(gallery).gap);
+  const moveSize = getArtistMoveSize(firstItem);
 
   gallery.style.transition = `transform ${slideTime}ms ease`;
-  gallery.style.transform = `translateX(-${firstItemWidth + gap}px)`;
+  gallery.style.transform = `translateX(-${moveSize}px)`;
 
   setTimeout(() => {
     gallery.appendChild(firstItem);
@@ -856,14 +868,115 @@ function moveNextArtist() {
     setCenterItem();
 
     isMoving = false;
+    if (shouldRestartTimer) restartArtistTimer();
   }, slideTime);
 }
 
-setCenterItem();
+function movePrevArtist(shouldRestartTimer = false) {
+  if (isMoving) return;
+  isMoving = true;
 
-setInterval(() => {
-  moveNextArtist();
-}, pointTime);
+  const lastItem = gallery.lastElementChild;
+  const moveSize = getArtistMoveSize(lastItem);
+
+  gallery.style.transition = "none";
+  gallery.insertBefore(lastItem, gallery.firstElementChild);
+  gallery.style.transform = `translateX(-${moveSize}px)`;
+
+  requestAnimationFrame(() => {
+    gallery.style.transition = `transform ${slideTime}ms ease`;
+    gallery.style.transform = "translateX(0)";
+  });
+
+  setTimeout(() => {
+    gallery.style.transition = "none";
+    gallery.style.transform = "translateX(0)";
+
+    setCenterItem();
+
+    isMoving = false;
+    if (shouldRestartTimer) restartArtistTimer();
+  }, slideTime);
+}
+
+function showClickedArtist(targetItem) {
+  if (isMoving || !targetItem) return;
+
+  const items = Array.from(gallery.children);
+  const targetIndex = items.indexOf(targetItem);
+  const centerIndex = 2;
+
+  if (targetIndex === -1 || targetIndex === centerIndex) return;
+
+  const steps = targetIndex - centerIndex;
+
+  gallery.style.transition = "none";
+  gallery.style.transform = "translateX(0)";
+
+  if (steps > 0) {
+    for (let i = 0; i < steps; i++) {
+      gallery.appendChild(gallery.firstElementChild);
+    }
+  } else {
+    for (let i = 0; i < Math.abs(steps); i++) {
+      gallery.insertBefore(gallery.lastElementChild, gallery.firstElementChild);
+    }
+  }
+
+  setCenterItem();
+  restartArtistTimer();
+}
+
+function ArtistControl__init() {
+  let startX = 0;
+  let startY = 0;
+  let dragX = 0;
+  let isPointerDown = false;
+
+  gallery.addEventListener("pointerdown", (event) => {
+    isPointerDown = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    dragX = 0;
+  });
+
+  gallery.addEventListener("pointermove", (event) => {
+    if (!isPointerDown) return;
+    dragX = event.clientX - startX;
+  });
+
+  gallery.addEventListener("pointerup", (event) => {
+    if (!isPointerDown) return;
+
+    const dragY = event.clientY - startY;
+    const targetItem = event.target.closest(".artist-item");
+    const isHorizontalSwipe = Math.abs(dragX) > 45 && Math.abs(dragX) > Math.abs(dragY);
+
+    isPointerDown = false;
+
+    if (isHorizontalSwipe) {
+      if (dragX < 0) {
+        moveNextArtist(true);
+      } else {
+        movePrevArtist(true);
+      }
+      return;
+    }
+
+    if (Math.abs(dragX) < 8) {
+      showClickedArtist(targetItem);
+    }
+  });
+
+  gallery.addEventListener("pointercancel", () => {
+    isPointerDown = false;
+  });
+}
+
+setCenterItem();
+ArtistControl__init();
+
+restartArtistTimer();
 
 
 // 일곱번째 캔버스 구현

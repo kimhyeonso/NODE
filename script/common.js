@@ -161,7 +161,9 @@ function HeaderPopup__ensure() {
   );
 }
 
-HeaderPopup__ensure();
+// Header coupon popup disabled.
+// To enable it again, remove the CSS disable rule in common.css and uncomment the line below.
+// HeaderPopup__ensure();
 
 $(window).on("scroll", function () {
   if ($(window).scrollTop() > 50) {
