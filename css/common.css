@@ -45,6 +45,114 @@ html > body {
 
 /* 메인 메뉴 */
 
+/* 비교 안내 팝업 */
+.vspopup {
+  width: 23%;
+  min-width: 320px;
+  max-width: 420px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+  position: fixed;
+  bottom: 2%;
+  left: 2%;
+  border-radius: 7px;
+  padding: 25px 15px;
+  overflow: hidden;
+  z-index: 99;
+}
+
+.vspopup .vstext {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.vspopup .vstext p:nth-child(1) {
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
+  color: #333;
+}
+
+.vspopup .vstext h3 {
+  margin-top: 10px;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.vspopup .vstext p:nth-child(3) {
+  margin-top: 5px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.vspopup .vsimg {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.vspopup .vsimg img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.vspopup .vsexplain {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vspopup .vsexplain img {
+  width: 70px;
+}
+
+.vspopup .vsexplain .vsbox span {
+  font-weight: bold;
+}
+
+.vspopup .vsexplain .vsbox p {
+  margin-top: 5px;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+}
+
+.vspopup .button {
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: #070707;
+  color: #fff;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.vspopup .closeBtn {
+  width: 90%;
+  margin: 25px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  gap: 5px;
+  padding: 20px 0 0;
+}
+
+.vspopup .closeBtn input {
+  display: block;
+}
+
+.vspopup .closeBtn p {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.vspopup .closeBtn p:hover {
+  font-weight: bold;
+}
+
 .top-bar {
   width: 100%;
 }
@@ -615,7 +723,7 @@ body.popup-visible .snb {
   cursor: pointer;
 
   display: none;
-  z-index: 800;
+  z-index: 98;
 }
 
 .topBtn.scrolled{
@@ -723,6 +831,83 @@ body.popup-visible .snb {
 /* ------- 모바일 반응형 ------- */
 
 @media (max-width: 768px) {
+  .vspopup {
+    width: calc(100vw - 28px);
+    min-width: 0;
+    max-width: 390px;
+    max-height: calc(100vh - 28px);
+    max-height: calc(100dvh - 28px);
+    left: 50%;
+    bottom: 14px;
+    padding: 16px 14px;
+    transform: translateX(-50%);
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.96);
+  }
+
+  .vspopup .vstext p:nth-child(1) {
+    font-size: 0.7rem;
+  }
+
+  .vspopup .vstext h3 {
+    margin-top: 6px;
+    font-size: 1.12rem;
+    line-height: 1.35;
+  }
+
+  .vspopup .vstext p:nth-child(3) {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .vspopup .vsimg {
+    margin-top: 10px;
+  }
+
+  .vspopup .vsimg img {
+    max-height: 135px;
+    object-fit: contain;
+  }
+
+  .vspopup .vsexplain {
+    gap: 10px;
+    padding: 14px 4px;
+  }
+
+  .vspopup .vsexplain img {
+    width: 52px;
+    flex: 0 0 auto;
+  }
+
+  .vspopup .vsexplain .vsbox span {
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  .vspopup .vsexplain .vsbox p {
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .vspopup .button {
+    width: 100%;
+    height: 44px;
+    font-size: 0.92rem;
+    line-height: 44px;
+  }
+
+  .vspopup .closeBtn {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 16px;
+    padding-top: 14px;
+    font-size: 0.82rem;
+  }
+
+  .vspopup .closeBtn p {
+    margin-left: auto;
+  }
+
   .main-logo {
     width: 150px;
   }

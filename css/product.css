@@ -84,7 +84,7 @@ body[data-product-category="live"] .hero-product {
 .section-heading h2 {
     margin: 0;
     line-height: 1;
-    letter-spacing: 0.1em;
+    /* letter-spacing: 0.1em; */
 }
 
 .hero-product h1 {
