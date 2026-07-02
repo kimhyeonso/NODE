@@ -1,0 +1,1423 @@
+@font-face{
+  font-family: "Nanum_Myeongjo" ;
+  src: url("../font/Nanum_Myeongjo/NanumMyeongjo-Regular.ttf");
+  font-weight: 500;
+}
+
+@font-face{
+  font-family: "Nanum_Myeongjo" ;
+  src: url("../font/Nanum_Myeongjo/NanumMyeongjo-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face{
+  font-family: "Nanum_Myeongjo" ;
+  src: url("../font/Nanum_Myeongjo/NanumMyeongjo-ExtraBold.ttf");
+  font-weight: 900;
+}
+
+@font-face{
+  font-family: "noto sans" ;
+  src: url("../font/noto snas/NotoSans-Regular.ttf");
+  font-weight: 500;
+}
+
+@font-face{
+  font-family: "noto sans" ;
+  src: url("../font/noto snas/NotoSans-Medium.ttf");
+  font-weight: 600;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  background-color: #070707;
+  overflow-y: hidden;
+}
+
+/* 탑바 메뉴 변경사항 */
+.top-menu-bar {
+  background-color: transparent;
+  transition: none;
+}
+
+.top-menu-bar.second-section-header {
+  background-color: #070707;
+  border-bottom-color: transparent;
+}
+
+.gnb > li > a {
+  color: #fff;
+}
+
+.gnb > li > a::after {
+  background-color: #fff;
+}
+
+.menu-icon a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.menu-icon li:nth-child(2) {
+  background-color: #999;
+}
+
+.hamburger-btn img {
+  filter: none;
+}
+
+.menu-icon .after-login img {
+  filter: none;
+}
+
+.section-container{
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
+
+  /* 스크롤 스냅 */
+  scroll-snap-type: y mandatory;
+
+  /* 부드럽게 이동 */
+  scroll-behavior: smooth;
+}
+
+/*********** 첫번째 섹션 구현 ***********/
+
+.movie-section{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+}
+
+.movie-section .video{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.movie-section .video video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-section .scroll {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  color: #ffcd4a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-section p {
+  font-family: "Nanum_Myeongjo";
+  font-size: clamp(.7rem, 2.5vw, .9rem);
+  margin-bottom: 20px;
+}
+
+.movie-section .line{
+  width: 1px;
+  height: 60px;
+  background-color: rgba(255, 205, 74, 0.3);
+}
+
+.movie-section .line::after{
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 0;
+  background-color: #ffcd4a;
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 40px;
+  }
+}
+
+/*********** 두번째 섹션 구현 ***********/
+
+.brand-logo-section{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+  z-index: 0;
+}
+
+.logo-mask {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 60%;
+  height: 60%;
+  opacity: .3;
+  transform: translate(-50%, 0) scale(.5);
+  will-change: opacity, transform;
+  transition:
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+.logo-mask.on{
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.logo-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-full-image {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url("../image/index/logo-in-image.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 1s ease,
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-logo-section.logo-zoom .logo-mask {
+  transform: translate(-50%, -50%) scale(5);
+  opacity: 0;
+  background-color: #070707;
+}
+
+.brand-logo-section.logo-zoom .logo-full-image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.brand-logo-section img{
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*********** 세번째 섹션 구현 (소리의 연결점) ***********/
+
+.brand-story-section{
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background-color: #070707;
+  display: flex;
+  align-items: flex-start;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  z-index: 3;
+
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+}
+
+.brand-story-container{
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.brand-logo-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #070707;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.brand-logo-section img {
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease;
+}
+
+.brand-logo-section.logo-zoom img {
+  transform: translate(-50%, -50%) scale(3.8);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.brand-logo-section.logo-zoom .brand-logo-bg {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.brand-logo-section.logo-zoom::after {
+  opacity: 1;
+}
+
+.brand-story-section.fade-in .brand-story-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand-story-container .textbox{
+  position: absolute;
+  top: clamp(80px, 12vh, 140px);
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.brand-story-container .logo{
+  transform: translateX(-50px);
+  width: 300px;
+  margin: 0 auto;
+  padding-left: 70px;
+}
+
+.brand-story-container .text{
+
+  text-align: center;
+}
+
+.brand-story-container .title {
+  font-family: "noto sans";
+  font-weight: 500;
+  font-size: clamp(2rem , 2.5vw, 2.7rem);
+  color: #fff;
+}
+
+.brand-story-container .title span{
+  font-family: "Nanum_Myeongjo" ;
+  font-weight: 700;
+  color: #FFCD4A;
+}
+
+.brand-story-container p{
+  margin-top: 30px;
+  color: rgba(255, 255, 255, .7);
+  font-size: clamp(0.9rem , 2.5vw, 1.1rem);
+}
+
+.brand-story-txt.mobile {
+  display: none;
+}
+
+.brand-story-txt.pc {
+  white-space: nowrap;
+}
+
+.brand-story-typing::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 3px;
+  background-color: currentColor;
+  vertical-align: -0.12em;
+  animation: brandStoryCursor 0.75s step-end infinite;
+}
+
+@keyframes brandStoryCursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+.sound-wave-section {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+
+#soundWaveCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/*********** 네번째 섹션 구현 (소리의 흐름) ***********/
+.sound-section {
+  width: 100%;
+  height: 400vh;
+  padding: clamp(65px, 8vw, 110px) 0 clamp(80px, 10vw, 140px);
+  overflow: visible;
+  background-color: #070707;
+  color: #fff;
+  text-align: center;
+
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+}
+
+.sound-heading{
+  position: sticky;
+  top: clamp(52px, 7vh, 86px);
+  z-index: 4;
+  transform: translateY(150%);
+  opacity: .3;
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.sound-heading.on{
+  transform: translateY(50%);
+  opacity: 1;
+}
+
+.sound-heading h2 {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem, 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.sound-heading p {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1.1rem, 1.15vw, 1.5rem);
+}
+
+.sound-flow {
+  position: sticky;
+  top: clamp(190px, 25vh, 260px);
+  width: min(70vw, 760px);
+  margin: clamp(45px, 6vw, 80px) auto 0;
+  overflow: hidden;
+  --sound-zoom-y: 12%;
+  --sound-flow-shift: 0px;
+  transform: translateY(var(--sound-flow-shift));
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.sound-flow::before,
+.sound-flow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  width: 1px;
+  height: clamp(30px, 4vw, 60px);
+  background: linear-gradient(to bottom, transparent, rgba(255, 220, 145, 0.75));
+  transform: translateX(-50%);
+}
+
+.sound-flow::before {
+  top: calc(clamp(30px, 4vw, 60px) * -1);
+}
+
+.sound-flow::after {
+  bottom: calc(clamp(30px, 4vw, 60px) * -1);
+  background: linear-gradient(to bottom, rgba(255, 220, 145, 0.75), transparent);
+}
+
+.sound-flow > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.86;
+  transform-origin: 50% var(--sound-zoom-y);
+  transform: scale(1);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.sound-label {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  width: 90%;
+  color: #fff;
+  isolation: isolate;
+  text-shadow: 0 2px 16px #000, 0 0 30px #000;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.78);
+  transition:
+    opacity 0.45s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.sound-label::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: min(520px, 86vw);
+  height: clamp(95px, 11vw, 155px);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.34) 30%,
+      rgba(255, 255, 255, 0.14) 55%,
+      rgba(255, 255, 255, 0) 78%);
+  filter: blur(18px);
+  transform: translate(-50%, -50%) scaleX(1.25);
+}
+
+.sound-label.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.sound-section.sound-step-origin .sound-flow {
+  --sound-zoom-y: 12%;
+  --sound-flow-shift: 0px;
+}
+
+.sound-section.sound-step-node .sound-flow {
+  --sound-zoom-y: 50%;
+  --sound-flow-shift: -70px;
+}
+
+.sound-section.sound-step-destination .sound-flow {
+  --sound-zoom-y: 88%;
+  --sound-flow-shift: -150px;
+}
+
+.sound-section.sound-step-closing .sound-flow {
+  --sound-flow-shift: -150px;
+}
+
+.sound-section.sound-step-origin .sound-flow > img,
+.sound-section.sound-step-node .sound-flow > img,
+.sound-section.sound-step-destination .sound-flow > img {
+  transform: scale(1.14);
+}
+
+.sound-label h3 {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(1.35rem, 2.2vw, 2.2rem);
+  font-weight: 400;
+}
+
+.sound-label p {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(0.8rem, 0.9vw, 1.2rem);
+}
+
+.sound-origin {
+  top: 33.333%;
+}
+
+.sound-node {
+  top: 66.666%;
+}
+
+.sound-destination {
+  top: 90%;
+}
+
+.sound-closing {
+  position: fixed;
+  top: calc(50% + clamp(76px, 10vh, 120px));
+  left: 50%;
+  z-index: 20;
+  width: min(90%, 720px);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(1.2rem, 1vw, 2rem);
+  line-height: 1.55;
+  opacity: 0;
+  transform: translate(-50%, -40%) scale(0.94);
+  transition:
+    opacity 0.7s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.sound-closing.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/*********** 다섯번째 섹션 구현 ***********/
+.menu-section{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #070707;
+  padding: clamp(180px, 9vh, 120px) 0;
+  color: #fff;
+
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+}
+
+.menu-container{
+  margin: 0 auto;
+  width: min(90%, 1900px);
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2vw, 40px);
+}
+
+.menu-section .title-box{
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(20px, 2vw, 40px);
+}
+
+.menu-section .image-box{
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(20px, 2vw, 40px);
+}
+
+.menu-section .title-box > .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: clamp(5px, 1.5vw, 24px);
+}
+
+.menu-section.menu-animation-ready .title-box > .title {
+  opacity: 0;
+  overflow: hidden;
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(36px);
+  transition:
+    clip-path 1s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s),
+    opacity 0.5s ease var(--menu-delay, 0s),
+    transform 1s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s);
+  will-change: clip-path, opacity, transform;
+}
+
+.menu-section.menu-animation-ready .title-box > .title.on {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+}
+
+.menu-section .title-txt {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem , 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.menu-section .title-box > .title p {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+}
+
+.menu-section .title-box > .prouct,
+.menu-section .image-box > .accessory,
+.menu-section .image-box > .lifestyle {
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.menu-section.menu-animation-ready .title-box > .prouct,
+.menu-section.menu-animation-ready .image-box > .accessory,
+.menu-section.menu-animation-ready .image-box > .lifestyle {
+  opacity: 0;
+  clip-path: inset(0 0 0 100%);
+  transform: translateX(52px);
+  transition:
+    clip-path 1.15s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s),
+    opacity 0.45s ease var(--menu-delay, 0s),
+    transform 1.15s cubic-bezier(0.77, 0, 0.18, 1) var(--menu-delay, 0s);
+  will-change: clip-path, opacity, transform;
+}
+
+.menu-section.menu-animation-ready .title-box > .prouct.on,
+.menu-section.menu-animation-ready .image-box > .accessory.on,
+.menu-section.menu-animation-ready .image-box > .lifestyle.on {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateX(0);
+}
+
+.menu-section .title-box > .prouct::after,
+.menu-section .image-box > .accessory::after,
+.menu-section .image-box > .lifestyle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+@keyframes menuRollLine {
+  0% {
+    left: 100%;
+    opacity: 0;
+  }
+
+  12%,
+  72% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 0;
+    opacity: 0;
+  }
+}
+
+.menu-section .title-box > .prouct img,
+.menu-section .image-box > .accessory img,
+.menu-section .image-box > .lifestyle img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.menu-section .title-box > .prouct:hover img,
+.menu-section .image-box > .accessory:hover img,
+.menu-section .image-box > .lifestyle:hover img {
+  transform: scale(1.04);
+}
+
+.menu-section .menu-card-txt {
+  position: absolute;
+  top: clamp(18px, 2vw, 32px);
+  left: clamp(18px, 2vw, 32px);
+  z-index: 2;
+}
+
+.menu-section.menu-animation-ready .menu-card-txt {
+  opacity: 0;
+  transform: translateX(22px);
+  transition:
+    opacity 0.5s ease calc(var(--menu-delay, 0s) + 0.5s),
+    transform 0.7s ease calc(var(--menu-delay, 0s) + 0.5s);
+}
+
+.menu-section.menu-animation-ready .box.on .menu-card-txt {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-section .prouct-title,
+.menu-section .accessory-title,
+.menu-section .lifeStyle-title {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.2;
+}
+
+.menu-section .menu-card-txt .sub-title {
+  margin-top: 6px;
+  font-family: "Nanum_Myeongjo";
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.menu-section .menu-card-txt p {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+/*********** 여섯번째 검색 섹션 구현 (select) ***********/
+.seach-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  padding: 180px 0 0;
+  overflow: hidden;
+  background-color: #070707;
+  user-select: none;
+  -webkit-user-select: none;
+
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+
+}
+
+.search-inner {
+  width: min(90%, 1870px);
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.55fr) minmax(720px, 2.45fr);
+  align-items: end;
+  gap: clamp(45px, 6vw, 110px);
+}
+
+.search-copy {
+  position: relative;
+  align-self: start;
+  padding-top: 2px;
+  color: #fff;
+  transform: translateY(150px);
+  opacity: .3;
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.search-copy.on{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.search-kicker {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem , 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.search-copy p:nth-child(2) {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+}
+
+.search-showcase {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  padding: 40px 0 18px;
+}
+
+.dragArea {
+  width: 100%;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.dragArea:active,
+.dragArea.dragging {
+  cursor: grabbing;
+}
+
+.slider {
+  display: flex;
+  gap: 24px;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.08s linear;
+  touch-action: pan-y;
+  will-change: transform;
+}
+
+.search-card-link {
+  flex: 0 0 calc((100% - 24px) / 2);
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  -webkit-user-drag: none;
+}
+
+.cursorCircle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 50%;
+  color: #ffcd4a;
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: 0.82rem;
+  line-height: 80px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.cursorCircle.on {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cursorCircle.drag {
+  background-color: rgba(255, 255, 255, 0.28);
+  transform: translate(-50%, -50%) scale(0.72);
+}
+
+.search-card {
+  position: relative;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.28);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  transform: translateY(-100px);
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+.search-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.search-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.search-card-copy {
+  padding: 35px 18px;
+}
+
+.search-card-copy h3 {
+  color: #111;
+  font-family: "noto sans", sans-serif;
+  font-size: clamp(1rem, 1vw, 2rem);
+  font-weight: 600;
+}
+
+.search-card-copy p {
+  margin-top: 7px;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.search-card-copy a {
+  display: inline-block;
+  margin-top: 16px;
+  color: #111;
+  font-size: 0.72rem;
+}
+
+/*********** 일곱번째 아티스트 섹션 구현 (artist) ***********/
+.artist-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  background-color: #070707;
+  color: #fff;
+  scroll-snap-align: start;
+}
+
+.artist-heading {
+  position: absolute;
+  top: 180px;
+  left: 6%;
+  z-index: 3;
+  transform: translateY(150px);
+  opacity: .3;
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.artist-heading.on {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.artist-heading h2 {
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(2rem, 2.5vw, 3.125rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.artist-heading p {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+  line-height: 1.55;
+}
+
+.artist-slider {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(100px, 13vh, 150px);
+  width: 100%;
+  transform: translateX(-50%);
+}
+
+.artist-gallery {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(30px, 3vw, 60px);
+  transition: transform 0.8s ease;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.artist-item {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(190px, 20vw, 310px);
+  text-align: center;
+  opacity: 0.45;
+  transform: scale(0.82);
+  transition: all 0.8s ease;
+}
+
+.artist-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+  overflow: visible;
+  border-radius: 50%;
+  background-color: #171717;
+}
+
+.artist-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: brightness(0.7);
+}
+
+.artist-item h3 {
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Nanum_Myeongjo", serif;
+  font-size: clamp(0.9rem, 1.2vw, 1.25rem);
+  font-weight: 400;
+}
+
+.artist-item.active {
+  width: clamp(290px, 30vw, 440px);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.artist-item.active .artist-photo {
+  padding: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.7);
+  background-color: transparent;
+}
+
+.artist-item.active .artist-photo img {
+  border-radius: 50%;
+  filter: brightness(0.9);
+}
+
+.artist-speaker {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 2;
+  width: 40%;
+  height: 45%;
+  object-fit: cover;
+  object-position: center;
+  transform: translateX(-50%);
+}
+
+.artist-item.active .artist-speaker {
+  display: block;
+}
+
+.artist-point {
+  display: none;
+}
+
+.artist-item.active .artist-point {
+  display: block;
+  position: absolute;
+  top: calc(50% - var(--point-radius));
+  left: 50%;
+  z-index: 10;
+
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #c9a24b;
+
+  transform: translate(-50%, -50%);
+  transform-origin: 50% calc(var(--point-radius) + 50%);
+  animation: artistPointRotate 4s linear forwards;
+}
+
+.artist-item.active h3 {
+  visibility: hidden;
+}
+
+@keyframes artistPointRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/*********** 여덟번째 캔버스 섹션 구현 (sound connect) ***********/
+
+.sound-node-section {
+  position: relative;
+  width: 100%;
+  min-height:calc(100vh + 300px);
+  overflow: hidden;
+  background: #070707;
+
+  /* 섹션 시작 부분에 맞춰 정렬 */
+  scroll-snap-align: start;
+
+}
+
+#soundNodeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y;
+}
+
+.sound-node-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  opacity: .3;
+  transform: translate(-50%, calc(-100% + 150px));
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.sound-node-text.on {
+  opacity: 1;
+  transform: translate(-50%, -100%);
+}
+
+.sound-node-text h2 {
+  font-family: "Nanum_Myeongjo";
+  font-weight: 900;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1.05;
+  white-space: nowrap;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.sound-node-desc, .sound-node-desc-mo {
+  margin-top: 22px;
+  font-size: clamp(14px, 1.4vw, 18px);
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.sound-node-desc-mo{
+  display: none;
+}
+
+
+/* 푸터 수정 */
+.footer{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+
+
+@media (max-width: 768px) {
+  /*********** 두번째 모바일 섹션 구현 ***********/
+  .brand-logo-section img{
+  width: 80%;
+  height: 80%;
+  }
+
+  /*********** 세번째 모바일 섹션 구현 (소리의 연결점) ***********/
+  .brand-story-container {
+    width: 100%;
+  }
+
+  .brand-story-container .logo {
+    transform: translateX(-7%);
+    width: 110px;
+    padding-left: 0;
+  }
+
+  .brand-story-container .text{
+    white-space: nowrap;
+  }
+
+  .brand-story-txt.pc {
+    display: none;
+  }
+
+  .brand-story-txt.mobile {
+    display: block;
+  }
+
+  .brand-story-section{
+    min-height: 100vh;
+  }
+
+  .sound-wave-section{
+    height: 50vh;
+    top: 50%;
+  }
+
+  /*********** 네번째 모바일 섹션 구현 (소리의 흐름) ***********/
+
+  .sound-section {
+    padding: 60px 0 80px;
+  }
+
+  .sound-flow {
+    width: min(92vw, 620px);
+    margin-top: 45px;
+  }
+
+  .sound-section.sound-step-node .sound-flow {
+    --sound-flow-shift: -45px;
+  }
+
+  .sound-section.sound-step-destination .sound-flow,
+  .sound-section.sound-step-closing .sound-flow {
+    --sound-flow-shift: -95px;
+  }
+
+  .sound-origin {
+    top: 33.333%;
+  }
+
+  .sound-node {
+    top: 66.666%;
+  }
+
+  .sound-destination {
+    top: 90%;
+  }
+
+  .sound-closing {
+    margin: 0;
+  }
+
+  /*********** 다섯번째 모바일 섹션 구현 (node)***********/
+
+  .menu-section {
+    padding: 70px 0;
+  }
+
+  .menu-container {
+    min-height: auto;
+    gap: 5px;
+  }
+
+  .menu-section .title-box,
+  .menu-section .image-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .menu-section .title-box > .title {
+    min-height: 130px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .menu-section .title-box > .prouct,
+  .menu-section .image-box > .accessory,
+  .menu-section .image-box > .lifestyle {
+    min-height: 200px;
+  }
+
+    /*********** 여섯번째 모바일 섹션 구현 (select) ***********/
+
+  .seach-section {
+    min-height: 100vh;
+    padding: 70px 0;
+    overflow-x: hidden;
+    background: #0c0c0c;
+  }
+
+  .search-inner {
+    margin-top: 40px;
+    width: min(88%, 640px);
+    height: auto;
+    min-height: auto;
+    display: block;
+  }
+
+  .search-guide {
+    margin-top: 22px;
+  }
+
+  .search-showcase {
+    display: block;
+    gap: 15px;
+    padding: 30px 0 14px;
+  }
+
+  .seach-section .dragArea {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    cursor: default;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: none;
+  }
+
+  .seach-section .dragArea::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider {
+    gap: 15px;
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+
+  .seach-section .search-card-link {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .cursorCircle {
+    display: none;
+  }
+
+  .search-card {
+     transform: translateY(0px);
+  }
+
+  .search-card-copy {
+    padding: 15px;
+  }
+
+  /*********** 일곱번째 모바일 섹션 구현 (artist)***********/
+
+.artist-section {
+    min-height: 100vh;
+  }
+
+  .artist-heading {
+    top: 120px;
+    left: 6%;
+  }
+
+  .artist-slider {
+    bottom: 70px;
+  }
+
+  .artist-gallery {
+    gap: 22px;
+  }
+
+  .artist-item {
+    width: 175px;
+  }
+
+  .artist-item.active {
+    width: 265px;
+  }
+
+  .artist-speaker {
+    width: 46%;
+  }
+
+  /*********** 여덟번째 모바일 섹션 구현 (sound connected) ***********/
+
+  .sound-node-section {
+    min-height: calc(100vh + 300px);
+  }
+
+  .sound-node-text.on {
+    opacity: 1;
+    transform: translate(-50%, -150%);
+  }
+
+  .sound-node-desc{
+    display: none;
+  }
+
+  .sound-node-desc-mo{
+    display: block;
+  }
+
+  .sound-node-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .sound-node-desc {
+    width: 80%;
+    margin: 18px auto 0;
+  }
+}

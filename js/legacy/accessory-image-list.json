@@ -1,0 +1,107 @@
+
+
+[
+  {
+    "id": "c_001",
+    "title": "전문가용 XLR 마이크 케이블 3m",
+    "url": "images/cable/cable_1.jpg",
+    "filters": { "connector": "xlr", "purpose": "mic", "length": "3m" }
+  },
+  {
+    "id": "c_002",
+    "title": "images/cable/cable_2.jpg",
+    "url": "assets/images/cables/c02_xlr_mic_5m.jpg",
+    "filters": { "connector": "xlr", "purpose": "mic", "length": "5m" }
+  },
+  {
+    "id": "c_003",
+    "title": "악기용 TS 케이블 3m (기타/베이스)",
+    "url": "images/cable/cable_3.jpg",
+    "filters": { "connector": "ts", "purpose": "instrument", "length": "3m" }
+  },
+  {
+    "id": "c_004",
+    "title": "악기용 TS 케이블 5m (기타/베이스)",
+    "url": "images/cable/cable_4.jpg",
+    "filters": { "connector": "ts", "purpose": "instrument", "length": "5m" }
+  },
+  {
+    "id": "c_005",
+    "title": "오디오 인터페이스용 TRS 케이블 1m",
+    "url": "images/cable/cable_5.jpg",
+    "filters": { "connector": "trs", "purpose": "instrument", "length": "1m" }
+  },
+  {
+    "id": "c_006",
+    "title": "스피커 연결용 TRS 밸런스 케이블 3m",
+    "url": "images/cable/cable_6.jpg",
+    "filters": { "connector": "trs", "purpose": "speaker", "length": "3m" }
+  },
+  {
+    "id": "c_007",
+    "title": "홈오디오 RCA-3.5mm 케이블 5m",
+    "url": "images/cable/cable_7.jpg",
+    "filters": { "connector": "rca_3.5", "purpose": "speaker", "length": "5m" }
+  },
+  {
+    "id": "c_008",
+    "title": "images/cable/cable_1.jpg",
+    "url": "images/cable/cable_8.jpg",
+    "filters": { "connector": "xlr", "purpose": "speaker", "length": "10m" }
+  },
+  {
+    "id": "c_009",
+    "title": "가성비 실속형 TS 케이블 3m",
+    "url": "images/cable/cable_9.jpg",
+    "filters": { "connector": "ts", "purpose": "instrument", "length": "3m" }
+  },
+
+  {
+    "id": "st_001",
+    "title": "알루미늄 데스크탑 스탠드",
+    "url": "images/cable/stand_1.jpg",
+    "filters": { "placement": "desktop", "capacity": "small", "features": ["angle_adj"] }
+  },
+  {
+    "id": "st_002",
+    "title": "진동 방지 데스크 패드 스탠드",
+    "url": "images/cable/stand_2.jpg",
+    "filters": { "placement": "desktop", "capacity": "small", "features": ["vibration_pad"] }
+  },
+  {
+    "id": "st_003",
+    "title": "틸팅형 데스크탑 스탠드",
+    "url": "images/cable/stand_3.jpg",
+    "filters": { "placement": "desktop", "capacity": "small", "features": ["angle_adj", "vibration_pad"] }
+  },
+  {
+    "id": "st_004",
+    "title": "스튜디오용 플로어 스탠드 (고정형)",
+    "url": "images/cable/stand_4.jpg",
+    "filters": { "placement": "floor", "capacity": "heavy", "features": [] }
+  },
+  {
+    "id": "st_005",
+    "title": "높이 조절 가능한 플로어 스탠드",
+    "url": "images/cable/stand_5.jpg",
+    "filters": { "placement": "floor", "capacity": "heavy", "features": ["vibration_pad"] }
+  },
+  {
+    "id": "st_006",
+    "title": "대형 미드필드용 플로어 스탠드",
+    "url": "images/cable/stand_6.jpg",
+    "filters": { "placement": "floor", "capacity": "heavy", "features": ["vibration_pad"] }
+  },
+  {
+    "id": "st_007",
+    "title": "미니멀 데스크 스탠드 (세트)",
+    "url": "images/cable/stand_7.jpg",
+    "filters": { "placement": "desktop", "capacity": "small", "features": [] }
+  },
+  {
+    "id": "st_008",
+    "title": "헤비 듀티 플로어 스탠드 프로",
+    "url": "images/cable/stand_8.jpg",
+    "filters": { "placement": "floor", "capacity": "heavy", "features": ["vibration_pad"] }
+  }
+]

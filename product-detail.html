@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<!--
+  
+  1. 상품명·가격·대표 이미지: js/catalog/category.json의 products 수정
+  2. 제품 사양: js/catalog/category.json의 specifications 수정
+  3. 공통 상세정보 문구: 이 파일의 #detail 영역 수정
+  4. 리뷰 내용: 이 파일의 #review 영역 수정
+  5. 배송·반품 내용: 이 파일의 #shipping 영역 수정
+  6. 디자인·반응형: css/product-detail.css 수정
+
+  주의: class, id, data-tab 이름은 JS와 연결되어 있으므로
+  기능 수정이 아니라면 이름을 변경하지 마세요.
+
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product-detail</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="./css/product-detail.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
+    <script src="./script/common.js"></script>
+    <script src="./script/product-detail.js" defer></script>
+    <script src="./script/product.js" defer></script>
+</head>
+<body>
+  <!--------- 헤더 --------->
+  <div class="top-bar">
+    <header class="top-menu-bar">
+      <div class="top-menu-contents">
+
+        <!-- 로고 -->
+        <a href="./index.html" class="main-logo"><img src="./image/common/node_logo_width.png" alt="로고"></a>
+
+        <!-- 메인 메뉴 -->
+        <nav class="main">
+          <ul class="gnb">
+            <li>
+              <a href="./product-main.html">PRODUCT</a>
+
+              <div class="snb">
+                <div class="snb-inner">
+
+                  <ul class="snb-menu sub-menu-product">
+                    <li><a href="./product-main.html">ALL</a></li>
+                    <li><a href="./product-studio.html">STUDIO</a></li>
+                    <li><a href="./product-live.html">LIVE</a></li>
+                  </ul>
+
+                  <div class="snb-banner">
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/product-sub-menu-01.png" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/product-sub-menu-02.jfif" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <a href="./accessory-main.html">ACCESSORY</a>
+
+              <div class="snb">
+                <div class="snb-inner">
+
+                  <ul class="snb-menu">
+                    <li><a href="./accessory-main.html">ALL</a></li>
+                    <li><a href="./accessory-cable.html">CABLE</a></li>
+                    <li><a href="./accessory-stand.html">STAND</a></li>
+                  </ul>
+
+                  <div class="snb-banner">
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/accessory-sub-menu-01.jpg" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/accessory-sub-menu-02.jpg" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li><a href="./lifeStyle.html">LIFE STYLE</a></li>
+            <li><a href="./store.html">STORE</a></li>
+          </ul>
+        </nav>
+
+        <!-- 로그인 / 회원가입
+        <ul class="menu-icon">
+          <li><a href="./login.html">Login</a></li>
+          <li></li>
+          <li><a href="./signup.html">Sign up</a></li>
+        </ul> -->
+
+        <!-- 로그인/회원가입 -->
+        <ul class="menu-icon">
+          <!-- 로그인 전 -->
+          <li class="before-login">
+            <a href="./login.html">Login</a>
+          </li>
+          <li class="line"></li>
+          <li class="before-login">
+            <a href="./signup.html">Sign up</a>
+          </li>
+
+          <!-- 로그인 후 -->
+          <li class="after-login" style="display:none">
+            <a href="./mypage-main.html"><span id="header-username" style="font-size: 15px;"></span> 님</a>
+          </li>
+          <li class="after-login" style="display:none">
+            <a href="./shoppingCart.html" class="cartIconWrap">
+              <img src="./image/common/shopping-cart-white.png" alt="쇼핑카트" style="width:24px; height:24px;">
+              <span class="cartCount" style="display:none">0</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- 사이드 메뉴-->
+        <div class="hamburger-btn">
+          <img src="image/common/hambergerbtn_white.png" alt="hamberger btn">
+        </div>
+
+        <div class="dim"></div>
+
+        <div class="side-menu-box">
+          <div class="side-menu-box-content">
+            <div class="side-top-bar">
+              <div class="side-top-logo">
+                  <img src="./image/common/node_logo.png" alt="side menu logo">
+                </div>
+              <div class="exit-btn">
+                <img src="./image/common/close button_white.png" alt="exit button">
+              </div>
+            </div>
+            <div class='search-contents'>
+            </div>
+            <nav class="side-gnb">
+                <ul class="side-main-gnb">
+                  <li><a href="./product-main.html">PRODUCT</a>
+                    <ul class="side-sub-menu">
+                      <li><a href="./product-main.html">ALL</a></li>
+                      <li><a href="./product-studio.html">STUDIO</a></li>
+                      <li><a href="./product-live.html">LIVE</a></li>
+                      <li>
+                        <ul class="side-sub-menu__img">
+                          <li><a href="./product-detail.html"><img src="./image/common/product-sub-menu-01.png" alt="new image"></a></li>
+                          <li><a href="./product-detail.html"><img src="./image/common/product-sub-menu-02.jfif" alt="best image"></a></li>
+                        </ul>
+                      </li>
+                    </ul></li>
+                  <li><a href="./accessory-main.html">ACCESSORY</a>
+                    <ul class="side-sub-menu">
+                      <li><a href="./accessory-main.html">ALL</a></li>
+                      <li><a href="./accessory-cable.html">CABLE</a></li>
+                      <li><a href="./accessory-stand.html">STAND</a></li>
+                      <li>
+                        <ul class="side-sub-menu__img">
+                          <li><a href="./product-detail.html"><img src="./image/common/accessory-sub-menu-01.jpg" alt="accessory-sub-menu"></a></li>
+                          <li><a href="./product-detail.html"><img src="./image/common/accessory-sub-menu-02.jpg" alt="accessory-sub-menu"></a></li>
+                        </ul>
+                      </li>
+                    </ul></li>
+                  <li><a href="./lifeStyle.html">LIFE STYLE</a></li>
+                  <li><a href="./store.html">STORE</a></li>
+                </ul>
+            </nav>
+            <div class="side-spot">
+              <ul class="side-spot-menu">
+                <li><a href="./shoppingCart.html"><img src="./image/common/shopping-cart-white.png" alt="side-spot-icon">
+                  <p>장바구니</p>
+                </a></li>
+                <li><a href="./mypage-main.html"><img src="./image/common/user-white.png" alt="side-spot-icon">
+                  <p>마이페이지</p>
+                </a></li>
+                <li><a href="./store.html"><img src="./image/common/placeholder-white.png" alt="side-spot-icon">
+                  <p>오시는 길</p>
+                </a></li>
+              </ul>
+            </div>
+            <!-- <div class="side-util">
+                <ul>
+                  <li><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                  <li><a href="./signup.html">SIGN UP</a></li>
+                </ul>
+            </div> -->
+
+            <div class="side-util">
+              <ul>
+                <!-- 로그인 전 -->
+                <li class="side-before-login"><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                <li class="side-before-login"><a href="./signup.html">SIGN UP</a></li>
+
+                <!-- 로그인 후 -->
+                <li class="side-after-login" style="display:none"><a href="./mypage-main.html"><span id="side-username"></span> 님</a></li>
+                <li class="side-after-login" style="display:none"><a href="./shoppingCart.html">장바구니</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  </div>
+
+  
+  <!--------- 쿠키창 --------->
+  <div class="popup">
+    <p>회원가입시 5,000원 할인 쿠폰 지급</p>
+    <div class="close">
+        <label>
+            <input type="checkbox" id="closeCheckBox">
+            오늘 하루 열지 않기
+        </label>
+        <button class="closeBtn"><img src="./image/common/close button_white.png" alt="button"></button>
+    </div>
+  </div>
+
+  <!---------top버튼--------->
+  <div class="topBtn">
+    TOP
+  </div>
+
+  <main class="product-detail">
+    <section class="product-detail-top">
+      <div class="gallery">
+        <div class="thumbnails">
+          <button class="thumb is-active" type="button" aria-label="첫 번째 상품 이미지"></button>
+          <button class="thumb" type="button" aria-label="두 번째 상품 이미지"></button>
+        </div>
+
+        <div class="main-image" role="img" aria-label="상품 이미지">
+          <img src="" alt="product image">
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h1>상품명</h1>
+        <p class="price">0원</p>
+        <div class="rating" aria-label="평점 4.5점">★★★★☆ <span>(5 Reviews)</span></div>
+        <p class="description">상품 정보를 불러오는 중입니다.</p>
+
+        <div class="options">
+          <div class="colors">
+            COLOR
+            <div class="color-chips"></div>
+        </div>
+
+          <div class="quantity" aria-label="상품 수량 선택">
+            <button class="quantity-button quantity-minus" type="button" aria-label="수량 줄이기">-</button>
+            <span class="quantity-value" aria-live="polite">1</span>
+            <button class="quantity-button quantity-plus" type="button" aria-label="수량 늘리기">+</button>
+          </div>
+        
+          <button class="add-cart-button" type="button">Add to Cart</button>
+          <button class="add-cart-button" type="button">Buy Now</button>
+        </div>
+      </div>
+    </section>
+
+    <nav class="product-tabs" aria-label="상품 상세 메뉴">
+      <button class="is-active" type="button" data-tab="detail" aria-selected="true">상세정보</button>
+      <button type="button" data-tab="review" aria-selected="false">Review</button>
+      <button type="button" data-tab="shipping" aria-selected="false">주문·배송 및 환불</button>
+    </nav>
+
+    <div class="product-tab-contents">
+  <section class="tab-panel long-description is-active" id="detail">
+    <div class="detail-hero">
+      <p class="section-label">DESIGNED FOR LISTENING</p>
+      <h2>공간을 채우는<br>정확하고 깊은 사운드</h2>
+      <p>NODE 가 제안하는 제품의 분위기와 사용 경험을 긴 호흡의 이미지로 확인해 보세요.<br class="mobile-hide"> 소리의 본질에 집중하는 당신을 위한 가장 완벽한 해답입니다.</p>
+    </div>
+
+    <section class="detail-overview" aria-label="제품 핵심 특징">
+      <article>
+        <span>Sound</span>
+        <strong>Balanced Response</strong>
+        <p>저역부터 고역까지 균형 잡힌 대역 표현으로 장시간 청취에도 편안한 사운드를 제공합니다.</p>
+      </article>
+      <article>
+        <span>Design</span>
+        <strong>Minimal Form</strong>
+        <p>불필요한 장식을 덜어낸 형태와 정돈된 비율로 어떤 공간에도 자연스럽게 어울립니다.</p>
+      </article>
+      <article>
+        <span>Control</span>
+        <strong>Simple Setup</strong>
+        <p>복잡한 설정 없이 필요한 순간 바로 사용할 수 있도록 연결과 조작 경험을 단순하게 다듬었습니다.</p>
+      </article>
+    </section>
+
+    <div class="detail-story">
+      <div class="detail-story-heading">
+        <p class="section-label">PRODUCT STORY</p>
+        <h3>소리를 위한 본질적인 디자인</h3>
+      </div>
+      <p class="detail-story-text">
+        NODE의 디자인 철학은 '비움'에서 시작됩니다. 불필요한 시각적 요소를 덜어내고, 오직 소리와 사용자의 감각이 맞닿는 지점에만 집중했습니다.
+        절제된 형태와 정교한 설계를 통해 오래도록 편안한 오디오 경험을 완성하며, 시간이 흘러도 변치 않는 단단한 마감과 손끝에 전해지는 질감은
+        단순한 기술적 도구를 넘어 당신의 공간을 완성하는 하나의 오브제로 존재합니다.
+      </p>
+    </div>
+
+    <div class="detail-image-grid">
+
+      <figure class="detail-figure">
+        <img class="detail-image-primary" src="" alt="공간과 어우러지는 디자인">
+        <figcaption>공간에 자연스럽게 스며드는 절제된 디자인의 미학.</figcaption>
+      </figure>
+
+      <figure class="detail-figure">
+        <img class="detail-image-secondary" src="" alt="섬세한 디테일">
+        <figcaption>사용자의 모든 움직임을 고려해 완성한 정교한 디테일.</figcaption>
+      </figure>
+      
+    </div>
+
+    <div class="detail-features">
+      <div class="detail-feature">
+        <span>01</span>
+        <h3>정확한 설계</h3>
+        <p>제품의 기본 성능을 한 치의 오차 없이 전달할 수 있도록 <br> 내부 구조부터 외부 소재까지 세심하게 검증하고 설계했습니다.</p>
+      </div>
+      <div class="detail-feature">
+        <span>02</span>
+        <h3>편안한 사용</h3>
+        <p>설치부터 일상적인 조작까지 복잡함은 덜어내고,<br>  가장 직관적인 사용자 경험을 제공하도록 UI를 최적화했습니다.</p>
+      </div>
+      <div class="detail-feature">
+        <span>03</span>
+        <h3>오래가는 가치</h3>
+        <p>유행에 휩쓸리지 않는 형태와 시간이 지날수록 빛을 발하는 견고한 마감으로 어떤 환경에서도 변치 않는 가치를 증명합니다.</p>
+      </div>
+    </div>
+
+    <section class="detail-performance">
+      <div class="detail-section-heading">
+        <p class="section-label">PERFORMANCE</p>
+        <h3>작은 차이까지 놓치지 않는<br>정교한 퍼포먼스</h3>
+        <p>입력부터 출력까지 신호의 흐름을 섬세하게 다듬어, 어떤 환경에서도 왜곡 없는 일관된 고품질 사운드를 제공합니다.</p>
+      </div>
+
+      <div class="performance-cards">
+        <article>
+          <strong>24 bit</strong>
+          <span>High Resolution</span>
+          <p>스튜디오에서 의도한 원음의 숨결까지 재현합니다. 미세한 배음과 보컬의 호흡까지 생생하게 전달합니다.</p>
+        </article>
+        <article>
+          <strong>0.02%</strong>
+          <span>Low Distortion</span>
+          <p>회로 순도를 극대화하여 불필요한 노이즈를 제거했습니다. 음량과 상관없이 선명한 질감을 유지합니다.</p>
+        </article>
+        <article>
+          <strong>120 dB</strong>
+          <span>Dynamic Range</span>
+          <p>정적인 디테일부터 폭발적인 에너지까지, 극명한 대비를 통해 음악의 생동감을 온전히 구현합니다.</p>
+        </article>
+        <article>
+          <strong>360°</strong>
+          <span>Space Balance</span>
+          <p>환경의 제약 없이 어느 위치에서도 음의 중심이 무너지지 않는 균형 잡힌 공간감을 형성합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-wide-visual">
+      <img class="detail-repeat-image" src="" alt="공간 연출">
+      <div>
+        <p class="section-label">PURE EXPERIENCE</p>
+        <h3>공간의 분위기까지<br>완성하는 하나의 오브제</h3>
+        <p>절제된 비율과 프리미엄 마감은 작업실, 무대, 거실 등 당신의 어떤 공간과도 자연스럽게 어우러지며, 공간의 품격을 한 단계 높여줍니다.</p>
+      </div>
+    </section>
+
+    <section class="detail-engineering">
+      <div class="detail-section-heading">
+        <p class="section-label">ENGINEERING</p>
+        <h3>보이지 않는 내부까지<br>완성도를 높였습니다</h3>
+      </div>
+      <div class="engineering-grid">
+        <article><span>01</span><h4>정밀한 신호 처리</h4><p>입력 신호의 손실을 최소화하고 각 대역의 밸런스를 안정적으로 유지합니다.</p></article>
+        <article><span>02</span><h4>견고한 구조</h4><p>진동과 충격에 강한 하우징을 적용해 장시간 사용에도 변함없는 성능을 지지합니다.</p></article>
+        <article><span>03</span><h4>효율적인 열 관리</h4><p>열을 효과적으로 분산하는 설계로 긴 작업 환경에서도 안정적인 궤도를 유지합니다.</p></article>
+        <article><span>04</span><h4>낮은 노이즈</h4><p>불필요한 전기적 간섭을 완벽히 차단하여 정숙한 배경을 확보했습니다.</p></article>
+        <article><span>05</span><h4>직관적인 인터페이스</h4><p>첫 접촉부터 완벽하게 익숙해지는 간결하고 효율적인 조작 체계를 갖췄습니다.</p></article>
+        <article><span>06</span><h4>확장 가능한 연결</h4><p>다양한 장비와 액세서리에 유연하게 대응하여 환경 변화에도 쉽게 적응합니다.</p></article>
+      </div>
+    </section>
+
+    <section class="detail-editorial-grid">
+      <figure class="detail-editorial-large"><img class="detail-repeat-image" src="" alt="에디토리얼 이미지"></figure>
+      <div class="detail-editorial-copy">
+        <p class="section-label">BUILT FOR EVERY DAY</p>
+        <h3>매일 사용할수록<br>느껴지는 편안함</h3>
+        <p>복잡한 설정은 잊으세요. 필요한 기능에 가장 빠르게 도달하며, 반복되는 작업 속에서도 흐름을 방해하지 않는 매끄러운 사용감을 선사합니다.</p>
+      </div>
+      <figure><img class="detail-repeat-image" src="" alt="상세컷1"></figure>
+      <figure><img class="detail-repeat-image" src="" alt="상세컷2"></figure>
+    </section>
+
+    <section class="detail-use-cases">
+      <div class="detail-section-heading">
+        <p class="section-label">MADE FOR YOUR SPACE</p>
+        <h3>어떤 공간에서도<br>자신만의 방식으로</h3>
+      </div>
+      <div class="use-case-list">
+        <article><span>01</span><h4>HOME</h4><p>당신의 일상을 풍성한 사운드로 가득 채웁니다. 취향과 조화를 이루는 디자인과 공간 구석구석 스며드는 깊은 울림으로, 당신의 집을 가장 안락한 공연장으로 변화시킵니다.</p></article>
+        <article><span>02</span><h4>STUDIO</h4><p>디테일 하나 놓치지 않는 정직하고 명료한 사운드를 구현합니다. 왜곡 없는 원음 재현을 통해 아티스트가 의도한 본연의 가치를 결과물에 완벽히 반영하도록 돕습니다.</p></article>
+        <article><span>03</span><h4>LIVE</h4><p>어떤 환경에서도 흔들림 없는 출력과 견고한 연결성을 유지합니다. 공연의 에너지가 관객에게 온전히 전달되도록, 기술적인 고민은 덜어내고 퍼포먼스에만 몰입할 수 있게 합니다.</p></article>
+        <article><span>04</span><h4>WORKSPACE</h4><p>정돈된 사운드 밸런스로 당신의 작업 몰입도를 최상으로 끌어올립니다. 피로감 없이 오직 본질에 집중할 수 있는 최적의 환경을 조성하여, 당신의 생산적인 영감을 뒷받침합니다.</p></article>
+      </div>
+    </section>
+
+    <section class="detail-full-images">
+      <img class="detail-repeat-image" src="" alt="이미지">
+      <img class="detail-repeat-image" src="" alt="이미지">
+      <img class="detail-repeat-image" src="" alt="이미지">
+    </section>
+
+    <section class="detail-specifications">
+      <div class="detail-section-heading">
+        <p class="section-label">SPECIFICATIONS</p>
+        <h3>제품 사양</h3>
+      </div>
+      <dl class="specification-list">
+        <div><dt>제품 유형</dt><dd>Professional Audio Reference Monitor</dd></div>
+        <div><dt>샘플링 레이트</dt><dd>24-bit / 192kHz High Resolution</dd></div>
+        <div><dt>주파수 응답</dt><dd>35Hz – 25kHz (±3dB)</dd></div>
+        <div><dt>왜곡율 (THD+N)</dt><dd>< 0.02%</dd></div>
+        <div><dt>연결성</dt><dd>XLR Balanced, TRS Input, USB-C Digital</dd></div>
+      </dl>
+    </section>
+
+    <section class="detail-final-message">
+      <img class="detail-repeat-image" src="" alt="마지막">
+      <div>
+        <p class="section-label">NODE AUDIO</p>
+        <h3>당신의 공간에서<br>새로운 기준을 만나보세요</h3>
+        <p>음악과 당신을 잇는 가장 완벽한 접점, NODE와 함께하는 매 순간이 예술이 됩니다.</p>
+      </div>
+    </section>
+
+        <section class="similar-products">
+          <div class="similar-heading">
+            <p class="section-label">YOU MAY ALSO LIKE</p>
+            <h2>Similar Products</h2>
+          </div>
+
+          <div class="similar-slider">
+            <div class="product-list">
+              <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+              <article class="card"><div class="similar-image-box"><a class="similar-product-link" href="#" aria-label="추천 상품 상세페이지 보기"></a><button class="similar-cart-button" type="button" aria-label="장바구니에 담기"></button></div><p class="similar-brand">NODE</p><h3 class="similar-name"><a href="#">추천 상품</a></h3><p class="similar-price">0원</p></article>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel information-panel" id="review" hidden>
+        <div class="review-section">
+          <div class="review-summary">
+            <p class="section-label">CUSTOMER REVIEW</p>
+            <h2>4.45</h2>
+            <div class="review-stars" aria-label="평점 5점 만점에 4.45점">★★★★★</div>
+            <p class="review-count">5개의 리뷰</p>
+            <div class="rating-bars">
+              <div class="bar-row"><div class="bar-label"><span>상품 만족</span><strong>100%</strong></div><div class="rating-bar"><span class="rating-fill-100"></span></div></div>
+              <div class="bar-row"><div class="bar-label"><span>배송 만족</span><strong>90%</strong></div><div class="rating-bar"><span class="rating-fill-90"></span></div></div>
+              <div class="bar-row"><div class="bar-label"><span>디자인 만족</span><strong>95%</strong></div><div class="rating-bar"><span class="rating-fill-95"></span></div></div>
+            </div>
+          </div>
+
+          <div class="review-list">
+            <div class="review-list-heading">
+              <h3>전체 리뷰</h3>
+              <!-- <select aria-label="리뷰 정렬">
+                <option>최신순</option>
+                <option>평점 높은 순</option>
+                <option>평점 낮은 순</option>
+              </select> -->
+            </div>
+            <article class="review-item">
+              <p class="review-date">2026년 6월 18일</p>
+              <div class="review-user"><div class="review-avatar" aria-hidden="true">U</div><div><strong>UTOPIA EVO</strong><div class="review-item-stars" aria-label="평점 4점">★★★★<span>★</span></div></div></div>
+              <div class="review-images"><div class="review-image review-image-one" role="img" aria-label="사용자 리뷰 이미지 1"></div><div class="review-image review-image-two" role="img" aria-label="사용자 리뷰 이미지 2"></div></div>
+              <p class="review-content">사운드가 선명하고 공간에 자연스럽게 어울립니다. 장시간 사용해도 편안하고 제품 마감도 만족스럽습니다.</p>
+            </article>
+            <article class="review-item">
+              <p class="review-date">2026년 6월 12일</p>
+              <div class="review-user"><div class="review-avatar" aria-hidden="true">M</div><div><strong>MONO ROOM</strong><div class="review-item-stars" aria-label="평점 5점">★★★★★</div></div></div>
+              <p class="review-content">설치가 어렵지 않았고 기대했던 것보다 소리가 훨씬 풍부합니다. 작은 볼륨에서도 디테일이 잘 들려 만족스럽습니다.</p>
+            </article>
+            <article class="review-item">
+              <p class="review-date">2026년 6월 5일</p>
+              <div class="review-user"><div class="review-avatar" aria-hidden="true">S</div><div><strong>SOUND LAB</strong><div class="review-item-stars" aria-label="평점 5점">★★★★★</div></div></div>
+              <p class="review-content">디자인이 깔끔해서 책상 위에 두어도 부담이 없고, 보컬과 악기 분리가 또렷하게 느껴집니다.</p>
+            </article>
+            <article class="review-item">
+              <p class="review-date">2026년 5월 29일</p>
+              <div class="review-user"><div class="review-avatar" aria-hidden="true">H</div><div><strong>HARMONY</strong><div class="review-item-stars" aria-label="평점 4점">★★★★<span>★</span></div></div></div>
+              <p class="review-content">저음이 과하지 않고 전체 밸런스가 좋아서 장시간 들어도 피로감이 적습니다. 배송도 빠른 편이었습니다.</p>
+            </article>
+            <article class="review-item">
+              <p class="review-date">2026년 5월 21일</p>
+              <div class="review-user"><div class="review-avatar" aria-hidden="true">A</div><div><strong>AUDIO NOTE</strong><div class="review-item-stars" aria-label="평점 5점">★★★★★</div></div></div>
+              <p class="review-content">마감이 단단하고 조작이 직관적입니다. 작은 공간에서도 소리가 답답하지 않게 퍼져서 만족스럽습니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-panel information-panel" id="shipping" hidden>
+        <div class="shipping-returns-section">
+          <div class="shipping-list">
+            <article class="shipping-item">
+              <div class="shipping-item-content">
+                <h3>일반배송</h3>
+                <dl>
+                  <div><dt>배송지역</dt><dd>전국 (일부 지역 제외)</dd></div>
+                  <div><dt>배송비</dt><dd>무료배송</dd></div>
+                  <div><dt>무료 반품</dt><dd>제품 수령일로부터 14일 이내 제품에 한해 가능합니다.</dd></div>
+                </dl>
+              </div>
+            </article>
+            <article class="shipping-item">
+              <div class="shipping-item-content">
+                <h3>오늘도착 서비스</h3>
+                <dl>
+                  <div><dt>이용시간</dt><dd>오전 10시 30분까지 결제 시 당일 도착 (일요일·공휴일 제외)</dd></div>
+                  <div><dt>서비스지역</dt><dd>서울·과천·안양·군포·수원·성남·안산시 일부 지역</dd></div>
+                  <div><dt class="visually-hidden">서비스비용</dt><dd>오늘도착 서비스 비용은 5,000원입니다.</dd></div>
+                </dl>
+              </div>
+            </article>
+            <article class="shipping-item">
+              <div class="shipping-item-content">
+                <h3>A/S 안내</h3>
+                <p>NODE 온라인에서 구매한 제품의 A/S는 NODE 페이지 신청 또는 고객센터를 통해 접수할 수 있습니다.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+    <!--------- 푸터 --------->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-info">
+        <h2>NODE</h2>
+        <p>
+          '노드(NODE)'는 스피커를 선택하는 기준을 넘어,<br>
+          아티스트가 의도한 소리의 첫 호흡부터 마지막 잔향까지 <br>
+          완벽하게 구현하기 위해 탄생했습니다.<br>
+        </p>
+
+        <ul class="footer-sns">
+          <li><a href="#"><img src="./image/common/facebooke-white.png" alt="footer sns"></a></li>
+          <li><a href="#"><img src="./image/common/instagram-white.png" alt="footer sns"></a></li>
+          <li><a href="#"><img src="./image/common/youtube-white.png" alt="footer sns"></a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-menu">
+        <ul>
+          <li><a href="./product-main.html">Product</a></li>
+          <li><a href="./accessory-main.html">Accessory</a></li>
+          <li><a href="./lifeStyle.html">Life style</a></li>
+          <li><a href="./store.html">Store</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <h1 class="footer-logo"><img src="image/common/node_logo.png" alt="footer logo"></h1>
+      <p>© 2026 본 사이트는 학생용 포트폴리오입니다.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

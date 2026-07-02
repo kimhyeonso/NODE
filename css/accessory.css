@@ -1,0 +1,778 @@
+/* ==========================================================================
+   기본 설정 및 전역 스타일
+   ========================================================================== */
+* {
+    box-sizing: border-box; /* 박스 모델 계산 방식 설정 */
+}
+
+html {
+    scroll-behavior: smooth; /* 부드러운 페이지 스크롤 효과 */
+}
+
+body {
+    margin: 0;
+    color: #151515;
+    background: #fff;
+    font-family: "Roboto", "noto sans", sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+select {
+    font: inherit;
+}
+
+/* 비교 팝업 */
+.vspopup{
+    width: 23%;
+    min-width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+    position: fixed;
+    bottom: 2%;
+    left: 2%;
+    border-radius: 7px;
+    padding: 25px 15px;
+    overflow: hidden;
+    z-index: 99;
+}
+
+.vstext{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.vstext p:nth-child(1){
+    font-size: clamp(0.5rem, 2vw, 0.8rem);
+    color: #333;
+}
+
+.vstext h3{
+    margin-top: 10px;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.vstext p:nth-child(3){
+    margin-top: 5px;
+    font-size: clamp(0.5rem, 2vw, 1rem);
+}
+
+.vsimg{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.vsimg img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.vsexplain{
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vsexplain img{
+    width: 70px;
+}
+
+.vsexplain .vsbox span{
+    font-weight: bold;
+}
+
+.vsexplain .vsbox p{
+    margin-top: 5px;
+    font-size:  clamp(0.7rem, 2vw, 0.9rem);
+}
+
+.button{
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #070707;
+    color: #fff;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.vspopup .closeBtn{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    margin-top: 25px;
+    gap: 5px;
+    padding: 20px 0 0;
+}
+
+.vspopup .closeBtn input{
+    display: block;
+}
+
+.vspopup .closeBtn p{
+    margin-left: 200px;
+    cursor: pointer;
+}
+
+.vspopup .closeBtn p:hover{
+    font-weight: bold;
+}
+
+main {
+    margin-top: 5rem; /* 본문 시작 여백 */
+}
+
+/* ==========================================================================
+   히어로 섹션 및 배너
+   ========================================================================== */
+.hero-accessory {
+    display: grid;
+    min-height: 430px;
+    overflow: hidden;
+    padding: 40px 24px;
+    place-items: center;
+    color: #fff;
+    background-color: #080808;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+/* 카테고리별 동적 히어로 배경 이미지 적용 */
+body[data-accessory-category="all"] .hero-accessory {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.58)), url("../image/hero/accessory-all-banner.png");
+    background-position: center;
+}
+
+body[data-accessory-category="cable"] .hero-accessory {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.62)), url("../image/hero/accessory-cable-banner.png");
+    background-position: center;
+}
+
+body[data-accessory-category="stand"] .hero-accessory {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.58)), url("../image/hero/accessory-stand-banner.png");
+    background-position: center;
+}
+
+.hero-copy {
+    width: min(980px, 100%);
+    position: relative;
+    z-index: 1;
+    animation: hero-in 700ms ease both;
+}
+
+.hero-accessory h1,
+.section-heading h2 {
+    margin: 0;
+    line-height: 1;
+    /* letter-spacing: 0.1em; */
+}
+
+.hero-accessory h1 {
+    font-size: 4.8rem;
+}
+
+.hero-description {
+    margin: 22px 0 0;
+    color: #c8c8c8;
+    font-size: 0.875rem;
+}
+
+.eyebrow {
+    margin: 0 0 16px;
+    color: #747474;
+    font-size: 1rem;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.hero-accessory .eyebrow {
+    color: #aaa;
+}
+
+/* ==========================================================================
+   상품 목록 및 필터링 시스템
+   ========================================================================== */
+.accessory-container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 88px 32px 110px;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    font-size: clamp(2.25rem, 2.5vw, 3rem);
+}
+
+.accessory-count {
+    min-height: 24px;
+    margin: 12px 0 0;
+    color: #717171;
+    font-size: 1rem;
+}
+
+.toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+
+.filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.reset-filter {
+    min-height: 40px;
+    padding: 7px 16px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    color: #151515;
+    background: #fff;
+    cursor: pointer;
+}
+
+.reset-filter:hover {
+    color: #fff;
+    background: #151515;
+}
+
+/* 상품 상세 필터 영역 */
+.filter-area {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 48px;
+}
+
+.filter-section {
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.filter-section h3 {
+    margin: 0;
+    padding: 14px 20px;
+    color: #fff;
+    background: #151515;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.filter-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 15px 20px;
+    border-top: 1px solid #e7e7e7;
+}
+
+.filter-row strong {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+}
+
+.filter-options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #444;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.filter-options input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #151515;
+}
+
+.sort-control {
+    display: grid;
+    gap: 7px;
+    color: #747474;
+    font-size: 0.75rem;
+}
+
+.sort-control select {
+    min-width: 136px;
+    min-height: 40px;
+    padding: 0 34px 0 12px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    color: #151515;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   상품 카드 리스트
+   ========================================================================== */
+.accessory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px 24px;
+}
+
+.accessory-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    min-width: 0;
+    opacity: 0;
+    transform: translateY(34px);
+    transition: 1.8s ease;
+}
+
+.accessory-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.accessory-card .image-box {
+    grid-column: 1 / -1;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    margin: 60px 0;
+    color: #747474;
+    text-align: center;
+}
+
+/* 카드 이미지 및 호버 효과 */
+.image-box {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background: #fff;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.image-box img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 66.666%;
+    height: 66.666%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    transition: transform 400ms ease;
+}
+
+.product-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.accessory-card:hover .image-box img {
+    transform: translate(-50%, -50%) scale(1.045);
+}
+
+.accessory-card:hover .image-box {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 카트 및 비교 기능 버튼 */
+.cart-button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    place-items: center;
+    color: #222;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 180ms ease, color 180ms ease;
+}
+
+.cart-button::before {
+    display: none;
+}
+
+.cart-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+}
+
+.cart-button:hover {
+    transform: scale(1.08);
+}
+
+.cart-button.active {
+    color: #fff;
+    background: #151515;
+}
+
+.compare-check {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    border-radius: 50%;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 180ms ease, background 180ms ease;
+}
+
+.compare-check input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #151515;
+}
+
+.compare-check:hover {
+    transform: scale(1.08);
+}
+
+.compare-check:has(input:checked) {
+    background: #151515;
+}
+
+.accessory-card.compare-selected .image-box {
+    outline: 3px solid #d8a000;
+    outline-offset: -3px;
+}
+
+/* 비교 팝업창 스타일 */
+.compare-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    padding: 20px;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.compare-popup-box {
+    width: min(360px, 100%);
+    padding: 26px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
+
+.compare-popup-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.compare-popup-actions button,
+.compare-popup-actions a {
+    padding: 9px 15px;
+    border: 1px solid #151515;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.compare-cancel {
+    color: #151515;
+    background: #fff;
+}
+
+.compare-go {
+    color: #fff;
+    background: #151515;
+}
+
+/* 상품 상세 정보 (텍스트) */
+.brand {
+    margin-bottom: 6px;
+    color: #717171;
+    font-size: 0.6875rem;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-weight: 700;
+    grid-column: 1;
+    grid-row: 2;
+    letter-spacing: 0.04em;
+}
+
+.accessory-name,
+.price-row {
+    grid-column: 1 / -1;
+}
+
+.accessory-name {
+    overflow: hidden;
+    margin: 0 0 10px;
+    color: #151515;
+    font-size: 1rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 0.875rem;
+}
+
+.sale-price {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.original-price {
+    color: #999;
+    font-size: 0.75rem;
+    text-decoration: line-through;
+}
+
+/* ==========================================================================
+   기타 컴포넌트
+   ========================================================================== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 56px;
+}
+
+.page-button:hover,
+.page-button.active {
+    border-color: #151515;
+    color: #fff;
+    background: #151515;
+}
+
+:focus-visible {
+    outline: 3px solid #6ba4ff; /* 접근성을 위한 포커스 아웃라인 */
+    outline-offset: 3px;
+}
+
+@keyframes hero-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   반응형 미디어 쿼리
+   ========================================================================== */
+/* 태블릿: 상품 한 줄 3개 */
+@media (max-width: 1024px) {
+    .accessory-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 모바일: 본문 레이아웃 재배치 */
+@media (max-width: 768px) {
+    .hero-accessory {
+        min-height: 300px;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .hero-accessory h1 {
+        font-size: 2.25rem;
+        font-weight: 900;
+    }
+
+    .accessory-container {
+        padding: 58px 18px 76px;
+    }
+
+    .section-heading {
+        margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+    .toolbar { justify-content: stretch; }
+
+    .filter-actions {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .sort-control select {
+        width: 100%;
+        min-height: 46px;
+        font-size: 0.95rem;
+    }
+
+    .filter-area {
+        gap: 16px;
+        margin-bottom: 34px;
+    }
+
+    .filter-section h3 {
+        padding: 15px 18px;
+        font-size: 1.05rem;
+    }
+
+    .filter-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px 18px;
+    }
+
+    .filter-row strong {
+        font-size: 1rem;
+    }
+
+    .filter-options {
+        gap: 12px 18px;
+    }
+
+    .filter-options label {
+        min-height: 28px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .filter-options input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cart-button,
+    .compare-check {
+        top: 8px;
+        width: 30px;
+        height: 30px;
+    }
+    .cart-button { left: 8px; }
+    .compare-check { right: 8px; }
+    .cart-button svg {
+        width: 16px;
+        height: 16px;
+    }
+    .compare-check input {
+        width: 14px;
+        height: 14px;
+    }
+
+    .accessory-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 14px;
+    }
+
+    .image-box {
+        margin-bottom: 14px;
+    }
+
+    .brand {
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+    }
+
+    .accessory-name {
+        display: -webkit-box;
+        min-height: 2.8em;
+        margin-bottom: 8px;
+        overflow: hidden;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        text-overflow: initial;
+        white-space: normal;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .price-row {
+        gap: 4px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .sale-price {
+        font-size: 0.95rem;
+    }
+
+    .original-price {
+        font-size: 0.82rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
+}
+
+/* 작은 모바일에서도 액세서리 카드 2열 유지 */
+@media (max-width: 380px) {
+    .accessory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 12px;
+    }
+
+    .accessory-container {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .accessory-name {
+        font-size: 0.98rem;
+    }
+
+    .sale-price {
+        font-size: 0.9rem;
+    }
+}

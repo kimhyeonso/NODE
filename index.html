@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NODE</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./script/vendor/gsap.min.js"></script>
+    <script src="./script/common.js"></script>
+    <script src="./script/index.js" defer></script>
+</head>
+<body>
+  <!--------- 헤더 --------->
+  <div class="top-bar">
+    <header class="top-menu-bar">
+      <div class="top-menu-contents">
+
+        <!-- 로고 -->
+        <a href="./index.html" class="main-logo"><img src="./image/common/node_logo_width.png" alt="로고"></a>
+
+        <!-- 메인 메뉴 -->
+        <nav class="main">
+          <ul class="gnb">
+            <li>
+              <a href="./product-main.html">PRODUCT</a>
+
+              <div class="snb">
+                <div class="snb-inner">
+
+                  <ul class="snb-menu sub-menu-product">
+                    <li><a href="./product-main.html">ALL</a></li>
+                    <li><a href="./product-studio.html">STUDIO</a></li>
+                    <li><a href="./product-live.html">LIVE</a></li>
+                  </ul>
+
+                  <div class="snb-banner">
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/product-sub-menu-01.png" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/product-sub-menu-02.jfif" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <a href="./accessory-main.html">ACCESSORY</a>
+
+              <div class="snb">
+                <div class="snb-inner">
+
+                  <ul class="snb-menu">
+                    <li><a href="./accessory-main.html">ALL</a></li>
+                    <li><a href="./accessory-cable.html">CABLE</a></li>
+                    <li><a href="./accessory-stand.html">STAND</a></li>
+                  </ul>
+
+                  <div class="snb-banner">
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/accessory-sub-menu-01.jpg" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/accessory-sub-menu-02.jpg" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li><a href="./lifeStyle.html">LIFE STYLE</a></li>
+            <li><a href="./store.html">STORE</a></li>
+          </ul>
+        </nav>
+
+        <!-- 로그인 / 회원가입
+        <ul class="menu-icon">
+          <li><a href="./login.html">Login</a></li>
+          <li></li>
+          <li><a href="./signup.html">Sign up</a></li>
+        </ul> -->
+
+        <!-- 로그인/회원가입 -->
+        <ul class="menu-icon">
+          <!-- 로그인 전 -->
+          <li class="before-login">
+            <a href="./login.html">Login</a>
+          </li>
+          <li class="line"></li>
+          <li class="before-login">
+            <a href="./signup.html">Sign up</a>
+          </li>
+
+          <!-- 로그인 후 -->
+          <li class="after-login" style="display:none">
+            <a href="./mypage-main.html"><span id="header-username" style="font-size: 15px;"></span> 님</a>
+          </li>
+          <li class="after-login" style="display:none">
+            <a href="./shoppingCart.html" class="cartIconWrap">
+              <img src="./image/common/shopping-cart-white.png" alt="쇼핑카트" style="width:24px; height:24px;">
+              <span class="cartCount" style="display:none">0</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- 사이드 메뉴-->
+        <div class="hamburger-btn">
+          <img src="image/common/hambergerbtn_white.png" alt="hamberger btn">
+        </div>
+
+        <div class="dim"></div>
+
+        <div class="side-menu-box">
+          <div class="side-menu-box-content">
+            <div class="side-top-bar">
+              <div class="side-top-logo">
+                  <img src="./image/common/node_logo.png" alt="side menu logo">
+                </div>
+              <div class="exit-btn">
+                <img src="./image/common/close button_white.png" alt="exit button">
+              </div>
+            </div>
+            <div class='search-contents'>
+            </div>
+            <nav class="side-gnb">
+                <ul class="side-main-gnb">
+                  <li><a href="./product-main.html">PRODUCT</a>
+                    <ul class="side-sub-menu">
+                      <li><a href="./product-main.html">ALL</a></li>
+                      <li><a href="./product-studio.html">STUDIO</a></li>
+                      <li><a href="./product-live.html">LIVE</a></li>
+                      <li>
+                        <ul class="side-sub-menu__img">
+                          <li><a href="./product-detail.html"><img src="./image/common/product-sub-menu-01.png" alt="new image"></a></li>
+                          <li><a href="./product-detail.html"><img src="./image/common/product-sub-menu-02.jfif" alt="best image"></a></li>
+                        </ul>
+                      </li>
+                    </ul></li>
+                  <li><a href="./accessory-main.html">ACCESSORY</a>
+                    <ul class="side-sub-menu">
+                      <li><a href="./accessory-main.html">ALL</a></li>
+                      <li><a href="./accessory-cable.html">CABLE</a></li>
+                      <li><a href="./accessory-stand.html">STAND</a></li>
+                      <li>
+                        <ul class="side-sub-menu__img">
+                          <li><a href="./product-detail.html"><img src="./image/common/accessory-sub-menu-01.jpg" alt="accessory-sub-menu"></a></li>
+                          <li><a href="./product-detail.html"><img src="./image/common/accessory-sub-menu-02.jpg" alt="accessory-sub-menu"></a></li>
+                        </ul>
+                      </li>
+                    </ul></li>
+                  <li><a href="./lifeStyle.html">LIFE STYLE</a></li>
+                  <li><a href="./store.html">STORE</a></li>
+                </ul>
+            </nav>
+            <div class="side-spot">
+              <ul class="side-spot-menu">
+                <li><a href="./shoppingCart.html"><img src="./image/common/shopping-cart-white.png" alt="side-spot-icon">
+                  <p>장바구니</p>
+                </a></li>
+                <li><a href="./mypage-main.html"><img src="./image/common/user-white.png" alt="side-spot-icon">
+                  <p>마이페이지</p>
+                </a></li>
+                <li><a href="./store.html"><img src="./image/common/placeholder-white.png" alt="side-spot-icon">
+                  <p>오시는 길</p>
+                </a></li>
+              </ul>
+            </div>
+            <!-- <div class="side-util">
+                <ul>
+                  <li><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                  <li><a href="./signup.html">SIGN UP</a></li>
+                </ul>
+            </div> -->
+
+            <div class="side-util">
+              <ul>
+                <!-- 로그인 전 -->
+                <li class="side-before-login"><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                <li class="side-before-login"><a href="./signup.html">SIGN UP</a></li>
+
+                <!-- 로그인 후 -->
+                <li class="side-after-login" style="display:none"><a href="./mypage-main.html"><span id="side-username"></span> 님</a></li>
+                <li class="side-after-login" style="display:none"><a href="./shoppingCart.html">장바구니</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  </div>
+
+    <!---------top버튼--------->
+  <div class="topBtn">
+    TOP
+  </div>
+
+  <!--------- 메인--------->
+  <div class="section-container">
+    <section class="movie-section">
+      <div class="video">
+        <video autoplay muted loop playsinline>
+              <source src="./image/index/main-viedo.mp4" type="video/mp4">
+          </video>
+      </div>
+      <div class="scroll">
+        <p>SCROLL DOWN</p>
+        <div class="line"></div>
+      </div>
+    </section>
+
+    <section class="brand-logo-section">
+      <div class="logo-mask">
+        <img src="./image/index/logo-background.png" alt="NODE 로고">
+      </div>
+
+      <div class="logo-full-image"></div>
+    </section>
+
+    <section class="brand-story-section">
+      <div class="brand-story-container">
+        <div class="textbox">
+          <div class="logo">
+            <img src="./image/index/logo-circle.png" alt="logo">
+          </div>
+          <div class="text">
+            <div class="title"><span>NODE;</span> 소리의 연결점</div>
+            <p class="brand-story-txt pc">
+              소리는 단순한 파동이 아닙니다. 창작자의 의도, 공간의 분위기, 그리고 사람의 감정이 담긴 하나의 언어입니다. <br>
+              NODE는 그 모든 요소가 정확하게 전달될 수 있도록 소리의 시작과 끝을 연결합니다. 우리는 기술을 넘어, <br>
+              소리가 가진 본질적인 가치를 전달하는 연결점을 만듭니다.
+            </p>
+            <p class="brand-story-txt mobile">
+              소리는 단순한 파동이 아닙니다. 창작자의 의도,<br>
+              공간의 분위기, 그리고 사람의 감정이 담긴 하나의 언어입니다.<br>
+              NODE는 그 모든 요소가 정확하게 전달될 수 있도록<br>
+              소리의 시작과 끝을 연결합니다. 우리는 기술을 넘어,<br>
+              소리가 가진 본질적인 가치를 전달하는 연결점을 만듭니다.
+            </p>
+          </div>
+        </div>
+        <!-- <img src="./image/index/music01.png" alt="영상이나 움직일 예정"> -->
+         <section class="sound-wave-section">
+          <canvas id="soundWaveCanvas"></canvas>
+        </section>
+      </div>
+    </section>
+
+    <section class="sound-section">
+      <div class="sound-heading">
+        <h2>SOUND FLOW</h2>
+        <p>소리의 흐름</p>
+      </div>
+
+      <div class="sound-flow">
+        <img src="./image/index/sound-flow.png" alt="스피커 구조를 따라 흐르는 소리">
+
+        <div class="sound-label sound-origin">
+          <h3>ORIGIN</h3>
+          <p>소리가 시작되는 곳</p>
+        </div>
+
+        <div class="sound-label sound-node">
+          <h3>NODE</h3>
+          <p>모든 소리가 만나는 곳</p>
+        </div>
+
+        <div class="sound-label sound-destination">
+          <h3>DESTINATION</h3>
+          <p>감동이 완성되는 곳</p>
+        </div>
+      </div>
+
+      <p class="sound-closing">
+        소리의 시작부터 끝까지,<br>
+        NODE가 정확하게 연결합니다.
+      </p>
+    </section>
+
+    <section class="menu-section">
+      <div class="menu-container">
+        <div class="title-box">
+          <div class="title">
+            <div class="title-txt">NODE</div>
+            <p>
+              소리의 시작부터 끝까지,<br>
+              이 부분 카피 수정 예정입니다.
+            </p>
+          </div>
+          <div class="box prouct">
+            <img src="./image/index/product.png" alt="공연 무대와 라이브 스피커">
+            <div class="menu-card-txt">
+              <div class="prouct-title">PRODUCT</div>
+              <div class="sub-title">Perfect Sound, Engineered.</div>
+              <p>정교한 설계로 완성된 NODE의 사운드.</p>
+            </div>
+          </div>
+        </div>
+        <div class="image-box">
+            <div class="box accessory">
+              <img src="./image/index/aceesery.png" alt="오디오 케이블과 스피커 액세서리">
+              <div class="menu-card-txt">
+                <div class="accessory-title">ACCESSORY</div>
+                <div class="sub-title">Every Detail Matters.</div>
+                <p>더 완벽한 환경을 위한 액세서리.</p>
+              </div>
+          </div>
+          <div class="box lifestyle">
+              <img src="./image/index/lifestyle.png" alt="스피커가 배치된 라이프스타일 공간">
+              <div class="menu-card-txt">
+                <div class="lifeStyle-title">LIFE STYLE</div>
+                <div class="sub-title">Sound Beyond Listening.</div>
+                <p>일상을 채우는 새로운 사운드 경험.</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seach-section">
+      <div class="search-inner">
+        <div class="search-copy">
+          <h2 class="search-kicker">SELECT</h2>
+          <p>내게 딱 맞는<br>스피커를 선택해보세요</p>
+        </div>
+
+        <div class="search-showcase">
+          <div class="cursorCircle">DRAG</div>
+
+          <div class="dragArea">
+            <div class="slider">
+              <a class="search-card-link" href="./product-studio.html">
+                <article class="search-card">
+                  <div class="search-image">
+                    <img src="./image/index/search-01.jpg" alt="거실에 설치된 NODE 스피커">
+                  </div>
+                  <div class="search-card-copy">
+                    <h3>Home Studio Entry Monitor</h3>
+                    <p>완벽한 스피커 시스템. 어느 곳에서든 오디오 애호가에게 맞는 음질을 제공합니다.</p>
+                  </div>
+                </article>
+              </a>
+
+              <a class="search-card-link" href="./product-live.html">
+                <article class="search-card">
+                  <div class="search-image">
+                    <img src="./image/index/search-02.png" alt="공연 공간의 NODE 라이브 스피커">
+                  </div>
+                  <div class="search-card-copy">
+                    <h3>Professional Coaxial Monitor</h3>
+                    <p>공간의 크기와 분위기에 맞춰 선명하고 단단한 사운드를 완성합니다.</p>
+                  </div>
+                </article>
+              </a>
+
+              <a class="search-card-link" href="./product-studio.html">
+                <article class="search-card">
+                  <div class="search-image">
+                    <img src="./image/index/search-03.png" alt="스튜디오에 설치된 NODE 모니터 스피커">
+                  </div>
+                  <div class="search-card-copy">
+                    <h3>NODE Studio Monitor</h3>
+                    <p>작은 디테일까지 놓치지 않는 정확한 모니터링 사운드를 제공합니다.</p>
+                  </div>
+                </article>
+              </a>
+
+              <a class="search-card-link" href="./lifeStyle.html">
+                <article class="search-card">
+                  <div class="search-image">
+                    <img src="./image/index/search-04.png" alt="인테리어 공간에 놓인 NODE 스피커">
+                  </div>
+                  <div class="search-card-copy">
+                    <h3>NODE Home Audio</h3>
+                    <p>음악과 공간이 자연스럽게 어우러지는 편안한 홈 오디오 시스템입니다.</p>
+                  </div>
+                </article>
+              </a>
+
+              <a class="search-card-link" href="./lifeStyle.html">
+                <article class="search-card">
+                  <div class="search-image">
+                    <img src="./image/index/search-05.png" alt="인테리어 공간에 놓인 NODE 스피커">
+                  </div>
+                  <div class="search-card-copy">
+                    <h3>NODE Home Audio</h3>
+                    <p>음악과 공간이 자연스럽게 어우러지는 편안한 홈 오디오 시스템입니다.</p>
+                  </div>
+                </article>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="artist-section">
+      <div class="artist-heading">
+        <h2>ARTIST</h2>
+        <p>
+          아티스트와 연결하다<br>
+          새로운 사운드를 만드는 사람들
+        </p>
+      </div>
+
+      <div class="artist-slider">
+        <div class="artist-gallery">
+          <article class="artist-item">
+            <div class="artist-photo">
+              <img src="./image/index/artist-circle-02.jpg" alt="스튜디오에서 작업하는 아티스트">
+              <span class="artist-point"></span>
+            </div>
+            <img class="artist-speaker" src="./image/index/artist-product-01.png" alt="NODE 스피커">
+            <h3>Lang Lang</h3>
+          </article>
+
+          <article class="artist-item">
+            <div class="artist-photo">
+              <img src="./image/index/artist-circle-05.jpg" alt="무대에서 연주하는 아티스트">
+              <span class="artist-point"></span>
+            </div>
+            <img class="artist-speaker" src="./image/index/search-01.png" alt="NODE 스피커">
+            <h3>Ludwig Göransson</h3>
+          </article>
+
+          <article class="artist-item">
+            <div class="artist-photo">
+              <img src="./image/index/artist-circle-01.jpg" alt="NODE와 함께 작업하는 아티스트">
+              <span class="artist-point"></span>
+            </div>
+            <img class="artist-speaker" src="./image/index/search-02.png" alt="NODE 스피커">
+            <h3>Hans Zimmer</h3>
+          </article>
+
+          <article class="artist-item">
+            <div class="artist-photo">
+              <img src="./image/index/artist-circle-03.jpg" alt="공연을 준비하는 아티스트">
+              <span class="artist-point"></span>
+            </div>
+            <img class="artist-speaker" src="./image/index/search-03.png" alt="NODE 스피커">
+            <h3>John Williams</h3>
+          </article>
+
+          <article class="artist-item">
+            <div class="artist-photo">
+              <img src="./image/index/artist-circle-04.jpg" alt="음악을 제작하는 아티스트">
+              <span class="artist-point"></span>
+            </div>
+            <img class="artist-speaker" src="./image/index/search-04.png" alt="NODE 스피커">
+            <h3>Yo-Yo Ma</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sound-node-section">
+      <div class="sound-node-content">
+        <canvas id="soundNodeCanvas" aria-hidden="true"></canvas>
+
+        <div class="sound-node-text">
+          <h2>EVERY SOUND<br>IS CONNECTED</h2>
+          <p class="sound-node-desc">
+            마우스를 움직여 소리의 연결을 경험해보세요
+          </p>
+          <p class="sound-node-desc-mo">
+            클릭한 상태로 움직여 <br> 소리의 연결을 경험해보세요
+          </p>
+        </div>
+      </div>
+      <!--------- 푸터 --------->
+      <footer class="footer">
+        <div class="footer-top">
+          <div class="footer-info">
+            <h2>NODE</h2>
+            <p>
+              '노드(NODE)'는 스피커를 선택하는 기준을 넘어,<br>
+              아티스트가 의도한 소리의 첫 호흡부터 마지막 잔향까지 <br>
+              완벽하게 구현하기 위해 탄생했습니다.<br>
+            </p>
+
+            <ul class="footer-sns">
+              <li><a href="#"><img src="./image/common/facebooke-white.png" alt="footer sns"></a></li>
+              <li><a href="#"><img src="./image/common/instagram-white.png" alt="footer sns"></a></li>
+              <li><a href="#"><img src="./image/common/youtube-white.png" alt="footer sns"></a></li>
+            </ul>
+          </div>
+
+          <nav class="footer-menu">
+            <ul>
+              <li><a href="./product-main.html">Product</a></li>
+              <li><a href="./accessory-main.html">Accessory</a></li>
+              <li><a href="./lifeStyle.html">Life style</a></li>
+              <li><a href="./store.html">Store</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <h1 class="footer-logo"><img src="image/common/node_logo.png" alt="footer logo"></h1>
+          <p>© 2026 본 사이트는 학생용 포트폴리오입니다.</p>
+        </div>
+      </footer>
+    </section>
+  </div>
+  
+</body>
+</html>
+
