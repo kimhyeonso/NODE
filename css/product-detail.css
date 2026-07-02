@@ -77,8 +77,7 @@
   max-width: 100%;
   height: clamp(560px, 42vw, 660px);
   border: 1px solid #dededb;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.92) 62%, #f1efea 100%);
+  background: white;
   box-shadow: 0 18px 42px rgba(21, 21, 21, 0.06);
   overflow: hidden;
 }
