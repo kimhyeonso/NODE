@@ -145,7 +145,7 @@
   font-size: clamp(1.2rem , 2vw , 1.5rem);
 
   margin-top: 10px;
-
+  margin-bottom: 50px;
   color: #777;
 
 }
@@ -423,6 +423,10 @@
     min-height: 680px;
   }
 
+  .gallery-message{
+    margin-top: -50px;
+  }
+
   .home-hero {
     top: 50px;
     transform: translateX(-50%);
@@ -441,7 +445,7 @@
     width: 92%;
     height: 460px;
     aspect-ratio: auto;
-    margin: 154px auto 0;
+    margin: 150px auto 0;
   }
 
   .gallery-section img:nth-child(1) {
@@ -509,7 +513,8 @@
   .intro-text {
     grid-column: auto;
     grid-row: auto;
-    padding: 24px 0 0;
+    padding: 80px 0 0;
+    
     text-align: center;
   }
 
