@@ -1025,6 +1025,7 @@ body {
   overflow: visible;
   border-radius: 50%;
   background-color: #171717;
+  cursor: pointer;
 }
 
 .artist-photo img {
