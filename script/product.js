@@ -1,3 +1,102 @@
+// 비교하기 팝업
+
+(function setupVsPopup() {
+  let popup = document.querySelector(".vspopup");
+
+  if (!popup) {
+    popup = document.createElement("div");
+    popup.className = "vspopup";
+    popup.innerHTML =
+      `<div class="vstext">
+        <p>COMPARE PRODUCTS</p>
+        <h3>상품을 두개 골라 <br> 차이점을 한눈에 확인하세요!</h3>
+        <p>오른쪽 상단의 <strong style="color: #C28E47;">체크 버튼</strong>을 클릭하면 <br> 비교 목록에 추가 됩니다</p>
+      </div>
+      <div class="vsimg"><img src="./image/popup/vspopup-01.png" alt="팝업 이미지"></div>
+      <div class="vsexplain">
+        <img src="./image/popup/vspopup-02-02.png" alt="팝업 이미지2">
+        <div class="vsbox">
+          <span>최대 2개까지 선택하여 <br> 제품을 비교할 수 있습니다</span>
+          <p>선택 완료 후 <strong style="color: #C28E47;">[비교하기]</strong>버튼이 활성화 됩니다</p>
+        </div>
+      </div>
+      <div class="button">직접 비교해보세요 -></div>
+      <div class="closeBtn">
+        <input type="checkbox" id="today"><label for="today">오늘 하루 보지 않기</label>
+        <p class="close">닫기</p>
+      </div>`;
+    document.body.insertBefore(popup, document.body.firstChild);
+  }
+
+  const cookieName = "vspopupClosed";
+  const todayCheck = popup.querySelector("#today");
+  const closeButton = popup.querySelector(".closeBtn .close, .closeBtn p");
+  const guideButton = popup.querySelector(".button");
+
+  function setVsCookie(name, value, day) {
+    const date = new Date();
+    date.setDate(date.getDate() + day);
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+  }
+
+  function getVsCookie(name) {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.split("=")[0] === name) {
+        return cookie.split("=")[1];
+      }
+    }
+
+    return "";
+  }
+
+  function closeVsPopup() {
+    if (todayCheck && todayCheck.checked) {
+      setVsCookie(cookieName, "close", 1);
+    }
+
+    popup.style.display = "none";
+    document.body.classList.remove("vspopup-visible");
+  }
+
+  function showVsPopup() {
+    popup.style.display = "";
+    document.body.classList.add("vspopup-visible");
+  }
+
+  if (getVsCookie(cookieName) === "close") {
+    popup.style.display = "none";
+    document.body.classList.remove("vspopup-visible");
+  } else {
+    showVsPopup();
+  }
+
+  if (closeButton) {
+    closeButton.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      closeVsPopup();
+    });
+  }
+
+  if (guideButton) {
+    guideButton.addEventListener("click", () => {
+      const target = document.querySelector("#accessory-grid, #product-grid");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.location.href = "./product-main.html";
+      }
+      closeVsPopup();
+    });
+  }
+})();
+
+
+
+
 /**
  * [상품 및 액세서리 리스트 페이지 공통 스크립트]
  * 이 스크립트는 상품 리스트와 액세서리 리스트 페이지에서 공통으로 사용됩니다.

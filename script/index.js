@@ -1,17 +1,17 @@
 // 두번째 섹션 헤더 배경색
 function HeaderSecondSection__init() {
   const scrollContainer = document.querySelector(".section-container");
-  const topBar = document.querySelector(".top-bar");
+  const header = document.querySelector(".top-menu-bar");
   const brandLogoSection = document.querySelector(".brand-logo-section");
 
-  if (!scrollContainer || !topBar || !brandLogoSection) return;
+  if (!scrollContainer || !header || !brandLogoSection) return;
 
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        topBar.classList.add("second-section-header");
+        header.classList.add("second-section-header");
       } else {
-        topBar.classList.remove("second-section-header");
+        header.classList.remove("second-section-header");
       }
     });
   }, {
@@ -23,6 +23,7 @@ function HeaderSecondSection__init() {
 }
 
 HeaderSecondSection__init();
+
 
 // 두번째 섹션 애니메이션 구현
 function BrandFade__init() {
@@ -63,7 +64,134 @@ function BrandFade__init() {
 
 BrandFade__init();
 
-// 두번째 섹션 캔버스 구현
+// brand story text typing animation
+function BrandStoryText__init() {
+  const scrollContainer = document.querySelector(".section-container");
+  const storySection = document.querySelector(".brand-story-section");
+  const storyTitle = document.querySelector(".brand-story-container .title");
+  const storyTexts = document.querySelectorAll(".brand-story-txt");
+  let isAnimated = false;
+
+  if (!window.gsap || !scrollContainer || !storySection || !storyTitle || storyTexts.length === 0) return;
+
+  function getTextTokens(element) {
+    const tokens = [];
+
+    element.childNodes.forEach(function(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent.replace(/\s+/g, " ").trim();
+
+        Array.from(text).forEach(function(char) {
+          tokens.push({ type: "char", value: char });
+        });
+      } else if (node.nodeName === "BR") {
+        tokens.push({ type: "br" });
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === "span") {
+        Array.from(node.textContent).forEach(function(char) {
+          tokens.push({ type: "char", value: char, wrap: "span" });
+        });
+      }
+    });
+
+    return tokens;
+  }
+
+  function renderTokens(tokens, length) {
+    let html = "";
+    let spanOpen = false;
+
+    tokens.slice(0, length).forEach(function(token) {
+      if (token.type === "br") {
+        if (spanOpen) {
+          html += "</span>";
+          spanOpen = false;
+        }
+
+        html += "<br>";
+        return;
+      }
+
+      if (token.wrap === "span" && !spanOpen) {
+        html += "<span>";
+        spanOpen = true;
+      }
+
+      if (token.wrap !== "span" && spanOpen) {
+        html += "</span>";
+        spanOpen = false;
+      }
+
+      html += token.value === " " ? "&nbsp;" : token.value;
+    });
+
+    if (spanOpen) {
+      html += "</span>";
+    }
+
+    return html;
+  }
+
+  function addTyping(timeline, element, speed, position) {
+    const tokens = getTextTokens(element);
+    const state = { length: 0 };
+
+    timeline.call(function() {
+      element.innerHTML = "";
+      element.style.visibility = "visible";
+      element.classList.add("brand-story-typing");
+      state.length = 0;
+    }, null, position);
+
+    timeline.to(state, {
+      length: tokens.length,
+      duration: Math.max(tokens.length * speed, 0.4),
+      ease: "none",
+      snap: { length: 1 },
+      onUpdate: function() {
+        element.innerHTML = renderTokens(tokens, state.length);
+      },
+      onComplete: function() {
+        element.innerHTML = renderTokens(tokens, tokens.length);
+        element.classList.remove("brand-story-typing");
+      }
+    }, position);
+  }
+
+  function playStoryText() {
+    if (isAnimated || !storySection.classList.contains("fade-in")) return;
+
+    const visibleText = Array.from(storyTexts).find(function(textElement) {
+      return window.getComputedStyle(textElement).display !== "none";
+    });
+
+    if (!visibleText) return;
+
+    isAnimated = true;
+    visibleText.style.visibility = "hidden";
+
+    const timeline = gsap.timeline();
+
+    addTyping(timeline, storyTitle, 0.055, 0);
+    addTyping(timeline, visibleText, 0.018, ">+0.25");
+  }
+
+  const classObserver = new MutationObserver(playStoryText);
+
+  classObserver.observe(storySection, {
+    attributes: true,
+    attributeFilter: ["class"]
+  });
+
+  scrollContainer.addEventListener("scroll", playStoryText, { passive: true });
+  window.addEventListener("resize", playStoryText);
+  playStoryText();
+}
+
+BrandStoryText__init();
+
+
+
+// 세번째 섹션 캔버스 구현
 function SoundWaveCanvas__init() {
 const canvas = document.getElementById("soundWaveCanvas");
 if (!canvas) return;
@@ -385,6 +513,83 @@ function SoundFlowSteps__init() {
 }
 
 SoundFlowSteps__init();
+
+// sound closing typing animation
+function SoundClosingTyping__init() {
+  const closingText = document.querySelector(".sound-closing");
+  let isAnimated = false;
+
+  if (!window.gsap || !closingText) return;
+
+  function getTextTokens(element) {
+    const tokens = [];
+
+    element.childNodes.forEach(function(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent.replace(/\s+/g, " ").trim();
+
+        Array.from(text).forEach(function(char) {
+          tokens.push({ type: "char", value: char });
+        });
+      } else if (node.nodeName === "BR") {
+        tokens.push({ type: "br" });
+      }
+    });
+
+    return tokens;
+  }
+
+  function renderTokens(tokens, length) {
+    let html = "";
+
+    tokens.slice(0, length).forEach(function(token) {
+      if (token.type === "br") {
+        html += "<br>";
+        return;
+      }
+
+      html += token.value === " " ? "&nbsp;" : token.value;
+    });
+
+    return html;
+  }
+
+  const tokens = getTextTokens(closingText);
+
+  function playClosingText() {
+    if (isAnimated || !closingText.classList.contains("active")) return;
+
+    const state = { length: 0 };
+    isAnimated = true;
+    closingText.innerHTML = "";
+    closingText.classList.add("brand-story-typing");
+
+    gsap.to(state, {
+      length: tokens.length,
+      duration: Math.max(tokens.length * 0.045, 0.5),
+      ease: "none",
+      snap: { length: 1 },
+      onUpdate: function() {
+        closingText.innerHTML = renderTokens(tokens, state.length);
+      },
+      onComplete: function() {
+        closingText.innerHTML = renderTokens(tokens, tokens.length);
+        closingText.classList.remove("brand-story-typing");
+      }
+    });
+  }
+
+  const classObserver = new MutationObserver(playClosingText);
+
+  classObserver.observe(closingText, {
+    attributes: true,
+    attributeFilter: ["class"]
+  });
+
+  playClosingText();
+}
+
+SoundClosingTyping__init();
 
 // 네번째 섹션 애니메이션 구현
 function MenuScrollAnimation__init() {

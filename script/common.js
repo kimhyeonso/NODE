@@ -142,6 +142,27 @@ $(".top-menu-bar").on(
 );
 
 //스크롤시 팝업창 불투명도 조절
+function HeaderPopup__ensure() {
+  const pageName = location.pathname.split("/").pop() || "index.html";
+
+  if (pageName === "index.html" || $(".popup").length > 0) return;
+
+  $(".top-bar").after(
+    `<div class="popup">
+      <p>회원가입시 5,000원 할인 쿠폰 지급</p>
+      <div class="close">
+        <label>
+          <input type="checkbox" id="closeCheckBox">
+          오늘 하루 열지 않기
+        </label>
+        <button class="closeBtn"><img src="./image/common/close button_white.png" alt="button"></button>
+      </div>
+    </div>`
+  );
+}
+
+HeaderPopup__ensure();
+
 $(window).on("scroll", function () {
   if ($(window).scrollTop() > 50) {
     $(".popup").addClass("scrolled");
@@ -155,7 +176,7 @@ function PopupVisibility__update() {
   $("body").toggleClass("popup-visible", $(".popup").is(":visible"));
 }
 
-$(".closeBtn").on("click", () => {
+$(".popup .closeBtn").on("click", () => {
   if ($("#closeCheckBox").is(":checked")) {
     setCookie("todaypopup", "close", 1);
   }

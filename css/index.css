@@ -42,12 +42,7 @@ body {
   transition: none;
 }
 
-.top-bar.second-section-header {
-  background-color: #070707 !important;
-  background-image: none !important;
-}
-
-.top-bar.second-section-header .top-menu-bar {
+.top-menu-bar.second-section-header {
   background-color: #070707;
   border-bottom-color: transparent;
 }
@@ -335,6 +330,23 @@ body {
 
 .brand-story-txt.pc {
   white-space: nowrap;
+}
+
+.brand-story-typing::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 3px;
+  background-color: currentColor;
+  vertical-align: -0.12em;
+  animation: brandStoryCursor 0.75s step-end infinite;
+}
+
+@keyframes brandStoryCursor {
+  50% {
+    opacity: 0;
+  }
 }
 
 .sound-wave-section {
