@@ -69,53 +69,71 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  createMosaicTiles();
+  let tl;
+  let resizeTimer;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: galleryWrapper,
-      start: "top top+=80",
-      end: "+=1400",
-      pin: true,
-      scrub: 1,
-      invalidateOnRefresh: true
+  function buildGalleryTimeline() {
+    if (tl) {
+      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      tl.kill();
     }
-  });
 
-  tl.set(tiles, { opacity: 1 })
-  .set(galleryImages, { opacity: 0 }, "<")
-  .to(tiles, {
-    x: function (index, target) {
-      const rect = target.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const screenCenter = window.innerWidth / 2;
+    gsap.set(galleryImages, { opacity: 1 });
+    gsap.set(galleryMessage, { opacity: 0, scale: 0.7 });
+    createMosaicTiles();
 
-      return centerX < screenCenter
-        ? gsap.utils.random(-900, -350)
-        : gsap.utils.random(350, 900);
-    },
-    y: () => gsap.utils.random(-180, 180),
-    rotate: () => gsap.utils.random(-25, 25),
-    opacity: 0,
-    duration: 1,
-    stagger: {
-      amount: 0.8,
-      from: "random"
-    }
-  })
-  .to(galleryMessage, {
-    opacity: 1,
-    scale: 1,
-    duration: 0.8
-  }, "-=0.2");
+    tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: galleryWrapper,
+        start: "top top+=80",
+        end: "+=1400",
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    tl.set(tiles, { opacity: 1 })
+    .set(galleryImages, { opacity: 0 }, "<")
+    .to(tiles, {
+      x: function (index, target) {
+        const rect = target.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const screenCenter = window.innerWidth / 2;
+
+        return centerX < screenCenter
+          ? gsap.utils.random(-900, -350)
+          : gsap.utils.random(350, 900);
+      },
+      y: () => gsap.utils.random(-180, 180),
+      rotate: () => gsap.utils.random(-25, 25),
+      opacity: 0,
+      duration: 1,
+      stagger: {
+        amount: 0.8,
+        from: "random"
+      }
+    })
+    .to(galleryMessage, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.8
+    }, "-=0.2");
+  }
+
+  buildGalleryTimeline();
 
   window.addEventListener("load", function () {
+    buildGalleryTimeline();
     ScrollTrigger.refresh();
   });
 
   window.addEventListener("resize", function () {
-    createMosaicTiles();
-    ScrollTrigger.refresh();
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(function () {
+      buildGalleryTimeline();
+      ScrollTrigger.refresh();
+    }, 120);
   });
 }
 
