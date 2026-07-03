@@ -105,7 +105,7 @@
  * 1. 현재 HTML이 상품 페이지인지 액세서리 페이지인지 판단합니다.
  * 2. category.json에서 상품 데이터를 불러옵니다.
  * 3. 현재 페이지 카테고리에 맞는 카드만 생성합니다.
- * 4. 필터/정렬/장바구니/비교 기능을 연결합니다.
+ * 4. 필터/장바구니/비교 기능을 연결합니다.
  * 5. 스크롤 시 카드가 자연스럽게 나타나도록 애니메이션을 붙입니다.
  */
 
@@ -137,7 +137,6 @@ function getListingPageSettings() {
       grid: productGrid,
       noResults: document.getElementById("no-products-msg"),
       filters: document.querySelectorAll("#product-filters input"),
-      sortSelect: document.getElementById("sort-select"),
       resetButton: document.getElementById("reset-filter"),
       count: document.getElementById("product-count"),
       pageCategory: document.body.dataset.productCategory || "all",
@@ -157,7 +156,6 @@ function getListingPageSettings() {
       grid: accessoryGrid,
       noResults: null,
       filters: document.querySelectorAll("#accessory-filters input"),
-      sortSelect: document.getElementById("sort-select"),
       resetButton: document.getElementById("reset-filter"),
       count: document.getElementById("accessory-count"),
       pageCategory: document.body.dataset.accessoryCategory || "all",
@@ -253,7 +251,7 @@ function renderListingCards(products) {
   observeListingCards();
 }
 
-/** 4. 필터 및 정렬 로직 */
+/** 4. 필터 로직 */
 function getSelectedFilters() {
   // 선택된 체크박스를 domain/filter 그룹 구조로 정리합니다.
   // 예: { studio: { type: ["monitor"], feature: ["wireless"] } }
@@ -296,7 +294,8 @@ function filterListings() {
 
   // 현재 DOM에 있는 카드들을 순회하면서 조건에 맞는 카드만 display:grid로 보여줍니다.
   listingCards.forEach(card => {
-    // 조건에 맞지 않는 카드는 DOM에서 삭제하지 않고 숨김 처리만 해서 초기화/정렬 때 다시 사용할 수 있습니다.
+    // 조건에 맞지 않는 카드는 DOM에서 삭제하지 않고 숨김 처리만 해서 초기화 때 다시 사용할 수 있습니다.
+
     const isVisible = checkListingCard(card, selectedFilters);
     card.style.display = isVisible ? "grid" : "none";
     if (isVisible) visibleCount++;
@@ -311,18 +310,6 @@ function filterListings() {
   }
 }
 
-function sortListings() {
-  if (!pageSettings.sortSelect) return;
-
-  // DOM 노드를 배열로 복사해서 정렬한 뒤, grid에 다시 append하면 화면 순서가 바뀝니다.
-  let cardArray = [...listingCards];
-  const sortVal = pageSettings.sortSelect.value;
-
-  // 가격순 정렬은 카드에 저장해둔 data-price 값을 기준으로 합니다.
-  if (sortVal === "low") cardArray.sort((a, b) => a.dataset.price - b.dataset.price);
-  else if (sortVal === "high") cardArray.sort((a, b) => b.dataset.price - a.dataset.price);
-  cardArray.forEach(card => pageSettings.grid.appendChild(card));
-}
 
 /** 5. 이벤트 핸들러 및 팝업 */
 function showMovePopup(messageText, linkText, linkHref) {
@@ -375,28 +362,18 @@ function getCardItem(card) {
   };
 }
 
-function setupFilterAndSort() {
-  // 필터 체크박스와 정렬 select에 이벤트를 연결합니다.
+function setupFilters() {
+  // 필터 체크박스에 이벤트를 연결합니다.
   pageSettings.filters.forEach(input => {
     input.addEventListener("change", filterListings);
   });
 
-  if (pageSettings.sortSelect) {
-    pageSettings.sortSelect.addEventListener("change", () => {
-      // 정렬 후에도 현재 선택된 필터 상태를 다시 적용해야 숨김/표시 상태가 유지됩니다.
-      sortListings();
-      filterListings();
-    });
-  }
-
   if (pageSettings.resetButton) {
     pageSettings.resetButton.addEventListener("click", () => {
-      // 필터 초기화 버튼은 체크박스, 정렬값, 화면 표시 상태를 모두 기본값으로 되돌립니다.
-      pageSettings.filters.forEach(input => {
+      // 필터 초기화 버튼은 체크박스와 화면 표시 상태를 기본값으로 되돌립니다.
+            pageSettings.filters.forEach(input => {
         input.checked = false;
       });
-      if (pageSettings.sortSelect) pageSettings.sortSelect.value = "featured";
-      sortListings();
       filterListings();
     });
   }
@@ -516,10 +493,9 @@ async function initListingPage() {
 
     // 데이터 렌더링이 끝난 뒤에 이벤트를 연결해야 동적으로 생성된 카드 버튼을 찾을 수 있습니다.
     renderListingCards(data.products || {});
-    setupFilterAndSort();
+    setupFilters();
     setupCartButtons();
     setupCompareInputs();
-    sortListings();
     filterListings();
   } catch (err) {
     // fetch 실패나 JSON 구조 문제가 생기면 사용자에게 에러 문구를 보여주고 콘솔에도 남깁니다.

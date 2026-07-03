@@ -1,21 +1,22 @@
 /**
- * Product Detail Page
+ * product-detail.html 전용 스크립트
  *
- * 이 파일은 product-detail.html 한 페이지에서 사용하는 스크립트입니다.
- * 상품 데이터는 js/catalog/category.json에서 가져오고,
- * URL의 id 값에 맞춰 상세 정보 / 이미지 / 추천 상품을 화면에 렌더링합니다.
+ * 이 파일은 상품 상세페이지 한 화면에서 필요한 동작을 담당합니다.
+ * 상품 정보는 `js/catalog/category.json`에서 가져오고,
+ * URL의 `id` 값에 맞는 상품을 찾아 화면에 렌더링합니다.
  *
- * 섹션 안내
- * 1. 공통 상수 / 유틸
- * 2. 장바구니 저장 로직
- * 3. 장바구니 완료 팝업
- * 4. 애니메이션 구현: Similar Products 자동 슬라이드
- * 5. 상품 상세 데이터 렌더링
- * 6. 이벤트 연결
+ * 주요 기능
+ * 1. 상품 데이터 로딩 및 가격 포맷 변환
+ * 2. 상세 상품 / 추천 상품 장바구니 저장
+ * 3. 장바구니 이동 팝업 생성
+ * 4. Similar Products 추천 상품 Slick 슬라이더
+ * 5. 상품명, 가격, 이미지, 색상칩, 사양 렌더링
+ * 6. 수량 조절, 탭 전환, 추천 상품 카드 이벤트 연결
  */
 
 // ==================== 1. 공통 상수 / 유틸 ====================
 
+// Similar Products 카드의 장바구니 버튼에 넣는 SVG 아이콘입니다.
 const SIMILAR_CART_ICON =
   '<svg aria-hidden="true" viewBox="0 0 24 24">' +
   '<path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 8H6"></path>' +
@@ -23,7 +24,7 @@ const SIMILAR_CART_ICON =
   '<circle cx="17" cy="20" r="1"></circle>' +
   "</svg>";
 
-// 상품 목록, 상세 이미지, 스펙 데이터가 모여 있는 JSON 파일을 불러옵니다.
+// 상품 목록, 상세 이미지, 스펙 정보가 들어 있는 JSON 파일을 불러옵니다.
 async function loadProductCatalog() {
   const response = await fetch("./js/catalog/category.json");
 
@@ -34,16 +35,16 @@ async function loadProductCatalog() {
   return response.json();
 }
 
-// 가격 숫자를 한국어 표기 방식으로 바꿉니다. 예: 2850000 -> 2,850,000원
+// 숫자 가격을 한국어 표기 방식으로 변환합니다. 예: 2850000 -> 2,850,000원
 function formatPrice(price) {
-  return price.toLocaleString("ko-KR") + "원";
+  return Number(price).toLocaleString("ko-KR") + "원";
 }
 
 // ==================== 2. 장바구니 저장 로직 ====================
 
 function readCartItems() {
   try {
-    // localStorage에는 문자열로 저장되기 때문에 JSON.parse로 배열 형태로 되돌립니다.
+    // localStorage에는 문자열로 저장되므로 JSON.parse로 배열 형태로 되돌립니다.
     return JSON.parse(localStorage.getItem("cartItems")) || [];
   } catch (error) {
     // 저장된 값이 깨져 있어도 페이지가 멈추지 않도록 빈 배열로 처리합니다.
@@ -69,7 +70,7 @@ function saveCartItem(item) {
 }
 
 function removeCartItem(productId) {
-  // 추천 상품 카드에서 아이콘을 한 번 더 눌렀을 때 해당 상품만 장바구니에서 제거합니다.
+  // 추천 상품 아이콘을 다시 눌렀을 때 해당 상품만 장바구니에서 제거합니다.
   const nextCart = readCartItems().filter(function (cartItem) {
     return cartItem.id !== productId;
   });
@@ -78,7 +79,7 @@ function removeCartItem(productId) {
 }
 
 function hasCartItem(productId) {
-  // 새로고침 후에도 이미 담긴 추천 상품이면 버튼 active 상태를 유지하기 위한 확인 함수입니다.
+  // 새로고침 후에도 이미 담긴 추천 상품은 active 상태로 표시하기 위한 확인 함수입니다.
   return readCartItems().some(function (cartItem) {
     return cartItem.id === productId;
   });
@@ -87,10 +88,10 @@ function hasCartItem(productId) {
 // ==================== 3. 장바구니 완료 팝업 ====================
 
 function showDetailCartPopup() {
-  // 팝업이 이미 떠 있으면 중복 생성하지 않습니다.
+  // 같은 팝업이 여러 번 겹쳐 뜨지 않도록 기존 팝업이 있으면 중단합니다.
   if (document.querySelector(".compare-popup")) return;
 
-  // HTML에 미리 넣지 않고, 장바구니 버튼을 눌렀을 때 필요한 팝업 요소를 만듭니다.
+  // 팝업은 HTML에 미리 두지 않고, 장바구니 버튼을 눌렀을 때 동적으로 생성합니다.
   const popup = document.createElement("div");
   popup.className = "compare-popup";
 
@@ -106,7 +107,7 @@ function showDetailCartPopup() {
   const cancelButton = document.createElement("button");
   cancelButton.className = "compare-cancel";
   cancelButton.type = "button";
-  cancelButton.textContent = "계속 쇼핑";
+  cancelButton.textContent = "계속 보기";
 
   const cartLink = document.createElement("a");
   cartLink.className = "compare-go";
@@ -124,6 +125,7 @@ function showDetailCartPopup() {
     popup.remove();
   });
 
+  // 팝업 바깥 어두운 영역을 눌러도 닫히게 처리합니다.
   popup.addEventListener("click", function (event) {
     if (event.target === popup) {
       popup.remove();
@@ -131,108 +133,69 @@ function showDetailCartPopup() {
   });
 }
 
-// ==================== 4. 애니메이션 구현: Similar Products ====================
+// ==================== 4. Similar Products 슬라이더 ====================
 
-function setupSimilarSwiper() {
-  const container = document.querySelector(".swiper-container");
-  if (!container) return;
+function setupSimilarSlick() {
+  const slider = $(".similar-slider .product-list");
+  if (!slider.length) return;
 
-  const wrapper = container.querySelector(".swiper-wrapper");
-  if (!wrapper) return;
+  // Slick은 jQuery 기반 슬라이더 플러그인입니다.
+  // CDN 로딩이 실패하면 오류를 내지 않고 슬라이더 초기화를 건너뜁니다.
+  if (typeof $.fn.slick !== "function") return;
 
-  // 모바일에서는 CSS 그리드로 2열 고정 배치하므로 Swiper를 실행하지 않습니다.
-  if (window.matchMedia("(max-width: 768px)").matches) return;
+  const mobileQuery = window.matchMedia("(max-width: 768px)");
 
-  // 5개 카드만 있을 때도 loop/autoplay가 끊기지 않도록 원본 슬라이드를 한 번 복제합니다.
-  if (!wrapper.dataset.cloned) {
-    const slides = Array.from(wrapper.querySelectorAll(".swiper-slide"));
+  function toggleSimilarSlider() {
+    const isSlickActive = slider.hasClass("slick-initialized");
 
-    slides.forEach(function (slide) {
-      wrapper.appendChild(slide.cloneNode(true));
+    // 모바일에서는 슬라이더를 쓰지 않고 CSS 2열 그리드로 추천 상품 4개만 보여줍니다.
+    if (mobileQuery.matches) {
+      if (isSlickActive) slider.slick("unslick");
+      return;
+    }
+
+    // 이미 Slick이 적용된 상태라면 중복 초기화하지 않습니다.
+    if (isSlickActive) return;
+
+    slider.slick({
+      autoplay: true,
+      autoplaySpeed: 1800,
+      arrows: false,
+      draggable: true,
+      dots: false,
+      infinite: true,
+      pauseOnHover: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      swipe: true,
+      swipeToSlide: true,
+      touchMove: true,
+      speed: 500,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 900,
+          settings: {
+            slidesToShow: 2
+          }
+        }
+      ]
     });
-
-    wrapper.dataset.cloned = "true";
   }
 
-  if (typeof Swiper === "undefined") return;
+  toggleSimilarSlider();
 
-  // 데스크톱/태블릿 화면에서는 추천 상품을 자동 슬라이드로 보여줍니다.
-  const swiper = new Swiper(".similar-swiper", {
-    loop: true,
-    speed: 500,
-    slidesPerView: 1.2,
-    spaceBetween: 14,
-    autoplay: {
-      delay: 1800,
-      disableOnInteraction: false
-    },
-    breakpoints: {
-      640: { slidesPerView: 2, spaceBetween: 16 },
-      900: { slidesPerView: 3, spaceBetween: 18 },
-      1200: { slidesPerView: 5, spaceBetween: 15 }
-    }
-  });
-
-  let hoverDirection = null;
-  let hoverTimer = null;
-
-  // 왼쪽/오른쪽 hover 이동을 멈추고 기본 자동 슬라이드를 다시 시작합니다.
-  function stopHoverSlide() {
-    hoverDirection = null;
-    window.clearInterval(hoverTimer);
-    hoverTimer = null;
-    swiper.autoplay.start();
+  // 화면 너비가 모바일/데스크탑으로 바뀔 때 Slick 적용 여부를 다시 판단합니다.
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", toggleSimilarSlider);
+  } else {
+    mobileQuery.addListener(toggleSimilarSlider);
   }
-
-  // 슬라이더 가장자리 영역에 마우스가 올라가면 해당 방향으로 반복 이동합니다.
-  function startHoverSlide(direction) {
-    // 이미 같은 방향으로 움직이는 중이면 interval을 새로 만들지 않습니다.
-    if (hoverDirection === direction) return;
-
-    window.clearInterval(hoverTimer);
-    hoverDirection = direction;
-    swiper.autoplay.stop();
-
-    function moveSlide() {
-      if (direction === "prev") {
-        swiper.slidePrev();
-        return;
-      }
-
-      swiper.slideNext();
-    }
-
-    moveSlide();
-    // 마우스를 가장자리에 계속 두면 0.9초마다 한 칸씩 추가 이동합니다.
-    hoverTimer = window.setInterval(moveSlide, 900);
-  }
-
-  // 카드가 아니라 슬라이더 박스 전체 기준으로 마우스 위치를 계산합니다.
-  container.addEventListener("mousemove", function (event) {
-    const rect = container.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-
-    // 양쪽 25%를 방향 이동 영역으로 사용합니다.
-    const edgeSize = rect.width * 0.25;
-
-    if (mouseX <= edgeSize) {
-      startHoverSlide("prev");
-      return;
-    }
-
-    if (mouseX >= rect.width - edgeSize) {
-      startHoverSlide("next");
-      return;
-    }
-
-    // 가운데 영역으로 돌아오면 hover 이동을 멈추고 autoplay로 복귀합니다.
-    if (hoverDirection) {
-      stopHoverSlide();
-    }
-  });
-
-  // 슬라이더 밖으로 마우스가 나가도 interval이 남지 않도록 정리합니다.
-  container.addEventListener("mouseleave", stopHoverSlide);
 }
 
 // ==================== 5. 상품 상세 데이터 렌더링 ====================
@@ -246,7 +209,7 @@ async function initProductDetail() {
   const requestedId = params.get("id");
   const fallbackId = catalog.fallbackId;
 
-  // 없는 id로 접근하면 기본 상품으로 보여줍니다.
+  // 존재하지 않는 id로 접근하면 기본 상품을 보여줍니다.
   const currentId = products[requestedId] ? requestedId : fallbackId;
   const product = products[currentId];
   const sharedDetailImages = catalog.sharedDetailImages;
@@ -282,7 +245,7 @@ async function initProductDetail() {
   bindAddToCart();
   bindTabs();
   renderSimilarProducts();
-  setupSimilarSwiper();
+  setupSimilarSlick();
 
   // fallback 상품을 보여준 경우, 주소창도 실제 fallback id로 정리합니다.
   if (!products[requestedId]) {
@@ -303,8 +266,8 @@ async function initProductDetail() {
   // ---------- 상세 이미지 ----------
 
   function renderDetailImages() {
-    // 상세 페이지 중간에 들어가는 공통 이미지 영역입니다.
-    // 상품별 이미지가 아니라 catalog의 sharedDetailImages를 함께 사용합니다.
+    // 상세페이지 중간에 들어가는 공통 이미지 영역입니다.
+    // 상품별 이미지가 아니라 category.json의 sharedDetailImages를 함께 사용합니다.
     detailHero.style.backgroundImage =
       'linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.18)), url("' +
       sharedDetailImages[0] +
@@ -457,6 +420,10 @@ async function initProductDetail() {
         qty: quantity,
         img: product.images[0]
       });
+
+      if (typeof updateCartBadge === "function") {
+        updateCartBadge();
+      }
 
       showDetailCartPopup();
     });
