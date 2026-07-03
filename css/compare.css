@@ -40,7 +40,7 @@
 
 .section-label {
   color: #ffcd4a;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -48,9 +48,8 @@
 }
 
 .compare-hero h1 {
-  font-size: clamp(2.25rem, 5vw + 1rem, 4.8rem);
+  font-size: clamp(2.25rem, 2.5vw, 4.8rem);
   font-weight: 700;
-  letter-spacing: 0.02em;
   line-height: 1;
   margin-bottom: 1.5rem;
 }
@@ -148,7 +147,7 @@
 .compare-table-wrap {
   width: 100%;
   overflow-x: auto;
-  border-radius: 0.5rem;
+  border-radius: 7px;
   background: #ffffff;
 }
 
@@ -252,7 +251,7 @@
   }
 
   .compare-table-wrap {
-    border-radius: 1.125rem;
+    border-radius: 5px;
     overflow-x: auto;
   }
 

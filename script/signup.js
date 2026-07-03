@@ -59,12 +59,16 @@ document.addEventListener("keydown", function(e){
 });
 
 //뒤로가기 버튼 구현하기
-document.getElementById('backBtn').addEventListener('click', () => {
+const backBtn = document.getElementById('backBtn');
+
+if (backBtn) {
+  backBtn.addEventListener('click', () => {
   document.querySelector('.signupBox').classList.add('fadeOut');
   setTimeout(() => {
     location.href = './login.html';
   }, 300);
-});
+  });
+}
 
 //닫기 버튼 구현하기
 document.getElementById('closeBtn').addEventListener('click', () => {
