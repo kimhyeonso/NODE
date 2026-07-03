@@ -1,7 +1,24 @@
 // 비교하기 팝업
 
 (function setupVsPopup() {
+  const allowedVsPopupPages = new Set([
+    "product-main.html",
+    "product-studio.html",
+    "product-live.html",
+    "accessory-main.html",
+    "accessory-cable.html",
+    "accessory-stand.html",
+  ]);
+  const currentPage = location.pathname.split("/").pop() || "index.html";
   let popup = document.querySelector(".vspopup");
+
+  if (!allowedVsPopupPages.has(currentPage)) {
+    if (popup) {
+      popup.remove();
+    }
+    document.body.classList.remove("vspopup-visible");
+    return;
+  }
 
   if (!popup) {
     popup = document.createElement("div");
