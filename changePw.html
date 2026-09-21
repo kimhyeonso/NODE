@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 재설정</title>
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/changePw.css"> 
+</head>
+<body>
+    <div class="wrap">
+        
+        <div class="changeBox">
+            <button class="closeBtn" id="closeBtn" aria-label="닫기">&times;</button>
+            <button class="backBtn" id="backBtn" aria-label="뒤로가기">&larr;</button>
+            <h2>비밀번호 재설정</h2>
+            <input id="newPw" type="password" placeholder="새 비밀번호">
+            <p class="errorMsg" id="pwError"></p>
+            <input id="newPwCheck" type="password" placeholder="새 비밀번호 확인">
+            <p class="errorMsg" id="pwCheckError"></p>
+            
+            <button id="changeBtn">변경하기</button>
+        </div>
+    </div>
+    <script src="./script/changePw.js"></script>
+</body>
+</html>

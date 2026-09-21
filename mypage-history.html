@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최근 결제 내역 | NODE</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/mypage-history.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./script/common.js"></script>
+    <!-- 결제내역 기능: 페이지 이동, 상세보기 -->
+    <script src="./script/mypage-history.js" defer></script>
+</head>
+<body>
+  <!--------- 헤더 --------->
+  <div class="top-bar">
+    <header class="top-menu-bar">
+      <div class="top-menu-contents">
+
+        <!-- 로고 -->
+        <a href="./index.html" class="main-logo"><img src="./image/common/node_logo_width.png" alt="로고"></a>
+
+        <!-- 메인 메뉴 -->
+        <nav class="main">
+          <ul class="gnb">
+            <li>
+              <a href="./product-main.html">PRODUCT</a>
+
+              <div class="snb">
+                <div class="snb-inner">
+
+                  <ul class="snb-menu sub-menu-product">
+                    <li><a href="./product-main.html">ALL</a></li>
+                    <li><a href="./product-studio.html">STUDIO</a></li>
+                    <li><a href="./product-live.html">LIVE</a></li>
+                  </ul>
+
+                  <div class="snb-banner">
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/product-sub-menu-01.png" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/product-sub-menu-02.jfif" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <a href="./accessory-main.html">ACCESSORY</a>
+
+              <div class="snb">
+                <div class="snb-inner">
+
+                  <ul class="snb-menu">
+                    <li><a href="./accessory-main.html">ALL</a></li>
+                    <li><a href="./accessory-cable.html">CABLE</a></li>
+                    <li><a href="./accessory-stand.html">STAND</a></li>
+                  </ul>
+
+                  <div class="snb-banner">
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/accessory-sub-menu-01.jpg" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+
+                    <a href="./product-detail.html" class="banner-item">
+                      <img src="./image/common/accessory-sub-menu-02.jpg" alt="snb image">
+                      <span>구매하기</span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li><a href="./lifeStyle.html">LIFE STYLE</a></li>
+            <li><a href="./store.html">STORE</a></li>
+          </ul>
+        </nav>
+
+        <!-- 로그인 / 회원가입
+        <ul class="menu-icon">
+          <li><a href="./login.html">Login</a></li>
+          <li></li>
+          <li><a href="./signup.html">Sign up</a></li>
+        </ul> -->
+
+        <!-- 로그인/회원가입 -->
+        <ul class="menu-icon">
+          <!-- 로그인 전 -->
+          <li class="before-login">
+            <a href="./login.html">Login</a>
+          </li>
+          <li class="line"></li>
+          <li class="before-login">
+            <a href="./signup.html">Sign up</a>
+          </li>
+
+          <!-- 로그인 후 -->
+          <li class="after-login" style="display:none">
+            <a href="./mypage-main.html"><span id="header-username" style="font-size: 15px;"></span> 님</a>
+          </li>
+          <li class="after-login" style="display:none">
+            <a href="./shoppingCart.html" class="cartIconWrap">
+              <img src="./image/common/shopping-cart-white.png" alt="쇼핑카트" style="width:24px; height:24px;">
+              <span class="cartCount" style="display:none">0</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- 사이드 메뉴-->
+        <div class="hamburger-btn">
+          <img src="image/common/hambergerbtn_white.png" alt="hamberger btn">
+        </div>
+
+        <div class="dim"></div>
+
+        <div class="side-menu-box">
+          <div class="side-menu-box-content">
+            <div class="side-top-bar">
+              <div class="side-top-logo">
+                  <img src="./image/common/node_logo.png" alt="side menu logo">
+                </div>
+              <div class="exit-btn">
+                <img src="./image/common/close button_white.png" alt="exit button">
+              </div>
+            </div>
+            <div class='search-contents'>
+            </div>
+            <nav class="side-gnb">
+                <ul class="side-main-gnb">
+                  <li><a href="./product-main.html">PRODUCT</a>
+                    <ul class="side-sub-menu">
+                      <li><a href="./product-main.html">ALL</a></li>
+                      <li><a href="./product-studio.html">STUDIO</a></li>
+                      <li><a href="./product-live.html">LIVE</a></li>
+                      <li>
+                        <ul class="side-sub-menu__img">
+                          <li><a href="./product-detail.html"><img src="./image/common/product-sub-menu-01.png" alt="new image"></a></li>
+                          <li><a href="./product-detail.html"><img src="./image/common/product-sub-menu-02.jfif" alt="best image"></a></li>
+                        </ul>
+                      </li>
+                    </ul></li>
+                  <li><a href="./accessory-main.html">ACCESSORY</a>
+                    <ul class="side-sub-menu">
+                      <li><a href="./accessory-main.html">ALL</a></li>
+                      <li><a href="./accessory-cable.html">CABLE</a></li>
+                      <li><a href="./accessory-stand.html">STAND</a></li>
+                      <li>
+                        <ul class="side-sub-menu__img">
+                          <li><a href="./product-detail.html"><img src="./image/common/accessory-sub-menu-01.jpg" alt="accessory-sub-menu"></a></li>
+                          <li><a href="./product-detail.html"><img src="./image/common/accessory-sub-menu-02.jpg" alt="accessory-sub-menu"></a></li>
+                        </ul>
+                      </li>
+                    </ul></li>
+                  <li><a href="./lifeStyle.html">LIFE STYLE</a></li>
+                  <li><a href="./store.html">STORE</a></li>
+                </ul>
+            </nav>
+            <div class="side-spot">
+              <ul class="side-spot-menu">
+                <li><a href="./shoppingCart.html"><img src="./image/common/shopping-cart-white.png" alt="side-spot-icon">
+                  <p>장바구니</p>
+                </a></li>
+                <li><a href="./mypage-main.html"><img src="./image/common/user-white.png" alt="side-spot-icon">
+                  <p>마이페이지</p>
+                </a></li>
+                <li><a href="./store.html"><img src="./image/common/placeholder-white.png" alt="side-spot-icon">
+                  <p>오시는 길</p>
+                </a></li>
+              </ul>
+            </div>
+            <!-- <div class="side-util">
+                <ul>
+                  <li><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                  <li><a href="./signup.html">SIGN UP</a></li>
+                </ul>
+            </div> -->
+
+            <div class="side-util">
+              <ul>
+                <!-- 로그인 전 -->
+                <li class="side-before-login"><a href="./login.html" style="border-right: 1px solid #777; padding-right: 20px;">LOGIN</a></li>
+                <li class="side-before-login"><a href="./signup.html">SIGN UP</a></li>
+
+                <!-- 로그인 후 -->
+                <li class="side-after-login" style="display:none"><a href="./mypage-main.html"><span id="side-username"></span> 님</a></li>
+                <li class="side-after-login" style="display:none"><a href="./shoppingCart.html">장바구니</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  </div>
+
+  <!--------- 쿠키창 --------->
+  <div class="popup">
+    <p>회원가입시 5,000원 할인 쿠폰 지급</p>
+    <div class="close">
+        <label>
+            <input type="checkbox" id="closeCheckBox">
+            오늘 하루 열지 않기
+        </label>
+        <button class="closeBtn"><img src="./image/common/close button_white.png" alt="button"></button>
+    </div>
+  </div>
+
+  <!---------top버튼--------->
+  <div class="topBtn">
+    TOP
+  </div>
+
+  <!-- ==================== 최근 결제 내역 콘텐츠 시작 ==================== -->
+
+  <main class="history-page">
+    <!-- [수정 포인트] 페이지 제목과 안내 문구 -->
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">MY ACCOUNT</p>
+        <h1>최근 결제 내역</h1>
+        <p>주문별 결제 상태와 상세 내역을 확인할 수 있습니다.</p>
+      </div>
+      <a class="back-link" href="./mypage-main.html">마이페이지로 돌아가기</a>
+    </div>
+
+    <!-- [수정 포인트] 총 결제액, 완료 건수, 환불 건수 -->
+    <section class="history-summary">
+      <article>
+        <span>총 결제액</span>
+        <strong>2,850,000<small>원</small></strong>
+        <p>최근 12개월 기준</p>
+      </article>
+      <article>
+        <span>결제 완료</span>
+        <strong>12<small>건</small></strong>
+        <p>정상 처리된 주문</p>
+      </article>
+      <article>
+        <span>취소·환불</span>
+        <strong>1<small>건</small></strong>
+        <p>총 50,000원</p>
+      </article>
+    </section>
+
+    <section class="history-panel">
+      <div class="history-toolbar">
+        <div>
+          <p class="eyebrow">PAYMENT HISTORY</p>
+          <h2>결제 내역</h2>
+        </div>
+      </div>
+
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>주문 정보</th>
+              <th>결제일</th>
+              <th>결제 수단</th>
+              <th>결제 금액</th>
+              <th>상태</th>
+              <th><span class="sr-only">상세 보기</span></th>
+            </tr>
+          </thead>
+          <!-- [수정 포인트] 결제내역 추가/삭제는 tr 한 묶음 단위로 수정 -->
+          <tbody>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">S</span>
+                  <div><strong>Studio Monitor S8</strong><small>NODE-260618-0124</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 18</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>320,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">C</span>
+                  <div><strong>Balanced XLR Cable</strong><small>NODE-260612-0088</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 12</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>59,000원</strong></td>
+              <td><span class="status shipping">배송 중</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">A</span>
+                  <div><strong>Monitor Stand Pair</strong><small>NODE-260603-0051</small></div>
+                </div>
+              </td>
+              <td>2026. 06. 03</td>
+              <td>현대카드 · 7312</td>
+              <td><strong>121,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">P</span>
+                  <div><strong>Premium Speaker Cable</strong><small>NODE-260521-0392</small></div>
+                </div>
+              </td>
+              <td>2026. 05. 21</td>
+              <td>국민카드 · 9041</td>
+              <td><strong>50,000원</strong></td>
+              <td><span class="status refund">환불 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="order-info">
+                  <span class="order-icon">L</span>
+                  <div><strong>Live Speaker L12</strong><small>NODE-260409-0217</small></div>
+                </div>
+              </td>
+              <td>2026. 04. 09</td>
+              <td>신한카드 · 2486</td>
+              <td><strong>790,000원</strong></td>
+              <td><span class="status complete">결제 완료</span></td>
+              <td><a href="#">상세</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 페이지당 표시 개수는 mypage-history.js의 ITEMS_PER_PAGE에서 수정 -->
+      <nav class="pagination" aria-label="결제 내역 페이지">
+        <button type="button" disabled>이전</button>
+        <button type="button" class="active">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button">다음</button>
+      </nav>
+    </section>
+  </main>
+  <!-- ==================== 최근 결제 내역 콘텐츠 끝 ==================== -->
+
+  <!--------- 푸터 --------->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-info">
+        <h2>NODE</h2>
+        <p>
+          '노드(NODE)'는 스피커를 선택하는 기준을 넘어,<br>
+          아티스트가 의도한 소리의 첫 호흡부터 마지막 잔향까지 <br>
+          완벽하게 구현하기 위해 탄생했습니다.<br>
+        </p>
+
+        <ul class="footer-sns">
+          <li><a href="#"><img src="./image/common/facebooke-white.png" alt="footer sns"></a></li>
+          <li><a href="#"><img src="./image/common/instagram-white.png" alt="footer sns"></a></li>
+          <li><a href="#"><img src="./image/common/youtube-white.png" alt="footer sns"></a></li>
+        </ul>
+      </div>
+
+      <nav class="footer-menu">
+        <ul>
+          <li><a href="./product-main.html">Product</a></li>
+          <li><a href="./accessory-main.html">Accessory</a></li>
+          <li><a href="./lifeStyle.html">Life style</a></li>
+          <li><a href="./store.html">Store</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <h1 class="footer-logo"><img src="image/common/node_logo.png" alt="footer logo"></h1>
+      <p>© 2026 본 사이트는 학생용 포트폴리오 입니다</p>
+    </div>
+  </footer>
+</body>
+</html>

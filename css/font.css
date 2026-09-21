@@ -1,0 +1,78 @@
+/* ROBOTO */
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Thin.ttf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Black.ttf");
+  font-weight: 900;
+}
+
+/* NOTO SNANS */
+
+@font-face {
+  font-family: "noto sans";
+  src: url("../font/notosnas/NotoSans-Thin.ttf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "noto sans";
+  src: url("../font/notosnas/NotoSans-Light.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "noto sans";
+  src: url("../font/notosnas/NotoSans-Regular.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "noto sans";
+  src: url("../font/notosnas/NotoSans-Medium.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "noto sans";
+  src: url("../font/notosnas/NotoSans-SemiBold.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "noto sans";
+  src: url("../font/notosnas/NotoSans-Bold.ttf");
+  font-weight: 600;
+}
+
+
+

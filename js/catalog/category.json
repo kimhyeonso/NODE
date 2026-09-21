@@ -1,0 +1,205 @@
+{
+  "fallbackId": "home-studio-entry-monitor",
+  "sharedDetailImages": [
+    "./image/product-detail/shared/node-detail-hero.png",
+    "./image/product-detail/shared/node-detail-texture.png",
+    "./image/product-detail/shared/node-detail-lifestyle.png",
+    "./image/product-detail/shared/node-detail-engineering.png"
+  ],
+  "products": {
+    "home-studio-entry-monitor": {
+      "name": "Home Studio Entry Monitor",
+      "brand": "NODE STUDIO",
+      "price": 390000,
+      "originalPrice": 470000,
+      "category": "studio",
+      "filters": ["near-field", "2-way", "flat", "under-50"],
+      "images": ["./image/Studio/studio_11.jpg", "./image/Studio/studio_11-ivory.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "Ivory", "hex": "#eee9dc", "imageIndex": 1}],
+      "description": "제한된 작업 공간에서도 왜곡 없이 균형 잡힌 사운드를 경험할 수 있는 입문자 맞춤형 니어필드 모니터입니다."
+    },
+    "best-value-nearfield-monitor": {
+      "name": "Best Value Nearfield Monitor",
+      "brand": "NODE STUDIO",
+      "price": 790000,
+      "originalPrice": 950000,
+      "category": "studio",
+      "filters": ["near-field", "2-way", "all-rounder", "50-100"],
+      "images": ["./image/Studio/studio_8.jpg", "./image/Studio/studio_8-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "음악 프로듀싱부터 일반적인 감상까지, 모든 영역에서 범용적으로 활용 가능한 가성비 최고의 니어필드 모니터입니다."
+    },
+    "professional-coaxial-monitor": {
+      "name": "Professional Coaxial Monitor",
+      "brand": "NODE STUDIO",
+      "price": 1890000,
+      "originalPrice": 2270000,
+      "category": "studio",
+      "filters": ["near-field", "coaxial", "flat", "100-300"],
+      "images": ["./image/Studio/studio_4.jpg", "./image/Studio/studio_4-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "정밀한 위상 일치로 완벽한 이미징을 구현하며, 모든 대역에서 일관된 디테일을 보장하는 전문가용 동축 모니터입니다."
+    },
+    "3-way-studio-monitor": {
+      "name": "3-Way Studio Monitor",
+      "brand": "NODE STUDIO",
+      "price": 3890000,
+      "originalPrice": 4670000,
+      "category": "studio",
+      "filters": ["mid-field", "3-way", "flat", "300-500"],
+      "images": ["./image/Studio/studio_6.jpg", "./image/Studio/studio_6-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "놀라운 광대역 주파수 응답과 초고해상도 사운드를 바탕으로 미드필드 환경에서 최상의 모니터링 기준을 제시합니다."
+    },
+    "battery-busking-amp-set": {
+      "name": "Battery Busking Amp Set",
+      "brand": "NODE LIVE",
+      "price": 620000,
+      "originalPrice": 750000,
+      "category": "live",
+      "filters": ["portable", "small", "battery", "stand"],
+      "images": ["./image/stage/stage_1.jpg", "./image/stage/stage_1-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "전원 연결이 어려운 야외 공간이나 소규모 버스킹 현장에서도 고품질 사운드를 출력하는 강력한 휴대용 배터리 앰프 세트입니다."
+    },
+    "compact-pa-speaker": {
+      "name": "Compact PA Speaker",
+      "brand": "NODE LIVE",
+      "price": 790000,
+      "originalPrice": 950000,
+      "category": "live",
+      "filters": ["portable", "small", "active", "stand"],
+      "images": ["./image/stage/stage_2.jpg", "./image/stage/stage_2-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "작은 체구에도 불구하고 균형 잡힌 출력과 뛰어난 휴대성을 자랑하여 다양한 이벤트 공간에 최적화된 콤팩트 액티브 PA 스피커입니다."
+    },
+    "12-inch-live-main-speaker": {
+      "name": "12-Inch Live Main Speaker",
+      "brand": "NODE LIVE",
+      "price": 1180000,
+      "originalPrice": 1420000,
+      "category": "live",
+      "filters": ["main", "medium", "active", "stand"],
+      "images": ["./image/stage/stage_3.jpg", "./image/stage/stage_3-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "중규모 공연장에서 선명하고 타격감 있는 메인 사운드를 출력하며, 신뢰도 높은 라이브 환경을 구축해 주는 12인치 메인 스피커입니다."
+    },
+    "festival-main-speaker": {
+      "name": "Festival Main Speaker",
+      "brand": "NODE LIVE",
+      "price": 3290000,
+      "originalPrice": 3950000,
+      "category": "live",
+      "filters": ["main", "large", "passive", "flying"],
+      "images": ["./image/stage/stage_11.jpg", "./image/stage/stage_11-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "대형 무대 및 야외 페스티벌의 압도적인 규모에 맞춰 설계된 고출력 메인 스피커로, 넓은 공간을 깊이 있는 사운드로 채워줍니다."
+    },
+    "balanced-xlr-cable-1m": {
+      "name": "Balanced XLR Cable 1M",
+      "brand": "NODE CABLE",
+      "price": 39000,
+      "originalPrice": 47000,
+      "category": "cable",
+      "filters": ["xlr", "microphone", "1m"],
+      "images": ["./image/cable/cable_1.jpg", "./image/cable/cable_1-blue.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "Blue", "hex": "#2f5fbd", "imageIndex": 1}],
+      "description": "마이크 및 주요 오디오 장비 간의 노이즈 없는 안정적인 연결을 위해 고순도 동선을 사용한 1미터 밸런스 XLR 케이블입니다."
+    },
+    "premium-xlr-cable-3m": {
+      "name": "Premium XLR Cable 3M",
+      "brand": "NODE CABLE",
+      "price": 59000,
+      "originalPrice": 71000,
+      "category": "cable",
+      "filters": ["xlr", "microphone", "3m"],
+      "images": ["./image/cable/cable_2.jpg", "./image/cable/cable_2-blue.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "Blue", "hex": "#2f5fbd", "imageIndex": 1}],
+      "description": "금도금 단자와 다중 차폐 설계를 적용하여 신호 손실을 최소화하고 가장 정밀한 오디오 데이터를 전송하는 프리미엄 XLR 케이블입니다."
+    },
+    "studio-trs-cable-3m": {
+      "name": "Studio TRS Cable 3M",
+      "brand": "NODE CABLE",
+      "price": 32000,
+      "originalPrice": 39000,
+      "category": "cable",
+      "filters": ["trs", "instrument", "3m"],
+      "images": ["./image/cable/cable_3.jpg", "./image/cable/cable_3-gray.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "Gray", "hex": "#8a8f94", "imageIndex": 1}],
+      "description": "오디오 인터페이스와 모니터 스피커, 외부 믹서 등을 연결할 때 노이즈를 억제하여 순수한 원음을 전달하는 3미터 규격의 TRS 케이블입니다."
+    },
+    "speaker-cable-5m": {
+      "name": "Speaker Cable 5M",
+      "brand": "NODE CABLE",
+      "price": 65000,
+      "originalPrice": 78000,
+      "category": "cable",
+      "filters": ["ts", "speaker", "5m"],
+      "images": ["./image/cable/cable_5.jpg", "./image/cable/cable_5-red.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "Red", "hex": "#c83a32", "imageIndex": 1}],
+      "description": "앰프의 고출력 신호를 패시브 스피커로 전달하는 고성능 스피커 케이블로, 내구성이 뛰어난 외피를 적용해 어떤 환경에서도 안심하고 사용할 수 있습니다."
+    },
+    "desktop-monitor-stand": {
+      "name": "Desktop Monitor Stand",
+      "brand": "NODE STAND",
+      "price": 89000,
+      "originalPrice": 107000,
+      "category": "stand",
+      "filters": ["desktop", "small", "angle"],
+      "images": ["./image/stands/stand_1.jpg", "./image/stands/stand_1-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "데스크톱 환경에서 최적의 모니터 청취 각도와 이상적인 높이를 제공하여 사용자의 청취 경험을 개선해 주는 튼튼한 모니터 스탠드입니다."
+    },
+    "isolation-speaker-stand": {
+      "name": "Isolation Speaker Stand",
+      "brand": "NODE STAND",
+      "price": 129000,
+      "originalPrice": 155000,
+      "category": "stand",
+      "filters": ["desktop", "small", "isolation"],
+      "images": ["./image/stands/isolation-speaker-stand-cutout.png", "./image/stands/isolation-speaker-stand-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "스피커에서 발생하는 원치 않는 진동을 바닥면과 완벽히 격리하여 저음의 해상도를 비약적으로 높여주는 프리미엄 아이솔레이션 스탠드입니다."
+    },
+    "adjustable-studio-stand": {
+      "name": "Adjustable Studio Stand",
+      "brand": "NODE STAND",
+      "price": 159000,
+      "originalPrice": 191000,
+      "category": "stand",
+      "filters": ["floor", "large", "angle"],
+      "images": ["./image/stands/stand_3.jpg", "./image/stands/stand_3-white.png"],
+      "colors": [{"name": "Black", "hex": "#171717", "imageIndex": 0}, {"name": "White", "hex": "#f5f5f0", "imageIndex": 1}],
+      "description": "스튜디오 공간의 크기나 청취 위치에 맞춰 유연하게 높이를 조절할 수 있는 다목적 플로어 스탠드로, 무거운 모니터도 흔들림 없이 지지합니다."
+    },
+    "minimal-floor-stand": {
+      "name": "Minimal Floor Stand",
+      "brand": "NODE STAND",
+      "price": 179000,
+      "originalPrice": 215000,
+      "category": "stand",
+      "filters": ["floor", "large", "isolation"],
+      "images": ["./image/stands/minimal-floor-stand-cutout.png", "./image/stands/minimal-floor-stand-black.png"],
+      "colors": [{"name": "Natural", "hex": "#b8b0a3", "imageIndex": 0}, {"name": "Black", "hex": "#171717", "imageIndex": 1}],
+      "description": "군더더기 없는 세련된 디자인과 안정적인 지지 구조가 결합된 플로어 스탠드로, 주거 공간의 인테리어와 스튜디오의 전문성을 동시에 완성합니다."
+    }
+  },
+  "specifications": {
+    "home-studio-entry-monitor": [["Product Type", "2-Way Near-field Active Monitor"], ["Frequency Response", "48 Hz - 20 kHz"], ["Max Output", "102 dB SPL"], ["Amp Power", "60 W"], ["Driver", "5.25 inch woofer / 1 inch tweeter"], ["Input", "XLR / TRS"], ["Size", "178 x 260 x 215 mm"], ["Weight", "4.1 kg"]],
+    "best-value-nearfield-monitor": [["Product Type", "2-Way Near-field Active Monitor"], ["Frequency Response", "42 Hz - 22 kHz"], ["Max Output", "108 dB SPL"], ["Amp Power", "100 W"], ["Driver", "6.5 inch woofer / 1 inch tweeter"], ["Input", "XLR / TRS / RCA"], ["Size", "215 x 332 x 285 mm"], ["Weight", "6.8 kg"]],
+    "professional-coaxial-monitor": [["Product Type", "2-Way Coaxial Active Monitor"], ["Frequency Response", "38 Hz - 25 kHz"], ["Max Output", "114 dB SPL"], ["Amp Power", "250 W"], ["Driver", "8 inch coaxial driver"], ["Input", "XLR / AES3"], ["Size", "286 x 420 x 330 mm"], ["Weight", "12.4 kg"]],
+    "3-way-studio-monitor": [["Product Type", "3-Way Mid-field Active Monitor"], ["Frequency Response", "28 Hz - 30 kHz"], ["Max Output", "120 dB SPL"], ["Amp Power", "500 W"], ["Driver", "10 inch / 4 inch / 1 inch"], ["Input", "XLR / AES3 / Network"], ["Size", "360 x 580 x 430 mm"], ["Weight", "27.5 kg"]],
+    "battery-busking-amp-set": [["Product Type", "Battery Portable PA System"], ["Frequency Response", "55 Hz - 18 kHz"], ["Max Output", "110 dB SPL"], ["Rated Power", "120 W"], ["Battery", "Up to 10 hours"], ["Input", "Mic x 2 / Line / Bluetooth"], ["Size", "310 x 460 x 280 mm"], ["Weight", "9.2 kg"]],
+    "compact-pa-speaker": [["Product Type", "10-Inch Active PA Speaker"], ["Frequency Response", "50 Hz - 20 kHz"], ["Max Output", "124 dB SPL"], ["Rated Power", "700 W"], ["Driver", "10 inch woofer / 1.4 inch HF"], ["Coverage", "90 deg x 60 deg"], ["Size", "320 x 520 x 300 mm"], ["Weight", "11.6 kg"]],
+    "12-inch-live-main-speaker": [["Product Type", "12-Inch Active Main Speaker"], ["Frequency Response", "45 Hz - 20 kHz"], ["Max Output", "130 dB SPL"], ["Rated Power", "1,200 W"], ["Driver", "12 inch woofer / 1.75 inch HF"], ["Coverage", "90 deg x 50 deg"], ["Size", "365 x 610 x 355 mm"], ["Weight", "17.8 kg"]],
+    "festival-main-speaker": [["Product Type", "Dual 15-Inch Passive Speaker"], ["Frequency Response", "35 Hz - 18 kHz"], ["Max Output", "138 dB SPL"], ["Power Handling", "2,400 W"], ["Driver", "15 inch woofer x 2 / 3 inch HF"], ["Impedance", "4 ohm"], ["Size", "520 x 1180 x 620 mm"], ["Weight", "58.5 kg"]],
+    "balanced-xlr-cable-1m": [["Product Type", "Balanced XLR Microphone Cable"], ["Length", "1 m"], ["Connector", "XLR Female-Male"], ["Conductor", "OFC Copper 24 AWG"], ["Shield", "Braided Copper 95%"], ["Outer Diameter", "6.0 mm"], ["Jacket", "Flexible PVC"], ["Warranty", "2 years"]],
+    "premium-xlr-cable-3m": [["Product Type", "Premium Balanced XLR Cable"], ["Length", "3 m"], ["Connector", "Gold-Plated XLR"], ["Conductor", "OFC Copper 22 AWG"], ["Shield", "Dual Spiral Shield 98%"], ["Outer Diameter", "6.8 mm"], ["Jacket", "Soft-Touch TPE"], ["Warranty", "3 years"]],
+    "studio-trs-cable-3m": [["Product Type", "Balanced TRS Studio Cable"], ["Length", "3 m"], ["Connector", "6.35 mm TRS-TRS"], ["Conductor", "OFC Copper 24 AWG"], ["Shield", "Spiral Copper 90%"], ["Capacitance", "85 pF/m"], ["Jacket", "Low-Noise PVC"], ["Warranty", "2 years"]],
+    "speaker-cable-5m": [["Product Type", "High-Current Speaker Cable"], ["Length", "5 m"], ["Connector", "6.35 mm TS-TS"], ["Conductor", "OFC Copper 14 AWG"], ["Conductor Area", "2.08 mm2 x 2"], ["Max Power", "1,500 W"], ["Jacket", "Heavy-Duty Rubber"], ["Warranty", "3 years"]],
+    "desktop-monitor-stand": [["Product Type", "Angled Desktop Monitor Stand"], ["Height", "145 mm"], ["Top Plate", "220 x 250 mm"], ["Angle", "0 deg / 5 deg / 10 deg"], ["Max Load", "15 kg"], ["Material", "Powder-Coated Steel"], ["Weight", "2.3 kg / pair"], ["Included", "2 stands"]],
+    "isolation-speaker-stand": [["Product Type", "Isolation Speaker Stand"], ["Height", "105 mm"], ["Top Plate", "200 x 240 mm"], ["Angle", "-5 deg / 0 deg / 5 deg"], ["Max Load", "12 kg"], ["Vibration Reduction", "Up to 18 dB"], ["Weight", "1.8 kg / pair"], ["Included", "2 stands"]],
+    "adjustable-studio-stand": [["Product Type", "Adjustable Floor Studio Stand"], ["Height Range", "720 - 1180 mm"], ["Top Plate", "230 x 230 mm"], ["Steps", "7 levels"], ["Max Load", "30 kg"], ["Material", "Steel / Aluminum"], ["Weight", "9.4 kg / pair"], ["Included", "2 stands"]],
+    "minimal-floor-stand": [["Product Type", "Minimal Fixed Floor Stand"], ["Height", "820 mm"], ["Top Plate", "210 x 240 mm"], ["Column", "Dual-Pillar"], ["Max Load", "22 kg"], ["Cable Management", "Internal"], ["Weight", "11.2 kg / pair"], ["Included", "2 stands"]]
+  }
+}

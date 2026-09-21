@@ -1,0 +1,69 @@
+[필터 영역]
+------------------------------------------------------------------
+배치 위치   | [ ] 거실(TV)  [ ] 침실/협탁  [ ] 책상/테이블  [ ] 이동형
+디자인 무드 | [ ] 레트로  [ ] 미니멀  [ ] 프리미엄  [ ] 컬러풀
+연결 방식   | [ ] 블루투스  [ ] Wi-Fi/스마트홈  [ ] 유선(입문용)
+특별 기능   | [ ] 방수  [ ] 조명 기능  [ ] 무선 충전 기능
+------------------------------------------------------------------
+
+( 추천 ID / 상품명 / 주요 필터 태그 (배치 / 디자인 / 연결 / 기능) )
+
+LV-01클래식 우드 블루투스 스피커책상/테이블 / 레트로 / 블루투스 / -
+LV-02화이트 미니멀 무드등 스피커침실/협탁 / 미니멀 / 블루투스 / 조명 기능
+LV-03프리미엄 가죽 마감 올인원 스피커거실(TV) / 프리미엄 / Wi-Fi / -
+LV-04팝아트 컬러 포인트 포터블 스피커이동형 / 컬러풀 / 블루투스 / 방수
+LV-05무선충전 협탁용 스마트 스피커침실/협탁 / 미니멀 / 블루투스 / 무선 충전
+LV-06모던 블랙 슬림 사운드바거실(TV) / 미니멀 / 유선 / -
+LV-07빈티지 라디오 스타일 스피커책상/테이블 / 레트로 / 블루투스 / -
+LV-08아웃도어 캠핑용 방수 스피커이동형 / 컬러풀 / 블루투스 / 방수
+
+[
+  {
+    "id": "lv_001",
+    "title": "클래식 우드 블루투스 스피커",
+    "url": "images/cable/living_1.jpg",
+    "filters": { "placement": "table", "mood": "retro", "connection": "bluetooth", "features": [] }
+  },
+  {
+    "id": "lv_002",
+    "title": "화이트 미니멀 무드등 스피커",
+    "url": "images/cable/living_2.jpg",
+    "filters": { "placement": "bedside", "mood": "minimal", "connection": "bluetooth", "features": ["lighting"] }
+  },
+  {
+    "id": "lv_003",
+    "title": "프리미엄 가죽 마감 올인원 스피커",
+    "url": "images/cable/living_3.jpg",
+    "filters": { "placement": "living", "mood": "premium", "connection": "wifi", "features": [] }
+  },
+  {
+    "id": "lv_004",
+    "title": "팝아트 컬러 포인트 포터블 스피커",
+    "url": "images/cable/living_4.jpg",
+    "filters": { "placement": "portable", "mood": "colorful", "connection": "bluetooth", "features": ["waterproof"] }
+  },
+  {
+    "id": "lv_005",
+    "title": "무선충전 협탁용 스마트 스피커",
+    "url": "images/cable/living_5.jpg",
+    "filters": { "placement": "bedside", "mood": "minimal", "connection": "bluetooth", "features": ["wireless_charging"] }
+  },
+  {
+    "id": "lv_006",
+    "title": "모던 블랙 슬림 사운드바",
+    "url": "images/cable/living_6.jpg",
+    "filters": { "placement": "living", "mood": "minimal", "connection": "wired", "features": [] }
+  },
+  {
+    "id": "lv_007",
+    "title": "빈티지 라디오 스타일 스피커",
+    "url": "images/cable/living_7.jpg",
+    "filters": { "placement": "table", "mood": "retro", "connection": "bluetooth", "features": [] }
+  },
+  {
+    "id": "lv_008",
+    "title": "아웃도어 캠핑용 방수 스피커",
+    "url": "images/cable/living_8.jpg",
+    "filters": { "placement": "portable", "mood": "colorful", "connection": "bluetooth", "features": ["waterproof"] }
+  }
+]

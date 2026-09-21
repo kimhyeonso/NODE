@@ -1,0 +1,98 @@
+[
+  {
+    "id": "s1_001",
+    "title": "홈 스튜디오 엔트리 모니터",
+    "url": "image/Studio/studio_1.jpg",
+    "filters": { "space": "near-field", "type": "2-way", "sound": "flat", "price_range": "under-50" }
+  },
+  {
+    "id": "s1_002",
+    "title": "가성비 베스트 니어필드",
+    "url": "image/Studio/studio_2.jpg",
+    "filters": { "space": "near-field", "type": "2-way", "sound": "all-rounder", "price_range": "under-50" }
+  },
+  {
+    "id": "s1_003",
+    "title": "믹싱 전문 동축 모니터",
+    "url": "image/Studio/studio_3.jpg",
+    "filters": { "space": "near-field", "type": "coaxial", "sound": "flat", "price_range": "100-300" }
+  },
+  {
+    "id": "s1_004",
+    "title": "프로 작업실용 2-Way",
+    "url": "image/Studio/studio_4.jpg",
+    "filters": { "space": "near-field", "type": "2-way", "sound": "flat", "price_range": "100-300" }
+  },
+  {
+    "id": "s1_005",
+    "title": "중급 미드필드 모니터",
+    "url": "image/Studio/studio_5.jpg",
+    "filters": { "space": "mid-field", "type": "2-way", "sound": "flat", "price_range": "300-500" }
+  },
+  {
+    "id": "s1_006",
+    "title": "대역 분리 3-Way 모니터",
+    "url": "image/Studio/studio_6.jpg",
+    "filters": { "space": "mid-field", "type": "3-way", "sound": "flat", "price_range": "over-500" }
+  },
+  {
+    "id": "s1_007",
+    "title": "하이엔드 파필드 메인",
+    "url": "image/Studio/studio_7.jpg",
+    "filters": { "space": "far-field", "type": "3-way", "sound": "flat", "price_range": "over-500" }
+  },
+  {
+    "id": "s1_008",
+    "title": "비트메이킹용 저음 강조형",
+    "url": "image/Studio/studio_8.jpg",
+    "filters": { "space": "near-field", "type": "2-way", "sound": "bass-heavy", "price_range": "50-100" }
+  },
+  {
+    "id": "l_001",
+    "title": "배터리형 버스킹 앰프 세트",
+    "url": "image/stage/stage_1.jpg",
+    "filters": { "purpose": "portable", "scale": "small", "type": "battery", "install": "stand" }
+  },
+  {
+    "id": "l_002",
+    "title": "가성비 소규모 PA 스피커",
+    "url": "image/stage/stage_2.jpg",
+    "filters": { "purpose": "portable", "scale": "small", "type": "active", "install": "stand" }
+  },
+  {
+    "id": "l_003",
+    "title": "라이브 카페용 12인치 메인",
+    "url": "image/stage/stage_3.jpg",
+    "filters": { "purpose": "main", "scale": "medium", "type": "active", "install": "stand" }
+  },
+  {
+    "id": "l_004",
+    "title": "고출력 서브우퍼 시스템",
+    "url": "image/stage/stage_5.jpg",
+    "filters": { "purpose": "main", "scale": "medium", "type": "passive", "install": "flying" }
+  },
+  {
+    "id": "l_005",
+    "title": "프로 스테이지 웨지 모니터",
+    "url": "image/stage/stage_5.jpg",
+    "filters": { "purpose": "wedge", "scale": "medium", "type": "active", "install": "floor" }
+  },
+  {
+    "id": "l_006",
+    "title": "교회/강당용 매립형 스피커",
+    "url": "image/stage/stage_6.jpg",
+    "filters": { "purpose": "main", "scale": "medium", "type": "passive", "install": "ceiling" }
+  },
+  {
+    "id": "l_007",
+    "title": "대규모 페스티벌 메인 스피커",
+    "url": "image/stage/stage_7.webp",
+    "filters": { "purpose": "main", "scale": "large", "type": "passive", "install": "flying" }
+  },
+  {
+    "id": "l_008",
+    "title": "컴팩트 웨지 모니터링 스피커",
+    "url": "image/stage/stage_8.jpg",
+    "filters": { "purpose": "wedge", "scale": "small", "type": "active", "install": "floor" }
+  }
+]

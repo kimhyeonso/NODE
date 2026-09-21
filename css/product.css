@@ -1,0 +1,745 @@
+/* ==========================================================================
+   기본 설정 및 전역 스타일
+   ========================================================================== */
+
+/* 전체 페이지에서 공통으로 사용하는 기본 스타일 */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: #151515;
+    background: #fff;
+    font-family: "Roboto", "noto sans", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased; /* 폰트를 더 선명하게 만들어주는 옵션 */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* 본문이 상단 고정 영역과 겹치지 않도록 시작 여백을 둡니다. */
+main {
+    margin-top: 5rem;
+}
+
+/* ==========================================================================
+   히어로 섹션 (상품 페이지 상단)
+   ========================================================================== */
+
+.hero-product {
+    display: grid;
+    min-height: 430px;
+    overflow: hidden;
+    padding: 40px 24px;
+    place-items: center;
+    color: #fff;
+    background-color: #080808;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
+
+/* 각 상품 페이지의 히어로 배경 이미지 카테고리별 분기 */
+body[data-product-category="all"] .hero-product {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.62)),
+        url("../image/hero/product-main-banner.png");
+    background-position: center;
+}
+
+body[data-product-category="studio"] .hero-product {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.66)),
+        url("../image/Studio/studio_13.jpg");
+    background-position: center;
+}
+
+body[data-product-category="live"] .hero-product {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
+        url("../image/hero/live-banner.png");
+    background-position: center 10%;
+}
+
+/* 히어로 사진 위에 글자가 보이도록 앞쪽에 배치 */
+.hero-product > div {
+    position: relative;
+    z-index: 1;
+    animation: hero-in 700ms ease both;
+}
+
+.hero-product h1,
+.section-heading h2 {
+    margin: 0;
+    line-height: 1;
+    /* letter-spacing: 0.1em; */
+}
+
+.hero-product h1 {
+    font-size: 4.8rem;
+}
+
+.hero-description {
+    margin: 22px 0 0;
+    color: #c8c8c8;
+    font-size: 0.875rem;
+}
+
+.eyebrow {
+    margin: 0 0 16px;
+    color: inherit;
+    font-size: 1rem;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.hero-product .eyebrow {
+    color: #aaa;
+}
+
+/* ==========================================================================
+   상품 목록 및 필터링 영역
+   ========================================================================== */
+
+/* 상품 목록 전체 너비와 위아래 여백 */
+.product-container {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 88px 32px 110px;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.section-heading .eyebrow {
+    color: #717171;
+}
+
+.section-heading h2 {
+    font-size: clamp(2.25rem, 2.5vw, 3rem);
+}
+
+.product-count {
+    min-height: 24px;
+    margin: 12px 0 0;
+    color: #717171;
+    font-size: 1rem;
+}
+
+/* 필터 초기화 버튼과 정렬 영역 */
+.filter-toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+
+.filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.reset-filter {
+    min-height: 40px;
+    padding: 7px 16px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    color: #151515;
+    background: #fff;
+    cursor: pointer;
+}
+
+.reset-filter:hover {
+    color: #fff;
+    background: #151515;
+}
+
+/* 상세 필터 박스 */
+.filter-area {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 48px;
+}
+
+.filter-section {
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.filter-section h3 {
+    margin: 0;
+    padding: 14px 20px;
+    color: #fff;
+    background: #151515;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.filter-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 20px;
+    padding: 15px 20px;
+    border-top: 1px solid #e7e7e7;
+}
+
+.filter-row strong {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+}
+
+.filter-options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #444;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.filter-options input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #151515;
+}
+
+.sort-control {
+    display: grid;
+    gap: 7px;
+    color: #717171;
+    font-size: 0.75rem;
+}
+
+.sort-control select {
+    min-width: 136px;
+    min-height: 40px;
+    padding: 0 34px 0 12px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    color: #151515;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   상품 카드 그리드
+   ========================================================================== */
+
+/* 상품 카드 그리드: PC에서 한 줄에 4개 표시 */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px 24px;
+}
+
+.product-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    min-width: 0;
+    opacity: 0;
+    transform: translateY(34px);
+    transition: 1.8s ease;
+}
+
+.product-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-card .image-box {
+    grid-column: 1 / -1;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    margin: 60px 0;
+    color: #717171;
+    text-align: center;
+}
+
+/* 상품 이미지 크기, 비율, 호버 효과 */
+.image-box {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background: #fff;
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.image-box img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 66.666%;
+    height: 66.666%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    transition: transform 400ms ease;
+}
+
+.product-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.product-card:hover .image-box img {
+    transform: translate(-50%, -50%) scale(1.045);
+}
+
+.product-card:hover .image-box {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 상품 이미지 상단 기능 버튼 (장바구니, 비교) */
+.cart-button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    place-items: center;
+    color: #222;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 180ms ease, color 180ms ease;
+}
+
+.cart-button::before {
+    display: none;
+}
+
+.cart-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+}
+
+.cart-button:hover {
+    transform: scale(1.08);
+}
+
+.cart-button.active {
+    color: #fff;
+    background: #151515;
+}
+
+.compare-check {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    border-radius: 50%;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 180ms ease, background 180ms ease;
+}
+
+.compare-check input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #151515;
+}
+
+.compare-check:hover {
+    transform: scale(1.08);
+}
+
+.compare-check:has(input:checked) {
+    background: #151515;
+}
+
+.product-card.compare-selected .image-box {
+    outline: 3px solid #d8a000;
+    outline-offset: -3px;
+}
+
+/* 비교 팝업 안내창 */
+.compare-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    padding: 20px;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.compare-popup-box {
+    width: min(360px, 100%);
+    padding: 26px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
+
+.compare-popup-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.compare-popup-actions button,
+.compare-popup-actions a {
+    padding: 9px 15px;
+    border: 1px solid #151515;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.compare-cancel {
+    color: #151515;
+    background: #fff;
+}
+
+.compare-go {
+    color: #fff;
+    background: #151515;
+}
+
+/* 상품 상세 정보 (브랜드, 이름, 가격 등) */
+.brand {
+    margin-bottom: 6px;
+    color: #717171;
+    font-size: 0.6875rem;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-weight: 700;
+    grid-column: 1;
+    grid-row: 2;
+    letter-spacing: 0.04em;
+}
+
+.product-name,
+.price-row,
+.colors {
+    grid-column: 1 / -1;
+}
+
+.product-name {
+    overflow: hidden;
+    margin: 0 0 10px;
+    color: #151515;
+    font-size: 1rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.colors {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.color-swatch {
+    width: 11px;
+    height: 11px;
+    border: 1px solid #cfcfcf;
+    border-radius: 50%;
+}
+
+.price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+    font-family: "Roboto", "noto sans", sans-serif;
+    font-size: 0.875rem;
+}
+
+.sale-price {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.original-price {
+    color: #999;
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-decoration: line-through;
+}
+
+.discount-rate {
+    color: #ef5b45;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 56px;
+}
+
+.page-button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #e7e7e7;
+    border-radius: 50%;
+    place-items: center;
+    color: #555;
+    background: #fff;
+    cursor: pointer;
+}
+
+.page-button:hover,
+.page-button.active {
+    border-color: #151515;
+    color: #fff;
+    background: #151515;
+}
+
+:focus-visible {
+    outline: 3px solid #6ba4ff;
+    outline-offset: 3px;
+}
+
+@keyframes hero-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   반응형 스타일 (태블릿/모바일)
+   ========================================================================== */
+
+/* 태블릿 화면: 상품을 한 줄에 3개 표시 */
+@media (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 모바일 화면: 본문, 필터, 상품 카드 크기 최적화 */
+@media (max-width: 768px) {
+    .hero-product {
+        min-height: 300px;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .hero-product h1 {
+        font-size: 2.25rem;
+        font-family: "Roboto", "noto sans", sans-serif;
+        font-weight: 900;
+    }
+
+    .product-container {
+        padding: 58px 18px 76px;
+    }
+
+    .section-heading {
+        margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+    .filter-toolbar {
+        justify-content: stretch;
+    }
+
+    .filter-actions {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .sort-control select {
+        width: 100%;
+        min-height: 46px;
+        font-size: 0.95rem;
+    }
+
+    .filter-area {
+        gap: 16px;
+        margin-bottom: 34px;
+    }
+
+    .filter-section h3 {
+        padding: 15px 18px;
+        font-size: 1.05rem;
+    }
+
+    .filter-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px 18px;
+    }
+
+    .filter-row strong {
+        font-size: 1rem;
+    }
+
+    .filter-options {
+        gap: 12px 18px;
+    }
+
+    .filter-options label {
+        min-height: 28px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .filter-options input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 14px;
+    }
+
+    .image-box {
+        margin-bottom: 14px;
+        border-radius: 8px;
+    }
+
+    .cart-button,
+    .compare-check {
+        top: 8px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .cart-button {
+        left: 8px;
+    }
+
+    .compare-check {
+        right: 8px;
+    }
+
+    .cart-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .compare-check input {
+        width: 14px;
+        height: 14px;
+    }
+
+    .brand {
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+    }
+
+    .product-name {
+        display: -webkit-box;
+        min-height: 2.8em;
+        margin-bottom: 8px;
+        overflow: hidden;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        text-overflow: initial;
+        white-space: normal;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .price-row {
+        gap: 4px;
+        font-size: 0.95rem;
+        line-height: 1.35;
+    }
+
+    .sale-price {
+        font-size: 0.95rem;
+    }
+
+    .original-price,
+    .discount-rate {
+        font-size: 0.82rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
+
+}
+
+/* 아주 작은 화면에서도 상품 카드 2열 유지 */
+@media (max-width: 380px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 12px;
+    }
+
+    .product-container {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .product-name {
+        font-size: 0.98rem;
+    }
+
+    .sale-price {
+        font-size: 0.9rem;
+    }
+}
